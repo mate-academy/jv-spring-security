@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 public class MovieMapper implements RequestDtoMapper<MovieRequestDto, Movie>,
         ResponseDtoMapper<MovieResponseDto, Movie> {
     @Override
-    public Movie mapToObj(MovieRequestDto dto) {
+    public Movie mapToModel(MovieRequestDto dto) {
         Movie movie = new Movie();
         movie.setTitle(dto.getMovieTitle());
         movie.setDescription(dto.getMovieDescription());

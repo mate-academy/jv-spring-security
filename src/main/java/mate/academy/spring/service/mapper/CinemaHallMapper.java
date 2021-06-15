@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 public class CinemaHallMapper implements RequestDtoMapper<CinemaHallRequestDto, CinemaHall>,
         ResponseDtoMapper<CinemaHallResponseDto, CinemaHall> {
     @Override
-    public CinemaHall mapToObj(CinemaHallRequestDto dto) {
+    public CinemaHall mapToModel(CinemaHallRequestDto dto) {
         CinemaHall cinemaHall = new CinemaHall();
         cinemaHall.setDescription(dto.getDescription());
         cinemaHall.setCapacity(dto.getCapacity());
