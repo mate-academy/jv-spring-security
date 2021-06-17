@@ -13,11 +13,46 @@ public class PasswordValidator implements ConstraintValidator<ValidPassword, Use
     @Override
     public boolean isValid(UserRequestDto userRequestDto,
                            ConstraintValidatorContext constraintValidatorContext) {
-        if (userRequestDto.getPassword() == null || userRequestDto.getRepeatedPassword() == null) {
-            return false;
+        constraintValidatorContext.disableDefaultConstraintViolation();
+        return areFieldsNotNull(userRequestDto, constraintValidatorContext)
+                && isPasswordValid(userRequestDto, constraintValidatorContext)
+                && arePasswordsEqual(userRequestDto, constraintValidatorContext);
+    }
+
+    private boolean arePasswordsEqual(UserRequestDto userRequestDto,
+                                      ConstraintValidatorContext constraintValidatorContext) {
+        boolean valid = true;
+        if (!userRequestDto.getPassword().equals(userRequestDto.getRepeatedPassword())) {
+            valid = false;
+            constraintValidatorContext.buildConstraintViolationWithTemplate(
+                    "Passwords must match."
+            ).addConstraintViolation();
         }
+        return valid;
+    }
+
+    private boolean areFieldsNotNull(UserRequestDto userRequestDto,
+                                  ConstraintValidatorContext constraintValidatorContext) {
+        boolean valid = true;
+        if (userRequestDto.getPassword() == null || userRequestDto.getRepeatedPassword() == null) {
+            valid = false;
+            constraintValidatorContext.buildConstraintViolationWithTemplate(
+                    "Password field can't be null."
+            ).addConstraintViolation();
+        }
+        return valid;
+    }
+
+    private boolean isPasswordValid(UserRequestDto userRequestDto,
+                                      ConstraintValidatorContext constraintValidatorContext) {
+        boolean valid = true;
         Matcher matcher = VALID_PASSWORD_REGEX.matcher(userRequestDto.getPassword());
-        return matcher.matches()
-                && userRequestDto.getPassword().equals(userRequestDto.getRepeatedPassword());
+        if (!matcher.matches()) {
+            valid = false;
+            constraintValidatorContext.buildConstraintViolationWithTemplate(
+                    "Password must be complex."
+            ).addConstraintViolation();
+        }
+        return valid;
     }
 }
