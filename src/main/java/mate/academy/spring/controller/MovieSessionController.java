@@ -1,5 +1,8 @@
 package mate.academy.spring.controller;
 
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotNull;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -34,14 +37,14 @@ public class MovieSessionController {
     }
 
     @PostMapping
-    public MovieSessionResponseDto add(@RequestBody MovieSessionRequestDto requestDto) {
+    public MovieSessionResponseDto add(@RequestBody @Valid MovieSessionRequestDto requestDto) {
         MovieSession movieSession = movieSessionMapper.mapToModel(requestDto);
         movieSessionService.add(movieSession);
         return movieSessionMapper.mapToDto(movieSession);
     }
 
     @GetMapping("/available")
-    public List<MovieSessionResponseDto> getAll(@RequestParam Long movieId,
+    public List<MovieSessionResponseDto> getAll(@RequestParam @NotNull @Min(1) Long movieId,
                                                 @RequestParam
                                                 @DateTimeFormat(pattern = DATE_PATTERN)
                                                         LocalDate date) {
@@ -52,8 +55,8 @@ public class MovieSessionController {
     }
 
     @PutMapping("/{id}")
-    public MovieSessionResponseDto update(@PathVariable Long id,
-                                          @RequestBody MovieSessionRequestDto requestDto) {
+    public MovieSessionResponseDto update(@PathVariable @NotNull @Min(1) Long id,
+                                          @RequestBody @Valid MovieSessionRequestDto requestDto) {
         MovieSession movieSession = movieSessionMapper.mapToModel(requestDto);
         movieSession.setId(id);
         movieSessionService.update(movieSession);
@@ -61,7 +64,7 @@ public class MovieSessionController {
     }
 
     @DeleteMapping("/{id}")
-    public void delete(@PathVariable Long id) {
+    public void delete(@PathVariable @NotNull @Min(1) Long id) {
         movieSessionService.delete(id);
     }
 }
