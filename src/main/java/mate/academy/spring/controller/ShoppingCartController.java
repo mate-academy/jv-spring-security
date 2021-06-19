@@ -1,5 +1,7 @@
 package mate.academy.spring.controller;
 
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotNull;
 import mate.academy.spring.dto.response.ShoppingCartResponseDto;
 import mate.academy.spring.exception.DataProcessingException;
 import mate.academy.spring.model.User;
@@ -33,7 +35,7 @@ public class ShoppingCartController {
     }
 
     @PostMapping("/movie-sessions")
-    public void addToCart(Authentication authentication, @RequestParam Long movieSessionId) {
+    public void addToCart(Authentication authentication, @RequestParam @NotNull @Min(1) Long movieSessionId) {
         String userEmail = authentication.getName();
         shoppingCartService.addSession(
                 movieSessionService.get(movieSessionId), userService.findByEmail(userEmail)
