@@ -2,7 +2,6 @@ package mate.academy.spring.lib;
 
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
-
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 

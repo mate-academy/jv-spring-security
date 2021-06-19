@@ -2,10 +2,10 @@ package mate.academy.spring.controller;
 
 import mate.academy.spring.dto.response.UserResponseDto;
 import mate.academy.spring.exception.DataProcessingException;
+import mate.academy.spring.lib.Email;
 import mate.academy.spring.model.User;
 import mate.academy.spring.service.UserService;
 import mate.academy.spring.service.mapper.UserMapper;
-import mate.academy.spring.lib.Email;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
