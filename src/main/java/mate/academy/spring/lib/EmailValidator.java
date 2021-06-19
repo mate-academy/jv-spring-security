@@ -1,8 +1,7 @@
-package mate.academy.spring.validation;
+package mate.academy.spring.lib;
 
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
-import mate.academy.spring.dto.request.UserRequestDto;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
