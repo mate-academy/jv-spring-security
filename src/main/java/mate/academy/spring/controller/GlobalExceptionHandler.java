@@ -32,7 +32,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
                 .stream()
                 .map(this::getErrorMessage)
                 .collect(Collectors.toList());
-        body.put("text", errors);
+        body.put("errorsMessages", errors);
         return new ResponseEntity<>(body, headers, status);
     }
 
