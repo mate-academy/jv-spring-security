@@ -27,4 +27,12 @@ public class UserController {
                 () -> new DataProcessingException("Invalid email"));
         return userMapper.mapToDto(user);
     }
+
+    @GetMapping("/inject")
+    public String injectUser() {
+        User user = new User();
+        user.setPassword("password");
+        user.setEmail("some.user@gmail.com");
+        return "Done!";
+    }
 }

@@ -1,5 +1,6 @@
 package mate.academy.spring.model;
 
+import jakarta.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -13,9 +14,12 @@ public class MovieSession {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @ManyToOne
+    @NotNull
     private Movie movie;
     @ManyToOne
+    @NotNull
     private CinemaHall cinemaHall;
+    @NotNull
     private LocalDateTime showTime;
 
     public Long getId() {
