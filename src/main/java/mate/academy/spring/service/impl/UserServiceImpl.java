@@ -6,24 +6,20 @@ import mate.academy.spring.exception.DataProcessingException;
 import mate.academy.spring.model.User;
 import mate.academy.spring.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
 public class UserServiceImpl implements UserService {
-    private static final int SALT_LENGTH = 10;
     private final UserDao userDao;
-    private final PasswordEncoder passwordEncoder;
 
     @Autowired
-    public UserServiceImpl(UserDao userDao, PasswordEncoder passwordEncoder) {
+    public UserServiceImpl(UserDao userDao) {
         this.userDao = userDao;
-        this.passwordEncoder = passwordEncoder;
     }
 
     @Override
     public User add(User user) {
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        user.setPassword(user.getPassword());
         return userDao.add(user);
     }
 
