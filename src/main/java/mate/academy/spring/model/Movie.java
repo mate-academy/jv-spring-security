@@ -1,6 +1,5 @@
 package mate.academy.spring.model;
 
-import jakarta.validation.constraints.NotNull;
 import java.util.Objects;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -12,7 +11,6 @@ public class Movie {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @NotNull
     private String title;
     private String description;
 

@@ -1,6 +1,5 @@
 package mate.academy.spring.model;
 
-import jakarta.validation.constraints.NotNull;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -15,10 +14,8 @@ public class Ticket {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @ManyToOne(fetch = FetchType.LAZY)
-    @NotNull
     private MovieSession movieSession;
     @OneToOne(fetch = FetchType.LAZY)
-    @NotNull
     private User user;
 
     public Long getId() {

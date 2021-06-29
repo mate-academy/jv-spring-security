@@ -1,6 +1,5 @@
 package mate.academy.spring.model;
 
-import jakarta.validation.constraints.NotNull;
 import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -16,7 +15,6 @@ public class ShoppingCart {
     private List<Ticket> tickets;
     @MapsId
     @OneToOne
-    @NotNull
     private User user;
 
     public Long getId() {

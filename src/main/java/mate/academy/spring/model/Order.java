@@ -1,7 +1,5 @@
 package mate.academy.spring.model;
 
-import jakarta.validation.constraints.Max;
-import jakarta.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 import java.util.List;
 import javax.persistence.Entity;
@@ -17,11 +15,9 @@ public class Order {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @OneToMany
-    @Max(value = 20)
     private List<Ticket> tickets;
     private LocalDateTime orderTime;
     @ManyToOne
-    @NotNull
     private User user;
 
     public Long getId() {
