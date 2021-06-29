@@ -6,6 +6,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import mate.academy.spring.validation.Email;
+import mate.academy.spring.validation.Password;
 
 @Entity
 public class User {
@@ -15,6 +16,7 @@ public class User {
     @Column(unique = true)
     @Email
     private String email;
+    @Password
     private String password;
 
     public Long getId() {
