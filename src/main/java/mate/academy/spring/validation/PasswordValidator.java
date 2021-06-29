@@ -32,23 +32,23 @@ public class PasswordValidator implements ConstraintValidator<Password, UserRequ
         return valid;
     }
 
+    private boolean isPasswordNotNull(UserRequestDto user,
+                                      ConstraintValidatorContext context) {
+        boolean valid = true;
+        if (user.getPassword() == null || user.getRepeatPassword() == null) {
+            valid = false;
+            context.buildConstraintViolationWithTemplate("Password can't be null")
+                    .addConstraintViolation();
+        }
+        return valid;
+    }
+
     private boolean isPasswordEquals(UserRequestDto user,
                                      ConstraintValidatorContext context) {
         boolean valid = true;
         if (!user.getPassword().equals(user.getRepeatPassword())) {
             valid = false;
             context.buildConstraintViolationWithTemplate("Both passwords must be the same")
-                    .addConstraintViolation();
-        }
-        return valid;
-    }
-
-    private boolean isPasswordNotNull(UserRequestDto user,
-                                     ConstraintValidatorContext context) {
-        boolean valid = true;
-        if (user.getPassword() == null || user.getRepeatPassword() == null) {
-            valid = false;
-            context.buildConstraintViolationWithTemplate("Password can't be null")
                     .addConstraintViolation();
         }
         return valid;
