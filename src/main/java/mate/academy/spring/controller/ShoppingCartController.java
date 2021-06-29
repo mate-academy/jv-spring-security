@@ -1,5 +1,6 @@
 package mate.academy.spring.controller;
 
+import javax.validation.constraints.Positive;
 import mate.academy.spring.dto.response.ShoppingCartResponseDto;
 import mate.academy.spring.exception.DataProcessingException;
 import mate.academy.spring.service.MovieSessionService;
@@ -32,7 +33,8 @@ public class ShoppingCartController {
     }
 
     @PostMapping("/movie-sessions")
-    public void addToCart(Authentication authentication, @RequestParam Long movieSessionId) {
+    public void addToCart(Authentication authentication, @RequestParam
+            @Positive Long movieSessionId) {
         String userName = authentication.getName();
         shoppingCartService.addSession(
                 movieSessionService.get(movieSessionId), userService
