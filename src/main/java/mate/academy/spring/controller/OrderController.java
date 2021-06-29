@@ -5,7 +5,6 @@ import java.util.stream.Collectors;
 import mate.academy.spring.dto.response.OrderResponseDto;
 import mate.academy.spring.exception.DataProcessingException;
 import mate.academy.spring.model.ShoppingCart;
-import mate.academy.spring.model.User;
 import mate.academy.spring.service.OrderService;
 import mate.academy.spring.service.ShoppingCartService;
 import mate.academy.spring.service.UserService;

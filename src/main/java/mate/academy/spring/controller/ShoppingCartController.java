@@ -2,7 +2,6 @@ package mate.academy.spring.controller;
 
 import mate.academy.spring.dto.response.ShoppingCartResponseDto;
 import mate.academy.spring.exception.DataProcessingException;
-import mate.academy.spring.model.User;
 import mate.academy.spring.service.MovieSessionService;
 import mate.academy.spring.service.ShoppingCartService;
 import mate.academy.spring.service.UserService;
