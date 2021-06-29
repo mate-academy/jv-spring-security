@@ -11,10 +11,9 @@ import org.springframework.stereotype.Service;
 @Service
 public class UserServiceImpl implements UserService {
     private final UserDao userDao;
-    private final PasswordEncoder passwordEncoder;// яка саме імплементація підтягнеться?
+    private final PasswordEncoder passwordEncoder;
 
-    public UserServiceImpl(UserDao userDao, PasswordEncoder passwordEncoder) { //чи можна тут
-        // вказати який саме алгоритм кодувуння обирати BCryptPasswordEncoder наприклад
+    public UserServiceImpl(UserDao userDao, PasswordEncoder passwordEncoder) {
         this.userDao = userDao;
         this.passwordEncoder = passwordEncoder;
     }
