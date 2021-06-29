@@ -13,7 +13,7 @@ public class PasswordValidator implements ConstraintValidator<Password, UserRequ
     public boolean isValid(UserRequestDto user,
                            ConstraintValidatorContext context) {
         context.disableDefaultConstraintViolation();
-        return !isPasswordNull(user, context)
+        return isPasswordNotNull(user, context)
                 && isPasswordEquals(user, context)
                 && isPasswordMatchesPattern(user, context);
     }
@@ -43,11 +43,11 @@ public class PasswordValidator implements ConstraintValidator<Password, UserRequ
         return valid;
     }
 
-    private boolean isPasswordNull(UserRequestDto user,
+    private boolean isPasswordNotNull(UserRequestDto user,
                                      ConstraintValidatorContext context) {
-        boolean valid = false;
+        boolean valid = true;
         if (user.getPassword() == null || user.getRepeatPassword() == null) {
-            valid = true;
+            valid = false;
             context.buildConstraintViolationWithTemplate("Password can't be null")
                     .addConstraintViolation();
         }
