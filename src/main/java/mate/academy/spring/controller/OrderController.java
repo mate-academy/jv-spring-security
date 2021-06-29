@@ -37,8 +37,8 @@ public class OrderController {
     public OrderResponseDto completeOrder(Authentication authentication) {
         ShoppingCart cart = shoppingCartService
                 .getByUser(userService.findByEmail(authentication.getName())
-                        .orElseThrow(()
-                        -> new DataProcessingException("Invalid email!")));
+                        .orElseThrow(() ->
+                                new DataProcessingException("Invalid email!")));
         return orderMapper.mapToDto(orderService.completeOrder(cart));
     }
 
