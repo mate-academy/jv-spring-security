@@ -6,7 +6,6 @@ import mate.academy.spring.validation.Email;
 
 public class UserRequestDto {
     private static final int MIN_PASSWORD_LENGTH = 4;
-    @NotNull
     @Email
     private String email;
     @NotNull
