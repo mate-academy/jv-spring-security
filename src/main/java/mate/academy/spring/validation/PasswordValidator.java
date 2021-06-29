@@ -1,5 +1,6 @@
 package mate.academy.spring.validation;
 
+import java.util.Objects;
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 import org.springframework.beans.BeanWrapperImpl;
@@ -19,10 +20,6 @@ public class PasswordValidator implements ConstraintValidator<ValidatePassword, 
         Object passwordValue = new BeanWrapperImpl(user).getPropertyValue(password);
         Object repeatedPasswordValue = new BeanWrapperImpl(user)
                 .getPropertyValue(repeatedPassword);
-        if (passwordValue != null) {
-            return passwordValue.equals(repeatedPasswordValue);
-        } else {
-            return repeatedPasswordValue == null;
-        }
+        return Objects.equals(passwordValue, repeatedPasswordValue);
     }
 }
