@@ -37,7 +37,8 @@ public class ShoppingCartController {
         String email = authentication.getName();
         User userFromDb = userService
                 .findByEmail(email)
-                .orElseThrow(() -> new DataProcessingException("User not found by email + " + email));
+                .orElseThrow(() -> new DataProcessingException(
+                        "User not found by email + " + email));
         shoppingCartService.addSession(
                 movieSessionService.get(movieSessionId), userFromDb);
     }
@@ -47,7 +48,8 @@ public class ShoppingCartController {
         String email = authentication.getName();
         User userFromDb = userService
                 .findByEmail(email)
-                .orElseThrow(() -> new DataProcessingException("User not found by email + " + email));
+                .orElseThrow(() -> new DataProcessingException(
+                        "User not found by email + " + email));
         return shoppingCartMapper.mapToDto(shoppingCartService.getByUser(userFromDb));
     }
 }
