@@ -21,6 +21,7 @@ public class CinemaHallMapper implements RequestDtoMapper<CinemaHallRequestDto, 
         CinemaHallResponseDto responseDto = new CinemaHallResponseDto();
         responseDto.setId(cinemaHall.getId());
         responseDto.setDescription(cinemaHall.getDescription());
+        responseDto.setCapacity(cinemaHall.getCapacity());
         return responseDto;
     }
 }
