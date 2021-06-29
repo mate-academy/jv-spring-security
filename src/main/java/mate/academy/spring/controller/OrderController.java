@@ -36,22 +36,19 @@ public class OrderController {
 
     @PostMapping("/complete")
     public OrderResponseDto completeOrder(Authentication authentication) {
-        ShoppingCart cart = shoppingCartService.getByUser(getUser(authentication));
+        ShoppingCart cart = shoppingCartService
+                .getByUser(userService.findByEmail(authentication.getName())
+                        .orElseThrow(() -> new DataProcessingException(
+                                "Email is incorrect")));
         return orderMapper.mapToDto(orderService.completeOrder(cart));
     }
 
     @GetMapping
     public List<OrderResponseDto> getOrderHistory(Authentication authentication) {
-        return orderService.getOrdersHistory(getUser(authentication))
+        return orderService.getOrdersHistory(userService.findByEmail(authentication.getName())
+                .orElseThrow(() -> new DataProcessingException("Email is incorrect")))
                 .stream()
                 .map(orderMapper::mapToDto)
                 .collect(Collectors.toList());
-    }
-
-    private User getUser(Authentication authentication) {
-        String email = authentication.getName();
-        return userService.findByEmail(email).orElseThrow(
-                () -> new DataProcessingException(
-                        "Can't find user with email" + email));
     }
 }

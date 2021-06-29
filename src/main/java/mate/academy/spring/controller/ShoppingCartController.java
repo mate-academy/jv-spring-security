@@ -35,19 +35,17 @@ public class ShoppingCartController {
     @PostMapping("/movie-sessions")
     public void addToCart(Authentication authentication, @RequestParam Long movieSessionId) {
         shoppingCartService.addSession(
-                movieSessionService.get(movieSessionId), getUser(authentication));
+                movieSessionService.get(movieSessionId),
+                userService.findByEmail(authentication.getName())
+                        .orElseThrow(() -> new DataProcessingException(
+                                "Email is incorrect")));
     }
 
     @GetMapping("/by-user")
     public ShoppingCartResponseDto getByUser(Authentication authentication) {
         return shoppingCartMapper.mapToDto(shoppingCartService
-                .getByUser(getUser(authentication)));
-    }
-
-    private User getUser(Authentication authentication) {
-        String email = authentication.getName();
-        return userService.findByEmail(email).orElseThrow(
-                () -> new DataProcessingException(
-                        "Can't find user with email" + email));
+                .getByUser(userService.findByEmail(authentication.getName())
+                        .orElseThrow(() -> new DataProcessingException(
+                                "Email is incorrect"))));
     }
 }
