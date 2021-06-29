@@ -1,6 +1,7 @@
 package mate.academy.spring.dto.request;
 
 import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 public class MovieSessionRequestDto {
@@ -10,7 +11,7 @@ public class MovieSessionRequestDto {
     @Min(1)
     @NotNull
     private Long cinemaHallId;
-    @NotNull
+    @NotBlank
     private String showTime;
 
     public Long getMovieId() {
