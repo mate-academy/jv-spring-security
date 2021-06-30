@@ -28,7 +28,8 @@ public class MovieSessionMapper implements RequestDtoMapper<MovieSessionRequestD
         MovieSession movieSession = new MovieSession();
         movieSession.setMovie(movieService.get(dto.getMovieId()));
         movieSession.setCinemaHall(cinemaHallService.get(dto.getCinemaHallId()));
-        movieSession.setShowTime(LocalDateTime.parse(dto.getShowTime(), formatter));
+        LocalDateTime dateTime = LocalDateTime.parse(dto.getShowTime(), formatter);
+        movieSession.setShowTime(dateTime);
         return movieSession;
     }
 
