@@ -3,6 +3,7 @@ package mate.academy.spring.controller;
 import java.util.List;
 import java.util.stream.Collectors;
 import mate.academy.spring.dto.response.OrderResponseDto;
+import mate.academy.spring.exception.DataProcessingException;
 import mate.academy.spring.model.ShoppingCart;
 import mate.academy.spring.model.User;
 import mate.academy.spring.service.OrderService;
@@ -36,14 +37,17 @@ public class OrderController {
     @PostMapping("/complete")
     public OrderResponseDto completeOrder(Authentication authentication) {
         String email = authentication.getName();
-        User user = userService.findByEmail(email).get();
+        User user = userService.findByEmail(email)
+                .orElseThrow(() -> new DataProcessingException("Can't find user by email"));
         ShoppingCart cart = shoppingCartService.getByUser(user);
         return orderMapper.mapToDto(orderService.completeOrder(cart));
     }
 
     @GetMapping
     public List<OrderResponseDto> getOrderHistory(Authentication authentication) {
-        User user = userService.findByEmail(authentication.getName()).get();
+        User user =
+                userService.findByEmail(authentication.getName())
+                        .orElseThrow(() -> new DataProcessingException("Can't find user by email"));
         return orderService.getOrdersHistory(user)
                 .stream()
                 .map(orderMapper::mapToDto)
