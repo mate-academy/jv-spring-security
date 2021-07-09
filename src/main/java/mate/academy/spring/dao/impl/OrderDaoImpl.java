@@ -44,15 +44,12 @@ public class OrderDaoImpl implements OrderDao {
     @Override
     public List<Order> getOrdersHistory(User user) {
         try (Session session = factory.openSession()) {
-            Query<Order> getByUser = session.createQuery(
-                    "SELECT DISTINCT o FROM orders o "
-                            + "join fetch o.tickets t "
-                            + "left join fetch t.movieSession ms "
-                            + "left join fetch ms.cinemaHall "
-                            + "left join fetch ms.movie "
-                            + "WHERE o.user = :user", Order.class);
-            getByUser.setParameter("user", user);
-            return getByUser.getResultList();
+            Query<Order> query = session.createQuery("FROM Order o "
+                    + "left join fetch o.tickets "
+                    + "left join fetch o.user "
+                    + "WHERE o.user = :user", Order.class);
+            query.setParameter("user", user);
+            return query.getResultList();
         } catch (Exception e) {
             throw new DataProcessingException("Not found orders for user " + user, e);
         }
