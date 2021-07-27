@@ -5,7 +5,6 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
 public class CinemaHallRequestDto {
-    @NotNull
     @Min(value = 2)
     private int capacity;
     @NotNull
