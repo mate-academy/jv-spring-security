@@ -90,13 +90,6 @@
             <artifactId>spring-security-web</artifactId>
             <version>${spring.security.version}</version>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/org.hibernate/hibernate-validator -->
-        <!-- https://mvnrepository.com/artifact/org.hibernate.validator/hibernate-validator -->
-<!--        <dependency>-->
-<!--            <groupId>org.hibernate</groupId>-->
-<!--            <artifactId>hibernate-validator</artifactId>-->
-<!--            <version>7.0.1.Final</version>-->
-<!--        </dependency>-->
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-validator</artifactId>

@@ -3,6 +3,7 @@ package mate.academy.spring.controller;
 import java.time.LocalDateTime;
 import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 import mate.academy.spring.exception.DataProcessingException;
 import org.springframework.http.HttpHeaders;
@@ -23,7 +24,7 @@ public class CustomGlobalExceptionHandler extends ResponseEntityExceptionHandler
             HttpHeaders headers,
             HttpStatus status,
             WebRequest request) {
-        LinkedHashMap<String, Object> body = new LinkedHashMap<>();
+        Map<String, Object> body = new LinkedHashMap<>();
         body.put("timestamp", LocalDateTime.now().toString());
         body.put("status", status.value());
         List<String> errors = ex.getBindingResult().getAllErrors().stream()
