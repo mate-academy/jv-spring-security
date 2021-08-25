@@ -1,6 +1,7 @@
 package mate.academy.spring.controller;
 
 import mate.academy.spring.dto.response.ShoppingCartResponseDto;
+import mate.academy.spring.exception.DataProcessingException;
 import mate.academy.spring.model.User;
 import mate.academy.spring.service.MovieSessionService;
 import mate.academy.spring.service.ShoppingCartService;
@@ -34,7 +35,8 @@ public class ShoppingCartController {
     @PostMapping("/movie-sessions")
     public void addToCart(Authentication authentication, @RequestParam Long movieSessionId) {
         String userName = authentication.getName();
-        User user = userService.findByEmail(userName).get();
+        User user = userService.findByEmail(userName).orElseThrow(
+                () -> new DataProcessingException("Invalid email"));
         shoppingCartService.addSession(
                 movieSessionService.get(movieSessionId), user);
     }
@@ -42,7 +44,8 @@ public class ShoppingCartController {
     @GetMapping("/by-user")
     public ShoppingCartResponseDto getByUser(Authentication authentication) {
         String userName = authentication.getName();
-        User user = userService.findByEmail(userName).get();
+        User user = userService.findByEmail(userName).orElseThrow(
+                () -> new DataProcessingException("Invalid email"));
         return shoppingCartMapper.mapToDto(shoppingCartService.getByUser(user));
     }
 }
