@@ -36,7 +36,7 @@ public class ShoppingCartController {
     public void addToCart(Authentication authentication, @RequestParam Long movieSessionId) {
         String userName = authentication.getName();
         User user = userService.findByEmail(userName).orElseThrow(
-                () -> new DataProcessingException("Invalid email"));
+                () -> new DataProcessingException("User not found"));
         shoppingCartService.addSession(
                 movieSessionService.get(movieSessionId), user);
     }
@@ -45,7 +45,7 @@ public class ShoppingCartController {
     public ShoppingCartResponseDto getByUser(Authentication authentication) {
         String userName = authentication.getName();
         User user = userService.findByEmail(userName).orElseThrow(
-                () -> new DataProcessingException("Invalid email"));
+                () -> new DataProcessingException("User not found"));
         return shoppingCartMapper.mapToDto(shoppingCartService.getByUser(user));
     }
 }
