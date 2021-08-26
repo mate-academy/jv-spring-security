@@ -1,14 +1,14 @@
 package mate.academy.spring.dto.request;
 
-import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 public class MovieRequestDto {
     @NotNull
-    @Min(value = 1)
+    @Size(min = 1)
     private String movieTitle;
     @NotNull
-    @Min(value = 1)
+    @Size(min = 1)
     private String movieDescription;
 
     public String getMovieTitle() {

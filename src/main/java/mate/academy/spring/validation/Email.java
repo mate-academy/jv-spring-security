@@ -11,7 +11,7 @@ import javax.validation.Payload;
 @Target({ElementType.PARAMETER, ElementType.FIELD})
 @Retention(RetentionPolicy.RUNTIME)
 public @interface Email {
-    String message() default "User not found";
+    String message() default "Invalid email";
     Class<?>[] groups() default {};
     Class<? extends Payload>[] payload() default {};
 }
