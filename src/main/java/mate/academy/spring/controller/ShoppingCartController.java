@@ -8,7 +8,6 @@ import mate.academy.spring.service.ShoppingCartService;
 import mate.academy.spring.service.UserService;
 import mate.academy.spring.service.mapper.ShoppingCartMapper;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -35,8 +34,7 @@ public class ShoppingCartController {
 
     @PostMapping("/movie-sessions")
     public void addToCart(Authentication auth, @RequestParam Long movieSessionId) {
-        UserDetails details = (UserDetails) auth.getPrincipal();
-        String email = details.getUsername();
+        String email = auth.getName();
         User user = userService.findByEmail(email).orElseThrow(
                 () -> new DataProcessingException("Can't find user by email: " + email));
         shoppingCartService.addSession(
@@ -45,8 +43,7 @@ public class ShoppingCartController {
 
     @GetMapping("/by-user")
     public ShoppingCartResponseDto getByUser(Authentication auth) {
-        UserDetails details = (UserDetails) auth.getPrincipal();
-        String email = details.getUsername();
+        String email = auth.getName();
         User user = userService.findByEmail(email).orElseThrow(
                 () -> new DataProcessingException("Can't find user by email: " + email));
         return shoppingCartMapper.mapToDto(shoppingCartService.getByUser(user));

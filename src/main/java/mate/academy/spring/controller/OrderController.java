@@ -10,11 +10,9 @@ import mate.academy.spring.service.ShoppingCartService;
 import mate.academy.spring.service.UserService;
 import mate.academy.spring.service.mapper.OrderMapper;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -37,8 +35,7 @@ public class OrderController {
 
     @PostMapping("/complete")
     public OrderResponseDto completeOrder(Authentication auth) {
-        UserDetails details = (UserDetails) auth.getPrincipal();
-        String email = details.getUsername();
+        String email = auth.getName();
         User user = userService.findByEmail(email).orElseThrow(
                 () -> new DataProcessingException("Can't find user by email: " + email));
         return orderMapper.mapToDto(orderService
@@ -46,8 +43,9 @@ public class OrderController {
     }
 
     @GetMapping
-    public List<OrderResponseDto> getOrderHistory(@RequestParam Long userId) {
-        return orderService.getOrdersHistory(userService.get(userId))
+    public List<OrderResponseDto> getOrderHistory(Authentication auth) {
+        String email = auth.getName();
+        return orderService.getOrdersHistory(userService.findByEmail(email).get())
                 .stream()
                 .map(orderMapper::mapToDto)
                 .collect(Collectors.toList());
