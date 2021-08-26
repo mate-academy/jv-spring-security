@@ -44,6 +44,7 @@ public class ShoppingCartController {
     @GetMapping("/by-user")
     public ShoppingCartResponseDto getByUser(Authentication authentication) {
         String userName = authentication.getName();
+        authentication.getPrincipal();
         User user = userService.findByEmail(userName).orElseThrow(
                 () -> new DataProcessingException("User not found"));
         return shoppingCartMapper.mapToDto(shoppingCartService.getByUser(user));

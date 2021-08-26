@@ -1,6 +1,5 @@
 package mate.academy.spring.config;
 
-import mate.academy.spring.model.User;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -14,12 +13,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        User user = new User();
-        user.setEmail("Bob@gmail.com");
-        user.setPassword("1234");
         auth.inMemoryAuthentication()
-                .withUser(user.getEmail())
-                .password(getEncoder().encode(user.getPassword()))
+                .withUser("Bob@gmail.com")
+                .password(getEncoder().encode("1234"))
                 .roles("USER");
     }
 
