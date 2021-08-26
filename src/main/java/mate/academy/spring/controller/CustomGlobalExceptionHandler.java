@@ -39,8 +39,11 @@ public class CustomGlobalExceptionHandler extends ResponseEntityExceptionHandler
     @ExceptionHandler(value = DataProcessingException.class)
     protected ResponseEntity<Object> handleDataProcessingException(DataProcessingException ex,
                                                                    WebRequest request) {
-        String message = "Data processing exception.";
-        return handleExceptionInternal(ex, message, new HttpHeaders(),
+        Map<String, Object> body = new LinkedHashMap<>();
+        body.put("timestamp", LocalDateTime.now().toString());
+        body.put("status", HttpStatus.BAD_REQUEST);
+        body.put("message", ex.getMessage());
+        return handleExceptionInternal(ex, body, new HttpHeaders(),
                 HttpStatus.BAD_REQUEST, request);
     }
 
