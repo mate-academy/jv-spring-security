@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/orders")
-public class    OrderController {
+public class OrderController {
     private final ShoppingCartService shoppingCartService;
     private final OrderService orderService;
     private final UserService userService;
