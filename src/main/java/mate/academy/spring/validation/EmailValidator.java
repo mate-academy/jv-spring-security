@@ -6,7 +6,7 @@ import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
 public class EmailValidator implements ConstraintValidator<Email, String> {
-    public static final String EMAIL_PATTERN =
+    private static final String EMAIL_PATTERN =
             "^[a-zA-Z0-9_!#$%&’*+/=?`{|}~^-]+(?:\\\\.[a-zA-Z0-9_!#$%&’*+/=?`{|}~^-]+)*@[a-zA-Z0-9-]"
                     + "+(?:\\\\.[a-zA-Z0-9-]+)*$";
 
@@ -15,8 +15,6 @@ public class EmailValidator implements ConstraintValidator<Email, String> {
         if (email == null) {
             return false;
         }
-        Pattern pattern = Pattern.compile(EMAIL_PATTERN);
-        Matcher matcher = pattern.matcher(email);
-        return matcher.matches();
+        return email.matches(EMAIL_PATTERN);
     }
 }
