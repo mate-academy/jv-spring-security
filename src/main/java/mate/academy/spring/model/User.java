@@ -14,12 +14,6 @@ public class User {
     @Column(unique = true)
     private String email;
     private String password;
-    private Role role;
-
-    enum Role {
-        ADMIN,
-        USER
-    }
 
     public Long getId() {
         return id;
