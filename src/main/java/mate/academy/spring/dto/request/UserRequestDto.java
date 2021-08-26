@@ -1,6 +1,6 @@
 package mate.academy.spring.dto.request;
 
-import jakarta.validation.constraints.Size;
+import javax.validation.constraints.Size;
 import mate.academy.spring.validate.Email;
 
 public class UserRequestDto {
