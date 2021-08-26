@@ -14,6 +14,4 @@ public @interface PasswordsMatch {
     String message() default "Passwords don't match!";
     Class<?>[] groups() default {};
     Class<? extends Payload>[] payload() default {};
-    String password();
-    String repeatPassword();
 }

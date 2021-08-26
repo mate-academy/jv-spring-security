@@ -1,5 +1,6 @@
 package mate.academy.spring.validation;
 
+import java.util.Objects;
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 import mate.academy.spring.dto.request.UserRequestDto;
@@ -10,9 +11,6 @@ public class PasswordsValidator implements ConstraintValidator<PasswordsMatch, U
                            ConstraintValidatorContext constraintValidatorContext) {
         String password = value.getPassword();
         String repeatPassword = value.getRepeatPassword();
-        if (password != null) {
-            return password.equals(repeatPassword);
-        }
-        return repeatPassword == null;
+        return Objects.equals(password, repeatPassword);
     }
 }
