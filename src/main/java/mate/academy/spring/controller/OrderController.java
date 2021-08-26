@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/orders")
-public class OrderController {
+public class    OrderController {
     private final ShoppingCartService shoppingCartService;
     private final OrderService orderService;
     private final UserService userService;
@@ -38,15 +38,14 @@ public class OrderController {
         User user = userService.findByEmail(auth.getName()).orElseThrow(() ->
                 new DataProcessingException("User not found/exist. User: " + auth.getName()));
         return orderMapper.mapToDto(orderService.completeOrder(shoppingCartService
-                .getByUser(userService.get(user.getId()))));
+                .getByUser(user)));
     }
 
     @GetMapping
     public List<OrderResponseDto> getOrderHistory(Authentication auth) {
         User user = userService.findByEmail(auth.getName()).orElseThrow(() ->
                 new DataProcessingException("User not found/exist. User: " + auth.getName()));
-        return orderService.getOrdersHistory(userService
-                .get(user.getId()))
+        return orderService.getOrdersHistory(user)
                 .stream()
                 .map(orderMapper::mapToDto)
                 .collect(Collectors.toList());
