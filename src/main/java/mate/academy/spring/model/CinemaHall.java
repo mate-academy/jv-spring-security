@@ -1,5 +1,7 @@
 package mate.academy.spring.model;
 
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -10,7 +12,9 @@ public class CinemaHall {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Min(value = 0)
     private int capacity;
+    @NotBlank
     private String description;
 
     public Long getId() {

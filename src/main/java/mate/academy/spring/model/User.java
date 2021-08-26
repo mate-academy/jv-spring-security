@@ -1,10 +1,13 @@
 package mate.academy.spring.model;
 
+import jakarta.validation.constraints.Size;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import mate.academy.spring.validation.Email;
+import org.springframework.lang.NonNull;
 
 @Entity
 public class User {
@@ -12,9 +15,11 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column(unique = true)
+    @Email
     private String email;
+    @NonNull
+    @Size(min = 6)
     private String password;
-    private String salt;
 
     public Long getId() {
         return id;
@@ -38,14 +43,6 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    public String getSalt() {
-        return salt;
-    }
-
-    public void setSalt(String salt) {
-        this.salt = salt;
     }
 
     @Override

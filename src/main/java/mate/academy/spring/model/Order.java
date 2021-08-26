@@ -1,5 +1,6 @@
 package mate.academy.spring.model;
 
+import jakarta.validation.constraints.NotEmpty;
 import java.time.LocalDateTime;
 import java.util.List;
 import javax.persistence.Entity;
@@ -8,6 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import org.springframework.lang.NonNull;
 
 @Entity(name = "orders")
 public class Order {
@@ -15,9 +17,11 @@ public class Order {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @OneToMany
+    @NotEmpty
     private List<Ticket> tickets;
     private LocalDateTime orderTime;
     @ManyToOne
+    @NonNull
     private User user;
 
     public Long getId() {

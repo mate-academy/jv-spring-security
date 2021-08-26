@@ -6,6 +6,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import org.springframework.lang.NonNull;
 
 @Entity
 public class Ticket {
@@ -13,8 +14,10 @@ public class Ticket {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @ManyToOne(fetch = FetchType.LAZY)
+    @NonNull
     private MovieSession movieSession;
     @ManyToOne(fetch = FetchType.LAZY)
+    @NonNull
     private User user;
 
     public Long getId() {
