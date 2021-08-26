@@ -11,9 +11,9 @@ public class EmailValidator implements ConstraintValidator<Email, String> {
                     + "`{|}~^-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$";
 
     @Override
-    public boolean isValid(String s, ConstraintValidatorContext constraintValidatorContext) {
+    public boolean isValid(String email, ConstraintValidatorContext constraintValidatorContext) {
         Pattern compile = Pattern.compile(EMAIL_PATTERN);
-        Matcher matcher = compile.matcher(s);
+        Matcher matcher = compile.matcher(email);
         return matcher.matches();
     }
 }
