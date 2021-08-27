@@ -6,7 +6,6 @@ import javax.persistence.Id;
 import javax.persistence.MapsId;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
-import org.springframework.lang.NonNull;
 
 @Entity
 public class ShoppingCart {
@@ -16,7 +15,6 @@ public class ShoppingCart {
     private List<Ticket> tickets;
     @MapsId
     @OneToOne
-    @NonNull
     private User user;
 
     public Long getId() {

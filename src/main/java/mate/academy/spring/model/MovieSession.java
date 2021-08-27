@@ -6,7 +6,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
-import org.springframework.lang.NonNull;
 
 @Entity
 public class MovieSession {
@@ -14,10 +13,8 @@ public class MovieSession {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @ManyToOne
-    @NonNull
     private Movie movie;
     @ManyToOne
-    @NonNull
     private CinemaHall cinemaHall;
     private LocalDateTime showTime;
 
