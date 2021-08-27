@@ -30,7 +30,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
         Map<String, Object> paramsMap = new HashMap<>();
         paramsMap.put("timestamp", LocalDateTime.now().toString());
         paramsMap.put("status", status.value());
-        List<String> exceptionsMessages = ex.getBindingResult().getFieldErrors()
+        List<String> exceptionsMessages = ex.getBindingResult().getAllErrors()
                 .stream()
                 .map(this::getErrorMessage)
                 .collect(Collectors.toList());
