@@ -1,6 +1,6 @@
 package mate.academy.spring.dto.request;
 
-import jakarta.validation.constraints.Min;
+import javax.validation.constraints.Min;
 import org.springframework.lang.NonNull;
 
 public class MovieSessionRequestDto {

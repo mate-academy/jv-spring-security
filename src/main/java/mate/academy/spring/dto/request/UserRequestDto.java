@@ -1,8 +1,12 @@
 package mate.academy.spring.dto.request;
 
-public class UserRequestDto {
+import mate.academy.spring.service.validation.Email;
+import mate.academy.spring.service.validation.Password;
 
+public class UserRequestDto {
+    @Email
     private String email;
+    @Password
     private String password;
 
     public String getEmail() {
