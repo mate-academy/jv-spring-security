@@ -12,7 +12,7 @@
    
 *IMPORTANT:*
 For dependency `hibernate-validator` don't use version `7.0.0.Final` and higher, they are not 
-fully compatible with Spring now, and may not work properly. You can user `6.1.7.Final`;
+fully compatible with Spring now, and may not work properly. You can user `6.1.6.Final`;
 
 Advanced:
 1. In the UserRequestDto add a `repeatPassword` field.
