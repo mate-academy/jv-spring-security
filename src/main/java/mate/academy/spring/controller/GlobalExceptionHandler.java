@@ -39,10 +39,8 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     }
 
     @ExceptionHandler(value
-            = {IllegalArgumentException.class, IllegalStateException.class,
-            NotFoundException.class, NoSuchElementException.class,
-            DataProcessingException.class, RuntimeException.class})
-    private ResponseEntity<Object> handleConflict(RuntimeException ex, WebRequest request) {
+            = {RuntimeException.class, NotFoundException.class, IllegalStateException.class})
+    private ResponseEntity<Object> handleServerError(RuntimeException ex, WebRequest request) {
         Map<String, Object> paramsMap = new HashMap<>();
         paramsMap.put("timestamp", LocalDateTime.now().toString());
         paramsMap.put("exception message", ex.getMessage());
