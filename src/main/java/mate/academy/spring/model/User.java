@@ -5,16 +5,25 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+import mate.academy.spring.validation.Email;
 
 @Entity
+@Table(name = "/users")
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @NotNull
+    @Size(min = 5, max = 255)
+    @Email
     @Column(unique = true)
     private String email;
+    @NotNull
+    @Size(min = 4, max = 50)
     private String password;
-    private String salt;
 
     public Long getId() {
         return id;
@@ -38,14 +47,6 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    public String getSalt() {
-        return salt;
-    }
-
-    public void setSalt(String salt) {
-        this.salt = salt;
     }
 
     @Override
