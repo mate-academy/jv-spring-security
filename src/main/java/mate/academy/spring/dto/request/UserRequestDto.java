@@ -3,7 +3,6 @@ package mate.academy.spring.dto.request;
 import mate.academy.spring.validation.email.Email;
 import mate.academy.spring.validation.password.Password;
 
-
 @Password
 public class UserRequestDto {
     @Email
