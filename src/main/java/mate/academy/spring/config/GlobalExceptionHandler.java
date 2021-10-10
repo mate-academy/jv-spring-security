@@ -38,8 +38,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler(DataProcessingException.class)
     protected ResponseEntity<Object> handleDataProcessingException(RuntimeException e,
-                                                                   HttpHeaders headers,
-                                                                   WebRequest request) {
+                                                                   HttpHeaders headers) {
         Map<String, Object> body = new LinkedHashMap<>();
         body.put("timestamp", LocalDateTime.now().toString());
         body.put("status", HttpStatus.INTERNAL_SERVER_ERROR);

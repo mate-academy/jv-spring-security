@@ -13,7 +13,20 @@ public class UserRequestDto {
     @NotNull
     @Size(min = 5, max = 25)
     private String password;
+    @NotNull
     private String secondPassword;
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getSecondPassword() {
+        return secondPassword;
+    }
+
+    public void setSecondPassword(String secondPassword) {
+        this.secondPassword = secondPassword;
+    }
 
     public String getEmail() {
         return email;
