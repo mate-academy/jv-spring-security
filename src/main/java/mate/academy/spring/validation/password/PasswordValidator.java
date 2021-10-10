@@ -20,6 +20,15 @@ public class PasswordValidator implements ConstraintValidator<Password, UserRequ
         }
         Pattern pattern = Pattern.compile(PASSWORD_PATTERN);
         Matcher matcher = pattern.matcher(password);
+        if (!matcher.matches()) {
+            constraintValidatorContext.buildConstraintViolationWithTemplate("Password should "
+                    + "be 8 symbols or longer and contain uppercase, lowercase and number.")
+                    .addConstraintViolation();
+        }
+        if (!password.equals(repeatPassword)) {
+            constraintValidatorContext.buildConstraintViolationWithTemplate("Password and repeat "
+                    + "password should be the same.").addConstraintViolation();
+        }
         return matcher.matches() && password.equals(repeatPassword);
     }
 }
