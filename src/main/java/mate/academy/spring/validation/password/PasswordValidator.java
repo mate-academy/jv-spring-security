@@ -1,7 +1,5 @@
 package mate.academy.spring.validation.password;
 
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 import mate.academy.spring.dto.request.UserRequestDto;
@@ -18,9 +16,7 @@ public class PasswordValidator implements ConstraintValidator<Password, UserRequ
         if (password == null || repeatPassword == null) {
             return false;
         }
-        Pattern pattern = Pattern.compile(PASSWORD_PATTERN);
-        Matcher matcher = pattern.matcher(password);
-        if (!matcher.matches()) {
+        if (!password.matches(PASSWORD_PATTERN)) {
             constraintValidatorContext.buildConstraintViolationWithTemplate("Password should "
                     + "be 8 symbols or longer and contain uppercase, lowercase and number.")
                     .addConstraintViolation();
@@ -29,6 +25,6 @@ public class PasswordValidator implements ConstraintValidator<Password, UserRequ
             constraintValidatorContext.buildConstraintViolationWithTemplate("Password and repeat "
                     + "password should be the same.").addConstraintViolation();
         }
-        return matcher.matches() && password.equals(repeatPassword);
+        return password.matches(PASSWORD_PATTERN) && password.equals(repeatPassword);
     }
 }
