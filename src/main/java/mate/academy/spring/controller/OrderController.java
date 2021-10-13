@@ -37,20 +37,17 @@ public class OrderController {
 
     @PostMapping("/complete")
     public OrderResponseDto completeOrder(Authentication auth) {
-        UserDetails details = (UserDetails) auth.getPrincipal();
-        String email = details.getUsername();
-        User user = userService.findByEmail(email).orElseThrow(
-                () -> new DataProcessingException("User with email " + email + " not found"));
+        User user = userService.findByEmail(auth.getName()).orElseThrow(
+                () -> new DataProcessingException("User with email "
+                        + auth.getName() + " not found"));
         ShoppingCart cart = shoppingCartService.getByUser(user);
         return orderMapper.mapToDto(orderService.completeOrder(cart));
     }
 
     @GetMapping
     public List<OrderResponseDto> getOrderHistory(Authentication auth) {
-        UserDetails details = (UserDetails) auth.getPrincipal();
-        String email = details.getUsername();
-        User user = userService.findByEmail(email).orElseThrow(
-                () -> new DataProcessingException("User with email " + email + " not found"));
+        User user = userService.findByEmail(auth.getName()).orElseThrow(
+                () -> new DataProcessingException("User with email " + auth.getName() + " not found"));
         return orderService.getOrdersHistory(user)
                 .stream()
                 .map(orderMapper::mapToDto)
