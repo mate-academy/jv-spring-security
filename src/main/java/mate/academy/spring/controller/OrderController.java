@@ -11,7 +11,6 @@ import mate.academy.spring.service.ShoppingCartService;
 import mate.academy.spring.service.UserService;
 import mate.academy.spring.service.mapper.OrderMapper;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -47,7 +46,8 @@ public class OrderController {
     @GetMapping
     public List<OrderResponseDto> getOrderHistory(Authentication auth) {
         User user = userService.findByEmail(auth.getName()).orElseThrow(
-                () -> new DataProcessingException("User with email " + auth.getName() + " not found"));
+                () -> new DataProcessingException("User with email "
+                        + auth.getName() + " not found"));
         return orderService.getOrdersHistory(user)
                 .stream()
                 .map(orderMapper::mapToDto)

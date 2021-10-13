@@ -1,10 +1,9 @@
 package mate.academy.spring.lib;
 
+import java.util.Objects;
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 import mate.academy.spring.dto.request.UserRequestDto;
-
-import java.util.Objects;
 
 public class PasswordMatcher implements ConstraintValidator<PasswordMatch, UserRequestDto> {
     @Override

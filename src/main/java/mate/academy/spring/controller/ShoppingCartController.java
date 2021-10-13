@@ -9,7 +9,6 @@ import mate.academy.spring.service.ShoppingCartService;
 import mate.academy.spring.service.UserService;
 import mate.academy.spring.service.mapper.ShoppingCartMapper;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -37,7 +36,8 @@ public class ShoppingCartController {
     @PutMapping("/movie-sessions")
     public void addToCart(Authentication auth, @RequestParam Long movieSessionId) {
         User user = userService.findByEmail(auth.getName()).orElseThrow(
-                () -> new DataProcessingException("User with email " + auth.getName() + " not found"));
+                () -> new DataProcessingException("User with email "
+                        + auth.getName() + " not found"));
         MovieSession movieSession = movieSessionService.get(movieSessionId);
         shoppingCartService.addSession(movieSession, user);
     }
@@ -45,7 +45,8 @@ public class ShoppingCartController {
     @GetMapping("/by-user")
     public ShoppingCartResponseDto getByUser(Authentication auth) {
         User user = userService.findByEmail(auth.getName()).orElseThrow(
-                () -> new DataProcessingException("User with email " + auth.getName() + " not found"));
+                () -> new DataProcessingException("User with email "
+                        + auth.getName() + " not found"));
         return shoppingCartMapper.mapToDto(shoppingCartService.getByUser(user));
     }
 }
