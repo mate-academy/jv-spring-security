@@ -1,6 +1,8 @@
 package mate.academy.spring.dao.impl;
 
+import java.util.List;
 import java.util.Optional;
+import javax.persistence.criteria.CriteriaQuery;
 import mate.academy.spring.dao.UserDao;
 import mate.academy.spring.exception.DataProcessingException;
 import mate.academy.spring.model.User;
@@ -61,6 +63,18 @@ public class UserDaoImpl implements UserDao {
             return findByEmail.uniqueResultOptional();
         } catch (Exception e) {
             throw new DataProcessingException("User with email " + email + " not found", e);
+        }
+    }
+
+    @Override
+    public List<User> getAll() {
+        try (Session session = factory.openSession()) {
+            CriteriaQuery<User> criteriaQuery = session.getCriteriaBuilder()
+                    .createQuery(User.class);
+            criteriaQuery.from(User.class);
+            return session.createQuery(criteriaQuery).getResultList();
+        } catch (Exception e) {
+            throw new DataProcessingException("Can't get all users ", e);
         }
     }
 }
