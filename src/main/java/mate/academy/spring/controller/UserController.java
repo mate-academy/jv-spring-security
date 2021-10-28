@@ -1,10 +1,12 @@
 package mate.academy.spring.controller;
 
+import javax.validation.constraints.NotNull;
 import mate.academy.spring.dto.response.UserResponseDto;
 import mate.academy.spring.exception.DataProcessingException;
 import mate.academy.spring.model.User;
 import mate.academy.spring.service.UserService;
 import mate.academy.spring.service.mapper.UserMapper;
+import mate.academy.spring.validator.Email;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -22,7 +24,7 @@ public class UserController {
     }
 
     @GetMapping("/by-email")
-    public UserResponseDto getByEmail(@RequestParam String email) {
+    public UserResponseDto getByEmail(@RequestParam @NotNull @Email String email) {
         User user = userService.findByEmail(email).orElseThrow(
                 () -> new DataProcessingException("Invalid email"));
         return userMapper.mapToDto(user);

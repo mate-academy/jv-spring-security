@@ -3,6 +3,9 @@ package mate.academy.spring.controller;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
+import javax.validation.Valid;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
 import mate.academy.spring.dto.request.MovieSessionRequestDto;
 import mate.academy.spring.dto.response.MovieSessionResponseDto;
 import mate.academy.spring.model.MovieSession;
@@ -34,14 +37,14 @@ public class MovieSessionController {
     }
 
     @PostMapping
-    public MovieSessionResponseDto add(@RequestBody MovieSessionRequestDto requestDto) {
+    public MovieSessionResponseDto add(@RequestBody @Valid MovieSessionRequestDto requestDto) {
         MovieSession movieSession = movieSessionMapper.mapToModel(requestDto);
         movieSessionService.add(movieSession);
         return movieSessionMapper.mapToDto(movieSession);
     }
 
     @GetMapping("/available")
-    public List<MovieSessionResponseDto> getAll(@RequestParam Long movieId,
+    public List<MovieSessionResponseDto> getAll(@RequestParam @NotNull @Min(value = 1) Long movieId,
                                                 @RequestParam
                                                 @DateTimeFormat(pattern = DATE_PATTERN)
                                                         LocalDate date) {
@@ -52,8 +55,8 @@ public class MovieSessionController {
     }
 
     @PutMapping("/{id}")
-    public MovieSessionResponseDto update(@PathVariable Long id,
-                                          @RequestBody MovieSessionRequestDto requestDto) {
+    public MovieSessionResponseDto update(@PathVariable @NotNull @Min(value = 1) Long id,
+                                          @RequestBody @Valid MovieSessionRequestDto requestDto) {
         MovieSession movieSession = movieSessionMapper.mapToModel(requestDto);
         movieSession.setId(id);
         movieSessionService.update(movieSession);
@@ -61,7 +64,7 @@ public class MovieSessionController {
     }
 
     @DeleteMapping("/{id}")
-    public void delete(@PathVariable Long id) {
+    public void delete(@PathVariable @NotNull @Min(value = 1) Long id) {
         movieSessionService.delete(id);
     }
 }
