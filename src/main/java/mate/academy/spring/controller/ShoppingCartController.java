@@ -50,7 +50,8 @@ public class ShoppingCartController {
     public ShoppingCartResponseDto getByUser(Authentication authentication) {
         User user = userService.findByEmail(authentication.getName())
                 .orElseThrow(() -> new DataProcessingException("Can't find a shopping card "
-                + "because either a user does not exist or email is not valid. " + authentication.getName()));
+                + "because either a user does not exist or email is not valid. "
+                        + authentication.getName()));
         return shoppingCartMapper.mapToDto(shoppingCartService.getByUser(user));
     }
 }
