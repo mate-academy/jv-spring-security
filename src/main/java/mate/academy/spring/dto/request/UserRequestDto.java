@@ -1,14 +1,14 @@
 package mate.academy.spring.dto.request;
 
-import mate.academy.spring.service.Email;
-import mate.academy.spring.service.RepeatedPassword;
+import mate.academy.spring.validator.Email;
+import mate.academy.spring.validator.RepeatedPassword;
 
 @RepeatedPassword
 public class UserRequestDto {
     @Email
     private String email;
     private String password;
-    private String twinPassword;
+    private String repeatPassword;
 
     public String getEmail() {
         return email;
@@ -26,11 +26,11 @@ public class UserRequestDto {
         this.password = password;
     }
 
-    public String getTwinPassword() {
-        return twinPassword;
+    public String getRepeatPassword() {
+        return repeatPassword;
     }
 
-    public void setTwinPassword(String twinPassword) {
-        this.twinPassword = twinPassword;
+    public void setRepeatPassword(String repeatPassword) {
+        this.repeatPassword = repeatPassword;
     }
 }
