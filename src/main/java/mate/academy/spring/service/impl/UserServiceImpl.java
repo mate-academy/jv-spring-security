@@ -1,16 +1,16 @@
 package mate.academy.spring.service.impl;
 
+import java.security.SecureRandom;
 import java.util.Optional;
 import mate.academy.spring.dao.UserDao;
 import mate.academy.spring.exception.DataProcessingException;
 import mate.academy.spring.model.User;
 import mate.academy.spring.service.UserService;
-import mate.academy.spring.util.PasswordUtil;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
 public class UserServiceImpl implements UserService {
-    private static final int SALT_LENGTH = 10;
     private final UserDao userDao;
 
     public UserServiceImpl(UserDao userDao) {
@@ -19,11 +19,15 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User add(User user) {
-        String salt = PasswordUtil.getSalt(SALT_LENGTH);
-        String securePassword = PasswordUtil.generateSecurePassword(user.getPassword(), salt);
-        user.setPassword(securePassword);
-        user.setSalt(salt);
+        user.setPassword(encodePassword(user.getPassword()));
         return userDao.add(user);
+    }
+
+    private String encodePassword(String password) {
+        int strength = 10;
+        BCryptPasswordEncoder encoder
+                = new BCryptPasswordEncoder(strength, new SecureRandom());
+        return encoder.encode(password);
     }
 
     @Override
