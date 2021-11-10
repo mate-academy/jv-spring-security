@@ -5,6 +5,7 @@ import java.util.NoSuchElementException;
 import java.util.stream.Collectors;
 import mate.academy.spring.dto.response.OrderResponseDto;
 import mate.academy.spring.model.ShoppingCart;
+import mate.academy.spring.model.User;
 import mate.academy.spring.service.OrderService;
 import mate.academy.spring.service.ShoppingCartService;
 import mate.academy.spring.service.UserService;
@@ -35,17 +36,17 @@ public class OrderController {
 
     @PostMapping("/complete")
     public OrderResponseDto completeOrder(Authentication authentication) {
-        Long userId = userService.findByEmail(authentication.getName()).orElseThrow(
-                () -> new NoSuchElementException("User not found")).getId();
-        ShoppingCart cart = shoppingCartService.getByUser(userService.get(userId));
+        User user = userService.findByEmail(authentication.getName()).orElseThrow(
+                () -> new NoSuchElementException("User not found"));
+        ShoppingCart cart = shoppingCartService.getByUser(user);
         return orderMapper.mapToDto(orderService.completeOrder(cart));
     }
 
     @GetMapping
     public List<OrderResponseDto> getOrderHistory(Authentication authentication) {
-        Long userId = userService.findByEmail(authentication.getName()).get().getId();
-        return orderService.getOrdersHistory(userService.get(userId))
-                .stream()
+        User user = userService.findByEmail(authentication.getName()).orElseThrow(
+                () -> new NoSuchElementException("User not found"));
+        return orderService.getOrdersHistory(user).stream()
                 .map(orderMapper::mapToDto)
                 .collect(Collectors.toList());
     }
