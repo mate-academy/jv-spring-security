@@ -35,7 +35,8 @@ public class ShoppingCartController {
     @PutMapping("/movie-sessions")
     public void addToCart(Authentication authentication, @RequestParam Long movieSessionId) {
         User user = userService.findByEmail(authentication.getName()).orElseThrow(
-                () -> new NoSuchElementException("User not found"));
+                () -> new NoSuchElementException("User not found by name "
+                        + authentication.getName()));
         shoppingCartService.addSession(movieSessionService.get(movieSessionId), user);
     }
 
