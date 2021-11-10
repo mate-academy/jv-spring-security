@@ -11,7 +11,7 @@ import javax.validation.Payload;
 @Target({ElementType.TYPE})
 @Retention(RetentionPolicy.RUNTIME)
 public @interface ValidPassword {
-    String message() default "Password must match";
+    String message() default "Passwords must match";
     Class<?>[] groups() default {};
     Class<? extends Payload>[] payload() default {};
 }

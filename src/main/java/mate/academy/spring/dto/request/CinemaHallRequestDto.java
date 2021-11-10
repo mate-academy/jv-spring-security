@@ -1,10 +1,10 @@
 package mate.academy.spring.dto.request;
 
-import javax.validation.constraints.PositiveOrZero;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.Size;
 
 public class CinemaHallRequestDto {
-    @PositiveOrZero
+    @Min(10)
     private int capacity;
     @Size(min = 2)
     private String description;

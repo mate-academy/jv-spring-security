@@ -1,6 +1,7 @@
 package mate.academy.spring.controller;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.stream.Collectors;
 import mate.academy.spring.dto.response.OrderResponseDto;
 import mate.academy.spring.model.ShoppingCart;
@@ -34,7 +35,8 @@ public class OrderController {
 
     @PostMapping("/complete")
     public OrderResponseDto completeOrder(Authentication authentication) {
-        Long userId = userService.findByEmail(authentication.getName()).get().getId();
+        Long userId = userService.findByEmail(authentication.getName()).orElseThrow(
+                () -> new NoSuchElementException("User not found")).getId();
         ShoppingCart cart = shoppingCartService.getByUser(userService.get(userId));
         return orderMapper.mapToDto(orderService.completeOrder(cart));
     }
