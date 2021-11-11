@@ -35,12 +35,16 @@ public class ShoppingCartController {
     public void addToCart(Authentication auth, @RequestParam Long movieSessionId) {
         shoppingCartService.addSession(
                 movieSessionService.get(movieSessionId),
-                userService.findByEmail(auth.getName()).get());
+                userService.findByEmail(auth.getName())
+                        .orElseThrow(() -> new RuntimeException("User with email "
+                        + auth.getName() + " doesn't exist.")));
     }
 
     @GetMapping("/by-user")
     public ShoppingCartResponseDto getByUser(Authentication auth) {
-        User user = userService.findByEmail(auth.getName()).get();
+        User user = userService.findByEmail(auth.getName())
+                .orElseThrow(() -> new RuntimeException("User with email "
+                + auth.getName() + " doesn't exist."));
         return shoppingCartMapper.mapToDto(shoppingCartService.getByUser(user));
     }
 }
