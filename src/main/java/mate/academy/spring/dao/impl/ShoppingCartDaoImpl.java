@@ -1,7 +1,7 @@
 package mate.academy.spring.dao.impl;
 
 import mate.academy.spring.dao.ShoppingCartDao;
-import mate.academy.spring.exception.DataProcessingException;
+import mate.academy.spring.exception.exceptions.DataProcessingException;
 import mate.academy.spring.model.ShoppingCart;
 import mate.academy.spring.model.User;
 import org.hibernate.Session;

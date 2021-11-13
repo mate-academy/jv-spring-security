@@ -2,7 +2,7 @@ package mate.academy.spring.dao.impl;
 
 import java.util.List;
 import mate.academy.spring.dao.OrderDao;
-import mate.academy.spring.exception.DataProcessingException;
+import mate.academy.spring.exception.exceptions.DataProcessingException;
 import mate.academy.spring.model.Order;
 import mate.academy.spring.model.User;
 import org.hibernate.Session;
