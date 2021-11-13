@@ -1,13 +1,10 @@
 package mate.academy.spring.exception;
 
-import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
-import javax.servlet.http.HttpServletResponse;
-import javax.validation.ConstraintViolationException;
 import mate.academy.spring.exception.exceptions.DataProcessingException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -49,11 +46,6 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
             return field.concat(" ").concat(error.getDefaultMessage());
         }
         return error.getDefaultMessage();
-    }
-
-    @ExceptionHandler(ConstraintViolationException.class)
-    public void handleConstraintValidationEx(HttpServletResponse response) throws IOException {
-        response.sendError(HttpStatus.BAD_REQUEST.value());
     }
 
     @ExceptionHandler(DataProcessingException.class)
