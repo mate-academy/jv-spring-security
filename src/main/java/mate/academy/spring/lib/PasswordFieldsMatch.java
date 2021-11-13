@@ -13,7 +13,7 @@ import javax.validation.Payload;
 @Target({ElementType.TYPE})
 @Retention(RetentionPolicy.RUNTIME)
 public @interface PasswordFieldsMatch {
-    String message() default "Passwords don't match";
+    String message() default "Password and repeated password don't match";
 
     Class<?>[] groups() default {};
 
