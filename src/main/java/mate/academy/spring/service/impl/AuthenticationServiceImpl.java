@@ -1,12 +1,9 @@
 package mate.academy.spring.service.impl;
 
-import java.util.Optional;
-import mate.academy.spring.exception.exceptions.AuthenticationException;
 import mate.academy.spring.model.User;
 import mate.academy.spring.service.AuthenticationService;
 import mate.academy.spring.service.ShoppingCartService;
 import mate.academy.spring.service.UserService;
-import mate.academy.spring.util.PasswordUtil;
 import org.springframework.stereotype.Service;
 
 @Service

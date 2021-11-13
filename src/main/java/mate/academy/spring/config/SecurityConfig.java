@@ -19,11 +19,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .roles("User");
     }
 
-    @Bean
-    PasswordEncoder getEncoder() {
-        return new BCryptPasswordEncoder();
-    }
-
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
@@ -36,5 +31,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .httpBasic()
                 .and()
                 .csrf().disable();
+    }
+
+    @Bean
+    PasswordEncoder getEncoder() {
+        return new BCryptPasswordEncoder();
     }
 }

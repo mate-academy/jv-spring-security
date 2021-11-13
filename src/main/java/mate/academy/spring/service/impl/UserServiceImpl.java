@@ -5,7 +5,6 @@ import mate.academy.spring.dao.UserDao;
 import mate.academy.spring.exception.exceptions.DataProcessingException;
 import mate.academy.spring.model.User;
 import mate.academy.spring.service.UserService;
-import mate.academy.spring.util.PasswordUtil;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 

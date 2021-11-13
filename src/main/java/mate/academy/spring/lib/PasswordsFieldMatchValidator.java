@@ -2,19 +2,14 @@ package mate.academy.spring.lib;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
+import mate.academy.spring.dto.request.UserRequestDto;
 
-public class PasswordsFieldMatchValidator implements ConstraintValidator<PasswordFieldsMatch, String> {
-    private String field;
-    private String fieldMatch;
-
-    @Override
-    public void initialize(PasswordFieldsMatch constraintAnnotation) {
-        this.field = constraintAnnotation.field();
-        this.fieldMatch = constraintAnnotation.fieldMatch();
-    }
+public class PasswordsFieldMatchValidator implements
+        ConstraintValidator<PasswordFieldsMatch, Object> {
 
     @Override
-    public boolean isValid(String s, ConstraintValidatorContext constraintValidatorContext) {
-        return field.equals(fieldMatch);
+    public boolean isValid(Object dto, ConstraintValidatorContext constraintValidatorContext) {
+        UserRequestDto userDto = (UserRequestDto) dto;
+        return userDto.getPassword().equals(userDto.getRepeatPassword());
     }
 }
