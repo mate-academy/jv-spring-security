@@ -7,7 +7,8 @@ import javax.validation.ConstraintValidatorContext;
 
 public class EmailValidator implements ConstraintValidator<Email, String> {
     private static final Pattern VALID_EMAIL_ADDRESS_REGEX =
-            Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$",
+            Pattern.compile("^(?=.{1,64}@)[A-Za-z0-9_-]+(\\.[A-Za-z0-9_-]+)*@"
+                    + "[^-][A-Za-z0-9-]+(\\.[A-Za-z0-9-]+)*(\\.[A-Za-z]{2,})$",
                     Pattern.CASE_INSENSITIVE);
 
     @Override

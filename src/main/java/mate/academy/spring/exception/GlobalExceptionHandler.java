@@ -5,6 +5,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
+import javax.validation.ConstraintViolationException;
 import mate.academy.spring.exception.exceptions.DataProcessingException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -36,7 +37,6 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
                                                 .collect(Collectors.toList());
 
         body.put("errors", errors);
-
         return new ResponseEntity<>(body, headers, status);
     }
 
@@ -46,6 +46,15 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
             return field.concat(" ").concat(error.getDefaultMessage());
         }
         return error.getDefaultMessage();
+    }
+
+    @ExceptionHandler(ConstraintViolationException.class)
+    public ResponseEntity<Object> handleConstraintEx(ConstraintViolationException ex) {
+        Map<String, Object> body = new LinkedHashMap<>();
+        body.put("timestamp", LocalDateTime.now().toString());
+        body.put("status", HttpStatus.BAD_REQUEST.toString());
+        body.put("error", ex.getMessage());
+        return new ResponseEntity<>(body, HttpStatus.BAD_REQUEST);
     }
 
     @ExceptionHandler(DataProcessingException.class)

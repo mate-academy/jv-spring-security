@@ -1,5 +1,6 @@
 package mate.academy.spring.controller;
 
+import javax.validation.constraints.Min;
 import mate.academy.spring.dto.response.ShoppingCartResponseDto;
 import mate.academy.spring.model.User;
 import mate.academy.spring.service.MovieSessionService;
@@ -7,6 +8,7 @@ import mate.academy.spring.service.ShoppingCartService;
 import mate.academy.spring.service.UserService;
 import mate.academy.spring.service.mapper.ShoppingCartMapper;
 import org.springframework.security.core.Authentication;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/shopping-carts")
+@Validated
 public class ShoppingCartController {
     private final ShoppingCartService shoppingCartService;
     private final ShoppingCartMapper shoppingCartMapper;
@@ -32,7 +35,8 @@ public class ShoppingCartController {
     }
 
     @PutMapping("/movie-sessions")
-    public void addToCart(@RequestParam Long userId, @RequestParam Long movieSessionId) {
+    public void addToCart(@RequestParam @Min(value = 1) Long userId,
+                          @RequestParam @Min(value = 1) Long movieSessionId) {
         shoppingCartService.addSession(
                 movieSessionService.get(movieSessionId), userService.get(userId));
     }

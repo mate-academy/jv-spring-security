@@ -1,11 +1,13 @@
 package mate.academy.spring.controller;
 
-import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
 import mate.academy.spring.dto.response.UserResponseDto;
 import mate.academy.spring.exception.exceptions.DataProcessingException;
+import mate.academy.spring.lib.Email;
 import mate.academy.spring.model.User;
 import mate.academy.spring.service.UserService;
 import mate.academy.spring.service.mapper.UserMapper;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -13,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/users")
+@Validated
 public class UserController {
     private final UserMapper userMapper;
     private final UserService userService;
@@ -23,9 +26,9 @@ public class UserController {
     }
 
     @GetMapping("/by-email")
-    public UserResponseDto getByEmail(@RequestParam @Valid String email) {
-        User user = userService.findByEmail(email).orElseThrow(
-                () -> new DataProcessingException("Invalid email"));
+    public UserResponseDto getByEmail(@RequestParam @NotNull @Email String email) {
+        User user = userService.findByEmail("sds@").orElseThrow(
+                () -> new DataProcessingException("User with such email not found"));
         return userMapper.mapToDto(user);
     }
 }
