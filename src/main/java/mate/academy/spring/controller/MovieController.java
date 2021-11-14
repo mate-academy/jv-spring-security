@@ -5,6 +5,7 @@ import java.util.stream.Collectors;
 import javax.validation.Valid;
 import mate.academy.spring.dto.request.MovieRequestDto;
 import mate.academy.spring.dto.response.MovieResponseDto;
+import mate.academy.spring.exception.DataProcessingException;
 import mate.academy.spring.model.Movie;
 import mate.academy.spring.service.MovieService;
 import mate.academy.spring.service.mapper.MovieMapper;
@@ -27,6 +28,9 @@ public class MovieController {
 
     @PostMapping
     public MovieResponseDto add(@RequestBody @Valid MovieRequestDto requestDto) {
+        if (requestDto.getMovieTitle().equals("qq")) {
+            throw new DataProcessingException("Can't insert movie " + requestDto);
+        }
         Movie movie = movieService.add(movieMapper.mapToModel(requestDto));
         return movieMapper.mapToDto(movie);
     }
