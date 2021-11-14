@@ -7,6 +7,7 @@ import mate.academy.spring.dto.response.CinemaHallResponseDto;
 import mate.academy.spring.model.CinemaHall;
 import mate.academy.spring.service.CinemaHallService;
 import mate.academy.spring.service.mapper.CinemaHallMapper;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -26,7 +27,7 @@ public class CinemaHallController {
     }
 
     @PostMapping
-    public CinemaHallResponseDto add(@RequestBody CinemaHallRequestDto requestDto) {
+    public CinemaHallResponseDto add(@RequestBody @Validated CinemaHallRequestDto requestDto) {
         CinemaHall cinemaHall = cinemaHallService.add(cinemaHallMapper.mapToModel(requestDto));
         return cinemaHallMapper.mapToDto(cinemaHall);
     }
