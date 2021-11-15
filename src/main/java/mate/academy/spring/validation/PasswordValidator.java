@@ -11,8 +11,6 @@ public class PasswordValidator implements ConstraintValidator<Password, UserRequ
     }
 
     public Boolean isPasswordMatched(UserRequestDto userRequestDto) {
-        return (userRequestDto.getPassword() != null
-                && userRequestDto.getRepeatPassword() != null
-                && userRequestDto.getPassword().equals(userRequestDto.getRepeatPassword()));
+        return (userRequestDto.getPassword().equals(userRequestDto.getRepeatPassword()));
     }
 }
