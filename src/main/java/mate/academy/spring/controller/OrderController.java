@@ -39,15 +39,16 @@ public class OrderController {
     public OrderResponseDto completeOrder(Authentication authentication) {
         UserDetails userDetails = (UserDetails) authentication.getDetails();
         User user = userService.findByEmail(userDetails.getUsername()).orElseThrow();
-        ShoppingCart cart = shoppingCartService.getByUser(userService.get(user.getId()));
+        ShoppingCart cart = shoppingCartService.getByUser(user);
         return orderMapper.mapToDto(orderService.completeOrder(cart));
     }
 
     @GetMapping
-    public List<OrderResponseDto> getOrderHistory(@RequestParam Long userId) {
-        return orderService.getOrdersHistory(userService.get(userId))
-                .stream()
-                .map(orderMapper::mapToDto)
-                .collect(Collectors.toList());
+    public List<OrderResponseDto> getOrderHistory(Authentication authentication) {
+            User user = userService.findByEmail(authentication.getName()).orElseThrow();
+            return orderService.getOrdersHistory(user)
+                    .stream()
+                    .map(orderMapper::mapToDto)
+                    .collect(Collectors.toList());
     }
 }
