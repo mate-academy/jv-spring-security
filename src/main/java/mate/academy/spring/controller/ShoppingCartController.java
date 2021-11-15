@@ -1,11 +1,13 @@
 package mate.academy.spring.controller;
 
+import javax.validation.constraints.NotNull;
 import mate.academy.spring.dto.response.ShoppingCartResponseDto;
 import mate.academy.spring.model.User;
 import mate.academy.spring.service.MovieSessionService;
 import mate.academy.spring.service.ShoppingCartService;
 import mate.academy.spring.service.UserService;
 import mate.academy.spring.service.mapper.ShoppingCartMapper;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -31,14 +33,20 @@ public class ShoppingCartController {
     }
 
     @PutMapping("/movie-sessions")
-    public void addToCart(@RequestParam Long userId, @RequestParam Long movieSessionId) {
+    public void addToCart(Authentication auth, @RequestParam @NotNull Long movieSessionId) {
+        User user = userService.findByEmail(auth.getName())
+                .orElseThrow(() -> new RuntimeException("Can't add movie session with Id "
+                        + movieSessionId + " to shopping cart of user with email "
+                        + auth.getName() + ". "));
         shoppingCartService.addSession(
-                movieSessionService.get(movieSessionId), userService.get(userId));
+                movieSessionService.get(movieSessionId), userService.get(user.getId()));
     }
 
     @GetMapping("/by-user")
-    public ShoppingCartResponseDto getByUser(@RequestParam Long userId) {
-        User user = userService.get(userId);
+    public ShoppingCartResponseDto getByUser(Authentication auth) {
+        User user = userService.findByEmail(auth.getName())
+                .orElseThrow(() -> new RuntimeException("Can't get shopping cart by user email "
+                        + auth.getName() + ". "));
         return shoppingCartMapper.mapToDto(shoppingCartService.getByUser(user));
     }
 }
