@@ -5,9 +5,9 @@ import mate.academy.spring.exception.DataProcessingException;
 import mate.academy.spring.model.User;
 import mate.academy.spring.service.UserService;
 import mate.academy.spring.service.mapper.UserMapper;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -22,8 +22,8 @@ public class UserController {
     }
 
     @GetMapping("/by-email")
-    public UserResponseDto getByEmail(@RequestParam String email) {
-        User user = userService.findByEmail(email).orElseThrow(
+    public UserResponseDto getByEmail(Authentication authentication) {
+        User user = userService.findByEmail(authentication.getName()).orElseThrow(
                 () -> new DataProcessingException("Invalid email"));
         return userMapper.mapToDto(user);
     }
