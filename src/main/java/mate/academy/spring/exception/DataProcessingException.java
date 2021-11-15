@@ -1,4 +1,4 @@
-package mate.academy.spring.exception.exceptions;
+package mate.academy.spring.exception;
 
 public class DataProcessingException extends RuntimeException {
 

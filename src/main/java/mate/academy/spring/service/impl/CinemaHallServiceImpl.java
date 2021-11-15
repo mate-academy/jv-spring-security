@@ -2,7 +2,7 @@ package mate.academy.spring.service.impl;
 
 import java.util.List;
 import mate.academy.spring.dao.CinemaHallDao;
-import mate.academy.spring.exception.exceptions.DataProcessingException;
+import mate.academy.spring.exception.DataProcessingException;
 import mate.academy.spring.model.CinemaHall;
 import mate.academy.spring.service.CinemaHallService;
 import org.springframework.stereotype.Service;

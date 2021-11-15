@@ -1,7 +1,7 @@
 package mate.academy.spring.dao.impl;
 
 import mate.academy.spring.dao.TicketDao;
-import mate.academy.spring.exception.exceptions.DataProcessingException;
+import mate.academy.spring.exception.DataProcessingException;
 import mate.academy.spring.model.Ticket;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;

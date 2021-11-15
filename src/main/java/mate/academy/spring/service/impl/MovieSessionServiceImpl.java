@@ -3,7 +3,7 @@ package mate.academy.spring.service.impl;
 import java.time.LocalDate;
 import java.util.List;
 import mate.academy.spring.dao.MovieSessionDao;
-import mate.academy.spring.exception.exceptions.DataProcessingException;
+import mate.academy.spring.exception.DataProcessingException;
 import mate.academy.spring.model.MovieSession;
 import mate.academy.spring.service.MovieSessionService;
 import org.springframework.stereotype.Service;
