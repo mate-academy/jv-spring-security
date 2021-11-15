@@ -1,5 +1,6 @@
 package mate.academy.spring.controller;
 
+import javax.validation.Valid;
 import mate.academy.spring.dto.response.ShoppingCartResponseDto;
 import mate.academy.spring.model.User;
 import mate.academy.spring.service.MovieSessionService;
@@ -31,13 +32,14 @@ public class ShoppingCartController {
     }
 
     @PutMapping("/movie-sessions")
-    public void addToCart(@RequestParam Long userId, @RequestParam Long movieSessionId) {
+    public void addToCart(@RequestParam @Valid Long userId,
+                          @RequestParam @Valid Long movieSessionId) {
         shoppingCartService.addSession(
                 movieSessionService.get(movieSessionId), userService.get(userId));
     }
 
     @GetMapping("/by-user")
-    public ShoppingCartResponseDto getByUser(@RequestParam Long userId) {
+    public ShoppingCartResponseDto getByUser(@RequestParam @Valid Long userId) {
         User user = userService.get(userId);
         return shoppingCartMapper.mapToDto(shoppingCartService.getByUser(user));
     }
