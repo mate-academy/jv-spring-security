@@ -1,4 +1,4 @@
-package mate.academy.spring.exception;
+package mate.academy.spring.controller;
 
 import java.time.LocalDateTime;
 import java.util.LinkedHashMap;
@@ -14,7 +14,7 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
-public class CustomGlobalExceptionHandler extends ResponseEntityExceptionHandler {
+public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     @Override
     protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException
                                                                               ex,
