@@ -5,8 +5,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.validation.constraints.NotNull;
-import mate.academy.spring.validation.Email;
 
 @Entity
 public class User {
@@ -14,9 +12,7 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column(unique = true)
-    @Email
     private String email;
-    @NotNull
     private String password;
 
     public Long getId() {

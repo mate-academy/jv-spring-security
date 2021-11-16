@@ -2,6 +2,7 @@ package mate.academy.spring.controller;
 
 import javax.validation.Valid;
 import mate.academy.spring.dto.response.ShoppingCartResponseDto;
+import mate.academy.spring.exception.DataProcessingException;
 import mate.academy.spring.service.MovieSessionService;
 import mate.academy.spring.service.ShoppingCartService;
 import mate.academy.spring.service.UserService;
@@ -36,15 +37,14 @@ public class ShoppingCartController {
         shoppingCartService.addSession(
                 movieSessionService.get(movieSessionId),
                 userService.findByEmail(authentication.getName())
-                        .orElseThrow(() -> new RuntimeException("The user with email "
-                                + authentication.getName() + " does not exist in DB.")));
+                        .orElseThrow(() -> new DataProcessingException("Invalid email")));
     }
 
     @GetMapping("/by-user")
     public ShoppingCartResponseDto getByUser(Authentication authentication) {
         return shoppingCartMapper.mapToDto(shoppingCartService
                 .getByUser(userService.findByEmail(authentication
-                        .getName()).orElseThrow(() -> new RuntimeException("The user with email "
-                        + authentication.getName() + " does not exist in DB."))));
+                        .getName())
+                        .orElseThrow(() -> new DataProcessingException("Invalid email"))));
     }
 }
