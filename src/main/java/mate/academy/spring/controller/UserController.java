@@ -1,6 +1,5 @@
 package mate.academy.spring.controller;
 
-import javax.validation.constraints.NotNull;
 import mate.academy.spring.dto.response.UserResponseDto;
 import mate.academy.spring.exception.DataProcessingException;
 import mate.academy.spring.model.User;
