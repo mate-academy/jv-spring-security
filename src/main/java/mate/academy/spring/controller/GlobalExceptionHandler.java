@@ -1,4 +1,4 @@
-package mate.academy.spring.config;
+package mate.academy.spring.controller;
 
 import java.time.LocalDateTime;
 import java.util.LinkedHashMap;

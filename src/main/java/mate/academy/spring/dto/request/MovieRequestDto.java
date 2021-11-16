@@ -1,11 +1,11 @@
 package mate.academy.spring.dto.request;
 
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.NotEmpty;
 
 public class MovieRequestDto {
-    @NotNull
+    @NotEmpty
     private String movieTitle;
-    @NotNull
+    @NotEmpty
     private String movieDescription;
 
     public String getMovieTitle() {
