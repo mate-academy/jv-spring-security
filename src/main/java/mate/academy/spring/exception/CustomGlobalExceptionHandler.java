@@ -1,7 +1,8 @@
-package mate.academy.spring.controller;
+package mate.academy.spring.exception;
 
 import java.time.LocalDateTime;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 import org.springframework.http.HttpHeaders;
@@ -23,12 +24,12 @@ public class CustomGlobalExceptionHandler extends ResponseEntityExceptionHandler
         Map<String, Object> body = new LinkedHashMap<>();
         body.put("timestamp", LocalDateTime.now().toString());
         body.put("status", status.value());
-        ex.getBindingResult()
+        List<String> error = ex.getBindingResult()
                 .getAllErrors()
                 .stream()
                 .map(this::getErrorMessage)
                 .collect(Collectors.toList());
-        body.put("error", ex.getCause());
+        body.put("error", error);
         return new ResponseEntity<>(body, headers, status);
     }
 
