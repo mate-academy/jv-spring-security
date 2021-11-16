@@ -1,13 +1,16 @@
 package mate.academy.spring.dto.request;
 
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Positive;
+import javax.validation.constraints.Size;
 
 public class MovieSessionRequestDto {
-    @NotNull
+    @Positive
     private Long movieId;
-    @NotNull
+    @Positive
     private Long cinemaHallId;
     @NotNull
+    @Size(min = 10)
     private String showTime;
 
     public Long getMovieId() {
