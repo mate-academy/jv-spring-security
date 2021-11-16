@@ -6,20 +6,16 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
-import javax.validation.constraints.NotNull;
 
 @Entity
 public class MovieSession {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @NotNull
     @ManyToOne
     private Movie movie;
-    @NotNull
     @ManyToOne
     private CinemaHall cinemaHall;
-    @NotNull
     private LocalDateTime showTime;
 
     public Long getId() {
