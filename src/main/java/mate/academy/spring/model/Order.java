@@ -8,15 +8,19 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.validation.constraints.NotNull;
 
 @Entity
 public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @NotNull
     @OneToMany
     private List<Ticket> tickets;
+    @NotNull
     private LocalDateTime orderTime;
+    @NotNull
     @ManyToOne
     private User user;
 

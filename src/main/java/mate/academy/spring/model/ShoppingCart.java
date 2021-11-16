@@ -6,6 +6,7 @@ import javax.persistence.Id;
 import javax.persistence.MapsId;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.validation.constraints.NotNull;
 
 @Entity
 public class ShoppingCart {
@@ -13,6 +14,7 @@ public class ShoppingCart {
     private Long id;
     @OneToMany
     private List<Ticket> tickets;
+    @NotNull
     @MapsId
     @OneToOne
     private User user;
