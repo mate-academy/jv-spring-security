@@ -1,6 +1,5 @@
 package mate.academy.spring.controller;
 
-import javax.validation.constraints.NotNull;
 import mate.academy.spring.dto.response.ShoppingCartResponseDto;
 import mate.academy.spring.model.User;
 import mate.academy.spring.service.MovieSessionService;
@@ -33,7 +32,7 @@ public class ShoppingCartController {
     }
 
     @PutMapping("/movie-sessions")
-    public void addToCart(Authentication auth, @RequestParam @NotNull Long movieSessionId) {
+    public void addToCart(Authentication auth, @RequestParam Long movieSessionId) {
         User user = userService.findByEmail(auth.getName())
                 .orElseThrow(() -> new RuntimeException("Can't add movie session with Id "
                         + movieSessionId + " to shopping cart of user with email "
