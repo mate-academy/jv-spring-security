@@ -1,7 +1,5 @@
 package mate.academy.spring.controller;
 
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotNull;
 import mate.academy.spring.dto.response.ShoppingCartResponseDto;
 import mate.academy.spring.exception.DataProcessingException;
 import mate.academy.spring.model.User;
@@ -36,7 +34,7 @@ public class ShoppingCartController {
 
     @PutMapping("/movie-sessions")
     public void addToCart(Authentication authentication,
-                          @RequestParam @NotNull @Min(value = 1) Long movieSessionId) {
+                          @RequestParam Long movieSessionId) {
         User user = userService.findByEmail(authentication.getName()).orElseThrow(
                 () -> new DataProcessingException("Can't add movie session with id: "
                         + movieSessionId + " to shopping cart of user with email: "
