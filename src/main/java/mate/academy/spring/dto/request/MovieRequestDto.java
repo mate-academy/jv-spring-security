@@ -4,7 +4,6 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 public class MovieRequestDto {
-    @NotNull
     @Size(max = 20)
     private String movieTitle;
     @Size(max = 300)
