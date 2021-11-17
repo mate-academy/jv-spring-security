@@ -35,7 +35,7 @@ public class ShoppingCartController {
     public void addToCart(Authentication auth, @RequestParam Long movieSessionId) {
         User user = userService.findByEmail(auth.getName())
                 .orElseThrow(() -> new RuntimeException("Can't add movie session with Id "
-                        + movieSessionId + " to shopping cart of user with email "
+                        + movieSessionId + " to shopping cart for user with email "
                         + auth.getName() + ". "));
         shoppingCartService.addSession(
                 movieSessionService.get(movieSessionId), userService.get(user.getId()));
