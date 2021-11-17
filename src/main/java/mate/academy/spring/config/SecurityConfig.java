@@ -9,7 +9,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     public void configure(AuthenticationManagerBuilder builder)
             throws Exception {
         builder.inMemoryAuthentication()
-                .withUser("email1@gmail.com")
+                .withUser("email@gmail.com")
                 .password("qwerty")
                 .roles("USER");
     }
