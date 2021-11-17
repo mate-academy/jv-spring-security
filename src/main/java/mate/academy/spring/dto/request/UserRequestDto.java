@@ -1,6 +1,6 @@
 package mate.academy.spring.dto.request;
 
-import javax.validation.constraints.Min;
+import javax.validation.constraints.Size;
 import mate.academy.spring.validator.Email;
 import mate.academy.spring.validator.PasswordMatch;
 
@@ -8,9 +8,9 @@ import mate.academy.spring.validator.PasswordMatch;
 public class UserRequestDto {
     @Email
     private String email;
-    @Min(value = 6)
+    @Size(min = 8, max = 20)
     private String password;
-    @Min(value = 6)
+    @Size(min = 8, max = 20)
     private String repeatPassword;
 
     public String getEmail() {
