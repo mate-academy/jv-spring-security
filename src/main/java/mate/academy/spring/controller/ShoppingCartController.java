@@ -33,7 +33,8 @@ public class ShoppingCartController {
     }
 
     @PutMapping("/movie-sessions")
-    public void addToCart(Authentication authentication, @RequestParam Long movieSessionId) {
+    public void addToCart(Authentication authentication,
+                          @RequestParam Long movieSessionId) {
         String email = authentication.getName();
         User user = userService.findByEmail(email).orElseThrow(
                 () -> new DataProcessingException("Can't find user: " + email)
