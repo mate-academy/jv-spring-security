@@ -4,8 +4,6 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 import javax.validation.Valid;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotNull;
 import mate.academy.spring.dto.request.MovieSessionRequestDto;
 import mate.academy.spring.dto.response.MovieSessionResponseDto;
 import mate.academy.spring.model.MovieSession;
@@ -44,7 +42,7 @@ public class MovieSessionController {
     }
 
     @GetMapping("/available")
-    public List<MovieSessionResponseDto> getAll(@RequestParam @NotNull @Min(value = 1) Long movieId,
+    public List<MovieSessionResponseDto> getAll(@RequestParam Long movieId,
                                                 @RequestParam
                                                 @DateTimeFormat(pattern = DATE_PATTERN)
                                                         LocalDate date) {
@@ -64,7 +62,7 @@ public class MovieSessionController {
     }
 
     @DeleteMapping("/{id}")
-    public void delete(@PathVariable @NotNull @Min(value = 1) Long id) {
+    public void delete(@PathVariable Long id) {
         movieSessionService.delete(id);
     }
 }
