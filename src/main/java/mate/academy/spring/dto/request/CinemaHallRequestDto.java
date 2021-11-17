@@ -7,7 +7,6 @@ import javax.validation.constraints.Size;
 public class CinemaHallRequestDto {
     @Min(value = 1, message = "Capacity Can't be negative or 0. ")
     private int capacity;
-    @NotNull
     @Size(min = 20, max = 100)
     private String description;
 
