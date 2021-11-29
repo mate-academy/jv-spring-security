@@ -1,11 +1,17 @@
 package mate.academy.spring.controller;
 
+import java.util.List;
+import java.util.stream.Collectors;
+import javax.validation.Valid;
+import mate.academy.spring.dto.request.UserRequestDto;
 import mate.academy.spring.dto.response.UserResponseDto;
 import mate.academy.spring.exception.DataProcessingException;
 import mate.academy.spring.model.User;
 import mate.academy.spring.service.UserService;
 import mate.academy.spring.service.mapper.UserMapper;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -26,5 +32,26 @@ public class UserController {
         User user = userService.findByEmail(email).orElseThrow(
                 () -> new DataProcessingException("Invalid email"));
         return userMapper.mapToDto(user);
+    }
+
+    @GetMapping("/")
+    public List<UserResponseDto> getAllUsers() {
+        return userService.getAll().stream().map(userMapper::mapToDto).collect(Collectors.toList());
+    }
+
+    @PostMapping
+    public UserResponseDto add(@RequestBody @Valid UserRequestDto requestDto) {
+        User user = userService.add(userMapper.mapToModel(requestDto));
+        return userMapper.mapToDto(user);
+
+    }
+
+    @GetMapping("/inject")
+    public String injectData() {
+        User bob = new User();
+        bob.setEmail("bob@gmail.com");
+        bob.setPassword("12345678");
+        userService.add(bob);
+        return "Done";
     }
 }
