@@ -10,6 +10,7 @@ import mate.academy.spring.validation.ValidPassword;
 public class UserRequestDto {
     @Email
     private String email;
+    @NotNull
     @Size(min = 8, max = 30)
     @Pattern(regexp = "^\\w*(([A-Z]+\\w*\\d+)|(\\d+\\w*[A-Z]+))\\w*$")
     private String password;

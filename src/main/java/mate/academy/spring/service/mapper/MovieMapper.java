@@ -11,7 +11,7 @@ public class MovieMapper implements RequestDtoMapper<MovieRequestDto, Movie>,
     @Override
     public Movie mapToModel(MovieRequestDto dto) {
         Movie movie = new Movie();
-        movie.setTitle(dto.getMovieTitle() == null ? "" : dto.getMovieTitle());
+        movie.setTitle(dto.getMovieTitle());
         movie.setDescription(dto.getMovieDescription());
         return movie;
     }
