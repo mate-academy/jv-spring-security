@@ -8,7 +8,6 @@ import mate.academy.spring.validation.ValidPassword;
 
 @ValidPassword
 public class UserRequestDto {
-    @NotNull
     @Email
     private String email;
     @NotNull

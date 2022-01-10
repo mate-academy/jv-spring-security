@@ -9,6 +9,6 @@ public class EmailValidator implements ConstraintValidator<Email, String> {
 
     @Override
     public boolean isValid(String email, ConstraintValidatorContext context) {
-        return email.matches(VALID_EMAIL_PATTERN);
+        return email != null && email.matches(VALID_EMAIL_PATTERN);
     }
 }
