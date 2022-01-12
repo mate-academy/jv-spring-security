@@ -5,8 +5,8 @@ import lombok.Getter;
 
 @Getter
 public class MovieRequestDto {
-    @NotNull
+    @NotNull(message = "Movie title may not be empty")
     private String movieTitle;
-    @NotNull
+    @NotNull(message = "Movie description may not be empty")
     private String movieDescription;
 }

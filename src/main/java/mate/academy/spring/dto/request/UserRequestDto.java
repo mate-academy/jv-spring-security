@@ -14,7 +14,7 @@ public class UserRequestDto {
     private String email;
     @NotNull(message = "Password may not be empty")
     @Pattern(regexp =
-            "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[*.!@$%^&(){}\\[\\]:;<>,?/~_+-=|]).{8,32}$",
+            "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[!-/:-@\\[-`{-~]).{8,32}$",
             message = "Password must contain:\n"
                     + "a minimum of 1 numeric character (0-9) and\n"
                     + "a minimum of 1 upper case letter (A-Z) and\n"

@@ -1,5 +1,6 @@
 package mate.academy.spring.controller;
 
+import lombok.AllArgsConstructor;
 import mate.academy.spring.dto.response.ShoppingCartResponseDto;
 import mate.academy.spring.service.MovieSessionService;
 import mate.academy.spring.service.ShoppingCartService;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
+@AllArgsConstructor
 @RequestMapping("/shopping-carts")
 public class ShoppingCartController {
     private final ShoppingCartService shoppingCartService;
@@ -20,26 +22,20 @@ public class ShoppingCartController {
     private final MovieSessionService movieSessionService;
     private final UserService userService;
 
-    public ShoppingCartController(ShoppingCartService shoppingCartService,
-                                  ShoppingCartMapper shoppingCartMapper,
-                                  UserService userService,
-                                  MovieSessionService movieSessionService) {
-        this.shoppingCartService = shoppingCartService;
-        this.shoppingCartMapper = shoppingCartMapper;
-        this.userService = userService;
-        this.movieSessionService = movieSessionService;
-    }
-
     @PutMapping("/movie-sessions")
     public void addToCart(Authentication authentication, @RequestParam Long movieSessionId) {
         shoppingCartService.addSession(
                 movieSessionService.get(movieSessionId),
-                userService.findByEmail(authentication.getName()).get());
+                userService.findByEmail(authentication.getName())
+                        .orElseThrow(() -> new RuntimeException("Can't find user with email "
+                                + authentication.getName())));
     }
 
     @GetMapping("/by-user")
     public ShoppingCartResponseDto getByUser(Authentication authentication) {
         return shoppingCartMapper.mapToDto(shoppingCartService
-                .getByUser(userService.findByEmail(authentication.getName()).get()));
+                .getByUser(userService.findByEmail(authentication.getName())
+                        .orElseThrow(() -> new RuntimeException("Can't find user with email "
+                                + authentication.getName()))));
     }
 }

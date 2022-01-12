@@ -6,12 +6,12 @@ import lombok.Getter;
 
 @Getter
 public class MovieSessionRequestDto {
-    @NotNull
+    @NotNull(message = "Movie id may not be empty")
     @Min(value = 1)
     private Long movieId;
-    @NotNull
+    @NotNull(message = "Cinema-hall id may not be empty")
     @Min(value = 1)
     private Long cinemaHallId;
-    @NotNull
+    @NotNull(message = "Show time may not be empty")
     private String showTime;
 }
