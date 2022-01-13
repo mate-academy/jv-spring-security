@@ -6,8 +6,8 @@ import lombok.Getter;
 
 @Getter
 public class CinemaHallRequestDto {
-    @Min(value = 0)
+    @Min(value = 1)
     private int capacity;
-    @NotNull(message = "Description may not be empty")
+    @NotNull(message = "Description can't be null")
     private String description;
 }

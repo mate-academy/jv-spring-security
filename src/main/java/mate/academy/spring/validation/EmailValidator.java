@@ -4,7 +4,7 @@ import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
 public class EmailValidator implements ConstraintValidator<Email, String> {
-    public static final String VALID_EMAIL_PATTERN
+    private static final String VALID_EMAIL_PATTERN
             = "^(\\S+)(@)(\\S+)(\\.)([a-zA-Z]{2,4})$";
 
     @Override
