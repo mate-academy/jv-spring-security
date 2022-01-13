@@ -52,5 +52,4 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
         }
         return e.getDefaultMessage();
     }
-
 }

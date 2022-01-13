@@ -13,18 +13,20 @@ public class PasswordValidator implements ConstraintValidator<Password, UserRequ
                            ConstraintValidatorContext constraintValidatorContext) {
         String password = userRequestDto.getPassword();
         String repeatPassword = userRequestDto.getRepeatPassword();
-        if (password == null || repeatPassword == null) {
+        if (password == null) {
             return false;
         }
         if (!password.matches(PASSWORD_PATTERN)) {
             constraintValidatorContext.buildConstraintViolationWithTemplate("Password should "
                     + "be 8 symbols or longer and contains lower and upper case character,"
                     + " special symbol and number").addConstraintViolation();
+            return false;
         }
         if (!password.equals(repeatPassword)) {
             constraintValidatorContext.buildConstraintViolationWithTemplate("Password "
                     + "and repeat password should match").addConstraintViolation();
+            return false;
         }
-        return password.matches(PASSWORD_PATTERN) && password.equals(repeatPassword);
+        return true;
     }
 }

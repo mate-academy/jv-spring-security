@@ -8,7 +8,7 @@ import lombok.Setter;
 @Setter
 @Getter
 public class CinemaHallRequestDto {
-    @Min(value = 0)
+    @Min(value = 1)
     private int capacity;
     @NotNull
     private String description;
