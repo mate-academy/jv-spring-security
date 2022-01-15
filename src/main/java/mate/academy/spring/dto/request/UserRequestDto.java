@@ -12,9 +12,9 @@ public class UserRequestDto {
     @Email
     private String email;
     @NotNull
-    @Size(min = 2, max = 30)
+    @Size(min = 6, max = 30)
     private String password;
     @NotNull
-    @Size(min = 2, max = 30)
+    @Size(min = 6, max = 30)
     private String repeatPassword;
 }
