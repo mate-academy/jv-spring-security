@@ -2,6 +2,7 @@ package mate.academy.spring.dao.impl;
 
 import java.util.List;
 import java.util.Optional;
+import lombok.AllArgsConstructor;
 import mate.academy.spring.dao.MovieDao;
 import mate.academy.spring.exception.DataProcessingException;
 import mate.academy.spring.model.Movie;
@@ -12,12 +13,9 @@ import org.hibernate.query.Query;
 import org.springframework.stereotype.Repository;
 
 @Repository
+@AllArgsConstructor
 public class MovieDaoImpl implements MovieDao {
     private final SessionFactory factory;
-
-    public MovieDaoImpl(SessionFactory factory) {
-        this.factory = factory;
-    }
 
     @Override
     public Movie add(Movie movie) {

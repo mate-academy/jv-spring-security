@@ -2,6 +2,7 @@ package mate.academy.spring.dao.impl;
 
 import java.util.List;
 import java.util.Optional;
+import lombok.AllArgsConstructor;
 import mate.academy.spring.dao.CinemaHallDao;
 import mate.academy.spring.exception.DataProcessingException;
 import mate.academy.spring.model.CinemaHall;
@@ -12,12 +13,9 @@ import org.hibernate.query.Query;
 import org.springframework.stereotype.Repository;
 
 @Repository
+@AllArgsConstructor
 public class CinemaHallDaoImpl implements CinemaHallDao {
     private final SessionFactory factory;
-
-    public CinemaHallDaoImpl(SessionFactory factory) {
-        this.factory = factory;
-    }
 
     @Override
     public CinemaHall add(CinemaHall cinemaHall) {

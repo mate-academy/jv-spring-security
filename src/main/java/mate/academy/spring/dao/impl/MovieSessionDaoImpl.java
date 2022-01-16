@@ -3,6 +3,7 @@ package mate.academy.spring.dao.impl;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
+import lombok.AllArgsConstructor;
 import mate.academy.spring.dao.MovieSessionDao;
 import mate.academy.spring.exception.DataProcessingException;
 import mate.academy.spring.model.MovieSession;
@@ -13,12 +14,9 @@ import org.hibernate.query.Query;
 import org.springframework.stereotype.Repository;
 
 @Repository
+@AllArgsConstructor
 public class MovieSessionDaoImpl implements MovieSessionDao {
     private final SessionFactory factory;
-
-    public MovieSessionDaoImpl(SessionFactory factory) {
-        this.factory = factory;
-    }
 
     @Override
     public MovieSession add(MovieSession movieSession) {

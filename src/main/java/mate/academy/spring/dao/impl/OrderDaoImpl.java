@@ -1,6 +1,7 @@
 package mate.academy.spring.dao.impl;
 
 import java.util.List;
+import lombok.AllArgsConstructor;
 import mate.academy.spring.dao.OrderDao;
 import mate.academy.spring.exception.DataProcessingException;
 import mate.academy.spring.model.Order;
@@ -12,12 +13,9 @@ import org.hibernate.query.Query;
 import org.springframework.stereotype.Repository;
 
 @Repository
+@AllArgsConstructor
 public class OrderDaoImpl implements OrderDao {
     private final SessionFactory factory;
-
-    public OrderDaoImpl(SessionFactory factory) {
-        this.factory = factory;
-    }
 
     @Override
     public Order add(Order order) {

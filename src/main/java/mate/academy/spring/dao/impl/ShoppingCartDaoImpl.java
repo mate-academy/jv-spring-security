@@ -1,5 +1,6 @@
 package mate.academy.spring.dao.impl;
 
+import lombok.AllArgsConstructor;
 import mate.academy.spring.dao.ShoppingCartDao;
 import mate.academy.spring.exception.DataProcessingException;
 import mate.academy.spring.model.ShoppingCart;
@@ -11,12 +12,9 @@ import org.hibernate.query.Query;
 import org.springframework.stereotype.Repository;
 
 @Repository
+@AllArgsConstructor
 public class ShoppingCartDaoImpl implements ShoppingCartDao {
     private final SessionFactory factory;
-
-    public ShoppingCartDaoImpl(SessionFactory factory) {
-        this.factory = factory;
-    }
 
     @Override
     public ShoppingCart add(ShoppingCart shoppingCart) {
