@@ -28,8 +28,8 @@ public class AuthenticationController {
     public UserResponseDto register(@RequestBody UserRequestDto requestDto) {
         User user = new User();
         if (emailValidator.isValid(requestDto.getEmail())) {
-            user.setEmail(requestDto.getEmail());
-            user.setPassword(requestDto.getPassword());
+            user = authService.register(requestDto.getEmail(),
+                    requestDto.getPassword());
         }
         return userMapper.mapToDto(user);
     }
