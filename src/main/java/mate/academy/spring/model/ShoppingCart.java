@@ -6,15 +6,18 @@ import javax.persistence.Id;
 import javax.persistence.MapsId;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.validation.constraints.NotNull;
 
 @Entity
 public class ShoppingCart {
     @Id
     private Long id;
     @OneToMany
+    @NotNull
     private List<Ticket> tickets;
     @MapsId
     @OneToOne
+    @NotNull
     private User user;
 
     public Long getId() {
