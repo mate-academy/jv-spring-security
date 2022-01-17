@@ -6,8 +6,10 @@ import lombok.Getter;
 
 @Getter
 public class MovieSessionRequestDto {
+    @NotNull
     @Min(value = 1)
     private Long movieId;
+    @NotNull
     @Min(value = 1)
     private Long cinemaHallId;
     @NotNull

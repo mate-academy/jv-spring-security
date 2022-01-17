@@ -6,6 +6,7 @@ import lombok.Getter;
 
 @Getter
 public class CinemaHallRequestDto {
+    @NotNull
     @Min(value = 1)
     private int capacity;
     @NotNull

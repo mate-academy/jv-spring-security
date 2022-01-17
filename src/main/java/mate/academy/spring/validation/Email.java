@@ -1,4 +1,4 @@
-package mate.academy.spring.validator;
+package mate.academy.spring.validation;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

@@ -1,4 +1,4 @@
-package mate.academy.spring.validator;
+package mate.academy.spring.validation;
 
 import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;
@@ -12,7 +12,7 @@ import javax.validation.Payload;
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
 @Constraint(validatedBy = PasswordValidator.class)
-public @interface Password {
+public @interface MatchingPasswords {
     String message();
 
     Class<?>[] groups() default {};
