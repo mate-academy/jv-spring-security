@@ -10,19 +10,16 @@ import mate.academy.spring.service.mapper.UserMapper;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
-import validation.EmailValidator;
 
 @RestController
 public class AuthenticationController {
     private final AuthenticationService authService;
     private final UserMapper userMapper;
-    private final EmailValidator emailValidator;
 
     public AuthenticationController(AuthenticationService authService,
-                                    UserMapper userMapper, EmailValidator emailValidator) {
+                                    UserMapper userMapper) {
         this.authService = authService;
         this.userMapper = userMapper;
-        this.emailValidator = emailValidator;
     }
 
     @PostMapping("/register")
