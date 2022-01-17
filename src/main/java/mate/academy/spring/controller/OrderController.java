@@ -45,8 +45,8 @@ public class OrderController {
     @GetMapping
     public List<OrderResponseDto> getOrderHistory(Authentication authentication) {
         return orderService.getOrdersHistory(userService.findByEmail(authentication.getName())
-                        .orElseThrow(() -> new DataProcessingException("Can't get any user by email "
-                                + authentication.getName())))
+                        .orElseThrow(() -> new DataProcessingException(
+                                "Can't get any user by email " + authentication.getName())))
                 .stream()
                 .map(orderMapper::mapToDto)
                 .collect(Collectors.toList());
