@@ -8,6 +8,7 @@ import mate.academy.spring.validation.Password;
 public class PasswordValidator implements ConstraintValidator<Password, UserRequestDto> {
     private static final String PASSWORD_PATTERN
             = "^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{8,}$";
+
     @Override
     public boolean isValid(UserRequestDto value, ConstraintValidatorContext context) {
         String password = value.getPassword();
