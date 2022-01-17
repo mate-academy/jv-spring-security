@@ -1,4 +1,4 @@
-package mate.academy.spring.service.validator;
+package mate.academy.spring.service.validation;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
@@ -8,6 +8,6 @@ public class EmailValidator implements ConstraintValidator<Email, String> {
 
     @Override
     public boolean isValid(String email, ConstraintValidatorContext constraintValidatorContext) {
-        return email != null && email.matches(EMAIL_PATTERN);
+        return email.matches(EMAIL_PATTERN);
     }
 }

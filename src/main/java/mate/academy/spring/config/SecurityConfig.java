@@ -16,7 +16,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         auth.inMemoryAuthentication()
                 .withUser("kolya")
                 .password(getPasswordEncoder().encode("kolyapackupmaster"))
-                .roles("");
+                .roles("USER");
     }
 
     @Override
@@ -30,7 +30,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .httpBasic()
                 .and()
                 .csrf().disable();
-
     }
 
     @Bean
