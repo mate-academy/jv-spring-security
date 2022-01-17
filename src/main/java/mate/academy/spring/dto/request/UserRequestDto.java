@@ -6,10 +6,10 @@ import mate.academy.spring.validation.PasswordAndRepeatPassword;
 
 @PasswordAndRepeatPassword
 public class UserRequestDto {
-    @NotNull
     @Email
     private String email;
     private String password;
+    @NotNull
     private String repeatPassword;
 
     public String getEmail() {

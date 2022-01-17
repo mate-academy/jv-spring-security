@@ -10,7 +10,6 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class UserServiceImpl implements UserService {
-    private static final int SALT_LENGTH = 10;
     private final UserDao userDao;
     private final PasswordEncoder passwordEncoder;
 
