@@ -24,8 +24,8 @@ public class ShoppingCartController {
     private final UserService userService;
 
     @PutMapping("/movie-sessions")
-    public void addToCart(Authentication authentication,
-                          @RequestParam Long movieSessionId) {
+    public void addToCart(@RequestParam Long movieSessionId,
+                          Authentication authentication) {
         shoppingCartService.addSession(movieSessionService.get(movieSessionId),
                 userService.findByEmail(authentication.getName())
                         .orElseThrow(() -> new RuntimeException("Can't find user with email "
@@ -33,8 +33,10 @@ public class ShoppingCartController {
     }
 
     @GetMapping("/by-user")
-    public ShoppingCartResponseDto getByUser(@RequestParam Long userId) {
-        User user = userService.get(userId);
+    public ShoppingCartResponseDto getByUser(Authentication authentication) {
+        User user = userService.findByEmail(authentication.getName())
+                .orElseThrow(() -> new RuntimeException("Can't find user by email "
+                        + authentication.getName()));
         return shoppingCartMapper.mapToDto(shoppingCartService.getByUser(user));
     }
 }
