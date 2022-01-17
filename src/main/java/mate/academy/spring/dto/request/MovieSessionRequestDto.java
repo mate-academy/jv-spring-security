@@ -5,8 +5,10 @@ import javax.validation.constraints.NotNull;
 
 public class MovieSessionRequestDto {
     @Min(value = 1)
+    @NotNull
     private Long movieId;
     @Min(value = 1)
+    @NotNull
     private Long cinemaHallId;
     @NotNull
     private String showTime;
