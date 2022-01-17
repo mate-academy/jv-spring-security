@@ -1,7 +1,7 @@
 package mate.academy.spring.dto.request;
 
-import jakarta.validation.constraints.Max;
-import jakarta.validation.constraints.Min;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 
 public class CinemaHallRequestDto {
     @Max(150)
