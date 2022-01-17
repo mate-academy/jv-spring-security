@@ -17,14 +17,14 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 public class CustomGlobalExceptionHandler extends ResponseEntityExceptionHandler {
     @Override
     protected ResponseEntity<Object> handleMethodArgumentNotValid(
-            MethodArgumentNotValidException ex,
+            MethodArgumentNotValidException exception,
             HttpHeaders headers,
             HttpStatus status,
             WebRequest request) {
         Map<String, Object> body = new LinkedHashMap<>();
         body.put("timestamp", LocalDateTime.now().toString());
         body.put("status", status.value());
-        List<String> errors = ex.getBindingResult().getAllErrors().stream()
+        List<String> errors = exception.getBindingResult().getAllErrors().stream()
                 .map(this::getErrorMessage)
                 .collect(Collectors.toList());
         body.put("errors", errors);
