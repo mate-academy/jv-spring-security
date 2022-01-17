@@ -20,8 +20,8 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User add(User user) {
-        String password = passwordEncoder.encode(user.getPassword());
-        user.setPassword(password);
+        String securePassword = passwordEncoder.encode(user.getPassword());
+        user.setPassword(securePassword);
         return userDao.add(user);
     }
 
