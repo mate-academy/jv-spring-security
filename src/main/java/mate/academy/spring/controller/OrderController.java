@@ -26,8 +26,10 @@ public class OrderController {
 
     @PostMapping("/complete")
     public OrderResponseDto completeOrder(Authentication authentication) {
-        ShoppingCart cart = shoppingCartService
-                .getByUser(userService.findByEmail(authentication.getName()).get());
+        ShoppingCart cart = shoppingCartService.getByUser(
+                userService.findByEmail(authentication.getName())
+                        .orElseThrow(() -> new RuntimeException("Can't find user with email "
+                                + authentication.getName())));
         return orderMapper.mapToDto(orderService.completeOrder(cart));
     }
 
