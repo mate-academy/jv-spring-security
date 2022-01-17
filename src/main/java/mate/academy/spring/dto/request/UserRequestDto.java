@@ -1,10 +1,9 @@
 package mate.academy.spring.dto.request;
 
-import javax.validation.constraints.Email;
+import mate.academy.spring.service.validation.Email;
 import javax.validation.constraints.NotNull;
 
 public class UserRequestDto {
-    @NotNull
     @Email
     private String email;
     @NotNull
