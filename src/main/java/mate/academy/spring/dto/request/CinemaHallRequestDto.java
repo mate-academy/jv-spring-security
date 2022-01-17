@@ -4,7 +4,7 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
 public class CinemaHallRequestDto {
-    @Min(value = 0)
+    @Min(value = 10)
     private int capacity;
     @NotNull
     private String description;
