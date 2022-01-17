@@ -12,9 +12,7 @@ public class Movie {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @NotNull
     private String title;
-    @NotNull
     private String description;
 
     public Long getId() {
