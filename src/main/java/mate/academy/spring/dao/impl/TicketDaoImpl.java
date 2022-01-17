@@ -1,5 +1,6 @@
 package mate.academy.spring.dao.impl;
 
+import lombok.AllArgsConstructor;
 import mate.academy.spring.dao.TicketDao;
 import mate.academy.spring.exception.DataProcessingException;
 import mate.academy.spring.model.Ticket;
@@ -9,12 +10,9 @@ import org.hibernate.Transaction;
 import org.springframework.stereotype.Repository;
 
 @Repository
+@AllArgsConstructor
 public class TicketDaoImpl implements TicketDao {
     private final SessionFactory factory;
-
-    public TicketDaoImpl(SessionFactory factory) {
-        this.factory = factory;
-    }
 
     @Override
     public Ticket add(Ticket ticket) {

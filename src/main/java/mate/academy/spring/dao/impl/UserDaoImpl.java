@@ -1,6 +1,7 @@
 package mate.academy.spring.dao.impl;
 
 import java.util.Optional;
+import lombok.AllArgsConstructor;
 import mate.academy.spring.dao.UserDao;
 import mate.academy.spring.exception.DataProcessingException;
 import mate.academy.spring.model.User;
@@ -11,12 +12,9 @@ import org.hibernate.query.Query;
 import org.springframework.stereotype.Repository;
 
 @Repository
+@AllArgsConstructor
 public class UserDaoImpl implements UserDao {
     private final SessionFactory factory;
-
-    public UserDaoImpl(SessionFactory factory) {
-        this.factory = factory;
-    }
 
     @Override
     public User add(User user) {
