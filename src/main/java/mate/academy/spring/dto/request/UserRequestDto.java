@@ -8,7 +8,7 @@ public class UserRequestDto {
     @NotNull
     @Email
     private String email;
-    @NotNull()
+    @NotNull
     @Size(min = 4, max = 12)
     private String password;
 
