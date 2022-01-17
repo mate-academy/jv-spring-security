@@ -1,7 +1,7 @@
 package mate.academy.spring.dto.request;
 
 import com.sun.istack.NotNull;
-import mate.academy.spring.validator.Email;
+import mate.academy.spring.validation.Email;
 
 public class UserRequestDto {
     @Email
