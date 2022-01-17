@@ -6,8 +6,8 @@ import lombok.Getter;
 
 @Getter
 public class MovieSessionRequestDto {
-    @NotNull(message = "Movie id can't be null")
-    @Min(value = 1, message = "Movie id can't be negative or 0")
+    @NotNull(message = "Movie's id can't be null")
+    @Min(value = 1, message = "Movie's id can't be negative or 0")
     private Long movieId;
     @NotNull(message = "Cinema hall id can't be null")
     @Min(value = 1, message = "Cinema hall id can't be negative or 0")

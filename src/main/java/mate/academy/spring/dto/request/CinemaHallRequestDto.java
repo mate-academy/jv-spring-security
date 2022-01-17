@@ -6,8 +6,8 @@ import lombok.Getter;
 
 @Getter
 public class CinemaHallRequestDto {
-    @Min(value = 1, message = "Cinema hall capacity must be greater or equal 1")
+    @Min(value = 1, message = "Cinema hall capacity must be greater than 0")
     private int capacity;
-    @NotNull(message = "Cinema hall description cant be null")
+    @NotNull(message = "Cinema hall description can't be null")
     private String description;
 }

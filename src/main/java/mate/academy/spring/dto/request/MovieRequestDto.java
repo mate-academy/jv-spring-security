@@ -6,10 +6,10 @@ import lombok.Getter;
 
 @Getter
 public class MovieRequestDto {
-    @NotNull(message = "Movie title can't be null")
+    @NotNull(message = "Movie's title can't be null")
     @Size(min = 1)
     private String movieTitle;
-    @NotNull(message = "Movie description can't be null")
+    @NotNull(message = "Movie's description can't be null")
     @Size(min = 1)
     private String movieDescription;
 }
