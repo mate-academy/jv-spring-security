@@ -9,7 +9,8 @@ public class PasswordValidator implements ConstraintValidator<PasswordValidation
     public boolean isValid(Object dto, ConstraintValidatorContext constraintValidatorContext) {
         if (dto instanceof UserRequestDto) {
             UserRequestDto userRequestDto = (UserRequestDto) dto;
-            return userRequestDto.getPassword().equals(userRequestDto.getRepeatPassword());
+            String password = userRequestDto.getPassword();
+            return password != null && password.equals(userRequestDto.getRepeatPassword());
         }
         return false;
     }

@@ -8,7 +8,6 @@ import mate.academy.spring.service.validation.PasswordValidation;
 public class UserRequestDto {
     @Email
     private String email;
-    @NotNull
     private String password;
     @NotNull
     private String repeatPassword;
