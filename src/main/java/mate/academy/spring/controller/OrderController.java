@@ -35,18 +35,20 @@ public class OrderController {
 
     @PostMapping("/complete")
     public OrderResponseDto completeOrder(Authentication authentication) {
+        String email = authentication.getName();
         ShoppingCart cart =
-                shoppingCartService.getByUser(userService.findByEmail(authentication.getName())
-                .orElseThrow(() -> new NoSuchElementException("Can't complete order for "
-                        + authentication.getName())));
+                shoppingCartService.getByUser(userService.findByEmail(email)
+                .orElseThrow(() -> new NoSuchElementException("Can't find user by email "
+                        + email)));
         return orderMapper.mapToDto(orderService.completeOrder(cart));
     }
 
     @GetMapping
     public List<OrderResponseDto> getOrderHistory(Authentication authentication) {
-        return orderService.getOrdersHistory(userService.findByEmail(authentication.getName())
-                        .orElseThrow(() -> new NoSuchElementException("Can't get order history for "
-                                + authentication.getName())))
+        String email = authentication.getName();
+        return orderService.getOrdersHistory(userService.findByEmail(email)
+                        .orElseThrow(() -> new NoSuchElementException("Can't find user by email "
+                                + email)))
                 .stream()
                 .map(orderMapper::mapToDto)
                 .collect(Collectors.toList());
