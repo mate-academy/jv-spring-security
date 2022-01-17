@@ -10,10 +10,12 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 @Entity
 @Getter
 @Setter
+@ToString
 @Table(name = "movie_sessions")
 public class MovieSession {
     @Id
@@ -24,14 +26,4 @@ public class MovieSession {
     @ManyToOne(fetch = FetchType.LAZY)
     private CinemaHall cinemaHall;
     private LocalDateTime showTime;
-
-    @Override
-    public String toString() {
-        return "MovieSession{"
-                + "id=" + id
-                + ", movie=" + movie
-                + ", cinemaHall=" + cinemaHall
-                + ", showTime=" + showTime
-                + '}';
-    }
 }
