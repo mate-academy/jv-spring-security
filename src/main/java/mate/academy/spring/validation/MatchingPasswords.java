@@ -11,7 +11,7 @@ import mate.academy.spring.validation.impl.PasswordValidator;
 @Constraint(validatedBy = PasswordValidator.class)
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
-public @interface Password {
+public @interface MatchingPasswords {
     String message() default "Invalid password";
     Class<?>[] groups() default {};
     Class<? extends Payload>[] payload() default {};

@@ -3,9 +3,9 @@ package mate.academy.spring.validation.impl;
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 import mate.academy.spring.dto.request.UserRequestDto;
-import mate.academy.spring.validation.Password;
+import mate.academy.spring.validation.MatchingPasswords;
 
-public class PasswordValidator implements ConstraintValidator<Password, UserRequestDto> {
+public class PasswordValidator implements ConstraintValidator<MatchingPasswords, UserRequestDto> {
     private static final String PASSWORD_PATTERN
             = "^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{8,}$";
 
