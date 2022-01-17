@@ -11,7 +11,6 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class UserServiceImpl implements UserService {
-    private static final int SALT_LENGTH = 10;
     private final UserDao userDao;
     private final PasswordEncoder encoder;
 
@@ -22,10 +21,8 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User add(User user) {
-        String salt = PasswordUtil.getSalt(SALT_LENGTH);
-        String securePassword = PasswordUtil.generateSecurePassword(user.getPassword(), salt);
+        String securePassword = encoder.encode(user.getPassword());
         user.setPassword(securePassword);
-        user.setSalt(salt);
         return userDao.add(user);
     }
 
