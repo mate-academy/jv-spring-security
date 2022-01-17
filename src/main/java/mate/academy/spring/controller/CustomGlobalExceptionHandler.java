@@ -29,8 +29,9 @@ public class CustomGlobalExceptionHandler extends ResponseEntityExceptionHandler
         body.put("timestamp", LocalDateTime.now());
         if (ex.equals(DataProcessingException.class)) {
             body.put("status", 500);
+        } else {
+            body.put("status", status.value());
         }
-        body.put("status", status.value());
         List<String> errors = ex.getBindingResult()
                 .getAllErrors()
                 .stream()
