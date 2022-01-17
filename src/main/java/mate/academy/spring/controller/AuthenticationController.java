@@ -7,10 +7,10 @@ import mate.academy.spring.exception.AuthenticationException;
 import mate.academy.spring.model.User;
 import mate.academy.spring.service.AuthenticationService;
 import mate.academy.spring.service.mapper.UserMapper;
-import mate.academy.spring.util.EmailValidator;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+import validation.EmailValidator;
 
 @RestController
 public class AuthenticationController {
@@ -28,9 +28,6 @@ public class AuthenticationController {
     @PostMapping("/register")
     public UserResponseDto register(@RequestBody @Valid UserRequestDto requestDto)
             throws AuthenticationException {
-        if (!emailValidator.isValid(requestDto.getEmail())) {
-            throw new AuthenticationException("Invalid email!");
-        }
         User user = authService.register(requestDto.getEmail(), requestDto.getPassword());
         return userMapper.mapToDto(user);
     }
