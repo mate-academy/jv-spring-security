@@ -26,9 +26,6 @@ public class AuthenticationController {
 
     @PostMapping("/register")
     public UserResponseDto register(@RequestBody @Valid UserRequestDto requestDto) {
-        if (!emailValidator.isValid(requestDto.getEmail())) {
-            throw new RuntimeException("Email is invalid!");
-        }
         User user = authService.register(requestDto.getEmail(), requestDto.getPassword());
         return userMapper.mapToDto(user);
     }
