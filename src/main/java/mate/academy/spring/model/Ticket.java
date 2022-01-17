@@ -6,7 +6,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
-import javax.validation.constraints.NotNull;
 
 @Entity
 public class Ticket {
@@ -14,10 +13,8 @@ public class Ticket {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @ManyToOne(fetch = FetchType.LAZY)
-    @NotNull
     private MovieSession movieSession;
     @ManyToOne(fetch = FetchType.LAZY)
-    @NotNull
     private User user;
 
     public Long getId() {
