@@ -7,7 +7,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import mate.academy.spring.validation.Email;
 
 @Entity
 public class User {
@@ -17,7 +16,6 @@ public class User {
     @Column(unique = true)
     @NotNull
     @Size(min = 9)
-    @Email
     private String email;
     @NotNull
     @Size(min = 6, max = 10)
