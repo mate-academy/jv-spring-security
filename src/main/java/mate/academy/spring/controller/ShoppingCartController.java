@@ -31,7 +31,7 @@ public class ShoppingCartController {
     }
 
     @PutMapping("/movie-sessions")
-    public void addToCart(Authentication authentication, @RequestParam Long movieSessionId) {
+    public void addToCart(@RequestParam Long movieSessionId, Authentication authentication) {
         shoppingCartService.addSession(
                 movieSessionService.get(movieSessionId),
                 userService.findByEmail(authentication.getName()).get());
