@@ -1,4 +1,4 @@
-package mate.academy.spring.service.validator;
+package mate.academy.spring.service.validation;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
