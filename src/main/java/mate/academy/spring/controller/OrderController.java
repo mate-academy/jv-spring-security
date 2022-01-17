@@ -37,7 +37,7 @@ public class OrderController {
         ShoppingCart cart = shoppingCartService.getByUser(userService
                 .findByEmail(authentication.getName())
                 .orElseThrow(() -> new RuntimeException(
-                        "Can't complete order for user with email " + authentication.getName())));
+                        "Can't find user with email " + authentication.getName())));
         return orderMapper.mapToDto(orderService.completeOrder(cart));
     }
 
@@ -45,7 +45,7 @@ public class OrderController {
     public List<OrderResponseDto> getOrderHistory(Authentication authentication) {
         return orderService.getOrdersHistory(userService.findByEmail(authentication.getName())
                         .orElseThrow(() -> new RuntimeException(
-                                "Can't find user's order history with email "
+                                "Can't find user with email "
                                         + authentication.getName())))
                 .stream()
                 .map(orderMapper::mapToDto)
