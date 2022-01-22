@@ -35,7 +35,7 @@ public class OrderController {
     @PostMapping("/complete")
     public OrderResponseDto completeOrder(Authentication authentication) {
         ShoppingCart cart = shoppingCartService.getByUser(userService
-                .findByEmail(authentication.getName()).orElseThrow(()-> new RuntimeException(
+                .findByEmail(authentication.getName()).orElseThrow(() -> new RuntimeException(
                         "Can't find user by email: " + authentication.getName())));
         return orderMapper.mapToDto(orderService.completeOrder(cart));
     }
@@ -43,7 +43,7 @@ public class OrderController {
     @GetMapping
     public List<OrderResponseDto> getOrderHistory(Authentication authentication) {
         return orderService.getOrdersHistory(userService.findByEmail(authentication.getName())
-                .orElseThrow(()-> new RuntimeException(
+                .orElseThrow(() -> new RuntimeException(
                 "Can't find user by email: " + authentication.getName())))
                 .stream()
                 .map(orderMapper::mapToDto)
