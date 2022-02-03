@@ -10,6 +10,7 @@ import javax.persistence.OneToOne;
 @Entity
 public class ShoppingCart {
     @Id
+
     private Long id;
     @OneToMany
     private List<Ticket> tickets;
