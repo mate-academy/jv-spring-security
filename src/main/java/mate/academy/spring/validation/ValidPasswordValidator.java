@@ -1,9 +1,8 @@
 package mate.academy.spring.validation;
 
-import mate.academy.spring.dto.request.UserRequestDto;
-
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
+import mate.academy.spring.dto.request.UserRequestDto;
 
 public class ValidPasswordValidator implements ConstraintValidator<ValidPassword, UserRequestDto> {
 
@@ -12,7 +11,7 @@ public class ValidPasswordValidator implements ConstraintValidator<ValidPassword
         String password = userRequestDto.getPassword();
         String repeatPassword = userRequestDto.getRepeatPassword();
         if (password == null || repeatPassword == null) {
-        return false;
+            return false;
         }
         return password.equals(repeatPassword);
     }
