@@ -40,9 +40,4 @@ public class CinemaHallController {
                 .map(cinemaHallMapper::mapToDto)
                 .collect(Collectors.toList());
     }
-
-    @GetMapping("/DataProcessingException")
-    public void dataProcessingException() {
-        throw new DataProcessingException("test exception was thrown");
-    }
 }
