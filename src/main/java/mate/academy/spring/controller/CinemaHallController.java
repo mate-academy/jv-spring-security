@@ -5,7 +5,6 @@ import java.util.stream.Collectors;
 import javax.validation.Valid;
 import mate.academy.spring.dto.request.CinemaHallRequestDto;
 import mate.academy.spring.dto.response.CinemaHallResponseDto;
-import mate.academy.spring.exception.DataProcessingException;
 import mate.academy.spring.model.CinemaHall;
 import mate.academy.spring.service.CinemaHallService;
 import mate.academy.spring.service.mapper.CinemaHallMapper;
