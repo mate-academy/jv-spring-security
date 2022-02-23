@@ -1,14 +1,14 @@
 package mate.academy.spring.dto.request;
 
 public class MovieRequestDto {
-    private String movieTitle;
-    private String movieDescription;
+    private String title;
+    private String description;
 
-    public String getMovieTitle() {
-        return movieTitle;
+    public String getTitle() {
+        return title;
     }
 
-    public String getMovieDescription() {
-        return movieDescription;
+    public String getDescription() {
+        return description;
     }
 }

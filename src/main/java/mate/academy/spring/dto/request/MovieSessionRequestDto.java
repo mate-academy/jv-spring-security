@@ -1,9 +1,11 @@
 package mate.academy.spring.dto.request;
 
+import java.time.LocalDateTime;
+
 public class MovieSessionRequestDto {
     private Long movieId;
     private Long cinemaHallId;
-    private String showTime;
+    private LocalDateTime showTime;
 
     public Long getMovieId() {
         return movieId;
@@ -13,7 +15,7 @@ public class MovieSessionRequestDto {
         return cinemaHallId;
     }
 
-    public String getShowTime() {
+    public LocalDateTime getShowTime() {
         return showTime;
     }
 }

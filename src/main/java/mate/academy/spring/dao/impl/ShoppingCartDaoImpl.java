@@ -32,7 +32,7 @@ public class ShoppingCartDaoImpl implements ShoppingCartDao {
             if (transaction != null) {
                 transaction.rollback();
             }
-            throw new DataProcessingException("Can't insert shoppingCart " + shoppingCart, e);
+            throw new DataProcessingException("Can't insert shopping cart " + shoppingCart, e);
         } finally {
             if (session != null) {
                 session.close();
@@ -53,7 +53,7 @@ public class ShoppingCartDaoImpl implements ShoppingCartDao {
             getByUser.setParameter("user", user);
             return getByUser.getSingleResult();
         } catch (Exception e) {
-            throw new DataProcessingException("Not found shopping cart for user " + user, e);
+            throw new DataProcessingException("Can't get user's shopping cart " + user, e);
         }
     }
 
@@ -70,7 +70,7 @@ public class ShoppingCartDaoImpl implements ShoppingCartDao {
             if (transaction != null) {
                 transaction.rollback();
             }
-            throw new DataProcessingException("Can't update shoppingCart " + shoppingCart, e);
+            throw new DataProcessingException("Can't update shopping cart " + shoppingCart, e);
         } finally {
             if (session != null) {
                 session.close();
