@@ -48,7 +48,7 @@ public class UserDaoImpl implements UserDao {
             findByEmail.setParameter("id", id);
             return findByEmail.uniqueResultOptional();
         } catch (Exception e) {
-            throw new DataProcessingException("User with id " + id + " not found", e);
+            throw new DataProcessingException("Can't get user, id: " + id, e);
         }
     }
 
@@ -60,7 +60,7 @@ public class UserDaoImpl implements UserDao {
             findByEmail.setParameter("email", email);
             return findByEmail.uniqueResultOptional();
         } catch (Exception e) {
-            throw new DataProcessingException("User with email " + email + " not found", e);
+            throw new DataProcessingException("Can't get user, email: " + email, e);
         }
     }
 }

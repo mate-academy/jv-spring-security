@@ -3,11 +3,12 @@ package mate.academy.spring.controller;
 import java.util.List;
 import java.util.stream.Collectors;
 import mate.academy.spring.dto.response.OrderResponseDto;
+import mate.academy.spring.model.Order;
 import mate.academy.spring.model.ShoppingCart;
 import mate.academy.spring.service.OrderService;
 import mate.academy.spring.service.ShoppingCartService;
 import mate.academy.spring.service.UserService;
-import mate.academy.spring.service.mapper.OrderMapper;
+import mate.academy.spring.service.mapper.ResponseDtoMapper;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,29 +21,29 @@ public class OrderController {
     private final ShoppingCartService shoppingCartService;
     private final OrderService orderService;
     private final UserService userService;
-    private final OrderMapper orderMapper;
+    private final ResponseDtoMapper<OrderResponseDto, Order> orderResponseDtoMapper;
 
     public OrderController(ShoppingCartService shoppingCartService,
                            OrderService orderService,
                            UserService userService,
-                           OrderMapper orderMapper) {
+                           ResponseDtoMapper<OrderResponseDto, Order> orderResponseDtoMapper) {
         this.shoppingCartService = shoppingCartService;
         this.orderService = orderService;
         this.userService = userService;
-        this.orderMapper = orderMapper;
+        this.orderResponseDtoMapper = orderResponseDtoMapper;
     }
 
     @PostMapping("/complete")
     public OrderResponseDto completeOrder(@RequestParam Long userId) {
         ShoppingCart cart = shoppingCartService.getByUser(userService.get(userId));
-        return orderMapper.mapToDto(orderService.completeOrder(cart));
+        return orderResponseDtoMapper.mapToDto(orderService.completeOrder(cart));
     }
 
     @GetMapping
     public List<OrderResponseDto> getOrderHistory(@RequestParam Long userId) {
         return orderService.getOrdersHistory(userService.get(userId))
                 .stream()
-                .map(orderMapper::mapToDto)
+                .map(orderResponseDtoMapper::mapToDto)
                 .collect(Collectors.toList());
     }
 }

@@ -50,7 +50,7 @@ public class MovieSessionDaoImpl implements MovieSessionDao {
                     .setParameter("id", id)
                     .uniqueResultOptional();
         } catch (Exception e) {
-            throw new DataProcessingException("Movie session with id " + id + " not found", e);
+            throw new DataProcessingException("Can't get movie session, id: " + id, e);
         }
     }
 
@@ -64,8 +64,8 @@ public class MovieSessionDaoImpl implements MovieSessionDao {
             getAvailableSessions.setParameter("date", date.toString());
             return getAvailableSessions.getResultList();
         } catch (Exception e) {
-            throw new DataProcessingException("Session for movie with id "
-                    + movieId + " and show date " + date + " not found", e);
+            throw new DataProcessingException("Can't get movie session, movie's id: "
+                    + movieId + ", show date: " + date, e);
         }
     }
 
