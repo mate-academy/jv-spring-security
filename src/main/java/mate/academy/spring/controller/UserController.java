@@ -28,7 +28,7 @@ public class UserController {
         this.userMapper = userMapper;
     }
 
-    @PostMapping
+    @PostMapping("/register")
     @ResponseStatus(HttpStatus.CREATED)
     public UserResponseDto create(@RequestBody UserRequestDto userRequestDto) {
         User user = userService.add(userMapper.mapToModel(userRequestDto));
