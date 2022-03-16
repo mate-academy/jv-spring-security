@@ -1,5 +1,6 @@
 package mate.academy.spring.dao.impl;
 
+import java.util.List;
 import java.util.Optional;
 import mate.academy.spring.dao.UserDao;
 import mate.academy.spring.exception.DataProcessingException;
@@ -63,4 +64,15 @@ public class UserDaoImpl implements UserDao {
             throw new DataProcessingException("User with email " + email + " not found", e);
         }
     }
+
+    @Override
+    public List<User> getAll() {
+        try (Session session = factory.openSession()) {
+            Query<User> getAllUsersQuery = session.createQuery("FROM User", User.class);
+            return getAllUsersQuery.getResultList();
+        } catch (Exception e) {
+            throw new DataProcessingException("Can't get all users from db", e);
+        }
+    }
+
 }
