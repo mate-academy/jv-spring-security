@@ -28,13 +28,6 @@ public class UserController {
         this.userMapper = userMapper;
     }
 
-    @PostMapping("/register")
-    @ResponseStatus(HttpStatus.CREATED)
-    public UserResponseDto create(@RequestBody UserRequestDto userRequestDto) {
-        User user = userService.add(userMapper.mapToModel(userRequestDto));
-        return userMapper.mapToDto(userService.add(user));
-    }
-
     @GetMapping("/")
     public List<UserResponseDto> getAll() {
         return userService.getAll()
