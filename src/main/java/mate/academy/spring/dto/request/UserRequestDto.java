@@ -1,10 +1,9 @@
 package mate.academy.spring.dto.request;
 
-import mate.academy.spring.validation.Email;
-import mate.academy.spring.validation.PasswordEquals;
-
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
+import mate.academy.spring.validation.Email;
+import mate.academy.spring.validation.PasswordEquals;
 
 @PasswordEquals
 public class UserRequestDto {
