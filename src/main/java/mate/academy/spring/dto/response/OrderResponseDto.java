@@ -1,5 +1,8 @@
 package mate.academy.spring.dto.response;
 
+import static mate.academy.spring.util.DateTimePatternUtil.DATE_TIME_PATTERN;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -7,6 +10,7 @@ public class OrderResponseDto {
     private Long id;
     private List<Long> ticketIds;
     private Long userId;
+    @JsonFormat(pattern = DATE_TIME_PATTERN)
     private LocalDateTime orderTime;
 
     public Long getId() {
