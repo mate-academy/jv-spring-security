@@ -1,5 +1,8 @@
 package mate.academy.spring.dto.response;
 
+import static mate.academy.spring.util.DateTimePatternUtil.DATE_TIME_PATTERN;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 import java.time.LocalDateTime;
 
 public class MovieSessionResponseDto {
@@ -7,6 +10,7 @@ public class MovieSessionResponseDto {
     private Long movieId;
     private String movieTitle;
     private Long cinemaHallId;
+    @JsonFormat(pattern = DATE_TIME_PATTERN)
     private LocalDateTime showTime;
 
     public Long getMovieSessionId() {
