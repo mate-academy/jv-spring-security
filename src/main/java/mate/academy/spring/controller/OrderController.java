@@ -37,8 +37,7 @@ public class OrderController {
     @PostMapping("/complete")
     public OrderResponseDto completeOrder(Authentication authObject) {
         User user = userService.findByEmail(authObject.getName())
-                .orElseThrow(
-                        () -> new RuntimeException("User "
+                .orElseThrow(() -> new RuntimeException("User "
                                 + authObject.getName() + " does not exist"));
         ShoppingCart cart = shoppingCartService.getByUser(user);
         return orderResponseDtoMapper.mapToDto(orderService.completeOrder(cart));
@@ -47,8 +46,7 @@ public class OrderController {
     @GetMapping
     public List<OrderResponseDto> getOrderHistory(Authentication authObject) {
         User user = userService.findByEmail(authObject.getName())
-                .orElseThrow(
-                        () -> new RuntimeException("Can't get orders by User "
+                .orElseThrow(() -> new RuntimeException("Can't get orders by User "
                                 + authObject.getName()));
         return orderService.getOrdersHistory(user)
                 .stream()
