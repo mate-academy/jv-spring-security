@@ -9,8 +9,6 @@ import mate.academy.spring.validation.Password;
 @Password
 public class UserRequestDto {
     @Email
-    @NotEmpty
-    @NotNull
     @Size(min = 6, max = 100)
     private String email;
     @NotEmpty
