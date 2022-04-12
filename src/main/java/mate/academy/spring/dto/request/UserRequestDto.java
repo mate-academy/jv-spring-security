@@ -1,8 +1,7 @@
 package mate.academy.spring.dto.request;
 
-import mate.academy.spring.lib.Email;
-
 import javax.validation.constraints.NotBlank;
+import mate.academy.spring.lib.Email;
 
 public class UserRequestDto {
     @Email
