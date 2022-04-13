@@ -37,7 +37,6 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
             HttpHeaders headers,
             HttpStatus status,
             WebRequest request) {
-
         List<String> errors = new ArrayList<>();
         errors.add(ex.getMethod() + " " + ex.getMessage());
         return getResponseEntity(errors, headers, status);
