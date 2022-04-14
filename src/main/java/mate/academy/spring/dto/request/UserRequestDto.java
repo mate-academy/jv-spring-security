@@ -12,6 +12,7 @@ public class UserRequestDto {
     @NotNull(message = "Password can't be null")
     @Size(min = 8, message = "Password must contain at least 8 characters")
     private String password;
+    @NotNull(message = "Repeat password can't be null")
     private String repeatPassword;
 
     public String getEmail() {
