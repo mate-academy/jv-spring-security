@@ -5,6 +5,7 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 import javax.validation.Constraint;
+import javax.validation.Payload;
 
 @Constraint(validatedBy = PasswordValidator.class)
 @Target({ElementType.TYPE, ElementType.PARAMETER})
@@ -15,5 +16,5 @@ public @interface Password {
 
     Class<?>[] groups() default {};
 
-    Class<?>[] payload() default {};
+    Class<? extends Payload>[] payload() default {};
 }
