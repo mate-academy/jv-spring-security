@@ -46,8 +46,5 @@ public class AppConfig {
         return factoryBean;
     }
 
-    @Bean
-    public BCryptPasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
-    }
+
 }

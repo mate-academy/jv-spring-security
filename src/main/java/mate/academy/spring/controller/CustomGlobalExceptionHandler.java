@@ -41,8 +41,8 @@ public class CustomGlobalExceptionHandler extends ResponseEntityExceptionHandler
     @ResponseBody
     @ExceptionHandler(DataProcessingException.class)
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
-    public DataProcessingException dataNotValid(DataProcessingException exception) {
-        return exception;
+    public String dataNotValid(DataProcessingException exception) {
+        return exception.getMessage();
     }
 
     private String getErrorMessage(ObjectError error) {
