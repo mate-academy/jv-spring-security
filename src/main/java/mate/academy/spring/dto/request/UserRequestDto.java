@@ -8,7 +8,6 @@ import mate.academy.spring.validation.PasswordMatch;
 @PasswordMatch
 public class UserRequestDto {
     @Email
-    @NotEmpty
     private String email;
     @NotEmpty
     @Size(min = 8, max = 20)

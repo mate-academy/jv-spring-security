@@ -14,8 +14,6 @@ import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
@@ -38,11 +36,15 @@ public class CustomGlobalExceptionHandler extends ResponseEntityExceptionHandler
         return new ResponseEntity<>(body, headers, status);
     }
 
-    @ResponseBody
     @ExceptionHandler(DataProcessingException.class)
-    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
-    public String dataNotValid(DataProcessingException exception) {
-        return exception.getMessage();
+    protected ResponseEntity<Object> handleDataProcessingException(
+                                    DataProcessingException exception) {
+        HttpStatus status = HttpStatus.INTERNAL_SERVER_ERROR;
+        Map<String, Object> body = new LinkedHashMap<>();
+        body.put("Timestamp", LocalDateTime.now().toString());
+        body.put("Status", status);
+        body.put("Error", exception.getMessage());
+        return new ResponseEntity<>(body, status);
     }
 
     private String getErrorMessage(ObjectError error) {
