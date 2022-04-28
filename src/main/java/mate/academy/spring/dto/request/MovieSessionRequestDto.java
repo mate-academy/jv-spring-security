@@ -6,9 +6,9 @@ import javax.validation.constraints.Min;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 public class MovieSessionRequestDto {
-    @Min(1)
+    @Min(value = 1)
     private Long movieId;
-    @Min(1)
+    @Min(value = 1)
     private Long cinemaHallId;
     @FutureOrPresent
     @JsonFormat(pattern = "dd.MM.yyyy HH:mm")
