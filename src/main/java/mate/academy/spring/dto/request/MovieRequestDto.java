@@ -1,6 +1,9 @@
 package mate.academy.spring.dto.request;
 
+import javax.validation.constraints.Size;
+
 public class MovieRequestDto {
+    @Size(min = 1, max = 100)
     private String title;
     private String description;
 
