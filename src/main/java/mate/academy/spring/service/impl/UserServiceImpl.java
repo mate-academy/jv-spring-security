@@ -4,24 +4,23 @@ import java.util.Optional;
 import mate.academy.spring.dao.UserDao;
 import mate.academy.spring.model.User;
 import mate.academy.spring.service.UserService;
-import mate.academy.spring.util.PasswordUtil;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
 public class UserServiceImpl implements UserService {
-    private static final int SALT_LENGTH = 10;
+    private final PasswordEncoder passwordEncoder;
     private final UserDao userDao;
 
-    public UserServiceImpl(UserDao userDao) {
+    public UserServiceImpl(PasswordEncoder passwordEncoder, UserDao userDao) {
+        this.passwordEncoder = passwordEncoder;
         this.userDao = userDao;
     }
 
     @Override
     public User add(User user) {
-        String salt = PasswordUtil.getSalt(SALT_LENGTH);
-        String securePassword = PasswordUtil.generateSecurePassword(user.getPassword(), salt);
+        String securePassword = passwordEncoder.encode(user.getEmail());
         user.setPassword(securePassword);
-        user.setSalt(salt);
         return userDao.add(user);
     }
 
