@@ -1,7 +1,5 @@
 package mate.academy.spring.validation;
 
-import org.hibernate.validator.internal.constraintvalidators.bv.EmailValidator;
-
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;

@@ -1,7 +1,5 @@
 package mate.academy.spring.service.impl;
 
-import java.util.Optional;
-import mate.academy.spring.exception.AuthenticationException;
 import mate.academy.spring.model.User;
 import mate.academy.spring.service.AuthenticationService;
 import mate.academy.spring.service.ShoppingCartService;
