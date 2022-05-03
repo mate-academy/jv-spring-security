@@ -4,7 +4,7 @@ import java.util.Optional;
 import mate.academy.spring.dao.UserDao;
 import mate.academy.spring.model.User;
 import mate.academy.spring.service.UserService;
-import mate.academy.spring.util.PasswordUtil;
+import mate.academy.spring.util.HashUtil;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -18,8 +18,8 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User add(User user) {
-        String salt = PasswordUtil.getSalt(SALT_LENGTH);
-        String securePassword = PasswordUtil.generateSecurePassword(user.getPassword(), salt);
+        String salt = HashUtil.getSalt(SALT_LENGTH);
+        String securePassword = HashUtil.generateSecurePassword(user.getPassword(), salt);
         user.setPassword(securePassword);
         user.setSalt(salt);
         return userDao.add(user);
