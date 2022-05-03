@@ -28,10 +28,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .httpBasic()
                 .and()
                 .csrf().disable();
-
     }
 
-    @Bean
     public InMemoryUserDetailsManager inMemoryUserDetailsManager() {
         Properties users = new Properties();
         users.put("bob@mail.com", getEncoder().encode("123456") + ",ROLE_USER, enabled");

@@ -5,6 +5,7 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 import javax.validation.Constraint;
+import javax.validation.Payload;
 import mate.academy.spring.validation.EmailValidator;
 
 @Constraint(validatedBy = EmailValidator.class)
@@ -12,4 +13,6 @@ import mate.academy.spring.validation.EmailValidator;
 @Retention(RetentionPolicy.RUNTIME)
 public @interface EmailConstraint {
     String message() default "Invalid email";
+    Class<?>[] groups() default {};
+    Class<? extends Payload>[] payload() default {};
 }
