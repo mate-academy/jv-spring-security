@@ -5,7 +5,7 @@
 1. Add @NonNull, @Min, etc annotations where applicable
    (add [this dependency](https://mvnrepository.com/artifact/org.hibernate/hibernate-validator)
    to your project, see example [here](https://hibernate.org/validator/))
-1. Implement custom email validation.
+1. Implemented custom email validation.
 1. Implement CustomGlobalExceptionHandler.
 1. Remove method `login()` in AuthenticationService, `HashUtil` and `salt` from User entity.
    Start using `passwordEncoder` in UserService -> add() for password hashing.
