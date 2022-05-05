@@ -4,6 +4,7 @@ import mate.academy.spring.model.User;
 import mate.academy.spring.service.AuthenticationService;
 import mate.academy.spring.service.ShoppingCartService;
 import mate.academy.spring.service.UserService;
+import mate.academy.spring.util.HashUtil;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -16,8 +17,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
         this.userService = userService;
         this.shoppingCartService = shoppingCartService;
     }
-
-    @Override
+  
     public User register(String email, String password) {
         User user = new User();
         user.setEmail(email);
