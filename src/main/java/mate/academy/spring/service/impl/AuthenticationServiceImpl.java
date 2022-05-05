@@ -4,7 +4,6 @@ import mate.academy.spring.model.User;
 import mate.academy.spring.service.AuthenticationService;
 import mate.academy.spring.service.ShoppingCartService;
 import mate.academy.spring.service.UserService;
-import mate.academy.spring.util.HashUtil;
 import org.springframework.stereotype.Service;
 
 @Service
