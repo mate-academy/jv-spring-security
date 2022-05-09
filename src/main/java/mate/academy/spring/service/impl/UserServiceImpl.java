@@ -1,7 +1,6 @@
 package mate.academy.spring.service.impl;
 
 import java.util.Optional;
-import mate.academy.spring.config.SecurityConfig;
 import mate.academy.spring.dao.UserDao;
 import mate.academy.spring.model.User;
 import mate.academy.spring.service.UserService;

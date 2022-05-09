@@ -35,7 +35,8 @@ public class OrderController {
 
     @PostMapping("/complete")
     public OrderResponseDto completeOrder(Authentication auth) {
-        ShoppingCart cart = shoppingCartService.getByUser(userService.findByEmail(auth.getName()).get());
+        ShoppingCart cart = shoppingCartService.getByUser(userService
+                .findByEmail(auth.getName()).get());
         return orderResponseDtoMapper.mapToDto(orderService.completeOrder(cart));
     }
 
