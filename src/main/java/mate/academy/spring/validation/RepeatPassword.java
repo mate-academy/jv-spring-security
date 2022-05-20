@@ -8,10 +8,12 @@ import javax.validation.Constraint;
 import javax.validation.Payload;
 
 @Constraint(validatedBy = RepeatPasswordValidator.class)
-@Target({ElementType.TYPE})
+@Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
 public @interface RepeatPassword {
-    String message() default "Passwords do not match";
-    Class<?>[] group() default {};
+    String message() default "Incorrect password";
+
+    Class<?>[] groups() default {};
+
     Class<? extends Payload>[] payload() default {};
 }

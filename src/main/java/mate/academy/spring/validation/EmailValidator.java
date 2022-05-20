@@ -13,6 +13,6 @@ public class EmailValidator implements ConstraintValidator<Email, String> {
         if (email == null) {
             return false;
         }
-        return email.matches(EMAIL_PATTERN);
+        return email != null && email.matches(EMAIL_PATTERN);
     }
 }

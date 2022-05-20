@@ -4,14 +4,15 @@ import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 import mate.academy.spring.dto.request.UserRequestDto;
 
-public class RepeatPasswordValidator implements
-        ConstraintValidator<RepeatPassword, UserRequestDto> {
+public class RepeatPasswordValidator implements ConstraintValidator<Email, UserRequestDto> {
     @Override
     public boolean isValid(UserRequestDto userRequestDto,
                            ConstraintValidatorContext constraintValidatorContext) {
-        if (userRequestDto.getRepeatPassword() == null) {
+
+        if (userRequestDto.getPassword() == null && userRequestDto.getRepeatPassword() == null) {
             return false;
         }
-        return userRequestDto.getPassword().equals(userRequestDto.getRepeatPassword());
+        return userRequestDto.getPassword() == null ? false : userRequestDto
+                .getPassword().equals(userRequestDto.getRepeatPassword());
     }
 }
