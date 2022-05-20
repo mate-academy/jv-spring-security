@@ -1,5 +1,6 @@
 package mate.academy.spring.controller;
 
+import javax.validation.Valid;
 import mate.academy.spring.dto.response.UserResponseDto;
 import mate.academy.spring.model.User;
 import mate.academy.spring.service.UserService;
@@ -16,15 +17,15 @@ public class UserController {
     private final ResponseDtoMapper<UserResponseDto, User> userResponseDtoMapper;
 
     public UserController(UserService userService,
-            ResponseDtoMapper<UserResponseDto, User> userResponseDtoMapper) {
+                          ResponseDtoMapper<UserResponseDto, User> userResponseDtoMapper) {
         this.userService = userService;
         this.userResponseDtoMapper = userResponseDtoMapper;
     }
 
     @GetMapping("/by-email")
-    public UserResponseDto findByEmail(@RequestParam String email) {
+    public UserResponseDto findByEmail(@RequestParam @Valid String email) {
         User user = userService.findByEmail(email).orElseThrow(
-                () -> new RuntimeException("Invalid email"));
+                () -> new RuntimeException("Invalid email" + email));
         return userResponseDtoMapper.mapToDto(user);
     }
 }
