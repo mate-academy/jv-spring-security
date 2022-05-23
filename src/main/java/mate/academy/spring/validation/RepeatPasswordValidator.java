@@ -8,11 +8,7 @@ public class RepeatPasswordValidator implements ConstraintValidator<Email, UserR
     @Override
     public boolean isValid(UserRequestDto userRequestDto,
                            ConstraintValidatorContext constraintValidatorContext) {
-
-        if (userRequestDto.getPassword() == null && userRequestDto.getRepeatPassword() == null) {
-            return false;
-        }
-        return userRequestDto.getPassword() == null ? false : userRequestDto
+        return userRequestDto.getPassword() != null && userRequestDto
                 .getPassword().equals(userRequestDto.getRepeatPassword());
     }
 }
