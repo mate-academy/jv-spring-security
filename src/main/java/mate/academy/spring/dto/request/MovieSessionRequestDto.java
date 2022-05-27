@@ -1,9 +1,7 @@
 package mate.academy.spring.dto.request;
 
-import org.springframework.lang.NonNull;
-
-import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
+import javax.validation.constraints.NotNull;
 
 public class MovieSessionRequestDto {
     @NotNull
