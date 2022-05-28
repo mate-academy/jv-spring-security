@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 import mate.academy.spring.exception.DataProcessingException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -31,7 +32,7 @@ public class CustomGlobalExceptionHandler extends ResponseEntityExceptionHandler
         bodyOfResponse.put("status", status);
         List<String> errors = ex.getBindingResult().getAllErrors().stream()
                 .map(this::getErrorMessage)
-                .toList();
+                .collect(Collectors.toList());
         bodyOfResponse.put("errors", errors);
         return new ResponseEntity<>(bodyOfResponse, headers, status);
     }
