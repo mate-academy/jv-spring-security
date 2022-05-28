@@ -14,10 +14,7 @@ import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.inMemoryAuthentication()
-                .withUser("Bob")
-                .password(getEncoder().encode("1234"))
-                .roles("USER");
+        auth.userDetailsService(inMemoryUserDetailsManager());
     }
 
     @Override
