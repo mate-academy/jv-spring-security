@@ -14,23 +14,23 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     public void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.inMemoryAuthentication()
-            .withUser("user")
-            .password(getEncoder().encode("Test1234"))
-            .roles("USER");
+                .withUser("user")
+                .password(getEncoder().encode("Test1234"))
+                .roles("USER");
     }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
-            .authorizeRequests()
-            .anyRequest().authenticated()
-            .and()
-            .formLogin()
-            .permitAll()
-            .and()
-            .httpBasic()
-            .and()
-            .csrf().disable();
+                .authorizeRequests()
+                .anyRequest().authenticated()
+                .and()
+                .formLogin()
+                .permitAll()
+                .and()
+                .httpBasic()
+                .and()
+                .csrf().disable();
     }
 
     @Bean

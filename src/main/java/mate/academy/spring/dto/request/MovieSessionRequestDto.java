@@ -1,7 +1,6 @@
 package mate.academy.spring.dto.request;
 
 import com.sun.istack.NotNull;
-
 import java.time.LocalDateTime;
 
 public class MovieSessionRequestDto {

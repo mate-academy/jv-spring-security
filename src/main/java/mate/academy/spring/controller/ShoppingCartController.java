@@ -14,8 +14,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.Optional;
-
 @RestController
 @RequestMapping("/shopping-carts")
 public class ShoppingCartController {
@@ -23,7 +21,7 @@ public class ShoppingCartController {
     private final MovieSessionService movieSessionService;
     private final UserService userService;
     private final ResponseDtoMapper<ShoppingCartResponseDto, ShoppingCart>
-        shoppingCartResponseDtoMapper;
+            shoppingCartResponseDtoMapper;
 
     public ShoppingCartController(ShoppingCartService shoppingCartService,
                                   UserService userService,
@@ -40,8 +38,8 @@ public class ShoppingCartController {
     public void addToCart(Authentication authentication, @RequestParam Long movieSessionId) {
         userService.findByEmail(authentication.getName())
             .ifPresent(user -> shoppingCartService.addSession(
-                    movieSessionService.get(movieSessionId),
-                    userService.get(user.getId())));
+                        movieSessionService.get(movieSessionId),
+                        userService.get(user.getId())));
     }
 
     @GetMapping("/by-user")
