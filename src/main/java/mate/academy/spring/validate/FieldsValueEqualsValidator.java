@@ -18,11 +18,6 @@ public class FieldsValueEqualsValidator implements ConstraintValidator<FieldsVal
     public boolean isValid(Object value, ConstraintValidatorContext constraintValidatorContext) {
         Object fieldValue = new BeanWrapperImpl(value).getPropertyValue(field);
         Object equalsFieldValue = new BeanWrapperImpl(value).getPropertyValue(equalsField);
-
-        if (fieldValue != null) {
-            return fieldValue.equals(equalsFieldValue);
-        } else {
-            return equalsFieldValue == null;
-        }
+        return fieldValue != null && fieldValue.equals(equalsFieldValue);
     }
 }

@@ -6,7 +6,6 @@ import mate.academy.spring.dao.MovieSessionDao;
 import mate.academy.spring.model.MovieSession;
 import mate.academy.spring.service.MovieSessionService;
 import org.springframework.stereotype.Service;
-import org.springframework.validation.annotation.Validated;
 
 @Service
 public class MovieSessionServiceImpl implements MovieSessionService {
@@ -38,7 +37,6 @@ public class MovieSessionServiceImpl implements MovieSessionService {
     }
 
     @Override
-    @Validated()
     public void delete(Long id) {
         movieSessionDao.delete(id);
     }
