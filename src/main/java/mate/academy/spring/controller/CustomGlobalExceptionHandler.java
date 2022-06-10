@@ -31,6 +31,7 @@ public class CustomGlobalExceptionHandler extends ResponseEntityExceptionHandler
                 .stream()
                 .map(this::getErrorMessage)
                 .collect(Collectors.toList());
+        body.put("errors", errors);
         return new ResponseEntity<>(body,headers,status);
     }
 
