@@ -4,6 +4,7 @@ import mate.academy.spring.dto.response.UserResponseDto;
 import mate.academy.spring.model.User;
 import mate.academy.spring.service.UserService;
 import mate.academy.spring.service.mapper.ResponseDtoMapper;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -19,6 +20,11 @@ public class UserController {
             ResponseDtoMapper<UserResponseDto, User> userResponseDtoMapper) {
         this.userService = userService;
         this.userResponseDtoMapper = userResponseDtoMapper;
+    }
+
+    @GetMapping
+    public String hello(Authentication authentication) {
+        return String.format("Hello, %s!", authentication.getName());
     }
 
     @GetMapping("/by-email")

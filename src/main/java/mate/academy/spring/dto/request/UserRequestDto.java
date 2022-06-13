@@ -1,8 +1,14 @@
 package mate.academy.spring.dto.request;
 
+import javax.validation.constraints.Email;
+import javax.validation.constraints.Size;
+
 public class UserRequestDto {
+    @Email
     private String email;
+    @Size(min = 5, max = 25)
     private String password;
+    private String repeatPassword;
 
     public String getEmail() {
         return email;
@@ -10,5 +16,9 @@ public class UserRequestDto {
 
     public String getPassword() {
         return password;
+    }
+
+    public String getRepeatPassword() {
+        return repeatPassword;
     }
 }
