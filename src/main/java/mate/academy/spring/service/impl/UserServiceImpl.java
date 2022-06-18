@@ -21,7 +21,6 @@ public class UserServiceImpl implements UserService {
         String salt = HashUtil.getSalt(SALT_LENGTH);
         String securePassword = HashUtil.generateSecurePassword(user.getPassword(), salt);
         user.setPassword(securePassword);
-        user.setSalt(salt);
         return userDao.add(user);
     }
 
