@@ -1,7 +1,12 @@
 package mate.academy.spring.dto.request;
 
+import javax.validation.constraints.Max;
+import javax.validation.constraints.NotNull;
+
 public class MovieRequestDto {
+    @NotNull
     private String title;
+    @Max(256)
     private String description;
 
     public String getTitle() {
