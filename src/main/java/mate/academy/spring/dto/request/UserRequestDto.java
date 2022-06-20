@@ -8,9 +8,9 @@ import mate.academy.spring.validation.ValidPassword;
 public class UserRequestDto {
     @Email
     private String email;
-    @Min(4)
+    @Min(8)
     private String password;
-    @Min(4)
+    @Min(8)
     private String repeatPassword;
 
     public String getEmail() {
