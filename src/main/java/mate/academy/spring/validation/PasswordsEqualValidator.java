@@ -10,6 +10,6 @@ public class PasswordsEqualValidator
     @Override
     public boolean isValid(UserRequestDto user,
                            ConstraintValidatorContext constraintValidatorContext) {
-        return user.getPassword().equals(user.getRepeatPassword());
+        return user != null && user.getPassword().equals(user.getRepeatPassword());
     }
 }
