@@ -8,12 +8,12 @@ import javax.validation.Constraint;
 import javax.validation.Payload;
 
 @Constraint(validatedBy = PasswordsEqualValidator.class)
-@Target({ ElementType.TYPE })
+@Target({ElementType.TYPE})
 @Retention(RetentionPolicy.RUNTIME)
 public @interface PasswordsEqual {
-String message() default "Passwords not match";
+    String message() default "Passwords not match";
 
-Class<?>[] groups() default {};
+    Class<?>[] groups() default {};
 
-Class<? extends Payload>[] payload() default {};
+    Class<? extends Payload>[] payload() default {};
 }
