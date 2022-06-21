@@ -45,7 +45,7 @@ public class ShoppingCartController {
     @GetMapping("/by-user")
     public ShoppingCartResponseDto getByUser(Authentication authentication) {
         User user = userService.findByEmail(authentication.getName())
-                .orElseThrow(() -> new RuntimeException("Can't find shopping cart by user email"));
+                .orElseThrow(() -> new RuntimeException("Can't find user by email"));
         return shoppingCartResponseDtoMapper.mapToDto(shoppingCartService.getByUser(user));
     }
 }
