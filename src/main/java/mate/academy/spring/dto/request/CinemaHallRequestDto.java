@@ -8,6 +8,7 @@ public class CinemaHallRequestDto {
     @NotNull
     @Min(0)
     private int capacity;
+    @NotNull
     @Size(max = 255)
     private String description;
 
