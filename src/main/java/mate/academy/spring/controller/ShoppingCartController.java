@@ -24,20 +24,22 @@ public class ShoppingCartController {
             shoppingCartResponseDtoMapper;
 
     public ShoppingCartController(ShoppingCartService shoppingCartService,
-                                  UserService userService,
                                   MovieSessionService movieSessionService,
-            ResponseDtoMapper<ShoppingCartResponseDto, ShoppingCart>
-                                      shoppingCartResponseDtoMapper) {
+                                  UserService userService,
+                                  ResponseDtoMapper<ShoppingCartResponseDto,
+                                          ShoppingCart> shoppingCartResponseDtoMapper) {
         this.shoppingCartService = shoppingCartService;
-        this.userService = userService;
         this.movieSessionService = movieSessionService;
+        this.userService = userService;
         this.shoppingCartResponseDtoMapper = shoppingCartResponseDtoMapper;
     }
 
     @PutMapping("/movie-sessions")
-    public void addToCart(@RequestParam Long userId, @RequestParam Long movieSessionId) {
+    public void addToCart(Authentication authentication, @RequestParam Long movieSessionId) {
         shoppingCartService.addSession(
-                movieSessionService.get(movieSessionId), userService.get(userId));
+                movieSessionService.get(movieSessionId), userService
+                        .findByEmail(authentication.getName()).orElseThrow(() ->
+                                new RuntimeException("Can't get user by email")));
     }
 
     @GetMapping("/by-user")
