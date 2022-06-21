@@ -6,7 +6,6 @@ import mate.academy.spring.dto.request.UserRequestDto;
 
 public class PasswordsEqualValidator
         implements ConstraintValidator<PasswordsEqual, UserRequestDto> {
-
     @Override
     public boolean isValid(UserRequestDto user,
                            ConstraintValidatorContext constraintValidatorContext) {
