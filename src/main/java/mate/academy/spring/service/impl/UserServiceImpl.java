@@ -26,7 +26,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public User get(Long id) {
         return userDao.get(id).orElseThrow(
-                () -> new RuntimeException("User with id " + id + " not found"));
+                () -> new RuntimeException("User with id " + id + " not found."));
     }
 
     @Override
