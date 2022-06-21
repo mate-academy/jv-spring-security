@@ -1,6 +1,5 @@
 package mate.academy.spring.controller;
 
-import javax.validation.Valid;
 import mate.academy.spring.dto.response.UserResponseDto;
 import mate.academy.spring.model.User;
 import mate.academy.spring.service.UserService;
