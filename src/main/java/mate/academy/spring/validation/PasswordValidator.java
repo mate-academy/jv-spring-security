@@ -8,9 +8,8 @@ public class PasswordValidator implements ConstraintValidator<PasswordEquals, Us
     @Override
     public boolean isValid(UserRequestDto userRequestDto,
                            ConstraintValidatorContext constraintValidatorContext) {
-        if ((userRequestDto.getPassword().length() < 8 || userRequestDto.getPassword().isEmpty())
-                && (userRequestDto.getPassword().length() < 8
-                || userRequestDto.getPassword().isEmpty())) {
+        if (userRequestDto.getPassword() == null
+                || userRequestDto.getPassword().length() < 8) {
             return false;
         }
         return userRequestDto.getPassword().equals(userRequestDto.getRepeatPassword());
