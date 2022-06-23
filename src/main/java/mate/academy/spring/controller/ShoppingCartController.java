@@ -37,8 +37,10 @@ public class ShoppingCartController {
     @PutMapping("/movie-sessions")
     public void addToCart(Authentication authentication, @RequestParam Long movieSessionId) {
         shoppingCartService.addSession(
-                movieSessionService.get(movieSessionId), userService.findByEmail(authentication.getName()).orElseThrow(() ->
-                        new RuntimeException("Can't get user by email " + authentication.getName())));
+                movieSessionService.get(movieSessionId), userService
+                        .findByEmail(authentication.getName()).orElseThrow(() ->
+                        new RuntimeException("Can't get user by email "
+                                + authentication.getName())));
     }
 
     @GetMapping("/by-user")
