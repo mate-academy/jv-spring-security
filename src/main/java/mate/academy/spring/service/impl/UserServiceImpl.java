@@ -1,13 +1,12 @@
 package mate.academy.spring.service.impl;
 
+import java.security.SecureRandom;
+import java.util.Optional;
 import mate.academy.spring.dao.UserDao;
 import mate.academy.spring.model.User;
 import mate.academy.spring.service.UserService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
-
-import java.security.SecureRandom;
-import java.util.Optional;
 
 @Service
 public class UserServiceImpl implements UserService {
