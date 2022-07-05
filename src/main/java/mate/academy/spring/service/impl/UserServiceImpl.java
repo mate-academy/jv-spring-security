@@ -1,6 +1,5 @@
 package mate.academy.spring.service.impl;
 
-import java.security.SecureRandom;
 import java.util.Optional;
 import mate.academy.spring.dao.UserDao;
 import mate.academy.spring.model.User;
