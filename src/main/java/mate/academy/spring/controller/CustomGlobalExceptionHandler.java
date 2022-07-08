@@ -1,6 +1,6 @@
 package mate.academy.spring.controller;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -21,12 +21,10 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 public class CustomGlobalExceptionHandler extends ResponseEntityExceptionHandler {
     @Override
     protected ResponseEntity<Object> handleMethodArgumentNotValid(
-            MethodArgumentNotValidException ex,
-                                                                  HttpHeaders headers,
-                                                                  HttpStatus status,
-                                                                  WebRequest request) {
+            MethodArgumentNotValidException ex, HttpHeaders headers,
+            HttpStatus status, WebRequest request) {
         Map<String, Object> body = new LinkedHashMap<>();
-        body.put("timestamp", new Date());
+        body.put("timestamp", LocalDateTime.now().toString());
         body.put("status", status.value());
 
         List<String> errors = ex.getBindingResult()
@@ -41,11 +39,10 @@ public class CustomGlobalExceptionHandler extends ResponseEntityExceptionHandler
     }
 
     @ExceptionHandler(value = DataProcessingException.class)
-    protected ResponseEntity<Object> handleDataProcessingException(RuntimeException ex,
-                                                                   HttpHeaders headers,
-                                                                   WebRequest request) {
+    protected ResponseEntity<Object> handleDataProcessingException(
+            RuntimeException ex, HttpHeaders headers, WebRequest request) {
         Map<String, Object> body = new LinkedHashMap<>();
-        body.put("timestamp", new Date());
+        body.put("timestamp", LocalDateTime.now().toString());
         body.put("message", ex.getMessage());
 
         return handleExceptionInternal(ex, body, headers,

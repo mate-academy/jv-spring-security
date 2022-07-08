@@ -40,7 +40,8 @@ public class ShoppingCartController {
                 movieSessionService.get(movieSessionId),
                 userService.findByEmail(authentication.getName())
                         .orElseThrow(() ->
-                                new RuntimeException("There is no user with this email")));
+                                new RuntimeException("There is no user with this email"
+                                        + authentication.getName())));
     }
 
     @GetMapping("/by-user")
@@ -48,7 +49,8 @@ public class ShoppingCartController {
         User user = userService
                 .findByEmail(authentication.getName())
                 .orElseThrow(() ->
-                        new RuntimeException("There is no user with this email"));
+                        new RuntimeException("There is no user with this email"
+                                + authentication.getName()));
         return shoppingCartResponseDtoMapper.mapToDto(shoppingCartService.getByUser(user));
     }
 }

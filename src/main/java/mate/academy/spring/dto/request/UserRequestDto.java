@@ -4,11 +4,7 @@ import javax.validation.constraints.Size;
 import mate.academy.spring.validation.Email;
 import mate.academy.spring.validation.RepeatPassword;
 
-@RepeatPassword(
-        password = "password",
-        repeatPassword = "repeatPassword"
-)
-
+@RepeatPassword()
 public class UserRequestDto {
     @Email
     private String email;
