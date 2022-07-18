@@ -23,9 +23,6 @@ public class AuthenticationController {
 
     @PostMapping("/register")
     public UserResponseDto register(@RequestBody @Valid UserRequestDto requestDto) {
-        if (!requestDto.getPassword().equals(requestDto.getRepeatPassword())) {
-            throw new RuntimeException("Passwords should be equal");
-        }
         User user = authService.register(requestDto.getEmail(), requestDto.getPassword());
         return userDtoResponseMapper.mapToDto(user);
     }

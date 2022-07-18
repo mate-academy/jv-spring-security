@@ -5,6 +5,7 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 import javax.validation.Constraint;
+import javax.validation.Payload;
 
 @Constraint(validatedBy = FieldsValueMatchValidator.class)
 @Target({ElementType.TYPE})
@@ -15,6 +16,10 @@ public @interface FieldsValueMatch {
     String field();
 
     String fieldMatch();
+
+    Class<?>[] groups() default {};
+
+    Class<? extends Payload>[] payload() default {};
 
     @Target({ElementType.TYPE})
     @Retention(RetentionPolicy.RUNTIME)
