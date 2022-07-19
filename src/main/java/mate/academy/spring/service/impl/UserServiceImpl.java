@@ -18,6 +18,7 @@ public class UserServiceImpl implements UserService {
         this.userDao = userDao;
         this.passwordEncoder = passwordEncoder;
     }
+
     @Override
     public User add(User user) {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
