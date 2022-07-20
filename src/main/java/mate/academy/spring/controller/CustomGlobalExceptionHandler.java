@@ -44,8 +44,7 @@ public class CustomGlobalExceptionHandler extends ResponseEntityExceptionHandler
         Map<String, Object> body = new HashMap<>();
         body.put("timestamp", LocalDateTime.now().toString());
         body.put("message", ex.getMessage());
-        return handleExceptionInternal(ex, body,
-                headers, HttpStatus.INTERNAL_SERVER_ERROR, request);
+        return new ResponseEntity<>(body, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
     private String getErrorMessage(ObjectError e) {
