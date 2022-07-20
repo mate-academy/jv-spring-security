@@ -8,6 +8,7 @@ public class MovieRequestDto {
     @Size(min = 5, max = 55)
     private String title;
     @NotNull
+    @Size(max = 155)
     private String description;
 
     public String getTitle() {
