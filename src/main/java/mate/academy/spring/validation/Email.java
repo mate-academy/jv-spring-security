@@ -11,10 +11,9 @@ import javax.validation.Payload;
 @Target({ElementType.FIELD, ElementType.PARAMETER})
 @Retention(RetentionPolicy.RUNTIME)
 public @interface Email {
-    String message() default "Invalid email or password";
+    String message() default "Invalid email";
 
     Class<?>[] groups() default {};
 
     Class<? extends Payload>[] payload() default {};
 }
-

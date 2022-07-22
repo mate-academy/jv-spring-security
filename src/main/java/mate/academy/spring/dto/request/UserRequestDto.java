@@ -1,14 +1,15 @@
 package mate.academy.spring.dto.request;
 
+import java.util.Objects;
 import javax.validation.constraints.Size;
 import mate.academy.spring.validation.Email;
 import mate.academy.spring.validation.Password;
 
 @Password
 public class UserRequestDto {
-    @Email
+    @Email(message = "Email should be valid")
     private String email;
-    @Size(min = 8, max = 15, message = "The password must be longer than 8 characters")
+    @Size(min = 8, max = 15, message = "Password must be more than 8 characters and less than 15")
     private String password;
     private String repeatPassword;
 
@@ -32,24 +33,14 @@ public class UserRequestDto {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-
         UserRequestDto that = (UserRequestDto) o;
-
-        if (email != null ? !email.equals(that.email) : that.email != null) {
-            return false;
-        }
-        if (password != null ? !password.equals(that.password) : that.password != null) {
-            return false;
-        }
-        return repeatPassword != null ? repeatPassword.equals(that.repeatPassword)
-                : that.repeatPassword == null;
+        return Objects.equals(email, that.email)
+                && Objects.equals(password, that.password)
+                && Objects.equals(repeatPassword, that.repeatPassword);
     }
 
     @Override
     public int hashCode() {
-        int result = email != null ? email.hashCode() : 0;
-        result = 31 * result + (password != null ? password.hashCode() : 0);
-        result = 31 * result + (repeatPassword != null ? repeatPassword.hashCode() : 0);
-        return result;
+        return Objects.hash(email, password, repeatPassword);
     }
 }
