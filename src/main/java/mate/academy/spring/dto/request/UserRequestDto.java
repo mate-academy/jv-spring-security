@@ -10,7 +10,6 @@ public class UserRequestDto {
     private String email;
     @Size(min = 8)
     private String password;
-    @Size(min = 8)
     private String repeatPassword;
 
     public String getEmail() {
