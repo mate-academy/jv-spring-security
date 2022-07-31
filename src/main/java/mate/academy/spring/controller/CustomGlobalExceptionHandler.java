@@ -36,9 +36,8 @@ public class CustomGlobalExceptionHandler extends ResponseEntityExceptionHandler
     }
 
     @ExceptionHandler(value = DataProcessingException.class)
-    protected ResponseEntity<Object> handleExceptionInternal(Exception ex,
-                                                             HttpHeaders headers,
-                                                             HttpStatus status) {
+    protected ResponseEntity<Object> handleExceptionInternal(
+            RuntimeException ex, HttpHeaders headers, HttpStatus status) {
         Map<String, Object> body = new LinkedHashMap<>();
         body.put("timestamp", LocalDateTime.now().toString());
         body.put("error", ex);
