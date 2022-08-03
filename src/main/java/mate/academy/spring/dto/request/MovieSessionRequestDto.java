@@ -5,9 +5,9 @@ import javax.validation.constraints.Future;
 import javax.validation.constraints.Min;
 
 public class MovieSessionRequestDto {
-    @Min(0)
+    @Min(1)
     private Long movieId;
-    @Min(0)
+    @Min(1)
     private Long cinemaHallId;
     @Future
     private LocalDateTime showTime;
