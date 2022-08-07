@@ -10,10 +10,12 @@ import mate.academy.spring.service.OrderService;
 import mate.academy.spring.service.ShoppingCartService;
 import mate.academy.spring.service.UserService;
 import mate.academy.spring.service.mapper.ResponseDtoMapper;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -35,6 +37,7 @@ public class OrderController {
     }
 
     @PostMapping("/complete")
+    @ResponseStatus(HttpStatus.CREATED)
     public OrderResponseDto completeOrder(Authentication auth) {
         User user = userService.findByEmail(auth.getName()).get();
         ShoppingCart cart = shoppingCartService.getByUser(user);
