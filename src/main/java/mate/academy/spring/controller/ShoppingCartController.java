@@ -7,6 +7,7 @@ import mate.academy.spring.service.MovieSessionService;
 import mate.academy.spring.service.ShoppingCartService;
 import mate.academy.spring.service.UserService;
 import mate.academy.spring.service.mapper.ResponseDtoMapper;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -34,9 +35,10 @@ public class ShoppingCartController {
     }
 
     @PutMapping("/movie-sessions")
-    public void addToCart(@RequestParam Long userId, @RequestParam Long movieSessionId) {
+    public void addToCart(Authentication auth, @RequestParam Long movieSessionId) {
+        User user = userService.findByEmail(auth.getName()).get();
         shoppingCartService.addSession(
-                movieSessionService.get(movieSessionId), userService.get(userId));
+                movieSessionService.get(movieSessionId), user);
     }
 
     @GetMapping("/by-user")
