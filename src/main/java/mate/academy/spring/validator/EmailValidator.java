@@ -10,7 +10,7 @@ public class EmailValidator implements ConstraintValidator<Email, String> {
             + "@[a-zA-Z0-9-]+(\\.[a-zA-Z0-9-]+)*(\\.[a-zA-Z]{1,8}))?$";
 
     @Override
-    public boolean isValid(String email, ConstraintValidatorContext constraintValidatorContext) {
+    public boolean isValid(String email, ConstraintValidatorContext context) {
         if (email == null) {
             return false;
         }
