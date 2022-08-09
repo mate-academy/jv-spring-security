@@ -24,12 +24,10 @@ public class CustomGlobalExceptionHandler extends ResponseEntityExceptionHandler
     protected ResponseEntity<Object> handleConflict(RuntimeException ex, WebRequest request) {
         Map<String, Object> map = new LinkedHashMap<>();
         map.put("timestamp", LocalDateTime.now().toString());
-        map.put("status", "HTTP status 500");
         map.put("cause", ex.getCause());
         map.put("message", ex.getMessage());
-        HttpHeaders headers = HttpHeaders.EMPTY;
         HttpStatus status = HttpStatus.INTERNAL_SERVER_ERROR;
-        return new ResponseEntity<>(map, headers, status);
+        return new ResponseEntity<>(map, status);
     }
 
     @Override
