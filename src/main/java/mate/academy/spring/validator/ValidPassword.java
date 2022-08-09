@@ -11,7 +11,7 @@ import javax.validation.Payload;
 @Target({ElementType.TYPE})
 @Retention(RetentionPolicy.RUNTIME)
 public @interface ValidPassword {
-    String message() default "invalid email";
+    String message() default "Passwords don't match";
     Class<?>[] groups() default{};
     Class<? extends Payload>[] payload() default {};
 }
