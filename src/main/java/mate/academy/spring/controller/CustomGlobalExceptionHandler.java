@@ -38,7 +38,6 @@ public class CustomGlobalExceptionHandler extends ResponseEntityExceptionHandler
             HttpHeaders headers,
             HttpStatus status,
             WebRequest request) {
-        System.out.println("called in handleMethodArgumentNotValid!");
         Map<String, Object> map = new LinkedHashMap<>();
         map.put("timestamp", LocalDateTime.now().toString());
         map.put("status", status.value());
