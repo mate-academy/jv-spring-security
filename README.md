@@ -1,4 +1,4 @@
-# Spring security
+# Spring mate.academy.spring.security
 
 1. Configure Spring Security with in memory authentication.
 1. Replace all `?userId` @RequestParam in your code with Authentication object.
