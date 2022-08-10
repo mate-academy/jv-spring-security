@@ -1,5 +1,6 @@
 package mate.academy.spring.dto.request;
 
+import javax.validation.constraints.NotNull;
 import mate.academy.spring.validation.Email;
 import mate.academy.spring.validation.Password;
 import mate.academy.spring.validation.RepeatPassword;
@@ -10,6 +11,7 @@ public class UserRequestDto {
     private String email;
     @Password
     private String password;
+    @NotNull
     private String repeatPassword;
 
     public String getRepeatPassword() {
