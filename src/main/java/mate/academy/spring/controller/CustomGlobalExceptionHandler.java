@@ -19,7 +19,6 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 
 @ControllerAdvice
 public class CustomGlobalExceptionHandler extends ResponseEntityExceptionHandler {
-
     @ExceptionHandler(value = {DataProcessingException.class})
     protected ResponseEntity<Object> handleConflict(RuntimeException ex, WebRequest request) {
         Map<String, Object> map = new LinkedHashMap<>();
