@@ -9,17 +9,20 @@ import javax.persistence.MapsId;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "shopping_carts")
 public class ShoppingCart {
     @Id
     private Long id;
+    @NotNull
     @OneToMany
     @JoinTable(name = "shopping_carts_tickets",
             joinColumns = @JoinColumn(name = "shopping_cart_id"),
             inverseJoinColumns = @JoinColumn(name = "ticket_id"))
     private List<Ticket> tickets;
+    @NotNull
     @MapsId
     @OneToOne
     @JoinColumn(name = "id")
