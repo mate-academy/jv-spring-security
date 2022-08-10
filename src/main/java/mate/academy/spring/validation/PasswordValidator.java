@@ -5,7 +5,6 @@ import javax.validation.ConstraintValidatorContext;
 import mate.academy.spring.dto.request.UserRequestDto;
 
 public class PasswordValidator implements ConstraintValidator<ValidPasswords, UserRequestDto> {
-
     @Override
     public boolean isValid(UserRequestDto userRequestDto,
                            ConstraintValidatorContext constraintValidatorContext) {

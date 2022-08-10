@@ -9,7 +9,7 @@ public class CinemaHallRequestDto {
     @Min(1)
     private int capacity;
     @NotNull
-    @Size (min = 3)
+    @Size(min = 3)
     private String description;
 
     public int getCapacity() {
