@@ -36,19 +36,19 @@ public class ShoppingCartController {
     }
 
     @PutMapping("/movie-sessions")
-    public void addToCart(Authentication object, @RequestParam Long movieSessionId) {
+    public void addToCart(Authentication authentication, @RequestParam Long movieSessionId) {
         shoppingCartService.addSession(
                 movieSessionService.get(movieSessionId),
-                userService.findByEmail(object.getName()).orElseThrow(
+                userService.findByEmail(authentication.getName()).orElseThrow(
                         () -> new NoSuchElementException("Can't find user by email: "
-                        + object.getName())));
+                        + authentication.getName())));
     }
 
     @GetMapping("/by-user")
-    public ShoppingCartResponseDto getByUser(Authentication object) {
-        User user = userService.findByEmail(object.getName()).orElseThrow(
+    public ShoppingCartResponseDto getByUser(Authentication authentication) {
+        User user = userService.findByEmail(authentication.getName()).orElseThrow(
                 () -> new NoSuchElementException("Can't find user by email: "
-                        + object.getName()));
+                        + authentication.getName()));
         return shoppingCartResponseDtoMapper.mapToDto(shoppingCartService.getByUser(user));
     }
 }
