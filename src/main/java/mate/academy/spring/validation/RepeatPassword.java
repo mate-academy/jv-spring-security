@@ -5,6 +5,7 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 import javax.validation.Constraint;
+import javax.validation.Payload;
 
 @Constraint(validatedBy = RepeatPasswordValidator.class)
 @Target({ElementType.TYPE})
@@ -12,5 +13,5 @@ import javax.validation.Constraint;
 public @interface RepeatPassword {
     String message() default "Your 'Password' and 'Repeat password' are not equals";
     Class<?>[] groups() default {};
-    Class<?>[] payload() default {};
+    Class<? extends Payload>[] payload() default {};
 }

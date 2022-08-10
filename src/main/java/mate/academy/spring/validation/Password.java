@@ -5,6 +5,7 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 import javax.validation.Constraint;
+import javax.validation.Payload;
 
 @Constraint(validatedBy = PasswordValidator.class)
 @Target(ElementType.FIELD)
@@ -16,5 +17,5 @@ public @interface Password {
             + "Contains at least one char within a set of special chars (@#%$^ etc.)\n"
             + "Does not contain space, tab, etc.";
     Class<?>[] groups() default {};
-    Class<?>[] payload() default {};
+    Class<? extends Payload>[] payload() default {};
 }
