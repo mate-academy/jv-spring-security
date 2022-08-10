@@ -42,5 +42,4 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         users.put("alice@i.ua", getEncoder().encode("1234") + ",ROLE_USER,enabled");
         return new InMemoryUserDetailsManager(users);
     }
-
 }
