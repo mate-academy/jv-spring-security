@@ -6,7 +6,6 @@ public class MovieRequestDto {
     @NotNull
     private String title;
     @NotNull
-
     private String description;
 
     public String getTitle() {
