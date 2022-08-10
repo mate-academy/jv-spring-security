@@ -1,5 +1,6 @@
 package mate.academy.spring.controller;
 
+import java.util.NoSuchElementException;
 import mate.academy.spring.dto.response.ShoppingCartResponseDto;
 import mate.academy.spring.model.ShoppingCart;
 import mate.academy.spring.model.User;
@@ -39,14 +40,14 @@ public class ShoppingCartController {
         shoppingCartService.addSession(
                 movieSessionService.get(movieSessionId),
                 userService.findByEmail(authentication.getName()).orElseThrow(
-                        () -> new RuntimeException(
+                        () -> new NoSuchElementException(
                                 "Can't find user with email " + authentication.getName())));
     }
 
     @GetMapping("/by-user")
     public ShoppingCartResponseDto getByUser(Authentication authentication) {
         User user = userService.findByEmail(authentication.getName()).orElseThrow(
-                () -> new RuntimeException(
+                () -> new NoSuchElementException(
                         "Can't find user with email " + authentication.getName()));
         return shoppingCartResponseDtoMapper.mapToDto(shoppingCartService.getByUser(user));
     }

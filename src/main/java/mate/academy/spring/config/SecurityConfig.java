@@ -33,8 +33,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Bean
     public InMemoryUserDetailsManager inMemoryUserDetailsManager() {
         Properties users = new Properties();
-        users.put("bob@gmail.com", getEncoder().encode("12345678") + ",ROLE_USER,enabled");
-        return new InMemoryUserDetailsManager();
+        users.put("bob@gmail.com", getEncoder().encode("12345678"));
+        return new InMemoryUserDetailsManager(users);
     }
 
     @Bean

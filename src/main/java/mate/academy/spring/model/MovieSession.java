@@ -9,7 +9,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "movie_sessions")
@@ -17,15 +16,12 @@ public class MovieSession {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @NotNull
     @ManyToOne
     @JoinColumn(name = "movie_id")
     private Movie movie;
-    @NotNull
     @ManyToOne
     @JoinColumn(name = "cinema_hall_id")
     private CinemaHall cinemaHall;
-    @NotNull
     @Column(name = "show_time")
     private LocalDateTime showTime;
 

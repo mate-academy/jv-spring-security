@@ -1,6 +1,7 @@
 package mate.academy.spring.controller;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.stream.Collectors;
 import mate.academy.spring.dto.response.OrderResponseDto;
 import mate.academy.spring.model.Order;
@@ -37,7 +38,7 @@ public class OrderController {
     public OrderResponseDto completeOrder(Authentication authentication) {
         ShoppingCart cart = shoppingCartService.getByUser(
                 userService.findByEmail(authentication.getName()).orElseThrow(
-                        () -> new RuntimeException(
+                        () -> new NoSuchElementException(
                                 "Can't complete order for user with email "
                                         + authentication.getName())));
         return orderResponseDtoMapper.mapToDto(orderService.completeOrder(cart));
@@ -47,7 +48,7 @@ public class OrderController {
     public List<OrderResponseDto> getOrderHistory(Authentication authentication) {
         return orderService.getOrdersHistory(
                         userService.findByEmail(authentication.getName()).orElseThrow(() ->
-                                new RuntimeException(
+                                new NoSuchElementException(
                                         "Can't get order history for user with email "
                                                 + authentication.getName())))
                 .stream()
