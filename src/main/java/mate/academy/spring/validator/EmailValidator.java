@@ -9,8 +9,14 @@ public class EmailValidator implements ConstraintValidator<Email, String> {
             + "+@((\\[\\d{1,3}\\.\\d{1,3}.\\[\\d{1,3}."
             + "\\[\\d{1,3}])|(([a-zA-Z\\-\\d]+\\.)+[a-zA-Z]{2,}))$";
     
+    private static final Pattern PATTERN = Pattern.compile(EMAIL_PATTERN);
+
     @Override
-    public boolean isValid(String email, ConstraintValidatorContext constraintValidatorContext) {
-        return email != null && Pattern.compile(EMAIL_PATTERN).matcher(email).matches();
+    public boolean isValid(String email, ConstraintValidatorContext context) {
+        if (email == null) {
+            return false;
+        }
+        Matcher matcher = PATTERN.matcher(email);
+        return matcher.matches();
     }
 }
