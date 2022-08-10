@@ -1,8 +1,8 @@
 package mate.academy.spring.dto.request;
 
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotNull;
 import java.time.LocalDateTime;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotNull;
 
 public class MovieSessionRequestDto {
     private Long movieId;
