@@ -46,7 +46,7 @@ public class OrderController {
     @GetMapping
     public List<OrderResponseDto> getOrderHistory(Authentication object) {
         return orderService.getOrdersHistory(userService.findByEmail(object.getName()).orElseThrow(
-                        () -> new NoSuchElementException("Can't find user by email: "
+                () -> new NoSuchElementException("Can't find user by email: "
                                 + object.getName())))
                 .stream()
                 .map(orderResponseDtoMapper::mapToDto)
