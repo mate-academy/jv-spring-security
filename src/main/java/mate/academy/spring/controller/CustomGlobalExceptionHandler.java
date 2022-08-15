@@ -1,10 +1,11 @@
-package mate.academy.spring.exception;
+package mate.academy.spring.controller;
 
 import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
+import mate.academy.spring.exception.DataProcessingException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -36,21 +37,20 @@ public class CustomGlobalExceptionHandler extends ResponseEntityExceptionHandler
         return new ResponseEntity<>(body, headers, status);
     }
 
-    private String getErrorMessage(ObjectError e) {
-        if (e instanceof FieldError) {
-            String field = ((FieldError) e).getField();
-            return field + " " + e.getDefaultMessage();
-        }
-        return e.getDefaultMessage();
-    }
-
     @ExceptionHandler(DataProcessingException.class)
     protected ResponseEntity<Object> handleDataProcessingException(DataProcessingException ex,
                                                                    HttpHeaders headers) {
         Map<String, Object> body = new HashMap<>();
         body.put("timestamp", LocalDateTime.now().toString());
         body.put("message", ex.getMessage());
-        body.put("status", HttpStatus.INTERNAL_SERVER_ERROR.value());
         return new ResponseEntity<>(body, headers, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
+    private String getErrorMessage(ObjectError e) {
+        if (e instanceof FieldError) {
+            String field = ((FieldError) e).getField();
+            return field + " " + e.getDefaultMessage();
+        }
+        return e.getDefaultMessage();
     }
 }
