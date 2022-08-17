@@ -1,5 +1,6 @@
 package mate.academy.spring.dto.response;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -7,6 +8,8 @@ public class OrderResponseDto {
     private Long id;
     private List<Long> ticketIds;
     private Long userId;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss",
+            timezone = "GMT")
     private LocalDateTime orderTime;
 
     public Long getId() {
