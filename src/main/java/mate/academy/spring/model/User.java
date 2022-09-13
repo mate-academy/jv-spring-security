@@ -1,5 +1,7 @@
 package mate.academy.spring.model;
 
+import mate.academy.spring.validation.Email;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -14,6 +16,7 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column(unique = true)
+    @Email
     private String email;
     private String password;
     private String salt;
