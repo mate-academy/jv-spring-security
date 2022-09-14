@@ -18,12 +18,15 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     }
 
     @Override
-    public User register(String email, String password) {
-        User user = new User();
-        user.setEmail(email);
-        user.setPassword(password);
-        userService.add(user);
-        shoppingCartService.registerNewShoppingCart(user);
-        return user;
+    public User register(String email, String password, String repeatPassword) {
+        if (password.equals(repeatPassword)) {
+            User user = new User();
+            user.setEmail(email);
+            user.setPassword(password);
+            userService.add(user);
+            shoppingCartService.registerNewShoppingCart(user);
+            return user;
+        }
+        throw new RuntimeException("Passwords don't match");
     }
 }
