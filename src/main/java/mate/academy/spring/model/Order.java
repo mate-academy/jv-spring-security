@@ -26,7 +26,6 @@ public class Order {
             inverseJoinColumns = @JoinColumn(name = "ticket_id"))
     private List<Ticket> tickets;
     @Column(name = "order_time")
-    @NotNull
     private LocalDateTime orderTime;
     @ManyToOne
     @JoinColumn(name = "user_id")

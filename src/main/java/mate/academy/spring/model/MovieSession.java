@@ -26,7 +26,6 @@ public class MovieSession {
     @JoinColumn(name = "cinema_hall_id")
     private CinemaHall cinemaHall;
     @Column(name = "show_time")
-    @NotNull
     private LocalDateTime showTime;
 
     public Long getId() {
