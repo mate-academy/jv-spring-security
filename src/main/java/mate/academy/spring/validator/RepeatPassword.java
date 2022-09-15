@@ -11,7 +11,7 @@ import javax.validation.Payload;
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
 public @interface RepeatPassword {
-    String message() default "Passwords don't match";
+    String message() default "Passwords different";
     Class<?>[] groups() default {};
     Class<? extends Payload>[] payload() default {};
 }

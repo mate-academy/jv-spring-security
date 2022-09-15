@@ -14,5 +14,4 @@ public @interface Email {
     String message() default "Not valid email";
     Class<?>[] groups() default {};
     Class<? extends Payload>[] payload() default {};
-
 }
