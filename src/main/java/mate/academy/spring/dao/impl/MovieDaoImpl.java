@@ -24,16 +24,16 @@ public class MovieDaoImpl implements MovieDao {
         Transaction transaction = null;
         Session session = null;
         try {
-            session = factory.openSession();
-            transaction = session.beginTransaction();
-            session.save(movie);
-            transaction.commit();
-            return movie;
-        } catch (Exception e) {
-            if (transaction != null) {
-                transaction.rollback();
-            }
-            throw new DataProcessingException("Can't insert movie " + movie, e);
+//            session = factory.openSession();
+//            transaction = session.beginTransaction();
+//            session.save(movie);
+//            transaction.commit();
+//            return movie;
+//        } catch (Exception e) {
+//            if (transaction != null) {
+//                transaction.rollback();
+//            }
+            throw new DataProcessingException("Can't insert movie " + movie, new Exception());
         } finally {
             if (session != null) {
                 session.close();
