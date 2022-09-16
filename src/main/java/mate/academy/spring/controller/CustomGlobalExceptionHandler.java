@@ -5,7 +5,6 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
-
 import mate.academy.spring.exception.DataProcessingException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -49,7 +48,7 @@ public class CustomGlobalExceptionHandler extends ResponseEntityExceptionHandler
     }
 
     private String getErrorMessage(ObjectError objectError) {
-        if(objectError instanceof FieldError) {
+        if (objectError instanceof FieldError) {
             String field = ((FieldError) objectError).getField();
             return field + " " + objectError.getDefaultMessage();
         }

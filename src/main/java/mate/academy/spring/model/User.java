@@ -1,7 +1,5 @@
 package mate.academy.spring.model;
 
-import mate.academy.spring.validation.Email;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

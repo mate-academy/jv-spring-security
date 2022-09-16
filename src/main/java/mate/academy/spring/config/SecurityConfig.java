@@ -1,5 +1,6 @@
 package mate.academy.spring.config;
 
+import java.util.Properties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -9,20 +10,11 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 
-import java.util.Properties;
-
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(inMemoryDetailsManager());
-    }
-
-    private InMemoryUserDetailsManager inMemoryDetailsManager() {
-        Properties users = new Properties();
-        users.put("bob@i.ua", getEncoder().encode("1234") + ",ROLE_USER,enabled");
-        users.put("alice@i.ua", getEncoder().encode("1234") + ",ROLE_USER,enabled");
-        return new InMemoryUserDetailsManager(users);
     }
 
     @Override
@@ -37,6 +29,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .httpBasic()
                 .and()
                 .csrf().disable();
+    }
+
+    private InMemoryUserDetailsManager inMemoryDetailsManager() {
+        Properties users = new Properties();
+        users.put("bob@i.ua", getEncoder().encode("1234") + ",ROLE_USER,enabled");
+        users.put("alice@i.ua", getEncoder().encode("1234") + ",ROLE_USER,enabled");
+        return new InMemoryUserDetailsManager(users);
     }
 
     @Bean
