@@ -1,0 +1,38 @@
+Spring security
++ Configure Spring Security with in memory authentication.
++ Replace all ?userId @RequestParam in your code with Authentication object.
++ Add @NonNull, @Min, etc annotations where applicable (+ add this dependency to your project, see example here)
++ Implement custom email validation.
++ Implement CustomGlobalExceptionHandler.
++ Remove method login() in AuthenticationService, HashUtil and salt from User entity.
++ Start using passwordEncoder in UserService -> add() for password hashing.
+
++ IMPORTANT: For dependency hibernate-validator don't use version 7.0.0.Final and higher,
++ they are not fully compatible with Spring now, and may not work properly. You can use 6.1.6.Final;
+
+Advanced:
+
++ In the UserRequestDto add a repeatPassword field.
++ Implement validation to check that password and repeatPassword are the same.
++ In your CustomGlobalExceptionHandler, return JSON response with HTTP status 500 if DataProcessingException is thrown.
+
+
+    Be careful with CustomGlobalExceptionHandler. Let’s use getAllErrors() instead of getFieldErrors().
+    + Don’t forget to add SecurityConfig.class in MyWebAppInitializer -> getRootConfigClasses().
+    + Be careful with @Target annotation. Choose correct ElementType.
+    + Add your custom email validation annotation above a field and password annotation above the class.
+    + Remember about parameterizing interface ConstraintValidator with two parameters.
+    + Don’t override method initialize(), we don’t need it in validator class.
+    + Don’t forget to rename parameters in isValid() method.
+    + Let’s create a constant with regex to check email. Remember about naming.
+    + Remember, that null.equals(smth) == NPE. HINT: be careful with implementation of the isValid() method.
+    + Don’t repeat checks for fields: you must ensure email field not to be null in your custom Validator,
+    so there is no need to put @NotNull for that field as well in Dto class.
+
+    + Can we use @NotNull annotation above the field with primitive data types?
+        Be careful to use only the suitable annotations :)
+    + Don’t create PasswordEncoder using new keyword. Let’s use dependency injection by the constructor.
+    + Don’t change findByEmail() method in UserController - this method is supposed to return info about any user.
+    + Be sure you have the @Valid annotation in your controllers for the validation to take effect.
+    + Your custom constraints should have the obligatory parameters: group() and payload().
+    + For validation use classes from javax.validation package.
