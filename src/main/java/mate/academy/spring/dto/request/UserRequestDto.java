@@ -7,7 +7,6 @@ import org.hibernate.validator.constraints.Length;
 
 @Password
 public class UserRequestDto {
-    @NotNull(message = "Please enter your email")
     @Email
     private String email;
     @NotNull(message = "Please enter your password")
