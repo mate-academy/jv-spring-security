@@ -44,6 +44,7 @@ public class CinemaHallDaoImpl implements CinemaHallDao {
     @Override
     public Optional<CinemaHall> get(Long id) {
         try (Session session = factory.openSession()) {
+            session.close();
             return session.createQuery("FROM CinemaHall WHERE id = :id", CinemaHall.class)
                     .setParameter("id", id)
                     .uniqueResultOptional();
