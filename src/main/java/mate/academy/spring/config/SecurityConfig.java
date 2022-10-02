@@ -1,6 +1,5 @@
 package mate.academy.spring.config;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -21,7 +20,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(AuthenticationManagerBuilder builder) throws Exception {
         builder.inMemoryAuthentication()
                 .withUser("alexgash8@gmail.com")
-                .password(passwordEncoder.encode("123456"))
+                .password(getPasswordEncoder().encode("123456"))
                 .roles("USER");
     }
 
