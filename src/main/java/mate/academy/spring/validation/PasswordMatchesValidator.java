@@ -7,12 +7,8 @@ import mate.academy.spring.dto.request.UserRequestDto;
 public class PasswordMatchesValidator implements ConstraintValidator<PasswordMatches, Object> {
 
     @Override
-    public void initialize(PasswordMatches constraintAnnotation) {
-    }
-
-    @Override
-    public boolean isValid(Object requestObject, ConstraintValidatorContext context) {
-        UserRequestDto user = (UserRequestDto) requestObject;
+    public boolean isValid(Object requestUser, ConstraintValidatorContext context) {
+        UserRequestDto user = (UserRequestDto) requestUser;
         return user.getPassword().equals(user.getRepeatPassword());
     }
 }
