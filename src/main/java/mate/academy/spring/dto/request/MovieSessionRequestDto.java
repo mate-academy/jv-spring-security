@@ -1,10 +1,18 @@
 package mate.academy.spring.dto.request;
 
 import java.time.LocalDateTime;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Positive;
+import mate.academy.spring.util.DateTimePatternUtil;
+import org.springframework.format.annotation.DateTimeFormat;
 
 public class MovieSessionRequestDto {
+    @Positive
     private Long movieId;
+    @Positive
     private Long cinemaHallId;
+    @NotNull
+    @DateTimeFormat(pattern = DateTimePatternUtil.DATE_TIME_PATTERN)
     private LocalDateTime showTime;
 
     public Long getMovieId() {
