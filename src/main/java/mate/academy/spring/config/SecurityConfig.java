@@ -29,17 +29,22 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Bean
     public UserDetailsService userDetailsService() {
-        UserDetails user = User.builder()
-                .username("user")
+        UserDetails alice = User.builder()
+                .username("alice@gmail.com")
+                .password(passwordEncoder().encode("1234"))
+                .roles("USER")
+                .build();
+        UserDetails bob = User.builder()
+                .username("bob@gmail.com")
                 .password(passwordEncoder().encode("1234"))
                 .roles("USER")
                 .build();
         UserDetails admin = User.builder()
-                .username("admin")
+                .username("admin@gmail.com")
                 .password(passwordEncoder().encode("qwer"))
                 .roles("ADMIN")
                 .build();
-        return new InMemoryUserDetailsManager(user, admin);
+        return new InMemoryUserDetailsManager(alice, bob, admin);
     }
 
     @Bean
