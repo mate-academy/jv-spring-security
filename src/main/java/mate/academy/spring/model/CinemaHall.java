@@ -5,8 +5,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import javax.validation.constraints.DecimalMin;
-import org.hibernate.validator.constraints.Length;
 
 @Entity
 @Table(name = "cinema_halls")
@@ -14,9 +12,7 @@ public class CinemaHall {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @DecimalMin(value = "0", message = "Please enter capacity more then 0")
     private int capacity;
-    @Length(max = 255, message = "Please note, that description must be less then 255 characters")
     private String description;
 
     public Long getId() {
