@@ -14,6 +14,7 @@ public class UserRequestDto {
     @NotNull
     @Min(value = 3, message = "Password length must be at least 3 characters.")
     private String password;
+    @NotNull
     private String repeatPassword;
 
     public String getEmail() {
