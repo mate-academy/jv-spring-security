@@ -6,6 +6,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import org.hibernate.validator.constraints.Length;
@@ -16,10 +17,9 @@ public class Movie {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @NotNull
-    @Size(min = 1)
+    @NotEmpty(message = "Please enter title of movie")
     private String title;
-    @Length(max = 255)
+    @Length(max = 255, message = "Please note, that description must be less then 255 characters")
     private String description;
 
     public Long getId() {

@@ -14,9 +14,9 @@ public class CinemaHall {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @DecimalMin(value = "0")
+    @DecimalMin(value = "0", message = "Please enter capacity more then 0")
     private int capacity;
-    @Length(max = 255)
+    @Length(max = 255, message = "Please note, that description must be less then 255 characters")
     private String description;
 
     public Long getId() {
