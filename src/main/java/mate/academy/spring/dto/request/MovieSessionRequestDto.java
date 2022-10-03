@@ -6,9 +6,9 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
 public class MovieSessionRequestDto {
-    @Min(value = 1)
+    @NotNull
     private Long movieId;
-    @Min(value = 1)
+    @NotNull
     private Long cinemaHallId;
     @Future
     @NotNull
