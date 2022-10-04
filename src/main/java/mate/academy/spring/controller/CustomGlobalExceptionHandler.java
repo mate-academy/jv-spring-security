@@ -16,17 +16,12 @@ import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 public class CustomGlobalExceptionHandler extends ResponseEntityExceptionHandler {
-    private Map<String, Object> body;
-
-    public CustomGlobalExceptionHandler(Map<String, Object> body) {
-        this.body = new LinkedHashMap<>();
-    }
-
     @Override
     protected ResponseEntity<Object> handleMethodArgumentNotValid(
             MethodArgumentNotValidException ex, HttpHeaders headers,
             HttpStatus status, WebRequest request) {
 
+        Map<String, Object> body = new LinkedHashMap<>();
         if (ex.getCause().equals(DataProcessingException.class)) {
             return null;
         }
