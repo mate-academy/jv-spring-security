@@ -36,6 +36,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         users.put("88888@gmail.com", getEncoder().encode("88888") + ",ROLE_USER,enabled");
         users.put("123@gmail.com", getEncoder().encode("12344") + ",ROLE_USER,enabled");
         users.put("99999@gmail.com", getEncoder().encode("99999") + ",ROLE_USER,enabled");
+        users.put("77777@gmail.com", getEncoder().encode("77777") + ",ROLE_USER,enabled");
         return new InMemoryUserDetailsManager(users);
     }
 
