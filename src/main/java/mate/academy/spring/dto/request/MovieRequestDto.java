@@ -6,7 +6,7 @@ import org.hibernate.validator.constraints.Length;
 public class MovieRequestDto {
     @NotEmpty
     private String title;
-    @Length(max=255, message = "The Description should be < 255 characters.")
+    @Length(max = 255, message = "The Description should be < 255 characters.")
     private String description;
 
     public String getTitle() {
