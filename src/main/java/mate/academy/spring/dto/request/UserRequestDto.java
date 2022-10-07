@@ -12,11 +12,23 @@ public class UserRequestDto {
     @Size(min = 4)
     private String password;
 
+    @NotNull
+    @Size(min = 4)
+    private String repeatPassword;
+
     public String getEmail() {
         return email;
     }
 
     public String getPassword() {
         return password;
+    }
+
+    public String getRepeatPassword() {
+        return repeatPassword;
+    }
+
+    public void setRepeatPassword(String repeatPassword) {
+        this.repeatPassword = repeatPassword;
     }
 }
