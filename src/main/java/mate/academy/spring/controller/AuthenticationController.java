@@ -3,6 +3,7 @@ package mate.academy.spring.controller;
 import javax.validation.Valid;
 import mate.academy.spring.dto.request.UserRequestDto;
 import mate.academy.spring.dto.response.UserResponseDto;
+import mate.academy.spring.exception.DataProcessingException;
 import mate.academy.spring.model.User;
 import mate.academy.spring.service.AuthenticationService;
 import mate.academy.spring.service.mapper.ResponseDtoMapper;
@@ -27,6 +28,6 @@ public class AuthenticationController {
             User user = authService.register(requestDto.getEmail(), requestDto.getPassword());
             return userDtoResponseMapper.mapToDto(user);
         }
-        throw new RuntimeException("Password and Repeat password should be the same");
+        throw new DataProcessingException("Password and Repeat password should be the same");
     }
 }
