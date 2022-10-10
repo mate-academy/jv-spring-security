@@ -3,6 +3,7 @@ package mate.academy.spring.controller;
 import java.util.List;
 import java.util.stream.Collectors;
 import mate.academy.spring.dto.response.OrderResponseDto;
+import org.springframework.security.core.Authentication;
 import mate.academy.spring.model.Order;
 import mate.academy.spring.model.ShoppingCart;
 import mate.academy.spring.service.OrderService;
@@ -34,8 +35,8 @@ public class OrderController {
     }
 
     @PostMapping("/complete")
-    public OrderResponseDto completeOrder(@RequestParam Long userId) {
-        ShoppingCart cart = shoppingCartService.getByUser(userService.get(userId));
+    public OrderResponseDto completeOrder(Authentication authentication) {
+        ShoppingCart cart = shoppingCartService.getByUser(userService.get((Long) authentication.getCredentials()));
         return orderResponseDtoMapper.mapToDto(orderService.completeOrder(cart));
     }
 
