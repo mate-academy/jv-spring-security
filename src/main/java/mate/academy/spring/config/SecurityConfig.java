@@ -13,7 +13,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(AuthenticationManagerBuilder auth)
             throws Exception {
-        auth.inMemoryAuthentication()
+        auth.
+                inMemoryAuthentication()
                 .withUser("user@testmail.com")
                 .password(getEncoder().encode("1234")).roles("USER");
     }
