@@ -16,6 +16,7 @@ public class User {
     @Column(unique = true)
     private String email;
     private String password;
+    private String repeatPassword;
     private String salt;
 
     public Long getId() {
@@ -55,5 +56,13 @@ public class User {
         return "User{"
                 + "id=" + id
                 + ", email='" + email + '\'' + '}';
+    }
+
+    public String getRepeatPassword() {
+        return repeatPassword;
+    }
+
+    public void setRepeatPassword(String repeatPassword) {
+        this.repeatPassword = repeatPassword;
     }
 }
