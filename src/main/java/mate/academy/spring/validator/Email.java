@@ -9,7 +9,7 @@ import javax.validation.Payload;
 
 @Constraint(validatedBy = EmailValidator.class)
 //Tell here, where we can put this annotation: parameter and field
-@Target({ElementType.METHOD})
+@Target({ElementType.FIELD})
 //When this annotation will be available
 @Retention(RetentionPolicy.RUNTIME)
 public @interface Email {
