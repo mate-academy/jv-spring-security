@@ -1,11 +1,13 @@
 package mate.academy.spring.controller;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 import mate.academy.spring.dto.response.OrderResponseDto;
 import org.springframework.security.core.Authentication;
 import mate.academy.spring.model.Order;
 import mate.academy.spring.model.ShoppingCart;
+import mate.academy.spring.model.User;
 import mate.academy.spring.service.OrderService;
 import mate.academy.spring.service.ShoppingCartService;
 import mate.academy.spring.service.UserService;
@@ -36,13 +38,19 @@ public class OrderController {
 
     @PostMapping("/complete")
     public OrderResponseDto completeOrder(Authentication authentication) {
-        ShoppingCart cart = shoppingCartService.getByUser(userService.get((Long) authentication.getCredentials()));
+        String email = authentication.getName();
+        User user = userService.findByEmail(email).orElseThrow(
+                () -> new RuntimeException("Couldn't find user by email " + email));
+        ShoppingCart cart = shoppingCartService.getByUser(user);
         return orderResponseDtoMapper.mapToDto(orderService.completeOrder(cart));
     }
 
     @GetMapping
-    public List<OrderResponseDto> getOrderHistory(@RequestParam Long userId) {
-        return orderService.getOrdersHistory(userService.get(userId))
+    public List<OrderResponseDto> getOrderHistory(Authentication authentication) {
+        String email = authentication.getName();
+        User user = userService.findByEmail(email).orElseThrow(
+                () -> new RuntimeException("Couldn't find user by email " + email));
+        return orderService.getOrdersHistory(user)
                 .stream()
                 .map(orderResponseDtoMapper::mapToDto)
                 .collect(Collectors.toList());

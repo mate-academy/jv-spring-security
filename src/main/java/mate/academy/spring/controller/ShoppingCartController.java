@@ -1,6 +1,7 @@
 package mate.academy.spring.controller;
 
 import mate.academy.spring.dto.response.ShoppingCartResponseDto;
+import org.springframework.security.core.Authentication;
 import mate.academy.spring.model.ShoppingCart;
 import mate.academy.spring.model.User;
 import mate.academy.spring.service.MovieSessionService;
@@ -34,14 +35,18 @@ public class ShoppingCartController {
     }
 
     @PutMapping("/movie-sessions")
-    public void addToCart(@RequestParam Long userId, @RequestParam Long movieSessionId) {
-        shoppingCartService.addSession(
-                movieSessionService.get(movieSessionId), userService.get(userId));
+    public void addToCart(Authentication authentication, @RequestParam Long movieSessionId) {
+        String email = authentication.getName();
+        User user = userService.findByEmail(email).orElseThrow(
+                () -> new RuntimeException("Couldn't find user by email " + email));
+        shoppingCartService.addSession(movieSessionService.get(movieSessionId), user);
     }
 
     @GetMapping("/by-user")
-    public ShoppingCartResponseDto getByUser(@RequestParam Long userId) {
-        User user = userService.get(userId);
+    public ShoppingCartResponseDto getByUser(Authentication authentication) {
+        String email = authentication.getName();
+        User user = userService.findByEmail(email).orElseThrow(
+                () -> new RuntimeException("Couldn't find user by email " + email));
         return shoppingCartResponseDtoMapper.mapToDto(shoppingCartService.getByUser(user));
     }
 }

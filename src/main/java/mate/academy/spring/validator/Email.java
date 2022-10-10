@@ -8,9 +8,7 @@ import javax.validation.Constraint;
 import javax.validation.Payload;
 
 @Constraint(validatedBy = EmailValidator.class)
-//Tell here, where we can put this annotation: parameter and field
-@Target({ElementType.FIELD})
-//When this annotation will be available
+@Target({ElementType.FIELD, ElementType.METHOD})
 @Retention(RetentionPolicy.RUNTIME)
 public @interface Email {
     String message() default "Wrong input! You have entered an invalid email";
