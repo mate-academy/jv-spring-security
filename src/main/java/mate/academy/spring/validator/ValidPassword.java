@@ -7,11 +7,11 @@ import java.lang.annotation.Target;
 import javax.validation.Constraint;
 import javax.validation.Payload;
 
-@Constraint(validatedBy = EmailValidator.class)
-@Target({ElementType.FIELD, ElementType.METHOD})
+@Constraint(validatedBy = PasswordValidator.class)
+@Target({ElementType.TYPE})
 @Retention(RetentionPolicy.RUNTIME)
-public @interface Email {
-    String message() default "Wrong input! You have entered an invalid email";
+public @interface ValidPassword {
+    String message() default "Password is weak or not the same";
     Class<?>[] groups() default {};
     Class<? extends Payload>[] payload() default {};
 }
