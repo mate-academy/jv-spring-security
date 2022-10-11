@@ -3,7 +3,7 @@ package mate.academy.spring.dto.request;
 import javax.validation.constraints.Min;
 
 public class CinemaHallRequestDto {
-    @Min(0)
+    @Min(1)
     private int capacity;
     private String description;
 
