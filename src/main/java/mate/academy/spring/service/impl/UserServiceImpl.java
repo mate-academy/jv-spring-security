@@ -1,27 +1,27 @@
 package mate.academy.spring.service.impl;
 
 import java.util.Optional;
-import mate.academy.spring.config.SecurityConfig;
 import mate.academy.spring.dao.UserDao;
 import mate.academy.spring.model.User;
 import mate.academy.spring.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
 public class UserServiceImpl implements UserService {
     private final UserDao userDao;
-    private final SecurityConfig securityConfig;
+    private final PasswordEncoder passwordEncoder;
 
     @Autowired
-    public UserServiceImpl(UserDao userDao, SecurityConfig securityConfig) {
+    public UserServiceImpl(UserDao userDao, PasswordEncoder passwordEncoder) {
         this.userDao = userDao;
-        this.securityConfig = securityConfig;
+        this.passwordEncoder = passwordEncoder;
     }
 
     @Override
     public User add(User user) {
-        String securePassword = securityConfig.getEncoder().encode(user.getPassword());
+        String securePassword = passwordEncoder.encode(user.getPassword());
         user.setPassword(securePassword);
         return userDao.add(user);
     }

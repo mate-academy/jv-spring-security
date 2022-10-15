@@ -8,7 +8,7 @@ public class UserRequestDto {
     @Email
     private String email;
     private String password;
-    private String rePassword;
+    private String repeatPassword;
 
     public String getEmail() {
         return email;
@@ -18,7 +18,7 @@ public class UserRequestDto {
         return password;
     }
 
-    public String getRePassword() {
-        return rePassword;
+    public String getRepeatPassword() {
+        return repeatPassword;
     }
 }
