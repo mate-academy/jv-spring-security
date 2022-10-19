@@ -7,7 +7,7 @@ import mate.academy.spring.validation.FieldsValueMatch;
 
 @FieldsValueMatch(first = "password", second = "repeatPassword")
 public class UserRequestDto {
-    @NotNull(message = "Email can't is empty")
+
     @Email
     private String email;
     @Size(min = 6)

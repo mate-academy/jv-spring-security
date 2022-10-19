@@ -34,8 +34,8 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
     private String getErrorMessage(ObjectError objectError) {
         if (objectError instanceof FieldError) {
-            String filed = ((FieldError) objectError).getField();
-            return filed + " " + objectError.getDefaultMessage();
+            String field = ((FieldError) objectError).getField();
+            return field + " " + objectError.getDefaultMessage();
         }
         return objectError.getDefaultMessage();
     }
