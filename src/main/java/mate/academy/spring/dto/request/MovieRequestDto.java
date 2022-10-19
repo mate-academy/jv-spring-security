@@ -1,8 +1,7 @@
 package mate.academy.spring.dto.request;
 
-import org.hibernate.validator.constraints.Length;
-
 import javax.validation.constraints.NotNull;
+import org.hibernate.validator.constraints.Length;
 
 public class MovieRequestDto {
     @NotNull
