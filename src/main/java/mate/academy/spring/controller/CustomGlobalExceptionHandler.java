@@ -1,4 +1,4 @@
-package mate.academy.spring.validation;
+package mate.academy.spring.controller;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
