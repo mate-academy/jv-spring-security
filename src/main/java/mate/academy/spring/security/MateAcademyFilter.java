@@ -12,7 +12,6 @@ public class MateAcademyFilter extends GenericFilterBean {
     public void doFilter(ServletRequest servletRequest,
                          ServletResponse servletResponse,
                          FilterChain filterChain) throws IOException, ServletException {
-        System.out.println("Hi");
         filterChain.doFilter(servletRequest, servletResponse);
     }
 }
