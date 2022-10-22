@@ -1,7 +1,13 @@
 package mate.academy.spring.dto.request;
 
+import com.sun.istack.NotNull;
+import javax.validation.constraints.Size;
+
 public class UserRequestDto {
+    @NotNull
     private String email;
+    @NotNull
+    @Size(min = 8, max = 16)
     private String password;
 
     public String getEmail() {
