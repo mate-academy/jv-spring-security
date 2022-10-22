@@ -1,7 +1,6 @@
 package mate.academy.spring.dto.request;
 
 import com.sun.istack.NotNull;
-
 import javax.validation.constraints.Email;
 import javax.validation.constraints.Size;
 
