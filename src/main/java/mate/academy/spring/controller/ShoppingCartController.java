@@ -2,10 +2,12 @@ package mate.academy.spring.controller;
 
 import mate.academy.spring.dto.response.ShoppingCartResponseDto;
 import mate.academy.spring.exception.DataProcessingException;
+import mate.academy.spring.model.ShoppingCart;
 import mate.academy.spring.model.User;
 import mate.academy.spring.service.MovieSessionService;
 import mate.academy.spring.service.ShoppingCartService;
 import mate.academy.spring.service.UserService;
+import mate.academy.spring.service.mapper.ResponseDtoMapper;
 import mate.academy.spring.service.mapper.ShoppingCartMapper;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,15 +23,17 @@ public class ShoppingCartController {
     private final ShoppingCartService shoppingCartService;
     private final MovieSessionService movieSessionService;
     private final UserService userService;
-    private final ShoppingCartMapper shoppingCartMapper;
+    private final ResponseDtoMapper<ShoppingCartResponseDto, ShoppingCart> responseDtoMapper;
 
     public ShoppingCartController(ShoppingCartService shoppingCartService,
                                   MovieSessionService movieSessionService, UserService userService,
-                                  ShoppingCartMapper shoppingCartMapper) {
+                                  ShoppingCartMapper shoppingCartMapper,
+                                  ResponseDtoMapper<ShoppingCartResponseDto, ShoppingCart>
+                                          responseDtoMapper) {
         this.shoppingCartService = shoppingCartService;
         this.movieSessionService = movieSessionService;
         this.userService = userService;
-        this.shoppingCartMapper = shoppingCartMapper;
+        this.responseDtoMapper = responseDtoMapper;
     }
 
     @PutMapping("/movie-sessions")
@@ -46,7 +50,7 @@ public class ShoppingCartController {
         String email = authentication.getName();
         User user = userService.findByEmail(email)
                 .orElseThrow(() -> new DataProcessingException("Can't get user by email " + email));
-        return shoppingCartMapper.mapToDto(shoppingCartService.getByUser(user));
+        return responseDtoMapper.mapToDto(shoppingCartService.getByUser(user));
     }
 }
 
