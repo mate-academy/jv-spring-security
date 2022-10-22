@@ -40,9 +40,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     public InMemoryUserDetailsManager inMemoryUserDetailsManager() {
         Properties properties = new Properties();
         properties.put("bob@domain.com", passwordEncoder.encode("1234")
-                + "ROLE_USER,enabled");
+                + ",ROLE_USER,enabled");
         properties.put("alice@domain.com", passwordEncoder.encode("1234")
-                + "ROLE_USER,enabled");
+                + ",ROLE_USER,enabled");
         return new InMemoryUserDetailsManager(properties);
     }
 }
