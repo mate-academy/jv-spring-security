@@ -1,8 +1,8 @@
 package mate.academy.spring.controller;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
+import javax.validation.Valid;
 import mate.academy.spring.dto.response.OrderResponseDto;
 import mate.academy.spring.model.Order;
 import mate.academy.spring.model.ShoppingCart;
@@ -15,7 +15,6 @@ import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -37,14 +36,14 @@ public class OrderController {
     }
 
     @PostMapping("/complete")
-    public OrderResponseDto completeOrder(Authentication authentication) {
+    public OrderResponseDto completeOrder(@Valid Authentication authentication) {
         User user = userService.findByEmail(authentication.getName()).get();
         ShoppingCart cart = shoppingCartService.getByUser(user);
         return orderResponseDtoMapper.mapToDto(orderService.completeOrder(cart));
     }
 
     @GetMapping
-    public List<OrderResponseDto> getOrderHistory(Authentication authentication) {
+    public List<OrderResponseDto> getOrderHistory(@Valid Authentication authentication) {
         User user = userService.findByEmail(authentication.getName()).get();
         return orderService.getOrdersHistory(user)
                 .stream()
