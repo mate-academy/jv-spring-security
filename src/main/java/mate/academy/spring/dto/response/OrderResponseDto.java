@@ -2,17 +2,11 @@ package mate.academy.spring.dto.response;
 
 import java.time.LocalDateTime;
 import java.util.List;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotNull;
 
 public class OrderResponseDto {
-    @Min(value = 1)
     private Long id;
-    @NotNull
     private List<Long> ticketIds;
-    @Min(value = 0)
     private Long userId;
-    @NotNull
     private LocalDateTime orderTime;
 
     public Long getId() {
