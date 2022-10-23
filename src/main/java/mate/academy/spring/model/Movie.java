@@ -6,8 +6,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "movies")
@@ -15,11 +13,7 @@ public class Movie {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @NotEmpty(message = "Title movie may not be empty")
-    @Size(min = 1, message = "Title movie may be longer 1 character")
     private String title;
-    @NotEmpty(message = "Description movie may not de empty")
-    @Size(min = 20, message = "Description movie may be longer 20 character")
     private String description;
 
     public Long getId() {
