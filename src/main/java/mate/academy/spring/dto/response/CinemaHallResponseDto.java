@@ -1,8 +1,16 @@
 package mate.academy.spring.dto.response;
 
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
 public class CinemaHallResponseDto {
+    @Min(value = 1)
     private Long id;
+    @Min(value = 1)
     private int capacity;
+    @NotNull
+    @Size(min = 4, max = 1000)
     private String description;
 
     public Long getId() {
