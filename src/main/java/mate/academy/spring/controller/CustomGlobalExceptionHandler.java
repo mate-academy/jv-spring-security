@@ -1,10 +1,10 @@
-package mate.academy.spring.exception;
+package mate.academy.spring.controller;
 
+import java.time.LocalDateTime;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
-import mate.academy.spring.util.DateTimePatternUtil;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -24,13 +24,14 @@ public class CustomGlobalExceptionHandler extends ResponseEntityExceptionHandler
             HttpStatus status,
             WebRequest request) {
         Map<String, Object> body = new LinkedHashMap<>();
-        body.put("timestamp", new DateTimePatternUtil());
+        body.put("timestamp", LocalDateTime.now().toString());
         body.put("status", status);
         List<String> errors = ex.getBindingResult()
                 .getAllErrors().stream()
                 .map(this::getErrorMessage)
                 .collect(Collectors.toList());
         body.put("errors", errors);
+
         return new ResponseEntity<>(body, headers, status);
     }
 
