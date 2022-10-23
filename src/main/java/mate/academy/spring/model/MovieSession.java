@@ -9,6 +9,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "movie_sessions")
@@ -18,11 +20,14 @@ public class MovieSession {
     private Long id;
     @ManyToOne
     @JoinColumn(name = "movie_id")
+    @NotNull(message = "Movie may not be null")
     private Movie movie;
     @ManyToOne
     @JoinColumn(name = "cinema_hall_id")
+    @NotNull(message = "Cinema hall may noy be null")
     private CinemaHall cinemaHall;
     @Column(name = "show_time")
+    @NotEmpty(message = "Show time may not be empty")
     private LocalDateTime showTime;
 
     public Long getId() {

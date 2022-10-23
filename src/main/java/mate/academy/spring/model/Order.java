@@ -12,6 +12,9 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "orders")
@@ -23,11 +26,14 @@ public class Order {
     @JoinTable(name = "orders_tickets",
             joinColumns = @JoinColumn(name = "order_id"),
             inverseJoinColumns = @JoinColumn(name = "ticket_id"))
+    @Size(min = 1, message = "Order must have tickets")
     private List<Ticket> tickets;
     @Column(name = "order_time")
+    @NotEmpty(message = "Order time may not be empty")
     private LocalDateTime orderTime;
     @ManyToOne
     @JoinColumn(name = "user_id")
+    @NotNull(message = "User may not be null")
     private User user;
 
     public Long getId() {
