@@ -8,7 +8,7 @@ public class EmailValidator implements ConstraintValidator<Email, String> {
             "^([\\w-\\.]+){1,64}@([\\w&&[^_]]+){2,255}.[a-z]{2,}$";
 
     @Override
-    public boolean isValid(String value, ConstraintValidatorContext context) {
-        return value != null && value.matches(EMAIL_PATTERN);
+    public boolean isValid(String email, ConstraintValidatorContext context) {
+        return email != null && email.matches(EMAIL_PATTERN);
     }
 }
