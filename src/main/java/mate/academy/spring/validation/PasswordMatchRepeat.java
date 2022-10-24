@@ -6,12 +6,12 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 import javax.validation.Constraint;
 import javax.validation.Payload;
-import mate.academy.spring.validation.validator.PasswordMatchRePasswordValidator;
+import mate.academy.spring.validation.validator.PasswordMatchRepeatValidator;
 
-@Constraint(validatedBy = PasswordMatchRePasswordValidator.class)
+@Constraint(validatedBy = PasswordMatchRepeatValidator.class)
 @Target({ElementType.TYPE})
 @Retention(RetentionPolicy.RUNTIME)
-public @interface PasswordMatchRePassword {
+public @interface PasswordMatchRepeat {
     String message () default "Field value not equal to field match value";
 
     Class<?>[] groups() default {};
@@ -25,6 +25,6 @@ public @interface PasswordMatchRePassword {
     @Target({ElementType.TYPE})
     @Retention(RetentionPolicy.RUNTIME)
     @interface List {
-        PasswordMatchRePassword[] value();
+        PasswordMatchRepeat[] value();
     }
 }

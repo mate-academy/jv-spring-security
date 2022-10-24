@@ -2,10 +2,10 @@ package mate.academy.spring.dto.request;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.Size;
-import mate.academy.spring.validation.PasswordMatchRePassword;
+import mate.academy.spring.validation.PasswordMatchRepeat;
 
-@PasswordMatchRePassword.List({
-        @PasswordMatchRePassword(
+@PasswordMatchRepeat.List({
+        @PasswordMatchRepeat(
             field = "password",
             fieldMatch = "repeatPassword",
             message = "Password not equal to repeat password"

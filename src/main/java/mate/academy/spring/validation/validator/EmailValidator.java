@@ -1,6 +1,5 @@
 package mate.academy.spring.validation.validator;
 
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
@@ -12,11 +11,7 @@ public class EmailValidator implements ConstraintValidator<Email, String> {
 
     @Override
     public boolean isValid(String email, ConstraintValidatorContext context) {
-        if (email == null || email.isEmpty()) {
-            return false;
-        }
-        Pattern pattern = Pattern.compile(PATTERN_EMAIL);
-        Matcher matcher = pattern.matcher(email);
-        return matcher.matches();
+        return (email != null && !email.isEmpty())
+                && Pattern.compile(PATTERN_EMAIL).matcher(email).matches();
     }
 }
