@@ -16,7 +16,7 @@ public class User {
     @Column(unique = true)
     private String email;
     private String password;
-    private String salt;
+    private String repeatPassword;
 
     public Long getId() {
         return id;
@@ -42,12 +42,12 @@ public class User {
         this.password = password;
     }
 
-    public String getSalt() {
-        return salt;
+    public String getRepeatPassword() {
+        return repeatPassword;
     }
 
-    public void setSalt(String salt) {
-        this.salt = salt;
+    public void setRepeatPassword(String repeatPassword) {
+        this.repeatPassword = repeatPassword;
     }
 
     @Override
