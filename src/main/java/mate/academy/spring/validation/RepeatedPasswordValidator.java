@@ -10,7 +10,6 @@ public class RepeatedPasswordValidator implements
     @Override
     public boolean isValid(UserRequestDto userRequestDto,
                            ConstraintValidatorContext constraintValidatorContext) {
-
         return Objects.equals(userRequestDto.getPassword(), userRequestDto.getRepeatedPassword());
     }
 }

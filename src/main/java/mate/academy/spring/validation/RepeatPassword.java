@@ -7,8 +7,8 @@ import java.lang.annotation.Target;
 import javax.validation.Constraint;
 import javax.validation.Payload;
 
-@Constraint(validatedBy = EmailValidator.class)
 @Target({ElementType.PARAMETER, ElementType.FIELD})
+@Constraint(validatedBy = RepeatedPasswordValidator.class)
 @Retention(RetentionPolicy.RUNTIME)
 public @interface RepeatPassword {
     String message() default "Password and repeated password don't match";

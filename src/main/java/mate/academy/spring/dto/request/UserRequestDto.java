@@ -9,9 +9,9 @@ public class UserRequestDto {
     @Email
     private String email;
     @NotNull
+    @RepeatPassword
     private String password;
     @NotNull
-    @RepeatPassword
     private String repeatedPassword;
 
     public String getEmail() {
