@@ -1,6 +1,5 @@
 package mate.academy.spring.service.impl;
 
-import javax.validation.Valid;
 import mate.academy.spring.model.User;
 import mate.academy.spring.service.AuthenticationService;
 import mate.academy.spring.service.ShoppingCartService;
@@ -19,7 +18,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     }
 
     @Override
-    public User register(@Valid String email, @Valid String password) {
+    public User register(String email, String password) {
         User user = new User();
         user.setEmail(email);
         user.setPassword(password);
