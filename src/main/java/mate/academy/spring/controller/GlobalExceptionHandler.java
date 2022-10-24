@@ -30,14 +30,14 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
         List<String> errors = ex.getBindingResult()
                 .getAllErrors()
                 .stream()
-                .map(this::getErrorMesaage)
+                .map(this::getErrorMessage)
                 .collect(Collectors.toList());
         body.put("errors", errors);
 
         return new ResponseEntity<>(body, headers, status);
     }
 
-    private String getErrorMesaage(ObjectError e) {
+    private String getErrorMessage(ObjectError e) {
         if (e instanceof FieldError) {
             String field = ((FieldError) e).getField();
             return field + " " + e.getDefaultMessage();
