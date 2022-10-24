@@ -18,8 +18,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.inMemoryAuthentication()
-                .withUser("bob")
-                .password(getEncoder().encode("1234"))
+                .withUser("blokitin@gmail.com")
+                .password(getEncoder().encode("Azunen13"))
                 .roles("USER");
     }
 

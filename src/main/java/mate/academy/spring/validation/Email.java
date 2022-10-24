@@ -14,5 +14,4 @@ public @interface Email {
     String message() default "Oops! Invalid email! Let's try one more time!";
     Class<?>[] groups() default {};
     Class<? extends Payload>[] payload() default {};
-
 }

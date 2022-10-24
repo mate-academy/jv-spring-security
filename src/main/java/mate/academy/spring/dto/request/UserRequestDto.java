@@ -5,9 +5,7 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.Size;
 
 public class UserRequestDto {
-    @NotNull
     @Email
-    @Size(min = 6)
     private String email;
     @NotNull
     @Size(min = 8, max = 16)

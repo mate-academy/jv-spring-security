@@ -1,6 +1,6 @@
 package mate.academy.spring.dto.request;
 
-import com.sun.istack.NotNull;
+import javax.validation.constraints.NotNull;
 
 public class CinemaHallRequestDto {
     private int capacity;
