@@ -16,16 +16,10 @@ public class PasswordValidator
 
     public boolean isValid(Object value,
                            ConstraintValidatorContext context) {
-
-        Object fieldValue = new BeanWrapperImpl(value)
+        Object fieldPassword = new BeanWrapperImpl(value)
                 .getPropertyValue(password);
-        Object fieldMatchValue = new BeanWrapperImpl(value)
+        Object fieldRepeatPassword = new BeanWrapperImpl(value)
                 .getPropertyValue(repeatPassword);
-
-        if (fieldValue != null) {
-            return fieldValue.equals(fieldMatchValue);
-        } else {
-            return fieldMatchValue == null;
-        }
+        return fieldPassword != null && fieldPassword.equals(fieldRepeatPassword);
     }
 }
