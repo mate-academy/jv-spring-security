@@ -7,7 +7,7 @@ import javax.validation.constraints.NotNull;
 public class MovieSessionRequestDto {
     @Min(1)
     private Long movieId;
-    @Min((1))
+    @Min(1)
     private Long cinemaHallId;
     @NotNull
     private LocalDateTime showTime;
