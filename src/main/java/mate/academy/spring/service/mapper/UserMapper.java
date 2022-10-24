@@ -21,7 +21,6 @@ public class UserMapper implements ResponseDtoMapper<UserResponseDto, User>,
         User user = new User();
         user.setEmail(dto.getEmail());
         user.setPassword(dto.getPassword());
-        user.setRepeatPassword(dto.getRepeatPassword());
         return user;
     }
 }
