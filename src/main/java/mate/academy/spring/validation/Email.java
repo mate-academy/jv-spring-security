@@ -1,4 +1,4 @@
-package mate.academy.spring.dto;
+package mate.academy.spring.validation;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -11,8 +11,8 @@ import javax.validation.Payload;
 @Constraint(validatedBy = EmailValidator.class)
 @Target({ElementType.PARAMETER, ElementType.FIELD})
 @Retention(RetentionPolicy.RUNTIME)
-public interface Email {
+public @interface Email {
     String message() default "Invalid email, try again";
     Class<?>[] groups() default {};
-    Class <? extends Payload>[] payload() default {};
+    Class<? extends Payload>[] payload() default {};
 }
