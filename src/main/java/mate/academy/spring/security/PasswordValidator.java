@@ -6,10 +6,12 @@ import javax.validation.ConstraintValidatorContext;
 import mate.academy.spring.dto.request.UserRequestDto;
 
 public class PasswordValidator implements ConstraintValidator<Password, UserRequestDto> {
+    private static final int MIN_USER_PASSWORD_LENGTH = 4;
     @Override
     public boolean isValid(UserRequestDto user,
                            ConstraintValidatorContext constraintValidatorContext) {
-        return Objects.equals(user.getPassword(), user.getRepeatPassword())
-                && user.getPassword().length() >= 4 && !user.getPassword().isBlank();
+        return !user.getPassword().isBlank()
+                && user.getPassword().length() >= MIN_USER_PASSWORD_LENGTH
+                && Objects.equals(user.getPassword(), user.getRepeatPassword());
     }
 }
