@@ -38,7 +38,7 @@ public class OrderController {
     public OrderResponseDto completeOrder(@RequestParam Authentication authentication) {
         ShoppingCart cart = shoppingCartService
                 .getByUser(userService.findByEmail(authentication.getName()).orElseThrow(
-                        () -> new RuntimeException("Can`t add new order for user: "
+                        () -> new RuntimeException("Can't find a user by email:  "
                         + authentication.getName())
                 ));
         return orderResponseDtoMapper.mapToDto(orderService.completeOrder(cart));
@@ -49,7 +49,7 @@ public class OrderController {
         return orderService.getOrdersHistory(
                 userService.findByEmail(authentication.getName()).orElseThrow(
                         () -> new RuntimeException(
-                                "History is empty for user: "
+                                "Can't find a user by email: "
                                         + authentication.getName())))
                 .stream()
                 .map(orderResponseDtoMapper::mapToDto)

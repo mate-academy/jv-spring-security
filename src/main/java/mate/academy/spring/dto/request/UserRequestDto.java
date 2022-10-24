@@ -1,11 +1,11 @@
 package mate.academy.spring.dto.request;
 
-import mate.academy.spring.validation.EmailCustom;
+import mate.academy.spring.validation.Email;
 import mate.academy.spring.validation.Password;
 
 @Password
 public class UserRequestDto {
-    @EmailCustom
+    @Email
     private String email;
     private String password;
 
