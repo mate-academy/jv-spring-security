@@ -1,6 +1,5 @@
 package mate.academy.spring.controller;
 
-import java.util.Optional;
 import mate.academy.spring.dto.response.ShoppingCartResponseDto;
 import mate.academy.spring.model.ShoppingCart;
 import mate.academy.spring.model.User;
@@ -27,8 +26,8 @@ public class ShoppingCartController {
     public ShoppingCartController(ShoppingCartService shoppingCartService,
                                   UserService userService,
                                   MovieSessionService movieSessionService,
-            ResponseDtoMapper<ShoppingCartResponseDto, ShoppingCart>
-                                      shoppingCartResponseDtoMapper) {
+                                  ResponseDtoMapper<ShoppingCartResponseDto, ShoppingCart>
+                                          shoppingCartResponseDtoMapper) {
         this.shoppingCartService = shoppingCartService;
         this.userService = userService;
         this.movieSessionService = movieSessionService;
@@ -37,17 +36,18 @@ public class ShoppingCartController {
 
     @PutMapping("/movie-sessions")
     public void addToCart(Authentication authentication, @RequestParam Long movieSessionId) {
-        String name = authentication.getName();
-        Optional<User> optionalUser = userService.findByEmail(name);
+        String email = authentication.getName();
+        User user = userService.findByEmail(email)
+                .orElseThrow(() -> new RuntimeException("User with email " + email + " not found"));
         shoppingCartService.addSession(
-                movieSessionService.get(movieSessionId), optionalUser.get());
+                movieSessionService.get(movieSessionId), user);
     }
 
     @GetMapping("/by-user")
     public ShoppingCartResponseDto getByUser(Authentication authentication) {
-        String name = authentication.getName();
-        Optional<User> optionalUser = userService.findByEmail(name);
-        User user = optionalUser.get();
+        String email = authentication.getName();
+        User user = userService.findByEmail(email)
+                .orElseThrow(() -> new RuntimeException("User with email " + email + " not found"));
         return shoppingCartResponseDtoMapper.mapToDto(shoppingCartService.getByUser(user));
     }
 }
