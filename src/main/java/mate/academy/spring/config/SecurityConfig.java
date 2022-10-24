@@ -15,16 +15,19 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             throws Exception {
         auth.inMemoryAuthentication().withUser("bob")
                 .password(getEncoder().encode("123456789"))
-                        .roles("USER");
+                .roles("USER");
         super.configure(auth);
     }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .anyRequest().authenticated().and()
-                .formLogin().permitAll().and()
-                .httpBasic().and()
+                .anyRequest().authenticated()
+                .and()
+                .formLogin().permitAll()
+                .and()
+                .httpBasic()
+                .and()
                 .csrf().disable();
     }
 
