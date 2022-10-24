@@ -1,7 +1,5 @@
 package mate.academy.spring.validation;
 
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 import javax.validation.constraints.Email;
