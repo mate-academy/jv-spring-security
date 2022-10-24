@@ -1,6 +1,5 @@
 package mate.academy.spring.config;
 
-import java.util.Properties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -8,13 +7,15 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(inMemoryUserDetailsManager());
+        auth.inMemoryAuthentication()
+                .withUser("bob@gm.com")
+                .password(getEncoder().encode("1234"))
+                .roles("USER");
     }
 
     @Override
@@ -28,13 +29,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .httpBasic()
                 .and()
                 .csrf().disable();
-    }
-
-    @Bean
-    public InMemoryUserDetailsManager inMemoryUserDetailsManager() {
-        Properties users = new Properties();
-        users.put("bob@gm.com", getEncoder().encode("1234") + ",ROLE_USER,enabled");
-        return new InMemoryUserDetailsManager(users);
     }
 
     @Bean
