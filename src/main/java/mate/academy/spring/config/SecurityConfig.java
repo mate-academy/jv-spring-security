@@ -16,7 +16,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .withUser("rost")
                 .password(getEncoder().encode("12345"))
                 .roles("USER");
-        super.configure(auth);
     }
 
     protected void configure(HttpSecurity http) throws Exception {
