@@ -37,10 +37,11 @@ public class CustomGlobalExceptionHandler extends ResponseEntityExceptionHandler
 
     @ExceptionHandler(value = DataProcessingException.class)
     protected ResponseEntity<Object> handleConflict(RuntimeException ex, WebRequest request) {
-        Map<String, Object> body = getBodyByStatus(500);
+        int status = HttpStatus.INTERNAL_SERVER_ERROR.value();
+        Map<String, Object> body = getBodyByStatus(status);
         DataProcessingException dataProcessingException = (DataProcessingException) ex;
         body.put("errors", ex.getMessage());
-        return new ResponseEntity<>(body, HttpHeaders.EMPTY, HttpStatus.resolve(500));
+        return new ResponseEntity<>(body, HttpHeaders.EMPTY, HttpStatus.resolve(status));
     }
 
     private Map<String, Object> getBodyByStatus(int status) {

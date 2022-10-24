@@ -11,10 +11,7 @@ public class PasswordValidator implements ConstraintValidator<Password, UserRequ
     @Override
     public boolean isValid(UserRequestDto user,
                            ConstraintValidatorContext constraintValidatorContext) {
-        if (user.getPassword() == null || user.getRepeatPassword() == null) {
-            return false;
-        }
-        return Objects.equals(user.getPassword(), user.getRepeatPassword())
-                && user.getPassword().length() >= MIN_PASSWORD_LENGTH;
+        return user.getPassword().length() >= MIN_PASSWORD_LENGTH
+                && Objects.equals(user.getPassword(), user.getRepeatPassword());
     }
 }
