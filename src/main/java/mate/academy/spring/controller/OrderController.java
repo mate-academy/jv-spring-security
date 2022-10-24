@@ -37,7 +37,7 @@ public class OrderController {
     public OrderResponseDto completeOrder(Authentication authentication) {
         String email = authentication.getName();
         ShoppingCart cart = shoppingCartService.getByUser(
-                userService.findByEmail(authentication.getName()).orElseThrow(
+                userService.findByEmail(email).orElseThrow(
                         () -> new RuntimeException("User is not found. Email: "
                                 + email)
                 ));
@@ -48,7 +48,7 @@ public class OrderController {
     public List<OrderResponseDto> getOrderHistory(Authentication authentication) {
         String email = authentication.getName();
         return orderService.getOrdersHistory(
-                        userService.findByEmail(authentication.getName()).orElseThrow(
+                        userService.findByEmail(email).orElseThrow(
                                 () -> new RuntimeException("User is not found. Email: "
                                         + email)
                         ))
