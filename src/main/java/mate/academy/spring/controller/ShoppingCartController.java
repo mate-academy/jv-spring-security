@@ -38,7 +38,7 @@ public class ShoppingCartController {
     public void addToCart(Authentication authentication, @RequestParam Long movieSessionId) {
         String email = authentication.getName();
         shoppingCartService.addSession(
-        movieSessionService.get(movieSessionId),
+                movieSessionService.get(movieSessionId),
                 userService.findByEmail(authentication.getName()).orElseThrow(
                         () -> new RuntimeException("User is not found. Email:"
                                 + email)
