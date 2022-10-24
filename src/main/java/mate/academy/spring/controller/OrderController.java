@@ -38,7 +38,7 @@ public class OrderController {
         String email = authentication.getName();
         ShoppingCart cart = shoppingCartService.getByUser(
                 userService.findByEmail(email).orElseThrow(
-                        () -> new RuntimeException("Can't get user with email: " + email)));
+                        () -> new RuntimeException("Can't find user with email: " + email)));
         return orderResponseDtoMapper.mapToDto(orderService.completeOrder(cart));
     }
 
@@ -47,7 +47,7 @@ public class OrderController {
         String email = authentication.getName();
         return orderService.getOrdersHistory(
                         userService.findByEmail(email).orElseThrow(
-                                () -> new RuntimeException("Can't get user with email: " + email)))
+                                () -> new RuntimeException("Can't find user with email: " + email)))
                 .stream()
                 .map(orderResponseDtoMapper::mapToDto)
                 .collect(Collectors.toList());
