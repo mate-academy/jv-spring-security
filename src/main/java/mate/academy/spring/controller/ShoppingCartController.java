@@ -39,14 +39,14 @@ public class ShoppingCartController {
         shoppingCartService.addSession(
                 movieSessionService.get(movieSessionId), userService
                         .findByEmail(authentication.getName())
-                        .orElseThrow(()-> new RuntimeException("No user with such email  - "
+                        .orElseThrow(() -> new RuntimeException("No user with such email  - "
                                 + authentication.getName())));
     }
 
     @GetMapping("/by-user")
     public ShoppingCartResponseDto getByUser(Authentication authentication) {
         User user = userService.findByEmail(authentication.getName())
-                .orElseThrow(()-> new RuntimeException("No user with such email  - "
+                .orElseThrow(() -> new RuntimeException("No user with such email  - "
                 + authentication.getName()));
         return shoppingCartResponseDtoMapper.mapToDto(shoppingCartService.getByUser(user));
     }

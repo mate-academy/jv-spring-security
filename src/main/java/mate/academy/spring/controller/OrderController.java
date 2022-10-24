@@ -37,7 +37,7 @@ public class OrderController {
     public OrderResponseDto completeOrder(Authentication authentication) {
         ShoppingCart cart = shoppingCartService.getByUser(userService
                 .findByEmail(authentication.getName())
-                .orElseThrow(()-> new RuntimeException("No user with such email  - "
+                .orElseThrow(() -> new RuntimeException("No user with such email  - "
                         + authentication.getName())));
         return orderResponseDtoMapper.mapToDto(orderService.completeOrder(cart));
     }
@@ -46,7 +46,7 @@ public class OrderController {
     public List<OrderResponseDto> getOrderHistory(Authentication authentication) {
         return orderService.getOrdersHistory(userService
                         .findByEmail(authentication.getName())
-                        .orElseThrow(()-> new RuntimeException("No user with such email  - "
+                        .orElseThrow(() -> new RuntimeException("No user with such email  - "
                         + authentication.getName())))
                 .stream()
                 .map(orderResponseDtoMapper::mapToDto)
