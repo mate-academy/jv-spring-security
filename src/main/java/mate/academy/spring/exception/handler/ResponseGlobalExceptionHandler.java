@@ -1,31 +1,30 @@
 package mate.academy.spring.exception.handler;
 
+import java.time.LocalDateTime;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 import mate.academy.spring.exception.DataProcessingException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.BindException;
 import org.springframework.validation.FieldError;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.WebRequest;
-import org.springframework.web.servlet.NoHandlerFoundException;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
-import java.time.LocalDateTime;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
 
 @ControllerAdvice
 public class ResponseGlobalExceptionHandler extends ResponseEntityExceptionHandler {
     @Override
-    protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex,
-                                                                  HttpHeaders headers,
-                                                                  HttpStatus status,
-                                                                  WebRequest request) {
+    protected ResponseEntity<Object> handleMethodArgumentNotValid(
+            MethodArgumentNotValidException ex,
+            HttpHeaders headers,
+            HttpStatus status,
+            WebRequest request) {
         Map<String, Object> mapErrors = new HashMap<>();
         mapErrors.put("timestamp", LocalDateTime.now().toString());
         mapErrors.put("status", status.value());
@@ -41,7 +40,6 @@ public class ResponseGlobalExceptionHandler extends ResponseEntityExceptionHandl
         String message = String.format("%s %s", LocalDateTime.now(), ex.getMessage());
         return new ResponseEntity<>(message, HttpStatus.INTERNAL_SERVER_ERROR);
     }
-
 
     private String getErrorMessage(ObjectError e) {
         if (e instanceof FieldError) {

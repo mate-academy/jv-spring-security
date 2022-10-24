@@ -1,8 +1,8 @@
 package mate.academy.spring.dto.request;
 
+import java.time.LocalDateTime;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
-import java.time.LocalDateTime;
 
 public class MovieSessionRequestDto {
     @NotNull(message = "Movie id may not be null")

@@ -1,10 +1,10 @@
 package mate.academy.spring.validation.validator;
 
+import java.util.Objects;
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 import mate.academy.spring.validation.PasswordMatchRePassword;
 import org.springframework.beans.BeanWrapperImpl;
-import java.util.Objects;
 
 public class PasswordMatchRePasswordValidator implements ConstraintValidator<
         PasswordMatchRePassword, Object> {

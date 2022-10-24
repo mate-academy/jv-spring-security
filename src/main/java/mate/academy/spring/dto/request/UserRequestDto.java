@@ -1,15 +1,15 @@
 package mate.academy.spring.dto.request;
 
-import mate.academy.spring.validation.PasswordMatchRePassword;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.Size;
+import mate.academy.spring.validation.PasswordMatchRePassword;
 
 @PasswordMatchRePassword.List({
-    @PasswordMatchRePassword(
-        field = "password",
-        fieldMatch = "repeatPassword",
-        message = "Password not equal to repeat password"
-    )
+        @PasswordMatchRePassword(
+            field = "password",
+            fieldMatch = "repeatPassword",
+            message = "Password not equal to repeat password"
+        )
 })
 public class UserRequestDto {
     @Email

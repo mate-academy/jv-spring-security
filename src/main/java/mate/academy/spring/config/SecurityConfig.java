@@ -13,15 +13,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth
-            .inMemoryAuthentication()
-            .withUser("user")
-            .password(getEncoder().encode("user"))
-            .roles("USER");
-    }
-
-    @Bean
-    public PasswordEncoder getEncoder() {
-        return new BCryptPasswordEncoder();
+                .inMemoryAuthentication()
+                .withUser("user")
+                .password(getEncoder().encode("user"))
+                .roles("USER");
     }
 
     @Override
@@ -37,4 +32,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             .and()
             .csrf().disable();
     }
+
+    @Bean
+    public PasswordEncoder getEncoder() {
+        return new BCryptPasswordEncoder();
+    }
+
 }
