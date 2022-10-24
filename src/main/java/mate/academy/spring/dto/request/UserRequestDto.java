@@ -5,7 +5,6 @@ import javax.validation.constraints.Size;
 import mate.academy.spring.validation.Email;
 
 public class UserRequestDto {
-    @NotNull(message = "Please enter email")
     @Size(min = 5, max = 15, message = "Email size must be min=5 and max=15")
     @Email
     private String email;
