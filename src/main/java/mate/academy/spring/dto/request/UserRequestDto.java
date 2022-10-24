@@ -6,7 +6,6 @@ import mate.academy.spring.validation.FieldsValueMatch;
 
 @FieldsValueMatch(first = "password", second = "repeatPassword",
         message = "The password fields must match")
-
 public class UserRequestDto {
     @Email
     private String email;
