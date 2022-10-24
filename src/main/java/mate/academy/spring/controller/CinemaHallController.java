@@ -1,5 +1,6 @@
 package mate.academy.spring.controller;
 
+import jakarta.validation.Valid;
 import java.util.List;
 import java.util.stream.Collectors;
 import mate.academy.spring.dto.request.CinemaHallRequestDto;
@@ -30,7 +31,7 @@ public class CinemaHallController {
     }
 
     @PostMapping
-    public CinemaHallResponseDto add(@RequestBody CinemaHallRequestDto requestDto) {
+    public CinemaHallResponseDto add(@RequestBody @Valid CinemaHallRequestDto requestDto) {
         CinemaHall cinemaHall = cinemaHallService.add(
                     cinemaHallRequestDtoMapper.mapToModel(requestDto));
         return cinemaHallResponseDtoMapper.mapToDto(cinemaHall);
