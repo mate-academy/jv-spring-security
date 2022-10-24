@@ -4,12 +4,12 @@ import javax.validation.constraints.NotNull;
 import mate.academy.spring.validation.Email;
 import mate.academy.spring.validation.RepeatPassword;
 
+@RepeatPassword
 public class UserRequestDto {
     @NotNull
     @Email
     private String email;
     @NotNull
-    @RepeatPassword
     private String password;
     @NotNull
     private String repeatedPassword;

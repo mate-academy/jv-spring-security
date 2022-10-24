@@ -7,7 +7,7 @@ import java.lang.annotation.Target;
 import javax.validation.Constraint;
 import javax.validation.Payload;
 
-@Target({ElementType.PARAMETER, ElementType.FIELD})
+@Target({ElementType.TYPE})
 @Constraint(validatedBy = RepeatedPasswordValidator.class)
 @Retention(RetentionPolicy.RUNTIME)
 public @interface RepeatPassword {
