@@ -37,14 +37,20 @@ public class OrderController {
     @PostMapping("/complete")
     public OrderResponseDto completeOrder(@RequestParam Authentication authentication) {
         ShoppingCart cart = shoppingCartService
-                .getByUser(userService.findByEmail(authentication.getName()).get());
+                .getByUser(userService.findByEmail(authentication.getName()).orElseThrow(
+                        () -> new RuntimeException("Can`t add new order for user: "
+                        + authentication.getName())
+                ));
         return orderResponseDtoMapper.mapToDto(orderService.completeOrder(cart));
     }
 
     @GetMapping
     public List<OrderResponseDto> getOrderHistory(@RequestParam Authentication authentication) {
         return orderService.getOrdersHistory(
-                userService.findByEmail(authentication.getName()).get())
+                userService.findByEmail(authentication.getName()).orElseThrow(
+                        () -> new RuntimeException(
+                                "History is empty for user: "
+                                        + authentication.getName())))
                 .stream()
                 .map(orderResponseDtoMapper::mapToDto)
                 .collect(Collectors.toList());

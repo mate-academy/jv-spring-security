@@ -39,12 +39,20 @@ public class ShoppingCartController {
                           @RequestParam Long movieSessionId) {
         shoppingCartService.addSession(
                 movieSessionService.get(movieSessionId),
-                userService.findByEmail(authentication.getName()).get());
+                userService.findByEmail(authentication.getName()).orElseThrow(
+                        () -> new RuntimeException(
+                                "Can`t add this movie session: "
+                                        + movieSessionService.get(movieSessionId)
+                                        + " to shopping cart cart of user: "
+                                        + authentication.getName())
+                ));
     }
 
     @GetMapping("/by-user")
     public ShoppingCartResponseDto getByUser(@RequestParam Authentication authentication) {
-        User user = userService.findByEmail(authentication.getName()).get();
+        User user = userService.findByEmail(authentication.getName()).orElseThrow(
+                () -> new RuntimeException("Can`t find shopping cart of user: "
+                        + authentication.getName()));
         return shoppingCartResponseDtoMapper.mapToDto(shoppingCartService.getByUser(user));
     }
 }
