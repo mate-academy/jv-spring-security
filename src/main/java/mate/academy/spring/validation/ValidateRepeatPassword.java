@@ -9,5 +9,5 @@ import javax.validation.Constraint;
 @Constraint(validatedBy = PasswordValidator.class)
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
-public @interface Password {
+public @interface ValidateRepeatPassword {
 }

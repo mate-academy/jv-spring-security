@@ -32,7 +32,8 @@ public class CustomGlobalExceptionHandler extends ResponseEntityExceptionHandler
                 .stream()
                 .map(this::getErrorMessage)
                 .collect(Collectors.toList());
-        return super.handleMethodArgumentNotValid(ex, headers, status, request);
+        body.put("errors", errors);
+        return new ResponseEntity<>(body, headers, status);
     }
 
     private Map<String, Object> prepareBodyWithStatusAndTimestamp(int status) {
@@ -55,7 +56,7 @@ public class CustomGlobalExceptionHandler extends ResponseEntityExceptionHandler
     protected ResponseEntity<Object> handleConflict(RuntimeException ex, WebRequest request) {
         DataProcessingException dataProcessingException = (DataProcessingException) ex;
         Map<String, Object> body = prepareBodyWithStatusAndTimestamp(500);
-        body.put("error", ex.getMessage());
+        body.put("error", dataProcessingException.getMessage());
         return new ResponseEntity<>(body, HttpHeaders.EMPTY, HttpStatus.resolve(500));
     }
 }
