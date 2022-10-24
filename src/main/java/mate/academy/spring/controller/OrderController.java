@@ -14,7 +14,6 @@ import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -37,14 +36,19 @@ public class OrderController {
 
     @PostMapping("/complete")
     public OrderResponseDto completeOrder(Authentication authentication) {
-        User user = userService.findByEmail(authentication.getName()).get();
+        String email = authentication.getName();
+        User user = userService.findByEmail(email).orElseThrow(
+                () -> new RuntimeException("Can't get user by email: " + email));
         ShoppingCart cart = shoppingCartService.getByUser(user);
         return orderResponseDtoMapper.mapToDto(orderService.completeOrder(cart));
     }
 
     @GetMapping
-    public List<OrderResponseDto> getOrderHistory(@RequestParam Long userId) {
-        return orderService.getOrdersHistory(userService.get(userId))
+    public List<OrderResponseDto> getOrderHistory(Authentication authentication) {
+        String email = authentication.getName();
+        return orderService.getOrdersHistory(userService.findByEmail(email)
+                        .orElseThrow(() -> new RuntimeException("Can't get user by email: "
+                                + email)))
                 .stream()
                 .map(orderResponseDtoMapper::mapToDto)
                 .collect(Collectors.toList());
