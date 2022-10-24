@@ -16,15 +16,15 @@ public class UserController {
     private final ResponseDtoMapper<UserResponseDto, User> userResponseDtoMapper;
 
     public UserController(UserService userService,
-            ResponseDtoMapper<UserResponseDto, User> userResponseDtoMapper) {
+                          ResponseDtoMapper<UserResponseDto, User> userResponseDtoMapper) {
         this.userService = userService;
         this.userResponseDtoMapper = userResponseDtoMapper;
     }
 
     @GetMapping("/by-email")
     public UserResponseDto findByEmail(@RequestParam String email) {
-        User user = userService.findByEmail(email).orElseThrow(
-                () -> new RuntimeException("Invalid email"));
+        User user = userService.findByEmail(email)
+                .orElseThrow(() -> new RuntimeException("User with email " + email + " not found"));
         return userResponseDtoMapper.mapToDto(user);
     }
 }
