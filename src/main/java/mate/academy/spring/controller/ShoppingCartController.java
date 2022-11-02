@@ -35,7 +35,7 @@ public class ShoppingCartController {
     }
 
     @PutMapping("/movie-sessions")
-    public void addToCart(@RequestParam Authentication authentication,
+    public void addToCart(Authentication authentication,
                           @RequestParam Long movieSessionId) {
         shoppingCartService.addSession(
                 movieSessionService.get(movieSessionId),
@@ -45,7 +45,7 @@ public class ShoppingCartController {
     }
 
     @GetMapping("/by-user")
-    public ShoppingCartResponseDto getByUser(@RequestParam Authentication authentication) {
+    public ShoppingCartResponseDto getByUser(Authentication authentication) {
         User user = userService.findByEmail(authentication.getName())
                 .orElseThrow(() -> new RuntimeException("Can't authenticate a user: "
                         + authentication.getName()));
