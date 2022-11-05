@@ -33,17 +33,18 @@ public class OrderController {
     }
 
     @PostMapping("/complete")
-    public OrderResponseDto completeOrder(Authentication auth) {
+    public OrderResponseDto completeOrder(Authentication authentication) {
         return orderResponseDtoMapper.mapToDto(orderService.completeOrder(
-                shoppingCartService.getByUser(userService.findByEmail(auth.getName())
-                .orElseThrow(() -> new RuntimeException("Auth error. User: " + auth.getName())))));
+                shoppingCartService.getByUser(userService.findByEmail(authentication.getName())
+                .orElseThrow(() -> new RuntimeException("Auth error. User: "
+                        + authentication.getName())))));
     }
 
     @GetMapping
-    public List<OrderResponseDto> getOrderHistory(Authentication auth) {
-        return orderService.getOrdersHistory(userService.findByEmail(auth.getName())
+    public List<OrderResponseDto> getOrderHistory(Authentication authentication) {
+        return orderService.getOrdersHistory(userService.findByEmail(authentication.getName())
                         .orElseThrow(() -> new RuntimeException("Auth error. User: "
-                                + auth.getName())))
+                                + authentication.getName())))
                 .stream()
                 .map(orderResponseDtoMapper::mapToDto)
                 .collect(Collectors.toList());

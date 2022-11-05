@@ -34,17 +34,19 @@ public class ShoppingCartController {
     }
 
     @PutMapping("/movie-sessions")
-    public void addToCart(Authentication auth, @RequestParam Long movieSessionId) {
+    public void addToCart(Authentication authentication, @RequestParam Long movieSessionId) {
         shoppingCartService.addSession(
-                movieSessionService.get(movieSessionId), userService.findByEmail(auth.getName())
+                movieSessionService.get(movieSessionId),
+                userService.findByEmail(authentication.getName())
                         .orElseThrow(() -> new RuntimeException("Auth error. User: "
-                                + auth.getName())));
+                                + authentication.getName())));
     }
 
     @GetMapping("/by-user")
-    public ShoppingCartResponseDto getByUser(Authentication auth) {
+    public ShoppingCartResponseDto getByUser(Authentication authentication) {
         return shoppingCartResponseDtoMapper.mapToDto(shoppingCartService.getByUser(
-                userService.findByEmail(auth.getName())
-                .orElseThrow(() -> new RuntimeException("Auth error. User: " + auth.getName()))));
+                userService.findByEmail(authentication.getName())
+                .orElseThrow(() -> new RuntimeException("Auth error. User: "
+                        + authentication.getName()))));
     }
 }
