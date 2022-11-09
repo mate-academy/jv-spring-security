@@ -49,9 +49,8 @@ public class MovieSessionController {
 
     @GetMapping("/available")
     public List<MovieSessionResponseDto> findAvailableSessions(@RequestParam Long movieId,
-                                                @RequestParam
-            @DateTimeFormat(pattern = DateTimePatternUtil.DATE_PATTERN)
-                                                        LocalDate date) {
+            @RequestParam
+            @DateTimeFormat(pattern = DateTimePatternUtil.DATE_PATTERN) LocalDate date) {
         return movieSessionService.findAvailableSessions(movieId, date)
                 .stream()
                 .map(movieSessionResponseDtoMapper::mapToDto)
@@ -60,7 +59,7 @@ public class MovieSessionController {
 
     @PutMapping("/{id}")
     public MovieSessionResponseDto update(@PathVariable Long id,
-                                          @RequestBody MovieSessionRequestDto requestDto) {
+            @RequestBody MovieSessionRequestDto requestDto) {
         MovieSession movieSession = movieSessionRequestDtoMapper.mapToModel(requestDto);
         movieSession.setId(id);
         movieSessionService.update(movieSession);

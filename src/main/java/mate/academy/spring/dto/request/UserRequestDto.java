@@ -1,16 +1,16 @@
 package mate.academy.spring.dto.request;
 
-import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import mate.academy.spring.validation.AuthValid;
 import mate.academy.spring.validation.Email;
-import org.springframework.lang.NonNull;
 
 @AuthValid(message = "passwords are not the same")
 public class UserRequestDto {
     @Email
     private String email;
-    @NonNull
-    @Min(8)
+    @NotNull
+    @Size(min = 8)
     private String password;
     private String repeatPassword;
 
