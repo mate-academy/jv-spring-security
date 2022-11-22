@@ -1,17 +1,16 @@
 package mate.academy.spring.dto.request;
 
 import mate.academy.spring.validation.Email;
+import mate.academy.spring.validation.MatchPasswords;
 import mate.academy.spring.validation.ValidPassword;
 
-import javax.validation.constraints.NotNull;
-
-@ValidPassword
+@MatchPasswords
 public class UserRequestDto {
     @Email
     private String email;
-    @NotNull
+    @ValidPassword
     private String password;
-    @NotNull
+    @ValidPassword
     private String repeatPassword;
     public String getEmail() {
         return email;

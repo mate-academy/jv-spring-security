@@ -7,14 +7,11 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-@Constraint(validatedBy = PasswordConstraintValidator.class)
-@Target({ElementType.FIELD, ElementType.ANNOTATION_TYPE})
+@Constraint(validatedBy = MatchPasswordsValidator.class)
+@Target({ElementType.TYPE})
 @Retention(RetentionPolicy.RUNTIME)
-public @interface ValidPassword {
-
-    String message() default "Invalid Password";
-
+public @interface MatchPasswords {
+    String message() default "Passwords don't match.";
     Class<?>[] groups() default {};
-
     Class<? extends Payload>[] payload() default {};
 }
