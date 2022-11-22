@@ -12,7 +12,8 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 public @interface ValidPassword {
 
-    String message() default "Invalid Password";
+    String message() default "Password should contains latin characters, "
+            + " numbers and special symbols from 8 to 16 characters.";
 
     Class<?>[] groups() default {};
 
