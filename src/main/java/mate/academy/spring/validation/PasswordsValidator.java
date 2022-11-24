@@ -15,16 +15,15 @@ public class PasswordsValidator implements ConstraintValidator<ValidPassword, Ob
         String password;
         String repeatPassword;
         try {
-            //Method methodGetPassword = object.getClass().getMethod("getPassword");
-            //Method methodGetRepeatPassword = object.getClass().getMethod("getRepeatPassword");
-            password = (String) object.getClass().getDeclaredField("getPassword").get(String.class);//(String) methodGetPassword.invoke(object);
-            repeatPassword = (String) object.getClass().getDeclaredField("getRepeatPassword").get(String.class);//(String) methodGetRepeatPassword.invoke(object);
-        } catch (NoSuchFieldException | IllegalAccessException e) {
+            Method methodGetPassword = object.getClass().getMethod("getPassword");
+            Method methodGetRepeatPassword = object.getClass().getMethod("getRepeatPassword");
+            password = (String) methodGetPassword.invoke(object);
+            repeatPassword = (String) methodGetRepeatPassword.invoke(object);
+        } catch (NoSuchMethodException | InvocationTargetException | IllegalAccessException e) {
             throw new RuntimeException("Error - " + e.getMessage(), e);
         }
         Pattern pattern = Pattern.compile(PASSWORD_PATTERN);
-        Matcher matcher = pattern.matcher(password);
-        if (!matcher.matches()) {
+        if (password == null || !pattern.matcher(password).matches()) {
             return false;
         }
         return password.equals(repeatPassword);

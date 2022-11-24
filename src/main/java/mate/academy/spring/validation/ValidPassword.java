@@ -14,7 +14,6 @@ public @interface ValidPassword {
 
     String message() default "Password should contains latin characters,"
             + " numbers and special symbols from 8 to 16 characters.";
-
     Class<?>[] groups() default {};
 
     Class<? extends Payload>[] payload() default {};
