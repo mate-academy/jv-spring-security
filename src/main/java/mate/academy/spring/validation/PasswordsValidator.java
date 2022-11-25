@@ -1,15 +1,16 @@
 package mate.academy.spring.validation;
 
-import javax.validation.ConstraintValidator;
-import javax.validation.ConstraintValidatorContext;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import javax.validation.ConstraintValidator;
+import javax.validation.ConstraintValidatorContext;
 
 public class PasswordsValidator implements ConstraintValidator<ValidPassword, Object> {
     private static final String PASSWORD_PATTERN =
-            "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[*.!@$%^&(){}\\[\\]:;<>,?/~_+=|\\-\\\\]).{8,16}$";
+            "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])"
+                    + "(?=.*[*.!@$%^&(){}\\[\\]:;<>,?/~_+=|\\-\\\\]).{8,16}$";
+
     @Override
     public boolean isValid(Object object, ConstraintValidatorContext context) {
         String password;
@@ -28,7 +29,8 @@ public class PasswordsValidator implements ConstraintValidator<ValidPassword, Ob
         }
         if (!password.equals(repeatPassword)) {
             context.disableDefaultConstraintViolation();
-            context.buildConstraintViolationWithTemplate("Passwords don't match.").addConstraintViolation();
+            context.buildConstraintViolationWithTemplate("Passwords don't match.")
+                    .addConstraintViolation();
             return false;
         }
         return true;
