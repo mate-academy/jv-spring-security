@@ -26,6 +26,11 @@ public class PasswordsValidator implements ConstraintValidator<ValidPassword, Ob
         if (password == null || !pattern.matcher(password).matches()) {
             return false;
         }
-        return password.equals(repeatPassword);
+        if (!password.equals(repeatPassword)) {
+            context.disableDefaultConstraintViolation();
+            context.buildConstraintViolationWithTemplate("Passwords don't match.").addConstraintViolation();
+            return false;
+        }
+        return true;
     }
 }

@@ -39,11 +39,12 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     @ExceptionHandler(DataProcessingException.class)
     protected ResponseEntity<Object> handleDataException(RuntimeException ex, WebRequest request) {
         Map<String, Object> body = new LinkedHashMap<>();
+        int status = 500;
         body.put("timestamp", LocalDateTime.now().toString());
-        body.put("status", 500);
+        body.put("status", status);
         body.put("error", ex.getMessage());
         return handleExceptionInternal(ex, body, new HttpHeaders(),
-                HttpStatus.valueOf(500), request);
+                HttpStatus.valueOf(status), request);
     }
 
     private String getErrorMessages(ObjectError error) {
