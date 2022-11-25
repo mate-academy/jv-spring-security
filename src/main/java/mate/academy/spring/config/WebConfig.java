@@ -14,9 +14,4 @@ import java.security.SecureRandom;
 @EnableWebMvc
 @ComponentScan(basePackages = "mate.academy.spring.controller")
 public class WebConfig implements WebMvcConfigurer {
-
-    @Bean
-    public PasswordEncoder getEncoder() {
-        return new BCryptPasswordEncoder(10, new SecureRandom());
-    }
 }

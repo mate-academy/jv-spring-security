@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Optional;
+
 @RestController
 @RequestMapping("/shopping-carts")
 public class ShoppingCartController {
@@ -35,15 +37,16 @@ public class ShoppingCartController {
     }
 
     @PutMapping("/movie-sessions")
-    public void addToCart(@RequestParam Authentication auth, @RequestParam Long movieSessionId) {
-        User user =
+    public void addToCart(Authentication auth, @RequestParam Long movieSessionId) {
+        Optional<User> user = userService.findByEmail(auth.getName());
         shoppingCartService.addSession(
-                movieSessionService.get(movieSessionId), userService.get(userId));
+                movieSessionService.get(movieSessionId), user.orElseThrow());
     }
 
     @GetMapping("/by-user")
-    public ShoppingCartResponseDto getByUser(@RequestParam Authentication auth) {
-        User user = userService.get(userId);
-        return shoppingCartResponseDtoMapper.mapToDto(shoppingCartService.getByUser(user));
+    public ShoppingCartResponseDto getByUser(Authentication auth) {
+        Optional<User> user = userService.findByEmail(auth.getName());
+        return shoppingCartResponseDtoMapper.mapToDto(
+                shoppingCartService.getByUser(user.orElseThrow()));
     }
 }
