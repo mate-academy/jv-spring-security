@@ -7,6 +7,7 @@ import org.springframework.validation.FieldError;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
@@ -34,15 +35,15 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
         return new ResponseEntity<>(body, headers, status);
     }
 
-    @Override
-    protected ResponseEntity<Object> handleExceptionInternal(Exception ex, Object body, HttpHeaders headers, HttpStatus status, WebRequest request) {
-        Map<String, Object> body1 = new LinkedHashMap<>();
-        body1.put("timestamp", LocalDateTime.now().toString());
-        if (ex instanceof DataProcessingException) {
-            body1.put("status", 500);
-            body1.put("error", ex.getMessage());
-        }
-        return new ResponseEntity<>(body1, headers, status);
+
+    @ExceptionHandler(DataProcessingException.class)
+    protected ResponseEntity<Object> handleDataException(RuntimeException ex, WebRequest request) {
+        Map<String, Object> body = new LinkedHashMap<>();
+        body.put("timestamp", LocalDateTime.now().toString());
+        body.put("status", 500);
+        body.put("error", ex.getMessage());
+        return handleExceptionInternal(ex, body, new HttpHeaders(),
+                HttpStatus.valueOf(500), request);
     }
 
     private String getErrorMessages(ObjectError error) {
