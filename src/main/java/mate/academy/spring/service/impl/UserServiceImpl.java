@@ -4,24 +4,23 @@ import java.util.Optional;
 import mate.academy.spring.dao.UserDao;
 import mate.academy.spring.model.User;
 import mate.academy.spring.service.UserService;
-import mate.academy.spring.util.HashUtil;
+import org.springframework.context.annotation.Bean;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
 public class UserServiceImpl implements UserService {
-    private static final int SALT_LENGTH = 10;
     private final UserDao userDao;
+    private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
-    public UserServiceImpl(UserDao userDao) {
+    public UserServiceImpl(UserDao userDao, BCryptPasswordEncoder bCryptPasswordEncoder) {
         this.userDao = userDao;
+        this.bCryptPasswordEncoder = bCryptPasswordEncoder;
     }
 
     @Override
     public User add(User user) {
-        String salt = HashUtil.getSalt(SALT_LENGTH);
-        String securePassword = HashUtil.generateSecurePassword(user.getPassword(), salt);
-        user.setPassword(securePassword);
-        user.setSalt(salt);
+        user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         return userDao.add(user);
     }
 
@@ -34,5 +33,10 @@ public class UserServiceImpl implements UserService {
     @Override
     public Optional<User> findByEmail(String email) {
         return userDao.findByEmail(email);
+    }
+
+    @Bean
+    public BCryptPasswordEncoder getEncoder() {
+        return new BCryptPasswordEncoder();
     }
 }

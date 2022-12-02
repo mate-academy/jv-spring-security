@@ -6,11 +6,11 @@ import javax.validation.constraints.NotNull;
 
 public class UserRequestDto {
     @Email
-    @NotNull
     private String email;
     @NotNull
     @Min(value = 8)
     private String password;
+    private String repeatPassword;
 
     public String getEmail() {
         return email;
@@ -18,5 +18,9 @@ public class UserRequestDto {
 
     public String getPassword() {
         return password;
+    }
+
+    public String getRepeatPassword() {
+        return repeatPassword;
     }
 }
