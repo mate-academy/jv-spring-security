@@ -1,9 +1,11 @@
 package mate.academy.spring.dto.request;
 
 import mate.academy.spring.validation.Email;
+import mate.academy.spring.validation.ValidPassword;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
+@ValidPassword
 public class UserRequestDto {
     @Email
     private String email;
