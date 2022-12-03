@@ -1,10 +1,10 @@
 package mate.academy.spring.controller;
 
+import java.time.LocalDateTime;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
-import java.time.LocalDateTime;
 import mate.academy.spring.exception.DataProcessingException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -45,7 +45,7 @@ public class CustomGlobalExceptionHandler extends ResponseEntityExceptionHandler
     }
 
     private String getErrorMessage(ObjectError e) {
-        if(e instanceof FieldError) {
+        if (e instanceof FieldError) {
             String field = ((FieldError) e).getField();
             return field + " " + e.getDefaultMessage();
         }
