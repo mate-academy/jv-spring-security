@@ -13,26 +13,21 @@ import org.springframework.validation.FieldError;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 @ControllerAdvice
 public class CustomGlobalExceptionHandler extends ResponseEntityExceptionHandler {
-    @Override
-    protected ResponseEntity<Object> handleExceptionInternal(
-            Exception ex,
-            Object body,
-            HttpHeaders headers,
-            HttpStatus status,
-            WebRequest request) {
-        if (ex.getClass().equals(DataProcessingException.class)) {
-            Map<String, Object> responseBody = new LinkedHashMap<>();
-            responseBody.put("timestamp", LocalDateTime.now().toString());
-            responseBody.put("status", HttpStatus.INTERNAL_SERVER_ERROR);
-            responseBody.put("error", ex.getMessage());
-            return new ResponseEntity<>(responseBody, headers, status);
-        }
-        return super.handleExceptionInternal(ex, body, headers, status, request);
+    @ExceptionHandler(DataProcessingException.class)
+    public ResponseEntity<Object> dataProcessingExceptionHandler(
+            Exception ex) {
+        Map<String, Object> responseBody = new LinkedHashMap<>();
+        responseBody.put("timestamp", LocalDateTime.now().toString());
+        responseBody.put("status", HttpStatus.INTERNAL_SERVER_ERROR);
+        responseBody.put("status_code", HttpStatus.INTERNAL_SERVER_ERROR.value());
+        responseBody.put("error", ex.getMessage());
+        return new ResponseEntity<>(responseBody, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
     @Override

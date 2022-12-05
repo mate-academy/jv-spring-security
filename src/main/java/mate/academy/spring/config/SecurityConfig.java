@@ -13,6 +13,8 @@ import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
+    private static final int PASSWORD_ENCODER_STRENGTH = 10;
+
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(inMemoryUserDetailsManager());
@@ -40,7 +42,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Bean
     public PasswordEncoder getEncoder() {
-        int strength = 10;
-        return new BCryptPasswordEncoder(strength, new SecureRandom());
+        return new BCryptPasswordEncoder(PASSWORD_ENCODER_STRENGTH, new SecureRandom());
     }
 }
