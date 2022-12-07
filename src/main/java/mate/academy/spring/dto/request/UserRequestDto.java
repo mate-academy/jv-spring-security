@@ -4,9 +4,9 @@ import mate.academy.spring.validation.Email;
 import mate.academy.spring.validation.Password;
 
 public class UserRequestDto {
-//    @Email
+    @Email
     private String email;
-//    @Password
+    @Password
     private String password;
 
     public String getEmail() {

@@ -14,9 +14,8 @@ public class PasswordValidator implements ConstraintValidator<Password, String> 
         if (password == null) {
             return false;
         }
-        return true;
-      /*  Pattern pattern = Pattern.compile(PASSWORD_PATTERN);
+        Pattern pattern = Pattern.compile(PASSWORD_PATTERN);
         Matcher matcher = pattern.matcher(password);
-        return matcher.matches();*/
+        return matcher.matches();
     }
 }
