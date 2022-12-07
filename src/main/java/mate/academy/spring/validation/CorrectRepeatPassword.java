@@ -7,11 +7,11 @@ import java.lang.annotation.Target;
 import javax.validation.Constraint;
 import javax.validation.Payload;
 
-@Constraint(validatedBy = EmailValidator.class)
+@Constraint(validatedBy = CorrectRepeatPasswordValidator.class)
 @Target({ElementType.PARAMETER, ElementType.FIELD})
 @Retention(RetentionPolicy.RUNTIME)
-public @interface Email {
-    String message() default "invalid. Email must be in format: name@domain";
+public @interface CorrectRepeatPassword {
+    String message() default "invalid. Password was not repeated correctly";
     Class<?>[] groups() default {};
     Class<? extends Payload>[] payload() default {};
 }

@@ -1,5 +1,6 @@
 package mate.academy.spring.config;
 
+import java.util.Properties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -8,28 +9,26 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
-import java.util.Properties;
 
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
-        @Override
+    @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-            auth.userDetailsService(inMemoryUserDetailsManager());
+        auth.userDetailsService(inMemoryUserDetailsManager());
     }
 
-        @Override
-        protected void configure(HttpSecurity http) throws Exception {
-            http.authorizeRequests().
-                    anyRequest().authenticated()
-                    .and()
-                    .formLogin()
-                    .permitAll()
-                    .and()
-                    .httpBasic()
-                    .and()
-                    .csrf().disable();
-        }
-
+    @Override
+    protected void configure(HttpSecurity http) throws Exception {
+        http.authorizeRequests()
+                .anyRequest().authenticated()
+                .and()
+                .formLogin()
+                .permitAll()
+                .and()
+                .httpBasic()
+                .and()
+                .csrf().disable();
+    }
 
     @Bean
     public InMemoryUserDetailsManager inMemoryUserDetailsManager() {
@@ -37,7 +36,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         users.put("max@i.ua", getEncoder().encode("Qwerty1!") + ",ROLE_USER,enabled");
         return new InMemoryUserDetailsManager(users);
     }
-
 
     @Bean
     public PasswordEncoder getEncoder() {
