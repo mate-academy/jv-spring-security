@@ -3,7 +3,6 @@ package mate.academy.spring.controller;
 import java.util.List;
 import java.util.stream.Collectors;
 import mate.academy.spring.dto.response.OrderResponseDto;
-import mate.academy.spring.exception.AuthenticationException;
 import mate.academy.spring.model.Order;
 import mate.academy.spring.model.ShoppingCart;
 import mate.academy.spring.service.OrderService;
@@ -42,11 +41,10 @@ public class OrderController {
     }
 
     @GetMapping
-    public List<OrderResponseDto> getOrderHistory(Authentication authentication)
-            throws AuthenticationException {
+    public List<OrderResponseDto> getOrderHistory(Authentication authentication) {
         return orderService.getOrdersHistory(userService.findByEmail(authentication.getName())
                         .orElseThrow(() ->
-                        new AuthenticationException("Can't find user " + authentication.getName())))
+                        new RuntimeException("Can't find user " + authentication.getName())))
                 .stream()
                 .map(orderResponseDtoMapper::mapToDto)
                 .collect(Collectors.toList());

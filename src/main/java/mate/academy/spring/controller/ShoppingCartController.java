@@ -1,7 +1,6 @@
 package mate.academy.spring.controller;
 
 import mate.academy.spring.dto.response.ShoppingCartResponseDto;
-import mate.academy.spring.exception.AuthenticationException;
 import mate.academy.spring.model.ShoppingCart;
 import mate.academy.spring.model.User;
 import mate.academy.spring.service.MovieSessionService;
@@ -36,22 +35,19 @@ public class ShoppingCartController {
     }
 
     @PutMapping("/movie-sessions")
-    public void addToCart(Authentication authentication, @RequestParam Long movieSessionId)
-            throws AuthenticationException {
+    public void addToCart(Authentication authentication, @RequestParam Long movieSessionId) {
         shoppingCartService.addSession(
                 movieSessionService.get(movieSessionId),
                 userService.findByEmail(authentication.getName())
-                        .orElseThrow(() ->
-                                new AuthenticationException("Can't find user "
+                        .orElseThrow(() -> new RuntimeException("Can't find user "
                                         + authentication.getName())));
     }
 
     @GetMapping("/by-user")
-    public ShoppingCartResponseDto getByUser(Authentication authentication)
-            throws AuthenticationException {
+    public ShoppingCartResponseDto getByUser(Authentication authentication) {
         User user = userService.findByEmail(authentication.getName())
                 .orElseThrow(() ->
-                new AuthenticationException("Can't find user " + authentication.getName()));
+                new RuntimeException("Can't find user " + authentication.getName()));
         return shoppingCartResponseDtoMapper.mapToDto(shoppingCartService.getByUser(user));
     }
 }
