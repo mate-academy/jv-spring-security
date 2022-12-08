@@ -13,6 +13,8 @@ import javax.validation.Payload;
 public @interface Password {
     String message() default "invalid. Password must contain as minimum: "
             + "uppercase letter, 1 lowercase letter, 1 special character, 1 number, 8 characters";
+
     Class<?>[] groups() default {};
+
     Class<? extends Payload>[] payload() default {};
 }

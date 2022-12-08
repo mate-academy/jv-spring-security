@@ -12,6 +12,8 @@ import javax.validation.Payload;
 @Retention(RetentionPolicy.RUNTIME)
 public @interface Email {
     String message() default "invalid. Email must be in format: name@domain";
+
     Class<?>[] groups() default {};
+
     Class<? extends Payload>[] payload() default {};
 }

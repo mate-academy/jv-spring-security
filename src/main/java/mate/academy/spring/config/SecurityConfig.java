@@ -14,7 +14,7 @@ import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(inMemoryUserDetailsManager());
+        auth.userDetailsService(getInMemoryUserDetailsManager());
     }
 
     @Override
@@ -31,7 +31,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     @Bean
-    public InMemoryUserDetailsManager inMemoryUserDetailsManager() {
+    public InMemoryUserDetailsManager getInMemoryUserDetailsManager() {
         Properties users = new Properties();
         users.put("max@i.ua", getEncoder().encode("Qwerty1!") + ",ROLE_USER,enabled");
         return new InMemoryUserDetailsManager(users);

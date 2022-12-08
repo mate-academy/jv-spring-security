@@ -1,16 +1,18 @@
 package mate.academy.spring.dto.request;
 
-import mate.academy.spring.validation.CorrectRepeatPassword;
 import mate.academy.spring.validation.Email;
 import mate.academy.spring.validation.Password;
+import mate.academy.spring.validation.Passwords;
 
+@Passwords(
+        password = "password",
+        repeatPassword = "repeatPassword"
+)
 public class UserRequestDto {
     @Email
     private String email;
     @Password
-    @CorrectRepeatPassword
     private String password;
-    @CorrectRepeatPassword
     private String repeatPassword;
 
     public String getEmail() {
