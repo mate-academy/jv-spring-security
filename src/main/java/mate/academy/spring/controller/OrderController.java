@@ -13,7 +13,6 @@ import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -35,8 +34,11 @@ public class OrderController {
     }
 
     @PostMapping("/complete")
-    public OrderResponseDto completeOrder(@RequestParam Long userId) {
-        ShoppingCart cart = shoppingCartService.getByUser(userService.get(userId));
+    public OrderResponseDto completeOrder(Authentication authentication) {
+        ShoppingCart cart = shoppingCartService.getByUser(userService
+                .findByEmail(authentication.getName())
+                .orElseThrow(() ->
+                        new RuntimeException("Can't find user " + authentication.getName())));
         return orderResponseDtoMapper.mapToDto(orderService.completeOrder(cart));
     }
 

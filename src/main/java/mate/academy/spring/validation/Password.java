@@ -8,7 +8,7 @@ import javax.validation.Constraint;
 import javax.validation.Payload;
 
 @Constraint(validatedBy = PasswordValidator.class)
-@Target({ElementType.PARAMETER, ElementType.FIELD})
+@Target({ElementType.FIELD})
 @Retention(RetentionPolicy.RUNTIME)
 public @interface Password {
     String message() default "Invalid password";
