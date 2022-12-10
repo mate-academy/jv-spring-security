@@ -1,7 +1,9 @@
 package mate.academy.spring.config;
 
+import java.time.format.DateTimeFormatter;
 import java.util.Properties;
 import javax.sql.DataSource;
+import mate.academy.spring.util.DateTimePatternUtil;
 import org.apache.commons.dbcp2.BasicDataSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -43,5 +45,10 @@ public class AppConfig {
         factoryBean.setHibernateProperties(properties);
         factoryBean.setPackagesToScan("mate.academy.spring.model");
         return factoryBean;
+    }
+
+    @Bean(name = "DefaultDateTimeFormatter")
+    public DateTimeFormatter getDefaultDateTimeFormatter() {
+        return DateTimeFormatter.ofPattern(DateTimePatternUtil.DATE_TIME_PATTERN);
     }
 }
