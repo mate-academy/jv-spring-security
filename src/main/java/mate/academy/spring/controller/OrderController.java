@@ -5,6 +5,7 @@ import java.util.stream.Collectors;
 import mate.academy.spring.dto.response.OrderResponseDto;
 import mate.academy.spring.model.Order;
 import mate.academy.spring.model.ShoppingCart;
+import mate.academy.spring.model.User;
 import mate.academy.spring.service.OrderService;
 import mate.academy.spring.service.ShoppingCartService;
 import mate.academy.spring.service.UserService;
@@ -35,23 +36,21 @@ public class OrderController {
 
     @PostMapping("/complete")
     public OrderResponseDto completeOrder(Authentication authentication) {
-        String email = authentication.getName();
-        ShoppingCart cart = shoppingCartService.getByUser(
-                userService.findByEmail(authentication.getName())
-                        .orElseThrow(() -> new RuntimeException(
-                                "There is no user with such email: " + email)));
+        ShoppingCart cart = shoppingCartService.getByUser(getUserByEmail(authentication.getName()));
         return orderResponseDtoMapper.mapToDto(orderService.completeOrder(cart));
     }
 
     @GetMapping
     public List<OrderResponseDto> getOrderHistory(Authentication authentication) {
-        String email = authentication.getName();
-        return orderService.getOrdersHistory(
-                        userService.findByEmail(authentication.getName())
-                                .orElseThrow(() -> new RuntimeException(
-                                        "There is no user with such email: " + email)))
+        return orderService.getOrdersHistory(getUserByEmail(authentication.getName()))
                 .stream()
                 .map(orderResponseDtoMapper::mapToDto)
                 .collect(Collectors.toList());
+    }
+
+    private User getUserByEmail(String email) {
+        return userService.findByEmail(email)
+                        .orElseThrow(() -> new RuntimeException(
+                                "There is no user with such email: " + email));
     }
 }
