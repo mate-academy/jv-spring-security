@@ -51,7 +51,7 @@ public class CustomGlobalExceptionHandler extends ResponseEntityExceptionHandler
         body.put("status", HttpStatus.INTERNAL_SERVER_ERROR.value());
         List<String> errors = new ArrayList<>();
         errors.add(exception.getMessage());
-//        body.put("errors", List.of(exception.getMessage()));
+        //body.put("errors", List.of(exception.getMessage())); why doesn't work?
         body.put("errors", errors);
         return new ResponseEntity<>(body, headers, status);
     }
