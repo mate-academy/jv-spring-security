@@ -20,8 +20,7 @@ public final class PasswordValidator implements ConstraintValidator<Password, Ob
         try {
             final String firstPass = BeanUtils.getProperty(value, originalPass);
             final String secondPass = BeanUtils.getProperty(value, repeatedPass);
-            return firstPass == null && secondPass == null
-                    || firstPass != null && firstPass.equals(secondPass);
+            return firstPass != null && firstPass.equals(secondPass);
 
         } catch (Exception e) {
             throw new RuntimeException("Can't validate the passwords", e);
