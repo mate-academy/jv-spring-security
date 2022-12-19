@@ -8,7 +8,7 @@ import java.lang.annotation.Target;
 import javax.validation.Constraint;
 import javax.validation.Payload;
 
-@Constraint(validatedBy = EmailValidator.class)
+@Constraint(validatedBy = PasswordValidator.class)
 @Target({TYPE})
 @Retention(value = RetentionPolicy.RUNTIME)
 public @interface ValidPassword {

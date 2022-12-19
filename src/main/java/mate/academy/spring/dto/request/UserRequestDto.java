@@ -4,7 +4,6 @@ import javax.validation.constraints.Size;
 import mate.academy.spring.validation.ValidEmail;
 import mate.academy.spring.validation.ValidPassword;
 
-@ValidPassword
 public class UserRequestDto {
     @ValidEmail
     private String email;

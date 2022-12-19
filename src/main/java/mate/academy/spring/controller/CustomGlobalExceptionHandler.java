@@ -14,6 +14,7 @@ import org.springframework.validation.FieldError;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
@@ -25,7 +26,7 @@ public class CustomGlobalExceptionHandler extends ResponseEntityExceptionHandler
             HttpStatus status, WebRequest request) {
 
         Map<String, Object> body = new LinkedHashMap<>();
-        body.put("timestamp", new Date());
+        body.put("timestamp", new Date().toString());
         body.put("status", status.value());
         List<String> errors = ex.getBindingResult()
                 .getAllErrors()
@@ -38,22 +39,21 @@ public class CustomGlobalExceptionHandler extends ResponseEntityExceptionHandler
 
     private String getErrorMessage(ObjectError e) {
         if (e instanceof FieldError) {
-            return ((FieldError) e).getField() + " " + e.getDefaultMessage();
+            return ((FieldError) e).getField() + ": " + e.getDefaultMessage();
         }
         return e.getDefaultMessage();
     }
 
-    public ResponseEntity<Object> handleDataProcessingException(DataProcessingException exception,
-                                                                HttpHeaders headers,
-                                                                HttpStatus status) {
+    @ExceptionHandler(DataProcessingException.class)
+    public ResponseEntity<Object> handleDataProcessingException(DataProcessingException exception) {
         Map<String, Object> body = new LinkedHashMap<>();
-        body.put("timestamp", new Date());
+        body.put("timestamp", new Date().toString());
         body.put("status", HttpStatus.INTERNAL_SERVER_ERROR.value());
         List<String> errors = new ArrayList<>();
         errors.add(exception.getMessage());
-        //body.put("errors", List.of(exception.getMessage())); why doesn't work?
         body.put("errors", errors);
-        return new ResponseEntity<>(body, headers, status);
+        //body.put("errors", List.of(exception.getMessage())); why doesn't work?
+        return new ResponseEntity<>(body, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
 }

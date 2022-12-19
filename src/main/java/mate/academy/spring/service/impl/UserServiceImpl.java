@@ -31,7 +31,7 @@ public class UserServiceImpl implements UserService {
     }
 
     public User get(Authentication auth) {
-        String email = (String) auth.getPrincipal();
+        String email = auth.getName();
         return findByEmail(email).orElseThrow(() ->
                 new RuntimeException("Can't find user with email " + email));
     }
