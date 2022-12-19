@@ -1,8 +1,8 @@
 package mate.academy.spring.dto.request;
 
-import mate.academy.spring.validation.RepeatedPasswordEquals;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
+import mate.academy.spring.validation.RepeatedPasswordEquals;
 
 @RepeatedPasswordEquals()
 public class UserRequestDto {
