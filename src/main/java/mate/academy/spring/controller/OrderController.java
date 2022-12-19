@@ -11,7 +11,6 @@ import mate.academy.spring.service.ShoppingCartService;
 import mate.academy.spring.service.UserService;
 import mate.academy.spring.service.mapper.ResponseDtoMapper;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -37,8 +36,7 @@ public class OrderController {
 
     @PostMapping("/complete")
     public OrderResponseDto completeOrder(Authentication authentication) {
-        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
-        String username = userDetails.getUsername();
+        String username = authentication.getName();
         User user = userService.findByEmail(username)
                 .orElseThrow(() -> new RuntimeException("User with email "
                 + username + " doesn't exist"));
@@ -48,8 +46,7 @@ public class OrderController {
 
     @GetMapping
     public List<OrderResponseDto> getOrderHistory(Authentication authentication) {
-        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
-        String username = userDetails.getUsername();
+        String username = authentication.getName();
         User user = userService.findByEmail(username)
                 .orElseThrow(() -> new RuntimeException("User with email "
                         + username + " doesn't exist"));
