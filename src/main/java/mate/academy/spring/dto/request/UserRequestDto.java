@@ -2,11 +2,12 @@ package mate.academy.spring.dto.request;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
+import mate.academy.spring.validation.Password;
 
 public class UserRequestDto {
     @Email
     private String email;
-    @NotNull
+    @Password
     private String password;
     @NotNull
     private String repeatPassword;
