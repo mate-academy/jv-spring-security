@@ -2,6 +2,7 @@ package mate.academy.spring.controller;
 
 import java.util.List;
 import java.util.stream.Collectors;
+import javax.persistence.EntityNotFoundException;
 import mate.academy.spring.dto.response.OrderResponseDto;
 import mate.academy.spring.model.Order;
 import mate.academy.spring.model.ShoppingCart;
@@ -36,15 +37,20 @@ public class OrderController {
 
     @PostMapping("/complete")
     public OrderResponseDto completeOrder(Authentication authentication) {
-        ShoppingCart cart = shoppingCartService.getByUser((User) authentication);
+        ShoppingCart cart = shoppingCartService.getByUser(getUser(authentication));
         return orderResponseDtoMapper.mapToDto(orderService.completeOrder(cart));
     }
 
     @GetMapping
     public List<OrderResponseDto> getOrderHistory(Authentication authentication) {
-        return orderService.getOrdersHistory((User) authentication)
+        return orderService.getOrdersHistory(getUser(authentication))
                 .stream()
                 .map(orderResponseDtoMapper::mapToDto)
                 .collect(Collectors.toList());
+    }
+
+    private User getUser(Authentication authentication) {
+        return userService.findByEmail(authentication.getName()).orElseThrow(() ->
+                new EntityNotFoundException("Can't get user by email" + authentication.getName()));
     }
 }
