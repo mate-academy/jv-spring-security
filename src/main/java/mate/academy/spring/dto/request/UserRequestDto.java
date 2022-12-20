@@ -4,10 +4,11 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 import mate.academy.spring.validation.Password;
 
+@Password
 public class UserRequestDto {
     @Email
     private String email;
-    @Password
+    @NotNull
     private String password;
     @NotNull
     private String repeatPassword;
