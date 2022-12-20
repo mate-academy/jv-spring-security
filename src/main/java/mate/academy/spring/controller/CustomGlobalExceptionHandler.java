@@ -1,6 +1,5 @@
 package mate.academy.spring.controller;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -49,10 +48,7 @@ public class CustomGlobalExceptionHandler extends ResponseEntityExceptionHandler
         Map<String, Object> body = new LinkedHashMap<>();
         body.put("timestamp", new Date().toString());
         body.put("status", HttpStatus.INTERNAL_SERVER_ERROR.value());
-        List<String> errors = new ArrayList<>();
-        errors.add(exception.getMessage());
-        body.put("errors", errors);
-        //body.put("errors", List.of(exception.getMessage())); why doesn't work?
+        body.put("errors", List.of(exception.getMessage()));
         return new ResponseEntity<>(body, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
