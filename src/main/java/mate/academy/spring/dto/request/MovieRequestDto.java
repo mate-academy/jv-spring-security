@@ -6,11 +6,11 @@ import javax.validation.constraints.Size;
 
 public class MovieRequestDto {
     @NotNull
-    @NotBlank(message = " field can't be empty")
+    @NotBlank(message = "field can't be empty")
     @Size(min = 1, max = 256)
     private String title;
     @NotNull
-    @NotBlank(message = " field can't be empty")
+    @NotBlank(message = "field can't be empty")
     @Size(min = 1, max = 256)
     private String description;
 

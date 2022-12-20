@@ -11,11 +11,11 @@ public class UserRequestDto {
     @Email
     private String email;
     @NotNull
-    @NotBlank(message = " field can't be empty")
+    @NotBlank(message = "field can't be empty")
     @Size(min = 4)
     private String password;
     @NotNull
-    @NotBlank(message = " field can't be empty")
+    @NotBlank(message = "field can't be empty")
     @Size(min = 4)
     private String confirmPassword;
 

@@ -1,16 +1,16 @@
 package mate.academy.spring.dto.request;
 
-import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Positive;
 import javax.validation.constraints.Size;
 
 public class CinemaHallRequestDto {
     @NotNull
-    @Min(value = 0, message = " can't be negative")
+    @Positive
     private int capacity;
     @NotNull
-    @NotBlank(message = " field can't be empty")
+    @NotBlank(message = "field can't be empty")
     @Size(min = 1, max = 256)
     private String description;
 
