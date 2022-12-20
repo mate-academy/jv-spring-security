@@ -15,5 +15,4 @@ public @interface Email {
     String message() default "Incorrect email";
     Class<?>[] groups() default {};
     Class<? extends Payload>[] payload() default {};
-
 }
