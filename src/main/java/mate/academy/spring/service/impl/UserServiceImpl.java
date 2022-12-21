@@ -1,6 +1,7 @@
 package mate.academy.spring.service.impl;
 
 import java.util.Optional;
+import javax.persistence.EntityNotFoundException;
 import mate.academy.spring.dao.UserDao;
 import mate.academy.spring.model.User;
 import mate.academy.spring.service.UserService;
@@ -32,5 +33,11 @@ public class UserServiceImpl implements UserService {
     @Override
     public Optional<User> findByEmail(String email) {
         return userDao.findByEmail(email);
+    }
+
+    @Override
+    public User getByEmail(String email) {
+        return userDao.findByEmail(email).orElseThrow(() ->
+                new EntityNotFoundException("Can't get user by email" + email));
     }
 }
