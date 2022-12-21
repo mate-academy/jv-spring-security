@@ -4,8 +4,8 @@ import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
 public class EmailValidator implements ConstraintValidator<ValidEmail,String> {
-    private static final String EMAIL_PATTERN = "^(?=.{1,64}@)[A-Za-z0-9_-]+"
-            + "(\\\\.[A-Za-z0-9_-]+)*@[^-][A-Za-z0-9-]+(\\\\.[A-Za-z0-9-]+)*(\\\\.[A-Za-z]{2,})$";
+    private static final String EMAIL_PATTERN
+            = "^([\\w\\-.]+){1,64}@([\\w&&[^_]]+){2,255}.[a-z]{2,}$";
 
     @Override
     public boolean isValid(String email,
