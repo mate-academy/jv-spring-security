@@ -10,7 +10,7 @@ public class RepeatingPasswordValidator
     @Override
     public boolean isValid(UserRequestDto userRequestDto,
                            ConstraintValidatorContext constraintValidatorContext) {
-        if (userRequestDto.getRepeatPassword() == null) {
+        if (userRequestDto.getRepeatPassword() == null && userRequestDto.getPassword() == null) {
             return false;
         }
         return Objects.equals(userRequestDto.getPassword(), userRequestDto.getRepeatPassword());
