@@ -38,7 +38,8 @@ public class ShoppingCartController {
     @PutMapping("/movie-sessions")
     public void addToCart(Authentication authentication, @RequestParam Long movieSessionId) {
         User user = userService.findByEmail(authentication.getName())
-                .orElseThrow(() -> new EntityNotFoundException("Can't get user"));
+                .orElseThrow(() -> new EntityNotFoundException("Can't get user by login="
+                        + authentication.getName()));
         shoppingCartService.addSession(
                 movieSessionService.get(movieSessionId), user);
     }
@@ -46,7 +47,8 @@ public class ShoppingCartController {
     @GetMapping("/by-user")
     public ShoppingCartResponseDto getByUser(Authentication authentication) {
         User user = userService.findByEmail(authentication.getName())
-                .orElseThrow(() -> new EntityNotFoundException("Can't get user"));
+                .orElseThrow(() -> new EntityNotFoundException("Can't get user by login="
+                        + authentication.getName()));
         return shoppingCartResponseDtoMapper.mapToDto(shoppingCartService.getByUser(user));
     }
 }
