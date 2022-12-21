@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.persistence.EntityNotFoundException;
+
 @RestController
 @RequestMapping("/shopping-carts")
 public class ShoppingCartController {
@@ -38,7 +40,7 @@ public class ShoppingCartController {
     @PutMapping("/movie-sessions")
     public void addToCart(Authentication authentication, @RequestParam Long movieSessionId) {
         shoppingCartService.addSession(
-                movieSessionService.get(movieSessionId), (User) authentication);
+                movieSessionService.get(movieSessionId), getUserByAuthentication(authentication));
     }
 
     @GetMapping("/by-user")
@@ -47,5 +49,11 @@ public class ShoppingCartController {
                 .orElseThrow(() -> new UserNotFoundException(
                         "Can't find user with this email: " + authentication.getName()));
         return shoppingCartResponseDtoMapper.mapToDto(shoppingCartService.getByUser(user));
+    }
+
+    private User getUserByAuthentication(Authentication authentication) {
+        String email = authentication.getName();
+        return userService.findByEmail(email).orElseThrow(() ->
+                new EntityNotFoundException("Can't find user by email: " + email));
     }
 }
