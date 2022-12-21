@@ -26,12 +26,12 @@ public class CustomGlobalExceptionHandler extends ResponseEntityExceptionHandler
         Map<String,Object> body = new LinkedHashMap<>();
         body.put("timestamp", LocalDateTime.now().toString());
         body.put("status",status.value());
-        List<String> collect = ex.getBindingResult()
+        List<String> errors = ex.getBindingResult()
                 .getAllErrors()
                 .stream()
                 .map(e -> getErrorMessage(e))
                 .collect(Collectors.toList());
-        body.put("errors", collect);
+        body.put("errors", errors);
         return new ResponseEntity<>(body,headers,status);
     }
 

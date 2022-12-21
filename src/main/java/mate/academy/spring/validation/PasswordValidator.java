@@ -9,6 +9,9 @@ public class PasswordValidator implements ConstraintValidator<ValidPassword, Use
     @Override
     public boolean isValid(UserRequestDto userRequestDto,
                            ConstraintValidatorContext constraintValidatorContext) {
+        if (userRequestDto.getPassword() == null && userRequestDto.getRepeatPassword() == null) {
+            return false;
+        }
         return Objects.equals(userRequestDto.getPassword(),userRequestDto.getRepeatPassword());
     }
 }
