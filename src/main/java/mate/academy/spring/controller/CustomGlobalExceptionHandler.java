@@ -1,6 +1,6 @@
 package mate.academy.spring.controller;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -25,7 +25,7 @@ public class CustomGlobalExceptionHandler extends ResponseEntityExceptionHandler
             HttpStatus status, WebRequest request) {
 
         Map<String, Object> body = new LinkedHashMap<>();
-        body.put("timestamp", new Date().toString());
+        body.put("timestamp", LocalDateTime.now());
         body.put("status", status.value());
         List<String> errors = ex.getBindingResult()
                 .getAllErrors()
@@ -46,7 +46,7 @@ public class CustomGlobalExceptionHandler extends ResponseEntityExceptionHandler
     @ExceptionHandler(DataProcessingException.class)
     public ResponseEntity<Object> handleDataProcessingException(DataProcessingException exception) {
         Map<String, Object> body = new LinkedHashMap<>();
-        body.put("timestamp", new Date().toString());
+        body.put("timestamp", LocalDateTime.now());
         body.put("status", HttpStatus.INTERNAL_SERVER_ERROR.value());
         body.put("errors", List.of(exception.getMessage()));
         return new ResponseEntity<>(body, HttpStatus.INTERNAL_SERVER_ERROR);

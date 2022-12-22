@@ -36,14 +36,16 @@ public class OrderController {
 
     @PostMapping("/complete")
     public OrderResponseDto completeOrder(Authentication auth) {
-        User user = userService.findByEmail(auth.getName()).get();
+        User user = userService.findByEmail(auth.getName()).orElseThrow(
+                () -> new RuntimeException("User with email " + auth.getName() + " not found"));
         ShoppingCart cart = shoppingCartService.getByUser(user);
         return orderResponseDtoMapper.mapToDto(orderService.completeOrder(cart));
     }
 
     @GetMapping
     public List<OrderResponseDto> getOrderHistory(Authentication auth) {
-        User user = userService.findByEmail(auth.getName()).get();
+        User user = userService.findByEmail(auth.getName()).orElseThrow(
+                () -> new RuntimeException("User with email " + auth.getName() + " not found"));
         return orderService.getOrdersHistory(user)
                 .stream()
                 .map(orderResponseDtoMapper::mapToDto)
