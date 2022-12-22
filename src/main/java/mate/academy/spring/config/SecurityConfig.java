@@ -17,21 +17,21 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         return http.authorizeHttpRequests(auth -> {
-                    try {
-                        auth.anyRequest()
-                                .authenticated()
-                                .and()
-                                .formLogin()
-                                .permitAll();
-                    } catch (Exception e) {
-                        throw new RuntimeException("Error when creating login form:", e);
-                    }
-                })
-                .httpBasic()
-                .and()
-                .csrf()
-                .disable()
-                .build();
+            try {
+                auth.anyRequest()
+                        .authenticated()
+                        .and()
+                        .formLogin()
+                        .permitAll();
+            } catch (Exception e) {
+                throw new RuntimeException("Error when creating login form:", e);
+            }
+        })
+        .httpBasic()
+        .and()
+        .csrf()
+        .disable()
+        .build();
     }
 
     @Bean
