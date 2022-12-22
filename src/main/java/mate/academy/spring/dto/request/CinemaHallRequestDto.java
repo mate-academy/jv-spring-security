@@ -4,9 +4,8 @@ import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 
 public class CinemaHallRequestDto {
-
-    @Min(value = 10)
-    @Max(value = 300)
+    @Min(30)
+    @Max(300)
     private int capacity;
     private String description;
 
