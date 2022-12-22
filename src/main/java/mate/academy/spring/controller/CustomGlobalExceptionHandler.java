@@ -1,4 +1,4 @@
-package mate.academy.spring.exception.handler;
+package mate.academy.spring.controller;
 
 import java.time.LocalDateTime;
 import java.util.LinkedHashMap;
