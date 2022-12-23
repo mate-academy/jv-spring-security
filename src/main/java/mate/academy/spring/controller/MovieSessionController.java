@@ -55,7 +55,7 @@ public class MovieSessionController {
         return movieSessionService.findAvailableSessions(movieId, date)
                 .stream()
                 .map(movieSessionResponseDtoMapper::mapToDto)
-                .toList();
+                .collect(Collectors.toList());
     }
 
     @PutMapping("/{id}")

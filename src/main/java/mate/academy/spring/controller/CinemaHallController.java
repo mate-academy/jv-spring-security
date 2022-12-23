@@ -42,6 +42,6 @@ public class CinemaHallController {
         return cinemaHallService.getAll()
                 .stream()
                 .map(cinemaHallResponseDtoMapper::mapToDto)
-                .toList();
+                .collect(Collectors.toList());
     }
 }
