@@ -2,7 +2,6 @@ package mate.academy.spring.controller;
 
 import java.time.LocalDate;
 import java.util.List;
-import java.util.stream.Collectors;
 import mate.academy.spring.dto.request.MovieSessionRequestDto;
 import mate.academy.spring.dto.response.MovieSessionResponseDto;
 import mate.academy.spring.model.MovieSession;
@@ -54,7 +53,7 @@ public class MovieSessionController {
         return movieSessionService.findAvailableSessions(movieId, date)
                 .stream()
                 .map(movieSessionResponseDtoMapper::mapToDto)
-                .collect(Collectors.toList());
+                .toList();
     }
 
     @PutMapping("/{id}")
