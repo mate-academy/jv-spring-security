@@ -11,6 +11,7 @@ public class MovieSessionRequestDto {
     @NotNull
     @Positive
     private Long cinemaHallId;
+    @NotNull
     private LocalDateTime showTime;
 
     public Long getMovieId() {
