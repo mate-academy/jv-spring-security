@@ -1,7 +1,12 @@
 package mate.academy.spring.dto.response;
 
+import javax.validation.constraints.NotNull;
+import mate.academy.spring.validation.Email;
+
 public class UserResponseDto {
+    @NotNull
     private Long id;
+    @Email
     private String email;
 
     public Long getId() {
