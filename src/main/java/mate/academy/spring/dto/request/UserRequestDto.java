@@ -12,8 +12,6 @@ public class UserRequestDto {
     @NotNull
     @Size(min = 5,max = 16)
     private String password;
-    @NotNull
-    @Size(min = 5,max = 16)
     private String repeatPassword;
 
     public String getEmail() {

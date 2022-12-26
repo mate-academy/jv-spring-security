@@ -1,6 +1,5 @@
 package mate.academy.spring.validation;
 
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
@@ -14,8 +13,6 @@ public class EmailValidator implements ConstraintValidator<Email,String> {
         if (email == null) {
             return false;
         }
-        Pattern pattern = Pattern.compile(EMAIL_PATTERN);
-        Matcher matcher = pattern.matcher(email);
-        return matcher.matches();
+        return Pattern.matches(EMAIL_PATTERN, email);
     }
 }
