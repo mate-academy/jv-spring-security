@@ -44,11 +44,11 @@ public class CustomGlobalExceptionHandler extends ResponseEntityExceptionHandler
         return new ResponseEntity<>(body, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
-    private String getErrorMessage(ObjectError err) {
-        if (err instanceof FieldError) {
-            String field = (((FieldError) err).getField());
-            return field + " " + err.getDefaultMessage();
+    private String getErrorMessage(ObjectError e) {
+        if (e instanceof FieldError) {
+            String field = (((FieldError) e).getField());
+            return field + " " + e.getDefaultMessage();
         }
-        return err.getDefaultMessage();
+        return e.getDefaultMessage();
     }
 }

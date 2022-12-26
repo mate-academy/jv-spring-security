@@ -3,22 +3,17 @@ package mate.academy.spring.validation;
 import java.util.Objects;
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
-import org.springframework.beans.BeanWrapperImpl;
+import mate.academy.spring.dto.request.UserRequestDto;
 
-public class PasswordValidator implements ConstraintValidator<ValidPassword, Object> {
-    private String password;
-    private String repeatPassword;
-
+public class PasswordValidator implements ConstraintValidator<ValidPassword, UserRequestDto> {
     @Override
-    public void initialize(ValidPassword constraintAnnotation) {
-        password = constraintAnnotation.passwordField();
-        repeatPassword = constraintAnnotation.repeatPasswordField();
+    public boolean isValid(UserRequestDto userRequestDto,
+                           ConstraintValidatorContext constraintValidatorContext) {
+        if (userRequestDto.getRepeatPassword() == null
+                && userRequestDto.getPassword() == null) {
+            return false;
+        }
+        return Objects.equals(userRequestDto.getPassword(), userRequestDto.getRepeatPassword());
     }
 
-    @Override
-    public boolean isValid(Object pass, ConstraintValidatorContext constraintValidatorContext) {
-        Object passwordValue = new BeanWrapperImpl(pass).getPropertyValue(password);
-        Object repeatPasswordValue = new BeanWrapperImpl(pass).getPropertyValue(repeatPassword);
-        return Objects.equals(passwordValue, repeatPasswordValue);
-    }
 }

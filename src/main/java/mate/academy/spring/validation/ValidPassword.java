@@ -14,7 +14,4 @@ public @interface ValidPassword {
     String message() default "Password doesn't match";
     Class<?>[] group() default {};
     Class<? extends Payload>[] payload() default {};
-    String passwordField();
-
-    String repeatPasswordField();
 }
