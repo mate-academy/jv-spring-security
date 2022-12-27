@@ -1,5 +1,6 @@
 package mate.academy.spring.controller;
 
+import javax.persistence.EntityNotFoundException;
 import mate.academy.spring.dto.response.ShoppingCartResponseDto;
 import mate.academy.spring.model.ShoppingCart;
 import mate.academy.spring.model.User;
@@ -37,13 +38,18 @@ public class ShoppingCartController {
     @PutMapping("/movie-sessions")
     public void addToCart(Authentication authentication, @RequestParam Long movieSessionId) {
         shoppingCartService.addSession(
-                movieSessionService.get(movieSessionId),
-                userService.findByEmail(authentication.getName()).get());
+                movieSessionService.get(movieSessionId), getUserByAuthentication(authentication));
     }
 
     @GetMapping("/by-user")
     public ShoppingCartResponseDto getByUser(Authentication authentication) {
-        User user = userService.findByEmail(authentication.getName()).get();
+        User user = getUserByAuthentication(authentication);
         return shoppingCartResponseDtoMapper.mapToDto(shoppingCartService.getByUser(user));
+    }
+
+    private User getUserByAuthentication(Authentication authentication) {
+        String email = authentication.getName();
+        return userService.findByEmail(email).orElseThrow(() ->
+                new EntityNotFoundException("Can't find user by email: " + email));
     }
 }
