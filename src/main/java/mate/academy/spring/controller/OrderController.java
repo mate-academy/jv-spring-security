@@ -46,7 +46,7 @@ public class OrderController {
         return orderService.getOrdersHistory(getUserByAuthentication(authentication))
                 .stream()
                 .map(orderResponseDtoMapper::mapToDto)
-                .collect(Collectors.toList());
+                .toList();
     }
 
     private User getUserByAuthentication(Authentication authentication) {
