@@ -4,7 +4,7 @@ import java.lang.reflect.Field;
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
-public class EqualFieldsValidator implements ConstraintValidator<EqualPasswords, Object> {
+public class EqualPasswordsValidator implements ConstraintValidator<EqualPasswords, Object> {
     private static final String VALUE_IS_NULL = "Passwords must not be null";
     private static final String VALUES_NOT_EQUAL = "Passwords are not equal";
     private String password;
@@ -38,8 +38,9 @@ public class EqualFieldsValidator implements ConstraintValidator<EqualPasswords,
             Field declaredField = currentClazz.getDeclaredField(fieldName);
             declaredField.setAccessible(true);
             return declaredField.get(clazz);
-        } catch (NoSuchFieldException | IllegalAccessException e) {
-            throw new RuntimeException(e);
+        } catch (Exception e) {
+            throw new RuntimeException("Can not find field "
+                    + fieldName + " in class " + currentClazz, e);
         }
     }
 
