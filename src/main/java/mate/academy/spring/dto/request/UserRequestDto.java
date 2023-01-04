@@ -1,10 +1,9 @@
 package mate.academy.spring.dto.request;
 
+import javax.validation.constraints.Min;
 import mate.academy.spring.validation.Email;
 import mate.academy.spring.validation.Password;
 import mate.academy.spring.validation.Passwords;
-
-import javax.validation.constraints.Min;
 
 @Passwords(
         password = "password",
