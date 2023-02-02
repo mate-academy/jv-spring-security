@@ -4,15 +4,14 @@ import mate.academy.spring.validation.Email;
 import mate.academy.spring.validation.ValidPassword;
 import org.hibernate.validator.constraints.Length;
 
-import javax.validation.constraints.Size;
-
 @ValidPassword
 public class UserRequestDto {
     @Email
+    @Length(max = 100)
     private String email;
-    @Length(min = 8)
+    @Length(min = 8, max = 16)
     private String password;
-    @Length(min = 8)
+    @Length(min = 8, max = 16)
     private String repeatedPassword;
 
     public String getEmail() {
