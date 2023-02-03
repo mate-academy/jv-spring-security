@@ -1,17 +1,17 @@
 package mate.academy.spring.dto.request;
 
+import javax.validation.constraints.Size;
 import mate.academy.spring.validation.Email;
 import mate.academy.spring.validation.ValidPassword;
-import org.hibernate.validator.constraints.Length;
 
 @ValidPassword
 public class UserRequestDto {
     @Email
-    @Length(max = 100)
+    @Size(max = 100)
     private String email;
-    @Length(min = 8, max = 16)
+    @Size(min = 8, max = 16)
     private String password;
-    @Length(min = 8, max = 16)
+    @Size(min = 8, max = 16)
     private String repeatedPassword;
 
     public String getEmail() {
