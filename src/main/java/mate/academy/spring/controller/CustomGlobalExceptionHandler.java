@@ -22,10 +22,6 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 
 @ControllerAdvice
 public class CustomGlobalExceptionHandler extends ResponseEntityExceptionHandler {
-    private DataProcessingException ex;
-    private HttpHeaders headers;
-    private HttpStatus status;
-    private WebRequest request;
 
     @Override
     protected ResponseEntity<Object> handleMethodArgumentNotValid(
