@@ -9,7 +9,7 @@ import javax.validation.Payload;
 
 @Documented
 @Retention(RetentionPolicy.RUNTIME)
-@Target(ElementType.FIELD)
+@Target(ElementType.TYPE)
 public @interface Password {
     String message() default "{javax.validation.constraints.Password.message}";
 

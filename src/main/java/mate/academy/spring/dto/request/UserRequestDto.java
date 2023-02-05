@@ -4,15 +4,14 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.Size;
 import mate.academy.spring.validation.Password;
 
+@Password
 public class UserRequestDto {
     @Email
     @Size(min = 8)
     private String email;
     @Size(min = 4)
-    @Password
     private String password;
     @Size(min = 4)
-    @Password
     private String repeatPassword;
 
     public String getEmail() {
