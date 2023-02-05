@@ -8,7 +8,6 @@ import java.util.Collection;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import mate.academy.spring.exception.DataProcessingException;
-import mate.academy.spring.model.StatusHttp500;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,6 +21,7 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 
 @ControllerAdvice
 public class CustomGlobalExceptionHandler extends ResponseEntityExceptionHandler {
+    private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern(DATE_TIME_PATTERN);
     private DataProcessingException ex;
     private HttpHeaders headers;
     private HttpStatus status;
@@ -34,7 +34,6 @@ public class CustomGlobalExceptionHandler extends ResponseEntityExceptionHandler
             HttpStatus status,
             WebRequest request) {
         Map<String, Object> errorsMap = new LinkedHashMap<>();
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(DATE_TIME_PATTERN);
         errorsMap.put("Timestamp: ", LocalDateTime.now().format(formatter));
         errorsMap.put("Status: ", status.value());
         Collection<String> errorsList = ex.getAllErrors()
@@ -46,11 +45,12 @@ public class CustomGlobalExceptionHandler extends ResponseEntityExceptionHandler
     }
 
     @ResponseBody
-    public StatusHttp500 handleMethodDataProcessingException(DataProcessingException ex,
-                                                            HttpHeaders headers,
-                                                            HttpStatus status,
-                                                            WebRequest request) {
-        return new StatusHttp500();
+    public ResponseEntity<Object> handleDataProcessingException(DataProcessingException ex) {
+        Map<String, Object> errorsMap = new LinkedHashMap<>();
+        errorsMap.put("TimeStamp", LocalDateTime.now().format(formatter));
+        errorsMap.put("Status", HttpStatus.INTERNAL_SERVER_ERROR.value());
+        errorsMap.put("Error", ex.getMessage());
+        return new ResponseEntity<>(errorsMap, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
     private String getErrorMessage(ObjectError e) {
