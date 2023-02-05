@@ -9,7 +9,6 @@ import static java.util.Base64.getEncoder;
 
 @Service
 public class UserServiceImpl implements UserService {
-    private static final int SALT_LENGTH = 10;
     private final UserDao userDao;
 
     public UserServiceImpl(UserDao userDao) {

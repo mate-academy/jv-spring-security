@@ -24,7 +24,10 @@ public class AuthenticationController {
 
     @PostMapping("/register")
     public UserResponseDto register(@RequestBody @Valid UserRequestDto requestDto) {
-        User user = authService.register(requestDto.getEmail(), requestDto.getPassword());
-        return userDtoResponseMapper.mapToDto(user);
+        if (requestDto.getPassword().equals(requestDto.getRepeatPassword())) {
+            User user = authService.register(requestDto.getEmail(), requestDto.getPassword());
+            return userDtoResponseMapper.mapToDto(user);
+        }
+        throw new RuntimeException("Error input in time registration. Try again");
     }
 }

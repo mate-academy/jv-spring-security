@@ -14,6 +14,10 @@ public class UserRequestDto {
     @Size(min = 4)
     @Password
     private String password;
+    @NotNull
+    @Size(min = 4)
+    @Password
+    private String repeatPassword;
 
     public String getEmail() {
         return email;
@@ -21,5 +25,9 @@ public class UserRequestDto {
 
     public String getPassword() {
         return password;
+    }
+
+    public String getRepeatPassword() {
+        return repeatPassword;
     }
 }
