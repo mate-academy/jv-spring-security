@@ -1,6 +1,14 @@
 package mate.academy.spring.controller;
 
+import static mate.academy.spring.util.DateTimePatternUtil.DATE_TIME_PATTERN;
+
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Collection;
+import java.util.LinkedHashMap;
+import java.util.Map;
 import mate.academy.spring.exception.DataProcessingException;
+import mate.academy.spring.model.StatusHttp500;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -11,25 +19,20 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.util.Collection;
-import java.util.LinkedHashMap;
-import java.util.Map;
-import static mate.academy.spring.util.DateTimePatternUtil.DATE_TIME_PATTERN;
 
 @ControllerAdvice
 public class CustomGlobalExceptionHandler extends ResponseEntityExceptionHandler {
-    private DataProcessingException e;
+    private DataProcessingException ex;
     private HttpHeaders headers;
     private HttpStatus status;
     private WebRequest request;
 
     @Override
-    protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex,
-                                                                  HttpHeaders headers,
-                                                                  HttpStatus status,
-                                                                  WebRequest request) {
+    protected ResponseEntity<Object> handleMethodArgumentNotValid(
+            MethodArgumentNotValidException ex,
+            HttpHeaders headers,
+            HttpStatus status,
+            WebRequest request) {
         Map<String, Object> errorsMap = new LinkedHashMap<>();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern(DATE_TIME_PATTERN);
         errorsMap.put("Timestamp: ", LocalDateTime.now().format(formatter));
@@ -43,7 +46,7 @@ public class CustomGlobalExceptionHandler extends ResponseEntityExceptionHandler
     }
 
     @ResponseBody
-    public StatusHttp500 handleMethodDataProcessingException(DataProcessingException e,
+    public StatusHttp500 handleMethodDataProcessingException(DataProcessingException ex,
                                                             HttpHeaders headers,
                                                             HttpStatus status,
                                                             WebRequest request) {
@@ -56,8 +59,4 @@ public class CustomGlobalExceptionHandler extends ResponseEntityExceptionHandler
         }
         return e.getDefaultMessage();
     }
-}
-
-class StatusHttp500 {
-    public Integer statusHttp = 500;
 }

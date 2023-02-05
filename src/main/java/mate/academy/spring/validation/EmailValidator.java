@@ -1,10 +1,10 @@
 package mate.academy.spring.validation;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 import javax.validation.constraints.Email;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class EmailValidator implements ConstraintValidator<Email, String> {
     private static final String EMAIL_PATTERN =
