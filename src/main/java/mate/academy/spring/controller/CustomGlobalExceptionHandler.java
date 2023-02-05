@@ -1,5 +1,6 @@
 package mate.academy.spring.controller;
 
+import mate.academy.spring.exception.DataProcessingException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -7,6 +8,7 @@ import org.springframework.validation.FieldError;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 import java.time.LocalDateTime;
@@ -18,6 +20,11 @@ import static mate.academy.spring.util.DateTimePatternUtil.DATE_TIME_PATTERN;
 
 @ControllerAdvice
 public class CustomGlobalExceptionHandler extends ResponseEntityExceptionHandler {
+    private DataProcessingException e;
+    private HttpHeaders headers;
+    private HttpStatus status;
+    private WebRequest request;
+
     @Override
     protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex,
                                                                   HttpHeaders headers,
@@ -35,10 +42,22 @@ public class CustomGlobalExceptionHandler extends ResponseEntityExceptionHandler
         return new ResponseEntity<>(errorsMap, headers, status);
     }
 
+    @ResponseBody
+    public StatusHttp500 handleMethodDataProcessingException(DataProcessingException e,
+                                                            HttpHeaders headers,
+                                                            HttpStatus status,
+                                                            WebRequest request) {
+        return new StatusHttp500();
+    }
+
     private String getErrorMessage(ObjectError e) {
         if (e instanceof FieldError) {
             return ((FieldError) e).getField() + " " + e.getDefaultMessage();
         }
         return e.getDefaultMessage();
     }
+}
+
+class StatusHttp500 {
+    public Integer statusHttp = 500;
 }
