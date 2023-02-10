@@ -1,11 +1,11 @@
 package mate.academy.spring.validation;
 
-import org.springframework.beans.BeanWrapperImpl;
-
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
+import org.springframework.beans.BeanWrapperImpl;
 
-public class PasswordsValueMatchValidator implements ConstraintValidator<PasswordsValueMatch, String> {
+public class PasswordsValueMatchValidator
+        implements ConstraintValidator<PasswordsValueMatch, String> {
     private String password;
     private String passwordMatch;
 
