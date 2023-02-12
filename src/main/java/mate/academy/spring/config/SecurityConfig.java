@@ -22,16 +22,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
                 .roles("ADMIN");
     }
 
-    @Override
-    protected void configure(HttpSecurity req) throws Exception {
-        req.authorizeRequests()
-                .antMatchers("/users").hasRole("ADMIN")
-                .antMatchers("/").permitAll()
-                .anyRequest().authenticated()
-                .and()
-                .formLogin();
-    }
-
     @Bean
     public PasswordEncoder getEncoder(){
         return new BCryptPasswordEncoder();
