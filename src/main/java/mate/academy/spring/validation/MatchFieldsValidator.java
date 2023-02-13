@@ -15,6 +15,7 @@ public class MatchFieldsValidator implements ConstraintValidator<MatchFields, Ob
 
     @Override
     public boolean isValid(Object value, ConstraintValidatorContext context) {
-        return (!Objects.equals(firstField, secondField) || firstField != null) && firstField.equals(secondField);
+        return (!Objects.equals(firstField, secondField) || firstField != null)
+                && firstField.equals(secondField);
     }
 }

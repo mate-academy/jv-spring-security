@@ -13,10 +13,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(AuthenticationManagerBuilder builder) throws Exception {
         builder.inMemoryAuthentication()
                 .withUser("max")
-                .password(getEncoder().encode("max"))
+                .password(getEncoder().encode("max@max.com"))
                 .roles("USER")
                 .and()
-                .withUser("marina")
+                .withUser("marina@marina.com")
                 .password(getEncoder().encode("marina"))
                 .roles("ADMIN");
     }
