@@ -9,6 +9,7 @@ import mate.academy.spring.service.ShoppingCartService;
 import mate.academy.spring.service.UserService;
 import mate.academy.spring.service.mapper.ResponseDtoMapper;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -35,14 +36,14 @@ public class OrderController {
     @PostMapping("/complete")
     public OrderResponseDto completeOrder(Authentication auth) {
         ShoppingCart cart = shoppingCartService.getByUser(
-                userService.findByEmail((String) auth.getPrincipal()).get());
+                userService.findByEmail(((UserDetails) auth.getPrincipal()).getUsername()).get());
         return orderResponseDtoMapper.mapToDto(orderService.completeOrder(cart));
     }
 
     @GetMapping
     public List<OrderResponseDto> getOrderHistory(Authentication auth) {
         return orderService.getOrdersHistory(
-                        userService.findByEmail((String) auth.getPrincipal()).get())
+                        userService.findByEmail(((UserDetails) auth.getPrincipal()).getUsername()).get())
                 .stream()
                 .map(orderResponseDtoMapper::mapToDto)
                 .toList();
