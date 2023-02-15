@@ -1,31 +1,30 @@
 package mate.academy.spring.config;
 
-import mate.academy.spring.service.PasswordService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
-
-    private final PasswordService passwordService;
+    private final PasswordEncoder encoder;
 
     @Autowired
-    public SecurityConfig(PasswordService passwordService) {
-        this.passwordService = passwordService;
+    public SecurityConfig(PasswordEncoder encoder) {
+        this.encoder = encoder;
     }
 
     @Override
     protected void configure(AuthenticationManagerBuilder builder) throws Exception {
         builder.inMemoryAuthentication()
                 .withUser("max@max.com")
-                .password(passwordService.getEncoder().encode("maximMaxim"))
+                .password(encoder.encode("maximMaxim"))
                 .roles("USER")
                 .and()
                 .withUser("marina@marina.com")
-                .password(passwordService.getEncoder().encode("marinaMarina"))
+                .password(encoder.encode("marinaMarina"))
                 .roles("ADMIN");
     }
 
@@ -42,5 +41,4 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .csrf().disable();
     }
-
 }
