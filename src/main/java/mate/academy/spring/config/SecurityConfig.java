@@ -1,3 +1,4 @@
+
 package mate.academy.spring.config;
 
 import java.util.Properties;

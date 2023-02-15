@@ -1,3 +1,4 @@
+
 package mate.academy.spring.model;
 
 import javax.persistence.Column;
