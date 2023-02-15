@@ -7,6 +7,8 @@ import mate.academy.spring.service.MovieSessionService;
 import mate.academy.spring.service.ShoppingCartService;
 import mate.academy.spring.service.UserService;
 import mate.academy.spring.service.mapper.ResponseDtoMapper;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,8 +27,8 @@ public class ShoppingCartController {
     public ShoppingCartController(ShoppingCartService shoppingCartService,
                                   UserService userService,
                                   MovieSessionService movieSessionService,
-            ResponseDtoMapper<ShoppingCartResponseDto, ShoppingCart>
-                                      shoppingCartResponseDtoMapper) {
+                                  ResponseDtoMapper<ShoppingCartResponseDto, ShoppingCart>
+                                          shoppingCartResponseDtoMapper) {
         this.shoppingCartService = shoppingCartService;
         this.userService = userService;
         this.movieSessionService = movieSessionService;
@@ -34,14 +36,17 @@ public class ShoppingCartController {
     }
 
     @PutMapping("/movie-sessions")
-    public void addToCart(@RequestParam Long userId, @RequestParam Long movieSessionId) {
+    public void addToCart(Authentication auth, @RequestParam Long movieSessionId) {
         shoppingCartService.addSession(
-                movieSessionService.get(movieSessionId), userService.get(userId));
+                movieSessionService.get(movieSessionId),
+                userService.findByEmail(((UserDetails) auth.getPrincipal()).getUsername()).get()
+        );
     }
 
     @GetMapping("/by-user")
-    public ShoppingCartResponseDto getByUser(@RequestParam Long userId) {
-        User user = userService.get(userId);
+    public ShoppingCartResponseDto getByUser(Authentication auth) {
+        User user = userService.findByEmail(
+                ((UserDetails) auth.getPrincipal()).getUsername()).get();
         return shoppingCartResponseDtoMapper.mapToDto(shoppingCartService.getByUser(user));
     }
 }
