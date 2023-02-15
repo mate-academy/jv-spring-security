@@ -1,24 +1,31 @@
 package mate.academy.spring.config;
 
-import org.springframework.context.annotation.Bean;
+import mate.academy.spring.service.PasswordService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
+
+    private final PasswordService passwordService;
+
+    @Autowired
+    public SecurityConfig(PasswordService passwordService) {
+        this.passwordService = passwordService;
+    }
+
     @Override
     protected void configure(AuthenticationManagerBuilder builder) throws Exception {
         builder.inMemoryAuthentication()
                 .withUser("max@max.com")
-                .password(getEncoder().encode("maximMaxim"))
+                .password(passwordService.getEncoder().encode("maximMaxim"))
                 .roles("USER")
                 .and()
                 .withUser("marina@marina.com")
-                .password(getEncoder().encode("marinaMarina"))
+                .password(passwordService.getEncoder().encode("marinaMarina"))
                 .roles("ADMIN");
     }
 
@@ -36,8 +43,4 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .csrf().disable();
     }
 
-    @Bean
-    public PasswordEncoder getEncoder() {
-        return new BCryptPasswordEncoder();
-    }
 }
