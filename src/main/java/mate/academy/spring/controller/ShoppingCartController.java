@@ -49,6 +49,6 @@ public class ShoppingCartController {
 
     private User getUserByEmail(Authentication auth) {
         return userService.findByEmail(auth.getName()).orElseThrow(
-                () -> new EntityNotFoundException("Can't find user by email " + auth.getName()));
+                () -> new EntityNotFoundException("Can't find user by email: " + auth.getName()));
     }
 }

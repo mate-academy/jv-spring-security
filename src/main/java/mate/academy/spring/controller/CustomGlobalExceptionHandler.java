@@ -27,7 +27,7 @@ public class CustomGlobalExceptionHandler extends ResponseEntityExceptionHandler
             WebRequest request) {
         Map<String, Object> body = new LinkedHashMap<>();
         body.put("timestamp", LocalDateTime.now().toString());
-        body.put("status", status);
+        body.put("status", status.value());
         List<String> errors = ex.getBindingResult()
                 .getAllErrors()
                 .stream()
@@ -37,12 +37,12 @@ public class CustomGlobalExceptionHandler extends ResponseEntityExceptionHandler
         return new ResponseEntity<>(body, headers, status);
     }
 
-    @ExceptionHandler(DataProcessingException.class)
-    public ResponseEntity<Object> dataProcessingException(Exception ex) {
+    @ExceptionHandler(value = {DataProcessingException.class})
+    public ResponseEntity<Object> dataProcessingExceptionHandler(DataProcessingException ex) {
         Map<String, Object> body = new LinkedHashMap<>();
         body.put("timestamp", LocalDateTime.now().toString());
-        body.put("message", ex.getMessage());
-        body.put("status", HttpStatus.INTERNAL_SERVER_ERROR);
+        body.put(ex.getClass().getSimpleName(), ex.getMessage());
+        body.put("status", HttpStatus.INTERNAL_SERVER_ERROR.value());
         return new ResponseEntity<>(body, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 

@@ -3,16 +3,16 @@ package mate.academy.spring.dto.request;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import java.time.LocalDateTime;
 import javax.validation.constraints.FutureOrPresent;
-import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Positive;
 import mate.academy.spring.util.DateTimePatternUtil;
 
 public class MovieSessionRequestDto {
     @NotNull
-    @Min(value = 0)
+    @Positive
     private Long movieId;
     @NotNull
-    @Min(value = 0)
+    @Positive
     private Long cinemaHallId;
     @JsonFormat(pattern = DateTimePatternUtil.DATE_TIME_PATTERN)
     @FutureOrPresent
