@@ -10,7 +10,7 @@ import javax.validation.Payload;
 @Constraint(validatedBy = ConfirmPasswordValidator.class)
 @Target({ElementType.TYPE})
 @Retention(RetentionPolicy.RUNTIME)
-public @interface ConfirmPassword {
+public @interface ValidatePassword {
     String message() default "Your password and confirm password doesn't match";
     Class<?>[] groups() default {};
     Class<? extends Payload>[] payload() default {};

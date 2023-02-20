@@ -1,10 +1,10 @@
 package mate.academy.spring.dto.request;
 
 import javax.validation.constraints.Email;
-import mate.academy.spring.validation.ConfirmPassword;
 import mate.academy.spring.validation.Password;
+import mate.academy.spring.validation.ValidatePassword;
 
-@ConfirmPassword
+@ValidatePassword
 public class UserRequestDto {
     @Email
     private String email;
