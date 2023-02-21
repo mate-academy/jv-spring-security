@@ -36,13 +36,12 @@ public class CustomGlobalExceptionHandler extends ResponseEntityExceptionHandler
     }
 
     @ExceptionHandler(DataProcessingException.class)
-    protected ResponseEntity<Object> handleDataProcessingException(DataProcessingException e,
-                                                                               HttpHeaders header) {
+    protected ResponseEntity<Object> handleDataProcessingException(DataProcessingException e) {
         Map<String, Object> body = new LinkedHashMap<>();
         body.put("timestamp", LocalDateTime.now().toString());
         body.put("status", HttpStatus.INTERNAL_SERVER_ERROR.value());
         body.put("errors", e.getMessage());
-        return new ResponseEntity<>(body, header, HttpStatus.INTERNAL_SERVER_ERROR.value());
+        return new ResponseEntity<>(body, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
     private String getErrorMessage(ObjectError objectError) {
