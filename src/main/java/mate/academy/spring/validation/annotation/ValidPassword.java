@@ -12,7 +12,7 @@ import mate.academy.spring.validation.MatchPasswordValidator;
 @Target({ElementType.TYPE})
 @Retention(RetentionPolicy.RUNTIME)
 public @interface ValidPassword {
-    String message() default "Invalid matches";
+    String message() default "Password and repeat password do not match";
     Class<?>[] groups() default {};
     Class<? extends Payload>[] payload() default {};
 }

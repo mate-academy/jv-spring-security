@@ -12,7 +12,11 @@ import mate.academy.spring.validation.PasswordValidator;
 @Target({ElementType.FIELD})
 @Retention(RetentionPolicy.RUNTIME)
 public @interface Password {
-    String message() default "Invalid password";
+    String message() default "Invalid password. It's need to contain: \n"
+            + "- One digit \n"
+            + "- One UpperCase letter \n"
+            + "- No special symbols \n"
+            + "- From 8 to 20 symbols";
     Class<?>[] groups() default {};
     Class<? extends Payload>[] payload() default {};
 }

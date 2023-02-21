@@ -12,7 +12,7 @@ import mate.academy.spring.validation.EmailValidator;
 @Target({ElementType.FIELD})
 @Retention(RetentionPolicy.RUNTIME)
 public @interface Email {
-    String message() default "Invalid email";
+    String message() default "Invalid email format";
     Class<?>[] groups() default {};
     Class<? extends Payload>[] payload() default {};
 }
