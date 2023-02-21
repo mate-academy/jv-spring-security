@@ -1,10 +1,23 @@
 package mate.academy.spring.dto.request;
 
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.FutureOrPresent;
 import java.time.LocalDateTime;
 
 public class MovieSessionRequestDto {
+    private static final byte MIN_ID_NUMBER = 1;
+    @NotNull(message = "Please provide a movieId")
+    @Min(value = MIN_ID_NUMBER, message = "The movieId must be more then " + MIN_ID_NUMBER)
+    @Max(value = Integer.MAX_VALUE, message = "The movieId must be less then " + Integer.MAX_VALUE)
     private Long movieId;
+    @NotNull(message = "Please provide a cinemaHallId")
+    @Min(value = MIN_ID_NUMBER, message = "The cinemaHallId must be more then " + MIN_ID_NUMBER)
+    @Max(value = Integer.MAX_VALUE, message = "The cinemaHallId must be less then " + Integer.MAX_VALUE)
     private Long cinemaHallId;
+    @NotNull(message = "Please provide a showTime")
+    @FutureOrPresent(message = "The date must be in the future")
     private LocalDateTime showTime;
 
     public Long getMovieId() {
