@@ -1,5 +1,6 @@
 package mate.academy.spring.config;
 
+import java.security.SecureRandom;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -10,6 +11,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
+    private static final int WORK_FACTOR = 10;
+
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.inMemoryAuthentication()
@@ -30,6 +33,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Bean
     public PasswordEncoder getEncoder() {
-        return new BCryptPasswordEncoder();
+        return new BCryptPasswordEncoder(WORK_FACTOR, new SecureRandom());
     }
 }

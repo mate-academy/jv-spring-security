@@ -2,7 +2,6 @@ package mate.academy.spring.controller;
 
 import mate.academy.spring.dto.request.UserRequestDto;
 import mate.academy.spring.dto.response.UserResponseDto;
-import mate.academy.spring.exception.AuthenticationException;
 import mate.academy.spring.model.User;
 import mate.academy.spring.service.AuthenticationService;
 import mate.academy.spring.service.mapper.ResponseDtoMapper;
@@ -24,9 +23,6 @@ public class AuthenticationController {
 
     @PostMapping("/register")
     public UserResponseDto register(@RequestBody @Validated UserRequestDto requestDto) {
-        if (!requestDto.getPassword().equals(requestDto.getRepeatPassword())) {
-            throw new AuthenticationException("Password and repeated password must be the same");
-        }
         User user = authService.register(requestDto.getEmail(), requestDto.getPassword());
         return userDtoResponseMapper.mapToDto(user);
     }

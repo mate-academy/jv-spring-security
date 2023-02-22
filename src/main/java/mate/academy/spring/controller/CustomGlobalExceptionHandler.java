@@ -4,7 +4,6 @@ import java.time.LocalDateTime;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import mate.academy.spring.exception.AuthenticationException;
 import mate.academy.spring.exception.DataProcessingException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -18,15 +17,12 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 
 @ControllerAdvice
 public class CustomGlobalExceptionHandler extends ResponseEntityExceptionHandler {
-    private static final int SERVER_ERROR_STATUS = 500;
-    private static final int BAD_REQUEST = 400;
 
-    @ExceptionHandler(value = {DataProcessingException.class, AuthenticationException.class})
+    @ExceptionHandler(value = DataProcessingException.class)
     protected ResponseEntity<Object> handleConflict(RuntimeException e) {
         Map<String, Object> body = new LinkedHashMap<>();
         body.put("timestamp", LocalDateTime.now());
-        body.put("status", e instanceof DataProcessingException
-                ? SERVER_ERROR_STATUS : BAD_REQUEST);
+        body.put("status", HttpStatus.INTERNAL_SERVER_ERROR.value());
         body.put("error info", e.getMessage());
         return new ResponseEntity<>(body, new HttpHeaders(), HttpStatus.CONFLICT);
     }
