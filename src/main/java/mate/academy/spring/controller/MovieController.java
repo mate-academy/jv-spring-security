@@ -7,6 +7,7 @@ import mate.academy.spring.model.Movie;
 import mate.academy.spring.service.MovieService;
 import mate.academy.spring.service.mapper.RequestDtoMapper;
 import mate.academy.spring.service.mapper.ResponseDtoMapper;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -29,7 +30,7 @@ public class MovieController {
     }
 
     @PostMapping
-    public MovieResponseDto add(@RequestBody MovieRequestDto requestDto) {
+    public MovieResponseDto add(@RequestBody @Validated MovieRequestDto requestDto) {
         Movie movie = movieService.add(movieRequestDtoMapper.mapToModel(requestDto));
         return movieResponseDtoMapper.mapToDto(movie);
     }
