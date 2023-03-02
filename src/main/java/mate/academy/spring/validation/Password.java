@@ -7,11 +7,11 @@ import java.lang.annotation.Target;
 import javax.validation.Constraint;
 import javax.validation.Payload;
 
-@Constraint(validatedBy = RepeatPasswordValidator.class)
-@Target({ElementType.TYPE})
+@Constraint(validatedBy = PasswordValidator.class)
+@Target({ElementType.PARAMETER, ElementType.FIELD})
 @Retention(RetentionPolicy.RUNTIME)
-public @interface RepeatPassword {
-    String message() default "Passwords are not equal";
+public @interface Password {
+    String message() default "Password is not correct";
     Class<?>[] groups() default {};
     Class<? extends Payload>[] payload() default {};
 }
