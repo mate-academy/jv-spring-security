@@ -8,6 +8,7 @@ public class MovieSessionRequestDto {
     private Long movieId;
     @NotNull
     private Long cinemaHallId;
+    @NotNull
     private LocalDateTime showTime;
 
     public Long getMovieId() {
