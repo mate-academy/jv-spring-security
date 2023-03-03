@@ -1,8 +1,7 @@
 package mate.academy.spring.dto.request;
 
-import org.springframework.lang.NonNull;
-
 import java.time.LocalDateTime;
+import org.springframework.lang.NonNull;
 
 public class MovieSessionRequestDto {
     @NonNull
