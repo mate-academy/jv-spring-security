@@ -44,10 +44,10 @@ public class ShoppingCartController {
 
     @GetMapping("/by-user")
     public ShoppingCartResponseDto getByUser(Authentication authentication) {
-        String userEmail = authentication.getName();
-        User user = userService.findByEmail(userEmail).orElseThrow(
+        String email = authentication.getName();
+        User user = userService.findByEmail(email).orElseThrow(
                 () -> new NoSuchElementException("Couldn't find user by email: "
-                        + userEmail));
+                        + email));
         return shoppingCartResponseDtoMapper.mapToDto(shoppingCartService.getByUser(user));
     }
 }
