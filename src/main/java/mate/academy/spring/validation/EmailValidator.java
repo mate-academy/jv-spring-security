@@ -7,6 +7,7 @@ import javax.validation.ConstraintValidatorContext;
 
 public class EmailValidator implements ConstraintValidator<Email, String> {
     private static final String EMAIL_PATTERN = "^[a-zA-Z0-9.]+@[a-zA-Z0-9.]+.[a-zA-Z]{2,6}$";
+    private static final Pattern pattern = Pattern.compile(EMAIL_PATTERN);
 
     @Override
     public boolean isValid(String email,
@@ -14,7 +15,6 @@ public class EmailValidator implements ConstraintValidator<Email, String> {
         if (email == null) {
             return false;
         }
-        Pattern pattern = Pattern.compile(EMAIL_PATTERN);
         Matcher matcher = pattern.matcher(email);
         return matcher.matches();
     }

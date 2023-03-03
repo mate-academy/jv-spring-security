@@ -6,13 +6,12 @@ import org.springframework.lang.NonNull;
 
 public class MovieSessionRequestDto {
     @NonNull
-    @Min(value = 0)
+    @Min(value = 1)
     private Long movieId;
     @NonNull
-    @Min(value = 0)
+    @Min(value = 1)
     private Long cinemaHallId;
     @NonNull
-    @Min(value = 0)
     private LocalDateTime showTime;
 
     public Long getMovieId() {
