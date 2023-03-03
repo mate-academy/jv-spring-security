@@ -8,10 +8,10 @@ import mate.academy.spring.service.OrderService;
 import mate.academy.spring.service.ShoppingCartService;
 import mate.academy.spring.service.UserService;
 import mate.academy.spring.service.mapper.ResponseDtoMapper;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -33,14 +33,21 @@ public class OrderController {
     }
 
     @PostMapping("/complete")
-    public OrderResponseDto completeOrder(@RequestParam Long userId) {
-        ShoppingCart cart = shoppingCartService.getByUser(userService.get(userId));
+    public OrderResponseDto completeOrder(Authentication auth) {
+        String email = auth.getName();
+        ShoppingCart cart = shoppingCartService.getByUser(userService
+                .findByEmail(email)
+                .orElseThrow(() -> new RuntimeException("Coudn't find user with such email: "
+                        + email)));
         return orderResponseDtoMapper.mapToDto(orderService.completeOrder(cart));
     }
 
     @GetMapping
-    public List<OrderResponseDto> getOrderHistory(@RequestParam Long userId) {
-        return orderService.getOrdersHistory(userService.get(userId))
+    public List<OrderResponseDto> getOrderHistory(Authentication auth) {
+        String email = auth.getName();
+        return orderService.getOrdersHistory(userService.findByEmail(email)
+                    .orElseThrow(() -> new RuntimeException("Coudn't find user with such email: "
+                            + email)))
                 .stream()
                 .map(orderResponseDtoMapper::mapToDto)
                 .toList();
