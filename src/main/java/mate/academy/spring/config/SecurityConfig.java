@@ -15,7 +15,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         auth.inMemoryAuthentication()
                 .withUser("alica")
                 .password(getEncoder().encode("1234"))
-                .roles("User");
+                .roles("USER");
     }
 
     @Override

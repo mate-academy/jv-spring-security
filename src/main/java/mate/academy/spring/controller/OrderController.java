@@ -37,7 +37,7 @@ public class OrderController {
     @PostMapping("/complete")
     public OrderResponseDto completeOrder(Authentication authentication) {
         User user = userService.findByEmail(authentication.getName()).orElseThrow(
-                () -> new NoSuchElementException("Invalid email"));
+                () -> new NoSuchElementException("Invalid email: " + authentication.getName()));
         ShoppingCart cart = shoppingCartService.getByUser(user);
         return orderResponseDtoMapper.mapToDto(orderService.completeOrder(cart));
     }
