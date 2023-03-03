@@ -37,7 +37,7 @@ public class ShoppingCartController {
 
     @PutMapping("/movie-sessions")
     public void addToCart(Authentication authentication, @RequestParam Long movieSessionId) {
-        String email = (String) authentication.getPrincipal();
+        String email = authentication.getName();
         shoppingCartService.addSession(
                 movieSessionService.get(movieSessionId), userService.findByEmail(email)
                         .orElseThrow(()
@@ -47,7 +47,7 @@ public class ShoppingCartController {
 
     @GetMapping("/by-user")
     public ShoppingCartResponseDto getByUser(Authentication authentication) {
-        String email = (String) authentication.getPrincipal();
+        String email = authentication.getName();
         User user = userService.findByEmail(email)
                 .orElseThrow(()
                         -> new NoSuchElementException(

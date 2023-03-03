@@ -35,7 +35,7 @@ public class OrderController {
 
     @PostMapping("/complete")
     public OrderResponseDto completeOrder(Authentication authentication) {
-        String email = (String) authentication.getPrincipal();
+        String email = authentication.getName();
         ShoppingCart cart = shoppingCartService.getByUser(userService.findByEmail(email)
                 .orElseThrow(()
                         -> new NoSuchElementException("Can't find user by email:" + email)));
@@ -44,7 +44,7 @@ public class OrderController {
 
     @GetMapping
     public List<OrderResponseDto> getOrderHistory(Authentication authentication) {
-        String email = (String) authentication.getPrincipal();
+        String email = authentication.getName();
         return orderService.getOrdersHistory(
                 userService.findByEmail(email)
                         .orElseThrow(()
