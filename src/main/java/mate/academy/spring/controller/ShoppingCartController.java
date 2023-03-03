@@ -37,7 +37,8 @@ public class ShoppingCartController {
     @PutMapping("/movie-sessions")
     public void addToCart(@RequestParam Long movieSessionId, Authentication authentication) {
         String email = authentication.getName();
-        User user = userService.findByEmail(email).orElseThrow();
+        User user = userService.findByEmail(email).orElseThrow(
+                () -> new RuntimeException("Can't find user by email: " + email));
         shoppingCartService.addSession(
                 movieSessionService.get(movieSessionId), userService.get(user.getId()));
     }
