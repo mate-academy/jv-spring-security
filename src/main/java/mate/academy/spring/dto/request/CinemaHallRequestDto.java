@@ -4,15 +4,15 @@ import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
 
 public class CinemaHallRequestDto {
+    @Min(0)
     private int capacity;
+    @NotNull
     private String description;
 
-    @Min(0)
     public int getCapacity() {
         return capacity;
     }
 
-    @NotNull
     public String getDescription() {
         return description;
     }
