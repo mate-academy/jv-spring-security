@@ -4,11 +4,10 @@ import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 import mate.academy.spring.dto.request.UserRequestDto;
 
-public class PasswordMatchesValidator implements ConstraintValidator<PasswordMatches, Object> {
-
+public class PasswordMatchesValidator implements
+        ConstraintValidator<PasswordMatches, UserRequestDto> {
     @Override
-    public boolean isValid(Object requestUser, ConstraintValidatorContext context) {
-        UserRequestDto user = (UserRequestDto) requestUser;
-        return user.getPassword().equals(user.getRepeatPassword());
+    public boolean isValid(UserRequestDto dto, ConstraintValidatorContext context) {
+        return dto.getPassword() != null && dto.getPassword().equals(dto.getRepeatPassword());
     }
 }

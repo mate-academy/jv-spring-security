@@ -19,7 +19,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .anyRequest().authenticated()
                 .and()
-                .formLogin()
+                .formLogin().permitAll()
                 .defaultSuccessUrl("/authenticated", true)
                 .and()
                 .httpBasic()
@@ -29,17 +29,17 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Bean
     public UserDetailsService userDetailsService() {
-        UserDetails user1 = User.builder()
-                .username("user1@gmail.com")
+        UserDetails user = User.builder()
+                .username("user@gmail.com")
                 .password(passwordEncoder().encode("password1"))
                 .roles("USER")
                 .build();
-        UserDetails admin1 = User.builder()
-                .username("admin1@gmail.com")
+        UserDetails admin = User.builder()
+                .username("admin@gmail.com")
                 .password(passwordEncoder().encode("password2"))
                 .roles("ADMIN")
                 .build();
-        return new InMemoryUserDetailsManager(user1, admin1);
+        return new InMemoryUserDetailsManager(user, admin);
     }
 
     @Bean
