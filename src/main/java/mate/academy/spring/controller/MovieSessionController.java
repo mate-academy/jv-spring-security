@@ -2,6 +2,8 @@ package mate.academy.spring.controller;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.stream.Collectors;
+import javax.validation.Valid;
 import mate.academy.spring.dto.request.MovieSessionRequestDto;
 import mate.academy.spring.dto.response.MovieSessionResponseDto;
 import mate.academy.spring.model.MovieSession;
@@ -30,43 +32,43 @@ public class MovieSessionController {
             movieSessionResponseDtoMapper;
 
     public MovieSessionController(MovieSessionService movieSessionService,
-            RequestDtoMapper<MovieSessionRequestDto, MovieSession> movieSessionRequestDtoMapper,
-            ResponseDtoMapper<MovieSessionResponseDto, MovieSession>
-                                      movieSessionResponseDtoMapper) {
+                                  RequestDtoMapper<MovieSessionRequestDto, MovieSession> movieSessionRequestDtoMapper,
+                                  ResponseDtoMapper<MovieSessionResponseDto, MovieSession>
+                                          movieSessionResponseDtoMapper) {
         this.movieSessionService = movieSessionService;
         this.movieSessionRequestDtoMapper = movieSessionRequestDtoMapper;
         this.movieSessionResponseDtoMapper = movieSessionResponseDtoMapper;
     }
 
     @PostMapping
-    public MovieSessionResponseDto add(@RequestBody MovieSessionRequestDto requestDto) {
-        MovieSession movieSession = movieSessionRequestDtoMapper.mapToModel(requestDto);
-        movieSessionService.add(movieSession);
-        return movieSessionResponseDtoMapper.mapToDto(movieSession);
-    }
+        public MovieSessionResponseDto add(@RequestBody @Valid MovieSessionRequestDto requestDto) {
+            MovieSession movieSession = movieSessionRequestDtoMapper.mapToModel(requestDto);
+            movieSessionService.add(movieSession);
+            return movieSessionResponseDtoMapper.mapToDto(movieSession);
+        }
 
-    @GetMapping("/available")
-    public List<MovieSessionResponseDto> findAvailableSessions(@RequestParam Long movieId,
-                                                @RequestParam
-            @DateTimeFormat(pattern = DateTimePatternUtil.DATE_PATTERN)
-                                                        LocalDate date) {
-        return movieSessionService.findAvailableSessions(movieId, date)
-                .stream()
-                .map(movieSessionResponseDtoMapper::mapToDto)
-                .toList();
-    }
+        @GetMapping("/available")
+        public List<MovieSessionResponseDto> findAvailableSessions(@RequestParam Long movieId,
+                @RequestParam
+                @DateTimeFormat(pattern = DateTimePatternUtil.DATE_PATTERN)
+                        LocalDate date) {
+            return movieSessionService.findAvailableSessions(movieId, date)
+                    .stream()
+                    .map(movieSessionResponseDtoMapper::mapToDto)
+                    .collect(Collectors.toList());
+        }
 
-    @PutMapping("/{id}")
-    public MovieSessionResponseDto update(@PathVariable Long id,
-                                          @RequestBody MovieSessionRequestDto requestDto) {
-        MovieSession movieSession = movieSessionRequestDtoMapper.mapToModel(requestDto);
-        movieSession.setId(id);
-        movieSessionService.update(movieSession);
-        return movieSessionResponseDtoMapper.mapToDto(movieSession);
-    }
+        @PutMapping("/{id}")
+        public MovieSessionResponseDto update(@PathVariable Long id,
+                @RequestBody MovieSessionRequestDto requestDto) {
+            MovieSession movieSession = movieSessionRequestDtoMapper.mapToModel(requestDto);
+            movieSession.setId(id);
+            movieSessionService.update(movieSession);
+            return movieSessionResponseDtoMapper.mapToDto(movieSession);
+        }
 
-    @DeleteMapping("/{id}")
-    public void delete(@PathVariable Long id) {
-        movieSessionService.delete(id);
+        @DeleteMapping("/{id}")
+        public void delete(@PathVariable Long id) {
+            movieSessionService.delete(id);
+        }
     }
-}
