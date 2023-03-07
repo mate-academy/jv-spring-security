@@ -13,6 +13,6 @@ public class EmailValidator implements
 
     @Override
     public boolean isValid(String email, ConstraintValidatorContext constraintValidatorContext) {
-        return email != null && email.matches(EMAIL_REGEX.pattern());
+        return email != null && EMAIL_REGEX.matcher(email).matches();
     }
 }

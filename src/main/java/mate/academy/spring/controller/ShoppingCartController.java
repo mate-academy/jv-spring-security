@@ -42,8 +42,8 @@ public class ShoppingCartController {
                 movieSessionService.get(movieSessionId),
                 userService.findByEmail(email)
                         .orElseThrow(
-                                () -> new RuntimeException("Coudn't find user "
-                                        + "with such email: " + email))
+                                () -> new NoSuchElementException("Cant find user by email: "
+                                        + email))
         );
     }
 
