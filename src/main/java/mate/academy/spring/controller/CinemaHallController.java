@@ -23,8 +23,10 @@ public class CinemaHallController {
     private final ResponseDtoMapper<CinemaHallResponseDto, CinemaHall> cinemaHallResponseDtoMapper;
 
     public CinemaHallController(CinemaHallService cinemaHallService,
-                                RequestDtoMapper<CinemaHallRequestDto, CinemaHall> cinemaHallRequestDtoMapper,
-                                ResponseDtoMapper<CinemaHallResponseDto, CinemaHall> cinemaHallResponseDtoMapper) {
+                                RequestDtoMapper<CinemaHallRequestDto,
+                                        CinemaHall> cinemaHallRequestDtoMapper,
+                                ResponseDtoMapper<CinemaHallResponseDto,
+                                        CinemaHall> cinemaHallResponseDtoMapper) {
         this.cinemaHallService = cinemaHallService;
         this.cinemaHallRequestDtoMapper = cinemaHallRequestDtoMapper;
         this.cinemaHallResponseDtoMapper = cinemaHallResponseDtoMapper;
@@ -32,16 +34,16 @@ public class CinemaHallController {
 
     @PostMapping
         public CinemaHallResponseDto add(@RequestBody @Valid CinemaHallRequestDto requestDto) {
-            CinemaHall cinemaHall = cinemaHallService.add(
+        CinemaHall cinemaHall = cinemaHallService.add(
                     cinemaHallRequestDtoMapper.mapToModel(requestDto));
-            return cinemaHallResponseDtoMapper.mapToDto(cinemaHall);
-        }
+        return cinemaHallResponseDtoMapper.mapToDto(cinemaHall);
+    }
 
-        @GetMapping
+    @GetMapping
         public List<CinemaHallResponseDto> getAll() {
-            return cinemaHallService.getAll()
+        return cinemaHallService.getAll()
                     .stream()
                     .map(cinemaHallResponseDtoMapper::mapToDto)
                     .collect(Collectors.toList());
-        }
     }
+}

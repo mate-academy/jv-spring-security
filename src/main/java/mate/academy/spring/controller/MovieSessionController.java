@@ -32,7 +32,8 @@ public class MovieSessionController {
             movieSessionResponseDtoMapper;
 
     public MovieSessionController(MovieSessionService movieSessionService,
-                                  RequestDtoMapper<MovieSessionRequestDto, MovieSession> movieSessionRequestDtoMapper,
+                                  RequestDtoMapper<MovieSessionRequestDto,
+                                          MovieSession> movieSessionRequestDtoMapper,
                                   ResponseDtoMapper<MovieSessionResponseDto, MovieSession>
                                           movieSessionResponseDtoMapper) {
         this.movieSessionService = movieSessionService;
@@ -42,33 +43,33 @@ public class MovieSessionController {
 
     @PostMapping
         public MovieSessionResponseDto add(@RequestBody @Valid MovieSessionRequestDto requestDto) {
-            MovieSession movieSession = movieSessionRequestDtoMapper.mapToModel(requestDto);
-            movieSessionService.add(movieSession);
-            return movieSessionResponseDtoMapper.mapToDto(movieSession);
-        }
+        MovieSession movieSession = movieSessionRequestDtoMapper.mapToModel(requestDto);
+        movieSessionService.add(movieSession);
+        return movieSessionResponseDtoMapper.mapToDto(movieSession);
+    }
 
-        @GetMapping("/available")
+    @GetMapping("/available")
         public List<MovieSessionResponseDto> findAvailableSessions(@RequestParam Long movieId,
                 @RequestParam
                 @DateTimeFormat(pattern = DateTimePatternUtil.DATE_PATTERN)
                         LocalDate date) {
-            return movieSessionService.findAvailableSessions(movieId, date)
+        return movieSessionService.findAvailableSessions(movieId, date)
                     .stream()
                     .map(movieSessionResponseDtoMapper::mapToDto)
                     .collect(Collectors.toList());
-        }
+    }
 
-        @PutMapping("/{id}")
+    @PutMapping("/{id}")
         public MovieSessionResponseDto update(@PathVariable Long id,
                 @RequestBody MovieSessionRequestDto requestDto) {
-            MovieSession movieSession = movieSessionRequestDtoMapper.mapToModel(requestDto);
-            movieSession.setId(id);
-            movieSessionService.update(movieSession);
-            return movieSessionResponseDtoMapper.mapToDto(movieSession);
-        }
-
-        @DeleteMapping("/{id}")
-        public void delete(@PathVariable Long id) {
-            movieSessionService.delete(id);
-        }
+        MovieSession movieSession = movieSessionRequestDtoMapper.mapToModel(requestDto);
+        movieSession.setId(id);
+        movieSessionService.update(movieSession);
+        return movieSessionResponseDtoMapper.mapToDto(movieSession);
     }
+
+    @DeleteMapping("/{id}")
+        public void delete(@PathVariable Long id) {
+        movieSessionService.delete(id);
+    }
+}
