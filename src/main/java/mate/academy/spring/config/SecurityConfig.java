@@ -6,18 +6,23 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
+    private final PasswordEncoder passwordEncoder;
+
+    public SecurityConfig(PasswordEncoder passwordEncoder) {
+        this.passwordEncoder = passwordEncoder;
+    }
+
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         // first approach to add one inMemoryUSer
         auth.inMemoryAuthentication()
                 .withUser("alex")
-                .password(getEncoder().encode("111"))
+                .password(passwordEncoder.encode("111"))
                 .roles("USER");
 
         // second approach to add list of users in MemoryUser
@@ -41,13 +46,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Bean
     public InMemoryUserDetailsManager inMemoryUserDetailsManager() {
         Properties users = new Properties();
-        users.put("username", getEncoder().encode("password") + ",ROLE," + "enabled");
-        users.put("admin", getEncoder().encode("password") + ",ADMIN," + "enabled");
+        users.put("username", passwordEncoder.encode("password") + ",ROLE," + "enabled");
+        users.put("admin", passwordEncoder.encode("password") + ",ADMIN," + "enabled");
         return new InMemoryUserDetailsManager(users);
-    }
-
-    @Bean
-    public PasswordEncoder getEncoder() {
-        return new BCryptPasswordEncoder();
     }
 }
