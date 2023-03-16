@@ -7,13 +7,11 @@ import java.lang.annotation.Target;
 import javax.validation.Constraint;
 import javax.validation.Payload;
 
-@Constraint(validatedBy = PasswordValidation.class)
-@Target({ElementType.TYPE})
+@Constraint(validatedBy = EmailValidation.class)
+@Target({ElementType.PARAMETER, ElementType.FIELD})
 @Retention(RetentionPolicy.RUNTIME)
-public @interface ValidPassword {
-    String message() default "Invalid password";
-
+public @interface Email {
+    String message() default "Invalid email";
     Class<?>[] groups() default {};
-
     Class<? extends Payload>[] payload() default {};
 }

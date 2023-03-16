@@ -5,7 +5,7 @@ import java.util.regex.Pattern;
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
-public class EmailValidation implements ConstraintValidator<ValidEmail, String> {
+public class EmailValidation implements ConstraintValidator<Email, String> {
     public static final String EMAIL_PATTERN = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$";
 
     @Override
