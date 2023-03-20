@@ -1,21 +1,17 @@
 package mate.academy.spring.dto.request;
 
 import java.time.LocalDateTime;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotNull;
-import org.springframework.format.annotation.DateTimeFormat;
+import javax.validation.constraints.FutureOrPresent;
+import javax.validation.constraints.Positive;
 
 public class MovieSessionRequestDto {
-    @NotNull
-    @Min(value = 0)
+    @Positive(message = "movie id should be positive")
     private Long movieId;
 
-    @NotNull
-    @Min(value = 0)
+    @Positive(message = "cinema hall id should be positive")
     private Long cinemaHallId;
 
-    @NotNull
-    @DateTimeFormat
+    @FutureOrPresent(message = "the date should be correct")
     private LocalDateTime showTime;
 
     public Long getMovieId() {

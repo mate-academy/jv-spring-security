@@ -1,18 +1,19 @@
 package mate.academy.spring.dto.request;
 
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 import mate.academy.spring.annotation.Email;
+import mate.academy.spring.annotation.PasswordValidation;
 
+@PasswordValidation(message = "the passwords aren't same")
 public class UserRequestDto {
-    @NotNull
-    @Email
-    @Size(max = 255)
+    @Email(message = "please enter valid email")
     private String email;
 
-    @NotNull
-    @Size(min = 8, max = 255)
+    @NotNull(message = "password should be not null")
     private String password;
+
+    @NotNull(message = "repeated password should be not null")
+    private String repeatPassword;
 
     public String getEmail() {
         return email;
@@ -20,5 +21,9 @@ public class UserRequestDto {
 
     public String getPassword() {
         return password;
+    }
+
+    public String getRepeatPassword() {
+        return repeatPassword;
     }
 }
