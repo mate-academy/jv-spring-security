@@ -8,9 +8,7 @@ import mate.academy.spring.dto.request.UserRequestDto;
 public class PasswordValidator implements ConstraintValidator<PasswordValidation, UserRequestDto> {
     @Override
     public boolean isValid(UserRequestDto userRequestDto, ConstraintValidatorContext context) {
-        if (userRequestDto.getPassword() == null || userRequestDto.getRepeatPassword() == null) {
-            throw new RuntimeException("The password and repeat password are should be not null!");
-        }
-        return userRequestDto.getPassword().equals(userRequestDto.getRepeatPassword());
+        return userRequestDto.getPassword() != null
+                && userRequestDto.getPassword().equals(userRequestDto.getRepeatPassword());
     }
 }
