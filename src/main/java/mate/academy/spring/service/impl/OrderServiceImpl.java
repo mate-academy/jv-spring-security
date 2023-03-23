@@ -18,6 +18,7 @@ public class OrderServiceImpl implements OrderService {
     public OrderServiceImpl(OrderDao orderDao, ShoppingCartService shoppingCartService) {
         this.orderDao = orderDao;
         this.shoppingCartService = shoppingCartService;
+
     }
 
     @Override
