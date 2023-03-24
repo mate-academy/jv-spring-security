@@ -1,5 +1,6 @@
 package mate.academy.spring.dto.request;
 
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import mate.academy.spring.validation.Email;
 import mate.academy.spring.validation.ValidPassword;
@@ -11,8 +12,10 @@ public class UserRequestDto {
     @Size(min = 4)
     private String email;
     @Size(min = 4)
+    @NotNull
     private String password;
     @Size(min = 4)
+    @NotNull
     private String repeatPassword;
 
     public String getEmail() {
