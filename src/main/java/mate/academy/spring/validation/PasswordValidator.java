@@ -11,9 +11,6 @@ public class PasswordValidator implements ConstraintValidator<ValidPassword, Use
         String plainPassword = userRequestDto.getPassword();
         String repeatPassword = userRequestDto.getRepeatPassword();
 
-        if (plainPassword != null && plainPassword.equals(repeatPassword)) {
-            return true;
-        }
-        return false;
+        return plainPassword != null && plainPassword.equals(repeatPassword);
     }
 }
