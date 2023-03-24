@@ -12,7 +12,7 @@ public class PasswordValidator implements ConstraintValidator<ValidPassword, Use
         String repeatPassword = userRequestDto.getRepeatPassword();
 
         if (plainPassword == null || plainPassword == "" || repeatPassword == ""
-                || !plainPassword.equals(repeatPassword)) {
+                || repeatPassword == null || !plainPassword.equals(repeatPassword)) {
             return false;
         }
         return true;

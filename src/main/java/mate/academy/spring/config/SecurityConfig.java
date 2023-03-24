@@ -12,12 +12,17 @@ import org.springframework.security.web.authentication.www.BasicAuthenticationFi
 
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
+    private final PasswordEncoder passwordEncoder;
+
+    public SecurityConfig(PasswordEncoder passwordEncoder) {
+        this.passwordEncoder = passwordEncoder;
+    }
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.inMemoryAuthentication()
-                .withUser("user@u")
-                .password(getEncoder().encode("password"))
+                .withUser("user@user")
+                .password(passwordEncoder.encode("password"))
                 .roles("USER");
     }
 

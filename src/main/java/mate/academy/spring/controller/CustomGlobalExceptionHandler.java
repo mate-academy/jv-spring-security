@@ -37,7 +37,6 @@ public class CustomGlobalExceptionHandler extends ResponseEntityExceptionHandler
         if (ex.getBindingResult() instanceof DataProcessingException) {
             body.put("status", status.is5xxServerError());
         }
-
         return new ResponseEntity<>(body, headers, status);
     }
 
