@@ -27,8 +27,8 @@ public class ShoppingCartController {
     public ShoppingCartController(ShoppingCartService shoppingCartService,
                                   UserService userService,
                                   MovieSessionService movieSessionService,
-            ResponseDtoMapper<ShoppingCartResponseDto, ShoppingCart>
-                                      shoppingCartResponseDtoMapper) {
+                                  ResponseDtoMapper<ShoppingCartResponseDto, ShoppingCart>
+                                          shoppingCartResponseDtoMapper) {
         this.shoppingCartService = shoppingCartService;
         this.userService = userService;
         this.movieSessionService = movieSessionService;
@@ -37,18 +37,19 @@ public class ShoppingCartController {
 
     @PutMapping("/movie-sessions")
     public void addToCart(Authentication authentication, @RequestParam Long movieSessionId) {
-        User userFromDB = userService.findByEmail(authentication.getName())
-                .orElseThrow(() -> new NoSuchElementException("Can't find user with email "
-                        + authentication.getName() + " in DB"));
         shoppingCartService.addSession(
-                movieSessionService.get(movieSessionId), userFromDB);
+                movieSessionService.get(movieSessionId), getUserFromDB(authentication));
     }
 
     @GetMapping("/by-user")
     public ShoppingCartResponseDto getByUser(Authentication authentication) {
-        User userFromDB = userService.findByEmail(authentication.getName())
+        return shoppingCartResponseDtoMapper
+                .mapToDto(shoppingCartService.getByUser(getUserFromDB(authentication)));
+    }
+
+    private User getUserFromDB(Authentication authentication) {
+        return userService.findByEmail(authentication.getName())
                 .orElseThrow(() -> new NoSuchElementException("Can't find user with email "
                         + authentication.getName() + " in DB"));
-        return shoppingCartResponseDtoMapper.mapToDto(shoppingCartService.getByUser(userFromDB));
     }
 }

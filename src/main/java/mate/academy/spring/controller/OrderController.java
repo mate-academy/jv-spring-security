@@ -37,21 +37,21 @@ public class OrderController {
 
     @PostMapping("/complete")
     public OrderResponseDto completeOrder(Authentication authentication) {
-        User userFromDB = userService.findByEmail(authentication.getName())
-                .orElseThrow(() -> new NoSuchElementException("Can't find user with email "
-                        + authentication.getName() + " in DB"));
-        ShoppingCart cart = shoppingCartService.getByUser(userFromDB);
+        ShoppingCart cart = shoppingCartService.getByUser(getUserFromDB(authentication));
         return orderResponseDtoMapper.mapToDto(orderService.completeOrder(cart));
     }
 
     @GetMapping
     public List<OrderResponseDto> getOrderHistory(Authentication authentication) {
-        User userFromDB = userService.findByEmail(authentication.getName())
-                .orElseThrow(() -> new NoSuchElementException("Can't find user with email "
-                        + authentication.getName() + " in DB"));
-        return orderService.getOrdersHistory(userFromDB)
+        return orderService.getOrdersHistory(getUserFromDB(authentication))
                 .stream()
                 .map(orderResponseDtoMapper::mapToDto)
                 .collect(Collectors.toList());
+    }
+
+    private User getUserFromDB(Authentication authentication) {
+        return userService.findByEmail(authentication.getName())
+                .orElseThrow(() -> new NoSuchElementException("Can't find user with email "
+                        + authentication.getName() + " in DB"));
     }
 }
