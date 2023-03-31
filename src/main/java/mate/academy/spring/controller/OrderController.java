@@ -36,14 +36,16 @@ public class OrderController {
 
     @PostMapping("/complete")
     public OrderResponseDto completeOrder(@RequestParam Authentication authentication) {
-        User user = userService.findByEmail(authentication.getName()).get();
+        User user = userService.findByEmail(authentication.getName()).orElseThrow(
+                () -> new RuntimeException("Can't complete by user"));
         ShoppingCart cart = shoppingCartService.getByUser(userService.get(user.getId()));
         return orderResponseDtoMapper.mapToDto(orderService.completeOrder(cart));
     }
 
     @GetMapping
     public List<OrderResponseDto> getOrderHistory(@RequestParam Authentication authentication) {
-        User user = userService.findByEmail(authentication.getName()).get();
+        User user = userService.findByEmail(authentication.getName()).orElseThrow(
+                () -> new RuntimeException("Can't get order history by user"));;
         return orderService.getOrdersHistory(userService.get(user.getId()))
                 .stream()
                 .map(orderResponseDtoMapper::mapToDto)
