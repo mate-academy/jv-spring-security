@@ -1,22 +1,17 @@
 package mate.academy.spring.dto.response;
 
 import java.time.LocalDateTime;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 
 public class MovieSessionResponseDto {
-    @NotNull
-    @Size(min = 1)
+
     private Long movieSessionId;
-    @NotNull
-    @Size(min = 1)
+
     private Long movieId;
-    @NotNull
+
     private String movieTitle;
-    @NotNull
-    @Size(min = 1)
+
     private Long cinemaHallId;
-    @NotNull
+
     private LocalDateTime showTime;
 
     public Long getMovieSessionId() {

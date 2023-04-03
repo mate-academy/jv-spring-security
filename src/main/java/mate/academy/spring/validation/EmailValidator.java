@@ -7,14 +7,14 @@ import javax.validation.ConstraintValidatorContext;
 
 public class EmailValidator implements ConstraintValidator<Email, String> {
     public static final String EMAIL_PATTERN = "^(.+)@(.+)$";
+    public static final Pattern COMPILE_EMAIL_PATTEN = Pattern.compile(EMAIL_PATTERN);
 
     @Override
     public boolean isValid(String email, ConstraintValidatorContext constraintValidatorContext) {
         if (email == null) {
             return false;
         }
-        Pattern pattern = Pattern.compile(EMAIL_PATTERN);
-        Matcher matcher = pattern.matcher(email);
+        Matcher matcher = COMPILE_EMAIL_PATTEN.matcher(email);
         return matcher.matches();
     }
 }

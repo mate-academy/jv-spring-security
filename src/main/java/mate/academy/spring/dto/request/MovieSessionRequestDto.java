@@ -1,17 +1,15 @@
 package mate.academy.spring.dto.request;
 
 import java.time.LocalDateTime;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.FutureOrPresent;
+import javax.validation.constraints.Positive;
 
 public class MovieSessionRequestDto {
-    @NotNull
-    @Size(min = 1)
+    @Positive
     private Long movieId;
-    @NotNull
-    @Size(min = 1)
+    @Positive
     private Long cinemaHallId;
-    @NotNull
+    @FutureOrPresent
     private LocalDateTime showTime;
 
     public Long getMovieId() {

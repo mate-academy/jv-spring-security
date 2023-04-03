@@ -1,13 +1,9 @@
 package mate.academy.spring.dto.response;
 
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
-
 public class MovieResponseDto {
-    @NotNull
-    @Size(min = 1)
+
     private Long movieId;
-    @NotNull
+
     private String movieTitle;
     private String movieDescription;
 
