@@ -4,7 +4,6 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Positive;
 
 public class CinemaHallRequestDto {
-
     @Positive
     private int capacity;
     @NotBlank
