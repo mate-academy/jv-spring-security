@@ -1,5 +1,6 @@
 package mate.academy.spring.controller;
 
+import javax.validation.Valid;
 import mate.academy.spring.dto.response.ShoppingCartResponseDto;
 import mate.academy.spring.model.ShoppingCart;
 import mate.academy.spring.model.User;
@@ -36,9 +37,9 @@ public class ShoppingCartController {
 
     @PutMapping("/movie-sessions")
     public void addToCart(@RequestParam Authentication authentication,
-                          @RequestParam Long movieSessionId) {
+                          @RequestParam @Valid Long movieSessionId) {
         User user = userService.findByEmail(authentication.getName()).orElseThrow(
-                () -> new RuntimeException("Can't add to cart"));
+                () -> new RuntimeException("Could not add to shopping card"));
         shoppingCartService.addSession(
                 movieSessionService.get(movieSessionId), userService.get(user.getId()));
     }
@@ -46,7 +47,7 @@ public class ShoppingCartController {
     @GetMapping("/by-user")
     public ShoppingCartResponseDto getByUser(@RequestParam Authentication authentication) {
         User user = userService.findByEmail(authentication.getName()).orElseThrow(
-                () -> new RuntimeException("Can't get to cart"));
+                () -> new RuntimeException("Could not get shopping cart by user"));
         return shoppingCartResponseDtoMapper.mapToDto(shoppingCartService.getByUser(user));
     }
 }
