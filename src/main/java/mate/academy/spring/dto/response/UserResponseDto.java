@@ -1,9 +1,7 @@
 package mate.academy.spring.dto.response;
 
 public class UserResponseDto {
-
     private Long id;
-
     private String email;
 
     public Long getId() {

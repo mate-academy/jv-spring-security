@@ -3,15 +3,10 @@ package mate.academy.spring.dto.response;
 import java.time.LocalDateTime;
 
 public class MovieSessionResponseDto {
-
     private Long movieSessionId;
-
     private Long movieId;
-
     private String movieTitle;
-
     private Long cinemaHallId;
-
     private LocalDateTime showTime;
 
     public Long getMovieSessionId() {

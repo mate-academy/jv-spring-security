@@ -3,9 +3,7 @@ package mate.academy.spring.dto.response;
 import java.util.List;
 
 public class ShoppingCartResponseDto {
-
     private Long userId;
-
     private List<Long> ticketIds;
 
     public List<Long> getTicketIds() {
