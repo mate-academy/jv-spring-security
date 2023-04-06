@@ -13,6 +13,9 @@ public class PasswordValidation implements ConstraintValidator<Password, UserReq
                            ConstraintValidatorContext constraintValidatorContext) {
         String password = userRequestDto.getPassword();
         String repeatPassword = userRequestDto.getRepeatPassword();
+        if (password == null) {
+            return false;
+        }
         if (!password.equals(repeatPassword)) {
             return false;
         }
@@ -20,6 +23,6 @@ public class PasswordValidation implements ConstraintValidator<Password, UserReq
     }
 
     private boolean isValidPassword(String password) {
-        return password != null && password.matches(PASSWORD_PATTERN);
+        return password.matches(PASSWORD_PATTERN);
     }
 }
