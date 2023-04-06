@@ -1,8 +1,10 @@
 package mate.academy.spring.validation;
 
+import java.util.Objects;
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 import mate.academy.spring.dto.request.UserRequestDto;
+
 
 public class PasswordValidation implements ConstraintValidator<Password, UserRequestDto> {
     private static final String PASSWORD_PATTERN =
@@ -13,13 +15,8 @@ public class PasswordValidation implements ConstraintValidator<Password, UserReq
                            ConstraintValidatorContext constraintValidatorContext) {
         String password = userRequestDto.getPassword();
         String repeatPassword = userRequestDto.getRepeatPassword();
-        if (password == null) {
-            return false;
-        }
-        if (!password.equals(repeatPassword)) {
-            return false;
-        }
-        return isValidPassword(password);
+        return password != null && repeatPassword != null
+                && Objects.equals(password, repeatPassword) && isValidPassword(password);
     }
 
     private boolean isValidPassword(String password) {
