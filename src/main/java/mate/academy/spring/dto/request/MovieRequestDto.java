@@ -1,14 +1,14 @@
 package mate.academy.spring.dto.request;
 
 import javax.validation.constraints.NotNull;
-import org.hibernate.validator.constraints.Length;
+import javax.validation.constraints.Size;
 
 public class MovieRequestDto {
-    @NotNull
-    @Length(min = 2, max = 20, message = "Provide the title of movie")
+    @NotNull(message = "Provide the title of movie")
+    @Size(min = 3, max = 25)
     private String title;
-    @NotNull
-    @Length(min = 10, max = 255, message = "Provide the description of movie")
+    @NotNull(message = "Provide the description of movie")
+    @Size(min = 10, max = 255)
     private String description;
 
     public String getTitle() {
