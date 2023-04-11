@@ -8,6 +8,8 @@ import javax.validation.ConstraintValidatorContext;
 public class EmailValidator implements ConstraintValidator<Email, String> {
     private static final String EMAIL_PATTERN = "^(?=.{1,64}@)[A-Za-z0-9_-]+(\\.[A-Za-z0-9_-]+)*@"
             + "[^-][A-Za-z0-9-]+(\\.[A-Za-z0-9-]+)*(\\.[A-Za-z]{2,})$";
+
+    private static final Pattern pattern = Pattern.compile(EMAIL_PATTERN);
     private static final int MIN_EMAIL_LENGTH = 4;
     private static final int MAX_EMAIL_LENGTH = 8;
 
@@ -18,7 +20,6 @@ public class EmailValidator implements ConstraintValidator<Email, String> {
                 || email.length() > MAX_EMAIL_LENGTH) {
             return false;
         }
-        Pattern pattern = Pattern.compile(EMAIL_PATTERN);
         Matcher matcher = pattern.matcher(email);
         return matcher.matches();
     }
