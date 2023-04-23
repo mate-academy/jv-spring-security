@@ -4,11 +4,11 @@ import java.time.LocalDateTime;
 import javax.validation.constraints.NotNull;
 
 public class MovieSessionRequestDto {
-    @NotNull
+    @NotNull(message = "Please enter movie id")
     private Long movieId;
-    @NotNull
+    @NotNull(message = "Please enter cinemaHall id")
     private Long cinemaHallId;
-    @NotNull
+    @NotNull(message = "Please enter show time")
     private LocalDateTime showTime;
 
     public Long getMovieId() {
