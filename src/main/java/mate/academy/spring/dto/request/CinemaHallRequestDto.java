@@ -5,7 +5,6 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 public class CinemaHallRequestDto {
-    @NotNull(message = "Please enter capacity")
     @Min(value = 10, message = "Capacity must be greater then 10")
     private int capacity;
     @NotNull(message = "Please enter description")
