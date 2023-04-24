@@ -12,7 +12,6 @@ import mate.academy.spring.service.MovieSessionService;
 import mate.academy.spring.service.OrderService;
 import mate.academy.spring.service.ShoppingCartService;
 import mate.academy.spring.service.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -28,7 +27,6 @@ public class InitialDataController {
     private final UserService userService;
     private final OrderService orderService;
 
-    @Autowired
     public InitialDataController(CinemaHallService cinemaHallService,
                                  MovieService movieService,
                                  MovieSessionService movieSessionService,

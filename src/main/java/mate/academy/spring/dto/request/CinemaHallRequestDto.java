@@ -5,7 +5,7 @@ import javax.validation.constraints.Size;
 
 public class CinemaHallRequestDto {
     @Min(50)
-    private int capacity;
+    private Integer capacity;
     @Size(min = 1, max = 255)
     private String description;
 

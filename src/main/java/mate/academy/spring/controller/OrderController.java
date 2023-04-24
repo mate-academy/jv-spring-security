@@ -10,7 +10,6 @@ import mate.academy.spring.service.OrderService;
 import mate.academy.spring.service.ShoppingCartService;
 import mate.academy.spring.service.UserService;
 import mate.academy.spring.service.mapper.ResponseDtoMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -25,7 +24,6 @@ public class OrderController {
     private final UserService userService;
     private final ResponseDtoMapper<OrderResponseDto, Order> orderResponseDtoMapper;
 
-    @Autowired
     public OrderController(ShoppingCartService shoppingCartService,
                            OrderService orderService,
                            UserService userService,

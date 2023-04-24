@@ -6,14 +6,12 @@ import mate.academy.spring.model.Ticket;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 @Repository
 public class TicketDaoImpl implements TicketDao {
     private final SessionFactory factory;
 
-    @Autowired
     public TicketDaoImpl(SessionFactory factory) {
         this.factory = factory;
     }

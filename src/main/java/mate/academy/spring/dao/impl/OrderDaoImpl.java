@@ -9,14 +9,12 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 @Repository
 public class OrderDaoImpl implements OrderDao {
     private final SessionFactory factory;
 
-    @Autowired
     public OrderDaoImpl(SessionFactory factory) {
         this.factory = factory;
     }
