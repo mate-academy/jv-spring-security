@@ -5,7 +5,7 @@ import javax.validation.constraints.Size;
 
 public class MovieRequestDto {
     @NotNull
-    @Size(min = 10, max = 255)
+    @Size(min = 1, max = 255)
     private String title;
     @NotNull
     @Size(min = 10, max = 512)
