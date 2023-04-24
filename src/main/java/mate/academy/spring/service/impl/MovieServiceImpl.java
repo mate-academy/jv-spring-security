@@ -1,15 +1,18 @@
 package mate.academy.spring.service.impl;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 import mate.academy.spring.dao.MovieDao;
 import mate.academy.spring.model.Movie;
 import mate.academy.spring.service.MovieService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class MovieServiceImpl implements MovieService {
     private final MovieDao movieDao;
 
+    @Autowired
     public MovieServiceImpl(MovieDao movieDao) {
         this.movieDao = movieDao;
     }
@@ -22,7 +25,7 @@ public class MovieServiceImpl implements MovieService {
     @Override
     public Movie get(Long id) {
         return movieDao.get(id).orElseThrow(
-                () -> new RuntimeException("Can't get movie by id " + id));
+                () -> new NoSuchElementException("Can't get movie by id " + id));
     }
 
     @Override

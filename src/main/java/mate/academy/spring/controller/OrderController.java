@@ -1,17 +1,20 @@
 package mate.academy.spring.controller;
 
 import java.util.List;
+import javax.persistence.EntityNotFoundException;
 import mate.academy.spring.dto.response.OrderResponseDto;
 import mate.academy.spring.model.Order;
 import mate.academy.spring.model.ShoppingCart;
+import mate.academy.spring.model.User;
 import mate.academy.spring.service.OrderService;
 import mate.academy.spring.service.ShoppingCartService;
 import mate.academy.spring.service.UserService;
 import mate.academy.spring.service.mapper.ResponseDtoMapper;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -22,6 +25,7 @@ public class OrderController {
     private final UserService userService;
     private final ResponseDtoMapper<OrderResponseDto, Order> orderResponseDtoMapper;
 
+    @Autowired
     public OrderController(ShoppingCartService shoppingCartService,
                            OrderService orderService,
                            UserService userService,
@@ -33,15 +37,19 @@ public class OrderController {
     }
 
     @PostMapping("/complete")
-    public OrderResponseDto completeOrder(@RequestParam Long userId) {
-        ShoppingCart cart = shoppingCartService.getByUser(userService.get(userId));
-        return orderResponseDtoMapper.mapToDto(orderService.completeOrder(cart));
+    public OrderResponseDto completeOrder(Authentication authentication) {
+        User user = userService.findByEmail(authentication.getName()).orElseThrow(() ->
+                new EntityNotFoundException("User with current name not found"));
+        ShoppingCart shoppingCart = shoppingCartService.getByUser(user);
+        return orderResponseDtoMapper.mapToDto(orderService.completeOrder(shoppingCart));
     }
 
     @GetMapping
-    public List<OrderResponseDto> getOrderHistory(@RequestParam Long userId) {
-        return orderService.getOrdersHistory(userService.get(userId))
-                .stream()
+    public List<OrderResponseDto> getOrderHistory(Authentication authentication) {
+        List<Order> ordersHistory = orderService.getOrdersHistory(
+                userService.findByEmail(authentication.getName()).orElseThrow(() ->
+                        new EntityNotFoundException("User with current name not found")));
+        return ordersHistory.stream()
                 .map(orderResponseDtoMapper::mapToDto)
                 .toList();
     }
