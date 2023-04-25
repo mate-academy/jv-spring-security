@@ -11,7 +11,7 @@ import javax.validation.Payload;
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
 public @interface PasswordValidation {
-    String message() default "Password and Repeat password don't match";
+    String message() default "Not valid password or passwordRepeat";
 
     Class<?>[] groups() default {};
 
