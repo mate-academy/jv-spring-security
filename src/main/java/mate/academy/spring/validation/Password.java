@@ -12,6 +12,8 @@ import javax.validation.Payload;
 @Retention(RetentionPolicy.RUNTIME)
 public @interface Password {
     String message() default "Passwords do not match";
+
     Class<?>[] groups() default {};
+
     Class<? extends Payload>[] payload() default {};
 }
