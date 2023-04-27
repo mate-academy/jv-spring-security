@@ -2,6 +2,7 @@ package mate.academy.spring.controller;
 
 import java.time.LocalDate;
 import java.util.List;
+import javax.validation.Valid;
 import mate.academy.spring.dto.request.MovieSessionRequestDto;
 import mate.academy.spring.dto.response.MovieSessionResponseDto;
 import mate.academy.spring.model.MovieSession;
@@ -10,7 +11,6 @@ import mate.academy.spring.service.mapper.RequestDtoMapper;
 import mate.academy.spring.service.mapper.ResponseDtoMapper;
 import mate.academy.spring.util.DateTimePatternUtil;
 import org.springframework.format.annotation.DateTimeFormat;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -40,7 +40,7 @@ public class MovieSessionController {
     }
 
     @PostMapping
-    public MovieSessionResponseDto add(@RequestBody @Validated MovieSessionRequestDto requestDto) {
+    public MovieSessionResponseDto add(@RequestBody @Valid MovieSessionRequestDto requestDto) {
         MovieSession movieSession = movieSessionRequestDtoMapper.mapToModel(requestDto);
         movieSessionService.add(movieSession);
         return movieSessionResponseDtoMapper.mapToDto(movieSession);
@@ -60,7 +60,7 @@ public class MovieSessionController {
     @PutMapping("/{id}")
     public MovieSessionResponseDto update(@PathVariable Long id,
                                           @RequestBody
-                                          @Validated MovieSessionRequestDto requestDto) {
+                                          @Valid MovieSessionRequestDto requestDto) {
         MovieSession movieSession = movieSessionRequestDtoMapper.mapToModel(requestDto);
         movieSession.setId(id);
         movieSessionService.update(movieSession);
