@@ -1,0 +1,41 @@
+package mate.academy.spring.controller;
+
+import java.time.LocalDateTime;
+import java.util.LinkedHashMap;
+import java.util.Map;
+import java.util.stream.Collectors;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.validation.FieldError;
+import org.springframework.validation.ObjectError;
+import org.springframework.web.bind.MethodArgumentNotValidException;
+import org.springframework.web.context.request.WebRequest;
+import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
+
+public class CustomGlobalExceptionHandler extends ResponseEntityExceptionHandler {
+    @Override
+    protected ResponseEntity<Object> handleMethodArgumentNotValid(
+            MethodArgumentNotValidException ex,
+            HttpHeaders headers,
+            HttpStatus status,
+            WebRequest request) {
+        Map<String, Object> body = new LinkedHashMap<>();
+        body.put("timestamp", LocalDateTime.now().toString());
+        body.put("status", status.value());
+        body.put("errors", ex.getBindingResult()
+                .getAllErrors()
+                .stream()
+                .map(this::getErrorMessage)
+                .collect(Collectors.toList()));
+        return new ResponseEntity<>(body, headers, status);
+    }
+
+    private String getErrorMessage(ObjectError ex) {
+        if (ex instanceof FieldError) {
+            String field = ((FieldError) ex).getField();
+            return field + " " + ex.getDefaultMessage();
+        }
+        return ex.getDefaultMessage();
+    }
+}
