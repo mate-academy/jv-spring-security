@@ -1,16 +1,14 @@
 package mate.academy.spring.validation;
 
-import mate.academy.spring.dto.request.UserRequestDto;
-
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import mate.academy.spring.dto.request.UserRequestDto;
 
-public class PasswordValidation implements ConstraintValidator<Password, UserRequestDto> {
+public class PasswordValidator implements ConstraintValidator<Password, UserRequestDto> {
 
     @Override
-    public boolean isValid(UserRequestDto userRequestDto, ConstraintValidatorContext constraintValidatorContext) {
+    public boolean isValid(UserRequestDto userRequestDto,
+                           ConstraintValidatorContext constraintValidatorContext) {
         if (userRequestDto.getPassword() == null) {
             return false;
         }

@@ -39,7 +39,8 @@ public class ShoppingCartController {
         shoppingCartService.addSession(
                 movieSessionService.get(movieSessionId), userService.findByEmail(authUser.getName())
                         .orElseThrow(() ->
-                                new RuntimeException("Can`t update cart by user: " + authUser.getName())));
+                                new RuntimeException("Can`t update cart by user: "
+                                        + authUser.getName())));
     }
 
     @GetMapping("/by-user")
