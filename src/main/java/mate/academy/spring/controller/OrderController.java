@@ -38,7 +38,7 @@ public class OrderController {
         ShoppingCart cart = shoppingCartService.getByUser(
                 userService.findByEmail(
                         authentication.getName()).orElseThrow(() ->
-                        new NoSuchElementException("Can't get user by this email"
+                        new NoSuchElementException("Can't get user by this email "
                                 + authentication.getName())));
         return orderResponseDtoMapper.mapToDto(orderService.completeOrder(cart));
     }
@@ -48,7 +48,7 @@ public class OrderController {
         return orderService.getOrdersHistory(
                 userService.findByEmail(
                         authentication.getName()).orElseThrow(() ->
-                        new NoSuchElementException("Can't get user by this email"
+                        new NoSuchElementException("Can't get user by this email "
                                 + authentication.getName())))
                 .stream()
                 .map(orderResponseDtoMapper::mapToDto)

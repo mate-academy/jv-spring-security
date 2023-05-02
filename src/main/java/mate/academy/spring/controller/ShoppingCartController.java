@@ -45,7 +45,7 @@ public class ShoppingCartController {
     public ShoppingCartResponseDto getByUser(Authentication authentication) {
         User user = userService.findByEmail(
                 authentication.getName()).orElseThrow(() ->
-                new NoSuchElementException("Can't get user by this email"
+                new NoSuchElementException("Can't get user by this email "
                         + authentication.getName()));
         return shoppingCartResponseDtoMapper.mapToDto(shoppingCartService.getByUser(user));
     }
