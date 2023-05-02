@@ -3,7 +3,6 @@ package mate.academy.spring.controller;
 import javax.validation.Valid;
 import mate.academy.spring.dto.request.UserRegistrationDto;
 import mate.academy.spring.dto.response.UserResponseDto;
-import mate.academy.spring.exception.AuthenticationException;
 import mate.academy.spring.model.User;
 import mate.academy.spring.service.AuthenticationService;
 import mate.academy.spring.service.mapper.ResponseDtoMapper;
@@ -24,11 +23,7 @@ public class AuthenticationController {
     }
 
     @PostMapping("/register")
-    public UserResponseDto register(@RequestBody @Valid UserRegistrationDto registrationDto)
-            throws AuthenticationException {
-        if (!registrationDto.getPassword().equals(registrationDto.getRepeatPassword())) {
-            throw new AuthenticationException("Passwords do not match");
-        }
+    public UserResponseDto register(@RequestBody @Valid UserRegistrationDto registrationDto) {
         User user = authService.register(registrationDto.getEmail(), registrationDto.getPassword());
         return userDtoResponseMapper.mapToDto(user);
     }
