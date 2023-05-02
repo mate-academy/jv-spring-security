@@ -7,13 +7,10 @@ import mate.academy.spring.validation.PasswordsMatch;
 
 @PasswordsMatch
 public class UserRequestDto {
-    @NotNull
     @Email
     private String email;
-    @NotNull
     @Min(4)
     private String password;
-    @NotNull
     @Min(4)
     private String repeatPassword;
 
