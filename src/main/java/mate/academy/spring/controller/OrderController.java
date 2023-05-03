@@ -37,7 +37,7 @@ public class OrderController {
     public OrderResponseDto completeOrder(Authentication authUser) {
         ShoppingCart cart = shoppingCartService.getByUser(
                 userService.findByEmail(authUser.getName()).orElseThrow(
-                        () -> new DataProcessingException("Can't complete order by user: "
+                        () -> new DataProcessingException("Can't find user by email: "
                                 + authUser.getName())));
         return orderResponseDtoMapper.mapToDto(orderService.completeOrder(cart));
     }
@@ -45,7 +45,7 @@ public class OrderController {
     @GetMapping
     public List<OrderResponseDto> getOrderHistory(Authentication authUser) {
         return orderService.getOrdersHistory(userService.findByEmail(authUser.getName())
-                .orElseThrow(() -> new DataProcessingException("Can't get order history by user: "
+                .orElseThrow(() -> new DataProcessingException("Can't find user by email: "
                         + authUser.getName())))
                 .stream()
                 .map(orderResponseDtoMapper::mapToDto)

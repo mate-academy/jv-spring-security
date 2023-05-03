@@ -40,7 +40,7 @@ public class ShoppingCartController {
         shoppingCartService.addSession(
                 movieSessionService.get(movieSessionId), userService.findByEmail(
                         authUser.getName()).orElseThrow(() ->
-                        new DataProcessingException("Can't update cart by user: "
+                        new DataProcessingException("Can't find user by email: "
                                 + authUser.getName())));
     }
 
