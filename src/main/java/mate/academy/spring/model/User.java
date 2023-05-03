@@ -8,9 +8,11 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 @Getter
 @Setter
+@ToString
 @Entity
 @Table(name = "users")
 public class User {
@@ -19,12 +21,6 @@ public class User {
     private Long id;
     @Column(unique = true)
     private String email;
+    @ToString.Exclude
     private String password;
-
-    @Override
-    public String toString() {
-        return "User{"
-                + "id=" + id
-                + ", email='" + email + '\'' + '}';
-    }
 }
