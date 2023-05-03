@@ -9,9 +9,6 @@ public class PasswordValidator implements ConstraintValidator<Password, UserRequ
     public boolean isValid(UserRequestDto userRequestDto,
                            ConstraintValidatorContext constraintValidatorContext) {
         String password = userRequestDto.getPassword();
-        return password != null
-                && password.length() >= 4
-                && password.length() <= 32
-                && password.equals(userRequestDto.getRepeatPassword());
+        return password != null && password.equals(userRequestDto.getRepeatPassword());
     }
 }

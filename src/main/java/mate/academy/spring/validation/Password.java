@@ -8,7 +8,7 @@ import javax.validation.Constraint;
 import javax.validation.Payload;
 
 @Constraint(validatedBy = PasswordValidator.class)
-@Target({ElementType.PARAMETER, ElementType.TYPE})
+@Target({ElementType.TYPE})
 @Retention(RetentionPolicy.RUNTIME)
 public @interface Password {
     String message() default "Invalid password, please use at least 4 characters with max of 32";
