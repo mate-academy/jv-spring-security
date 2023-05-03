@@ -1,13 +1,12 @@
 package mate.academy.spring.dto.request;
 
-import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import mate.academy.spring.validation.Password;
+import mate.academy.spring.validation.Email;
+import mate.academy.spring.validation.MatchingPasswords;
 
-@Password
+@MatchingPasswords
 public class UserRequestDto {
-    @NotNull
     @Email
     private String email;
     @NotNull
