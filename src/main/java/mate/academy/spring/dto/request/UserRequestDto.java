@@ -6,10 +6,8 @@ import javax.validation.constraints.Size;
 
 public class UserRequestDto {
     @Email
-    @NotNull
     private String email;
     @Size(min = 10)
-    @NotNull
     private String password;
     private String repeatPassword;
 
