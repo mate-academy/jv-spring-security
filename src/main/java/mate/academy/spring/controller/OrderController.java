@@ -45,7 +45,7 @@ public class OrderController {
     public List<OrderResponseDto> getOrderHistory(Authentication authentication) {
         return orderService.getOrdersHistory(
                 userService.findByEmail(authentication.getName()).orElseThrow(() ->
-                                new RuntimeException("Can't complete order by user "
+                                new RuntimeException("Can't get order history order by user "
                                         + authentication.getName())))
                 .stream()
                 .map(orderResponseDtoMapper::mapToDto)

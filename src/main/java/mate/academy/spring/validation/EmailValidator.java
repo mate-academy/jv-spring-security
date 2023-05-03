@@ -10,7 +10,7 @@ public class EmailValidator implements ConstraintValidator<Email, String> {
                     + "[A-Za-z0-9-]+(\\.[A-Za-z0-9-]+)*(\\.[A-Za-z]{2,})$");
 
     @Override
-    public boolean isValid(String s, ConstraintValidatorContext constraintValidatorContext) {
-        return s != null && EMAIL_PATTERN.matcher(s).matches();
+    public boolean isValid(String email, ConstraintValidatorContext constraintValidatorContext) {
+        return email != null && EMAIL_PATTERN.matcher(email).matches();
     }
 }
