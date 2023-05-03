@@ -10,6 +10,7 @@ public class MovieSessionRequestDto {
     @NotNull
     @Min(value = 1)
     private Long cinemaHallId;
+    @NotNull
     private LocalDateTime showTime;
 
     public Long getMovieId() {
