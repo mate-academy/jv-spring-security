@@ -19,7 +19,6 @@ public class UserRequestDto {
     }
 
     public String getPassword() {
-
         return password;
     }
 
