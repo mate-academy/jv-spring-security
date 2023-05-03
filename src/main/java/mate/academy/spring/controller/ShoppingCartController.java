@@ -3,7 +3,6 @@ package mate.academy.spring.controller;
 import mate.academy.spring.dto.response.ShoppingCartResponseDto;
 import mate.academy.spring.exception.DataProcessingException;
 import mate.academy.spring.model.ShoppingCart;
-import mate.academy.spring.model.User;
 import mate.academy.spring.service.MovieSessionService;
 import mate.academy.spring.service.ShoppingCartService;
 import mate.academy.spring.service.UserService;
@@ -45,8 +44,9 @@ public class ShoppingCartController {
     }
 
     @GetMapping("/by-user")
-    public ShoppingCartResponseDto getByUser(@RequestParam Long userId) {
-        User user = userService.get(userId);
-        return shoppingCartResponseDtoMapper.mapToDto(shoppingCartService.getByUser(user));
+    public ShoppingCartResponseDto getByUser(Authentication authUser) {
+        return shoppingCartResponseDtoMapper.mapToDto(shoppingCartService.getByUser(
+                userService.findByEmail(authUser.getName()).orElseThrow(() ->
+                new DataProcessingException("Can't find user by email:" + authUser.getName()))));
     }
 }
