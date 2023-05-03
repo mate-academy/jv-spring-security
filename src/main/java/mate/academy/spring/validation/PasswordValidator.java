@@ -5,7 +5,6 @@ import java.util.regex.Pattern;
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 import mate.academy.spring.dto.request.UserRequestDto;
-import org.springframework.beans.BeanWrapperImpl;
 
 public class PasswordValidator implements ConstraintValidator<Password, UserRequestDto> {
     private static final String PASSWORD_PATTERN =
@@ -14,17 +13,9 @@ public class PasswordValidator implements ConstraintValidator<Password, UserRequ
     @Override
     public boolean isValid(UserRequestDto userRequestDto,
                            ConstraintValidatorContext constraintValidatorContext) {
-        if (userRequestDto == null) {
-            return false;
-        }
-        String password = (String) new BeanWrapperImpl(userRequestDto)
-                .getPropertyValue("password");
-        String repeatPassword = (String) new BeanWrapperImpl(userRequestDto)
-                .getPropertyValue("repeatPassword");
-        if (password == null || repeatPassword == null) {
-            return false;
-        }
-        if (!password.equals(repeatPassword)) {
+        String password = userRequestDto.getPassword();
+        if (password == null
+                || !password.equals(userRequestDto.getRepeatPassword())) {
             return false;
         }
         Pattern pattern = Pattern.compile(PASSWORD_PATTERN);
