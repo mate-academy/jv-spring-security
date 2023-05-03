@@ -14,7 +14,7 @@ If you use `Pattern` - make it constant too.
 The same goes for the `password` field.
 * Be careful with `@Size`, `@Min` and `@Max` annotations. Read javadoc to learn about their correct use.
 * Can we use `@NotNull` annotation above the field with primitive data types? Be careful to use only the suitable annotations :)
-* Don't create `PasswordEncoder` using `new` keyword. Let's use dependency injection by the constructor.
+* Don't create `Password` using `new` keyword. Let's use dependency injection by the constructor.
 * Don't change `findByEmail()` method in UserController - this method is supposed to return info about any user.
 * Be sure you have the `@Valid` annotation in your controllers for the validation to take effect.
 * Your custom constraints should have the obligatory parameters: `group()` and `payload()`.

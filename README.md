@@ -8,7 +8,7 @@
 1. Implement custom email validation.
 1. Implement CustomGlobalExceptionHandler.
 1. Remove method `login()` in AuthenticationService, `HashUtil` and `salt` from User entity.
-   Start using `passwordEncoder` in UserService -> add() for password hashing.
+   Start using `password` in UserService -> add() for password hashing.
    
 *IMPORTANT:*
 For dependency `hibernate-validator` don't use version `7.0.0.Final` and higher, they are not 
