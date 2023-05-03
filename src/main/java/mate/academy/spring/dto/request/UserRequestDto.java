@@ -5,7 +5,6 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
 public class UserRequestDto {
-    @NotNull
     @Email
     private String email;
     @NotNull
