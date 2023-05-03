@@ -37,7 +37,7 @@ public class OrderController {
         ShoppingCart cart = shoppingCartService.getByUser(userService.findByEmail(
                 authentication.getName())
                         .orElseThrow(() ->
-                        new RuntimeException("Can't add order by user" + authentication.getName())
+                        new RuntimeException("Can't add order by user " + authentication.getName())
         ));
         return orderResponseDtoMapper.mapToDto(orderService.completeOrder(cart));
     }
@@ -47,7 +47,7 @@ public class OrderController {
         return orderService.getOrdersHistory(userService.findByEmail(
                         authentication.getName())
                                 .orElseThrow(() ->
-                                new RuntimeException("Can't find order history by user"
+                                new RuntimeException("Can't find order history by user "
                                 + authentication.getName())))
                 .stream()
                 .map(orderResponseDtoMapper::mapToDto)

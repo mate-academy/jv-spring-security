@@ -13,8 +13,6 @@ public class PasswordValidator implements ConstraintValidator<Password, UserRequ
                            ConstraintValidatorContext constraintValidatorContext) {
         String checkPassword = userRequestDto.getPassword();
         return checkPassword != null
-                && checkPassword.length() >= MIN_LENGTH
-                && checkPassword.length() <= MAX_LENGTH
                 && checkPassword.equals(userRequestDto.getRepeatPassword());
     }
 }

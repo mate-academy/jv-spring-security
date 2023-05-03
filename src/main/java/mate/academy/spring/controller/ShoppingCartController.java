@@ -41,7 +41,7 @@ public class ShoppingCartController {
                 userService.findByEmail(authentication.getName())
                         .orElseThrow(() ->
                                 new RuntimeException(
-                                        "Can't update cart by use" + authentication.getName())));
+                                        "Can't update cart by user " + authentication.getName())));
     }
 
     @GetMapping("/by-user")
@@ -49,7 +49,7 @@ public class ShoppingCartController {
         return shoppingCartResponseDtoMapper.mapToDto(shoppingCartService
                 .getByUser(userService.findByEmail(authentication.getName())
                         .orElseThrow(() ->
-                                new RuntimeException("Can't find cart by use"
+                                new RuntimeException("Can't find cart by user "
                                         + authentication.getName()))));
     }
 }
