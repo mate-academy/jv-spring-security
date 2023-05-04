@@ -1,7 +1,7 @@
 package mate.academy.spring.controller.exception;
 
 import java.time.LocalDateTime;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 import mate.academy.spring.exception.DataProcessingException;
 import org.springframework.http.HttpHeaders;
@@ -23,7 +23,7 @@ public class GlobalExceptionController extends ResponseEntityExceptionHandler {
             HttpHeaders headers,
             HttpStatus status,
             WebRequest request) {
-        Map<String, Object> body = new HashMap<>();
+        Map<String, Object> body = new LinkedHashMap<>();
         body.put("status", status.value());
         body.put("timestamp", LocalDateTime.now().toString());
         body.put("errors", ex.getBindingResult().getAllErrors().stream()
@@ -35,7 +35,7 @@ public class GlobalExceptionController extends ResponseEntityExceptionHandler {
     @ExceptionHandler(value = DataProcessingException.class)
     protected ResponseEntity<Object> handleDataProcessingException(
             DataProcessingException e) {
-        Map<String, Object> responseBody = new HashMap<>();
+        Map<String, Object> responseBody = new LinkedHashMap<>();
         responseBody.put("status", HttpStatus.INTERNAL_SERVER_ERROR.value());
         responseBody.put("timestamp", LocalDateTime.now().toString());
         responseBody.put("error", e.getMessage());
