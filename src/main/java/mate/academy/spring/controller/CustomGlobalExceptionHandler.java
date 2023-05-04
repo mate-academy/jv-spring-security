@@ -40,8 +40,14 @@ public class CustomGlobalExceptionHandler extends ResponseEntityExceptionHandler
     @ExceptionHandler(DataProcessingException.class)
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     @ResponseBody
-    public Object processDataValidationException(DataProcessingException ex) {
-        return ex.getMessage();
+    public ResponseEntity<Object> handleDataProcessingException(DataProcessingException ex,
+                                                                HttpHeaders headers,
+                                                                HttpStatus status,
+                                                                WebRequest request) {
+        Map<String, Object> body = new LinkedHashMap<>();
+        body.put("status", status.value());
+        body.put("errors", ex.getMessage());
+        return new ResponseEntity<>(body, headers, status);
     }
 
     private String getErrorMessage(ObjectError err) {

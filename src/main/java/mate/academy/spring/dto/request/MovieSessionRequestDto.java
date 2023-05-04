@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 import javax.validation.constraints.NotNull;
 
 public class MovieSessionRequestDto {
+    @NotNull
     private Long movieId;
     @NotNull
     private Long cinemaHallId;
