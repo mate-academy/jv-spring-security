@@ -10,6 +10,7 @@ public class EmailValidator implements ConstraintValidator<Email, String> {
             + "]\\\\.,;:\\s@\\\"]]+)*)|(\\\".+\\\"))@((\\[[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.["
             + "0-9]{1,3}\\])|(([a-zA-Z\\-0-9]+\\.)+[a-zA-Z]{2,}))$";
     private static final Pattern PATTERN = Pattern.compile(EMAIL_PATTERN);
+
     @Override
     public boolean isValid(String email, ConstraintValidatorContext context) {
         if (email == null) {
