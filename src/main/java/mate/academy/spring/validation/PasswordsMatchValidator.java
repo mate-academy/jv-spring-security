@@ -9,7 +9,8 @@ public class PasswordsMatchValidator implements
     @Override
     public boolean isValid(UserRequestDto userRequestDto,
                            ConstraintValidatorContext constraintValidatorContext) {
-        if (userRequestDto == null) {
+        if (userRequestDto.getPassword() == null
+            || userRequestDto.getRepeatPassword() == null) {
             return false;
         }
         return userRequestDto.getPassword().equals(userRequestDto.getRepeatPassword());
