@@ -37,7 +37,8 @@ public class OrderController {
     public OrderResponseDto completeOrder(Authentication authentication) {
         ShoppingCart cart = shoppingCartService.getByUser(
                 userService.findByEmail(authentication.getName()).orElseThrow(() ->
-                        new NoSuchElementException("Can't complete order by email " + authentication.getName())));
+                        new NoSuchElementException("Can't complete order by email "
+                                + authentication.getName())));
         return orderResponseDtoMapper.mapToDto(orderService.completeOrder(cart));
     }
 
@@ -45,7 +46,8 @@ public class OrderController {
     public List<OrderResponseDto> getOrderHistory(Authentication authentication) {
         return orderService.getOrdersHistory(
                 userService.findByEmail(authentication.getName()).orElseThrow(() ->
-                        new NoSuchElementException("Can't find order history by email " + authentication.getName())))
+                        new NoSuchElementException("Can't find order history by email "
+                                + authentication.getName())))
                 .stream()
                 .map(orderResponseDtoMapper::mapToDto)
                 .toList();

@@ -40,14 +40,15 @@ public class ShoppingCartController {
         shoppingCartService.addSession(
                 movieSessionService.get(movieSessionId),
                 userService.findByEmail(authentication.getName()).orElseThrow(() ->
-                        new NoSuchElementException("Can't add movie session to shopping cart for user with email "
-                                + authentication.getName())));
+                        new NoSuchElementException("Can't add movie session to shopping cart "
+                                + "for user with email " + authentication.getName())));
     }
 
     @GetMapping("/by-user")
     public ShoppingCartResponseDto getByUser(Authentication authentication) {
         User user = userService.findByEmail(authentication.getName()).orElseThrow(() ->
-                new NoSuchElementException("Can't find shopping cart for user with email " + authentication.getName()));
+                new NoSuchElementException("Can't find shopping cart for user with email "
+                        + authentication.getName()));
         return shoppingCartResponseDtoMapper.mapToDto(shoppingCartService.getByUser(user));
     }
 }
