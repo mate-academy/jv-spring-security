@@ -16,7 +16,6 @@ public class User {
     @Column(unique = true)
     private String email;
     private String password;
-    private String repeatPassword;
 
     public Long getId() {
         return id;
@@ -40,14 +39,6 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    public String getRepeatPassword() {
-        return repeatPassword;
-    }
-
-    public void setRepeatPassword(String repeatPassword) {
-        this.repeatPassword = repeatPassword;
     }
 
     @Override
