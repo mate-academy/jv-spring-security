@@ -6,7 +6,6 @@ import mate.academy.spring.validation.Password;
 
 public class UserRequestDto {
     @Email
-    @Size(min = 5)
     private String email;
     @Password
     @Size(min = 6)
