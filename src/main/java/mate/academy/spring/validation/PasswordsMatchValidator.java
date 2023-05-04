@@ -10,7 +10,7 @@ public class PasswordsMatchValidator implements
     public boolean isValid(UserRequestDto userRequestDto,
                            ConstraintValidatorContext constraintValidatorContext) {
         if (userRequestDto.getPassword() == null
-            || userRequestDto.getRepeatPassword() == null) {
+                    || userRequestDto.getRepeatPassword() == null) {
             return false;
         }
         return userRequestDto.getPassword().equals(userRequestDto.getRepeatPassword());
