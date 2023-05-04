@@ -37,16 +37,17 @@ public class ShoppingCartController {
     @PutMapping("/movie-sessions")
     public void addToCart(Authentication authentication, @RequestParam Long movieSessionId) {
         shoppingCartService.addSession(movieSessionService.get(movieSessionId),
-                // -------------------comment for mentor----------------------
-                // do we need to handle exception here, or it`s ok use .get()?
                 userService.findByEmail(authentication.getName()).orElseThrow(
-                        () -> new RuntimeException("Couldn't add movie session to cart")));
+                        () -> new RuntimeException("Couldn't add movie session: " + movieSessionId
+                                + " to cart: " + authentication.getName())));
     }
 
     @GetMapping("/by-user")
     public ShoppingCartResponseDto getByUser(Authentication authentication) {
         //like here
-        User user = userService.findByEmail(authentication.getName()).get();
+        User user = userService.findByEmail(authentication.getName()).orElseThrow(
+                () -> new RuntimeException("Couldn't find shopping cart: "
+                        + authentication.getName()));
         return shoppingCartResponseDtoMapper.mapToDto(shoppingCartService.getByUser(user));
     }
 }

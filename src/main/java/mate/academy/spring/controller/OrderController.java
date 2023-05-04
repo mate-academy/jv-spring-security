@@ -36,7 +36,8 @@ public class OrderController {
     public OrderResponseDto completeOrder(Authentication authentication) {
         ShoppingCart cart = shoppingCartService.getByUser(
                 userService.findByEmail(authentication.getName()).orElseThrow(
-                        () -> new RuntimeException("Couldn't complete order")));
+                        () -> new RuntimeException("Couldn't complete order: "
+                                + authentication.getName())));
         return orderResponseDtoMapper.mapToDto(orderService.completeOrder(cart));
     }
 
@@ -44,7 +45,8 @@ public class OrderController {
     public List<OrderResponseDto> getOrderHistory(Authentication authentication) {
         return orderService.getOrdersHistory(
                 userService.findByEmail(authentication.getName()).orElseThrow(
-                        () -> new RuntimeException("Couldn't get order history")))
+                        () -> new RuntimeException("Couldn't get order history for: "
+                                + authentication.getName())))
                 .stream()
                 .map(orderResponseDtoMapper::mapToDto)
                 .toList();
