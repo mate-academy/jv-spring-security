@@ -8,9 +8,9 @@ public class UserRequestDto {
     @Email
     private String email;
     @Password
-    @Size(min = 6)
+    @Size(min = 6, max = 255)
     private String password;
-    @Size(min = 6)
+    @Size(min = 6, max = 255)
     private String repeatPassword;
 
     public String getEmail() {
