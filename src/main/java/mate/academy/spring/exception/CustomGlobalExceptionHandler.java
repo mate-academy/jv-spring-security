@@ -33,14 +33,6 @@ public class CustomGlobalExceptionHandler extends ResponseEntityExceptionHandler
         return new ResponseEntity<>(body, headers, status);
     }
 
-    private String getErrorMessage(ObjectError objectError) {
-        if (objectError instanceof FieldError) {
-            String field = ((FieldError) objectError).getField();
-            return field + " " + objectError.getDefaultMessage();
-        }
-        return objectError.getDefaultMessage();
-    }
-
     @ExceptionHandler(DataProcessingException.class)
     public ResponseEntity<Object> handleDataProcessingException(DataProcessingException ex,
                                                                    HttpHeaders headers) {
@@ -49,5 +41,13 @@ public class CustomGlobalExceptionHandler extends ResponseEntityExceptionHandler
         body.put("status", HttpStatus.INTERNAL_SERVER_ERROR);
         body.put("errors", ex.getMessage());
         return new ResponseEntity<>(body, headers, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
+    private String getErrorMessage(ObjectError objectError) {
+        if (objectError instanceof FieldError) {
+            String field = ((FieldError) objectError).getField();
+            return field + " " + objectError.getDefaultMessage();
+        }
+        return objectError.getDefaultMessage();
     }
 }

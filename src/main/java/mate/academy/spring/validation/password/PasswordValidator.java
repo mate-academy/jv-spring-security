@@ -1,14 +1,14 @@
 package mate.academy.spring.validation.password;
 
-import java.util.regex.Pattern;
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
+import mate.academy.spring.dto.request.UserRequestDto;
 
-public class PasswordValidator implements ConstraintValidator<Password, String> {
-    private static final Pattern PATTERN = Pattern.compile("^\\+380\\d{9}$");
-
+public class PasswordValidator implements ConstraintValidator<Password, UserRequestDto> {
     @Override
-    public boolean isValid(String password, ConstraintValidatorContext constraintValidatorContext) {
-        return password != null && PATTERN.matcher(password).matches();
+    public boolean isValid(UserRequestDto requestDto,
+                           ConstraintValidatorContext constraintValidatorContext) {
+        return requestDto.getPassword() != null
+                && requestDto.getPassword().equals(requestDto.getRepeatPassword());
     }
 }
