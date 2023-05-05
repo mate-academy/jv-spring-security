@@ -1,7 +1,7 @@
 package mate.academy.spring.controller;
 
-import javax.validation.Valid;
 import java.util.List;
+import javax.validation.Valid;
 import mate.academy.spring.dto.request.CinemaHallRequestDto;
 import mate.academy.spring.dto.response.CinemaHallResponseDto;
 import mate.academy.spring.model.CinemaHall;
