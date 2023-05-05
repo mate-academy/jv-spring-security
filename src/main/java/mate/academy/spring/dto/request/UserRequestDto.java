@@ -6,6 +6,7 @@ import mate.academy.spring.validator.Email;
 
 public class UserRequestDto {
     @Email
+    @NotNull
     private String email;
     @NotNull
     @Size(min = 8)
