@@ -10,7 +10,6 @@ public class UserRequestDto {
     @NotNull
     @Email
     private String email;
-    @NotNull
     @Size(min = 5, max = 15)
     private String password;
     private String repeatPassword;
