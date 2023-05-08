@@ -3,14 +3,14 @@ package mate.academy.spring.dto.request;
 import java.time.LocalDateTime;
 import javax.validation.constraints.FutureOrPresent;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Positive;
+import javax.validation.constraints.PositiveOrZero;
 
 public class MovieSessionRequestDto {
     @NotNull
-    @Positive
+    @PositiveOrZero
     private Long movieId;
     @NotNull
-    @Positive
+    @PositiveOrZero
     private Long cinemaHallId;
     @NotNull
     @FutureOrPresent
