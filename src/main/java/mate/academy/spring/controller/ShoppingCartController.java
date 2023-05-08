@@ -7,6 +7,7 @@ import mate.academy.spring.service.MovieSessionService;
 import mate.academy.spring.service.ShoppingCartService;
 import mate.academy.spring.service.UserService;
 import mate.academy.spring.service.mapper.ResponseDtoMapper;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -34,14 +35,22 @@ public class ShoppingCartController {
     }
 
     @PutMapping("/movie-sessions")
-    public void addToCart(@RequestParam Long userId, @RequestParam Long movieSessionId) {
-        shoppingCartService.addSession(
-                movieSessionService.get(movieSessionId), userService.get(userId));
+    public void addToCart(Authentication auth, @RequestParam Long movieSessionId) {
+        User user = getUser(auth);
+        shoppingCartService.addSession(movieSessionService.get(movieSessionId), user);
     }
 
     @GetMapping("/by-user")
-    public ShoppingCartResponseDto getByUser(@RequestParam Long userId) {
-        User user = userService.get(userId);
-        return shoppingCartResponseDtoMapper.mapToDto(shoppingCartService.getByUser(user));
+    public ShoppingCartResponseDto getByUser(Authentication auth) {
+        User user = getUser(auth);
+        return shoppingCartResponseDtoMapper.mapToDto(shoppingCartService
+                .getByUser(user));
+    }
+
+    private User getUser(Authentication auth) {
+        String email = auth.getName();
+        return userService.findByEmail(email).orElseThrow(() ->
+                new RuntimeException("The user with the email: "
+                        + email + " is absent into DB"));
     }
 }
