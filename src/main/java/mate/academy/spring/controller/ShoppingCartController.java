@@ -8,7 +8,6 @@ import mate.academy.spring.service.ShoppingCartService;
 import mate.academy.spring.service.UserService;
 import mate.academy.spring.service.mapper.ResponseDtoMapper;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -49,8 +48,7 @@ public class ShoppingCartController {
     }
 
     private User getUser(Authentication auth) {
-        UserDetails userDetails = (UserDetails) auth.getPrincipal();
-        String email = userDetails.getUsername();
+        String email = auth.getName();
         return userService.findByEmail(email).orElseThrow(() ->
                 new RuntimeException("The user with the email: "
                         + email + " is absent into DB"));
