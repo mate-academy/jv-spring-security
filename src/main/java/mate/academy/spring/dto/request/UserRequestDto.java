@@ -11,8 +11,10 @@ import mate.academy.spring.validation.FieldsValueMatch;
         message = "Passwords do not match!"
 )
 public class UserRequestDto {
+    @NotNull
     @Email
     private String email;
+    @NotNull
     @Size(min = 8)
     private String password;
     @NotNull
