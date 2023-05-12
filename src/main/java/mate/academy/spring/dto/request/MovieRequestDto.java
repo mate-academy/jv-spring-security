@@ -1,6 +1,9 @@
 package mate.academy.spring.dto.request;
 
+import javax.validation.constraints.NotNull;
+
 public class MovieRequestDto {
+    @NotNull(message = "Please enter a movie title")
     private String title;
     private String description;
 
