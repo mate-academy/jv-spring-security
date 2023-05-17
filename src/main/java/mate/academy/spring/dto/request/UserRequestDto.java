@@ -9,8 +9,6 @@ import org.springframework.lang.NonNull;
 public class UserRequestDto {
     @Email
     private String email;
-    @NonNull
-    @Min(4)
     private String password;
     private String repeatPassword;
 

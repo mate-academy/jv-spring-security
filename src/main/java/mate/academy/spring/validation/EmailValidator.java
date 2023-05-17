@@ -4,6 +4,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
+import org.springframework.lang.NonNull;
 
 public class EmailValidator implements ConstraintValidator<Email, String> {
     private static final String EMAIL_PATTERN =
@@ -11,7 +12,7 @@ public class EmailValidator implements ConstraintValidator<Email, String> {
                     + "[A-Za-z0-9-]+(\\\\.[A-Za-z0-9-]+)*(\\\\.[A-Za-z]{2,})$";
 
     @Override
-    public boolean isValid(String email, ConstraintValidatorContext
+    public boolean isValid( String email, ConstraintValidatorContext
             constraintValidatorContext) {
         if (email == null) {
             return false;
