@@ -46,7 +46,7 @@ public class MovieSessionDaoImpl implements MovieSessionDao {
     public Optional<MovieSession> get(Long id) {
         try (Session session = factory.openSession()) {
             return session.createQuery(
-                    "FROM MovieSession WHERE id = :id ", MovieSession.class)
+                            "FROM MovieSession WHERE id = :id ", MovieSession.class)
                     .setParameter("id", id)
                     .uniqueResultOptional();
         } catch (Exception e) {
