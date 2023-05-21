@@ -42,7 +42,8 @@ public class OrderController {
     @GetMapping
     public List<OrderResponseDto> getOrderHistory(Authentication auth) {
         return orderService.getOrdersHistory(userService.findByEmail(auth.getName())
-                        .orElseThrow(() -> new RuntimeException("User not found by email: " + auth.getName())))
+                        .orElseThrow(() -> new RuntimeException(
+                                "User not found by email: " + auth.getName())))
                 .stream()
                 .map(orderResponseDtoMapper::mapToDto)
                 .toList();
