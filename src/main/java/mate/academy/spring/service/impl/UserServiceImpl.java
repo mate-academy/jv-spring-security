@@ -21,7 +21,6 @@ public class UserServiceImpl implements UserService {
     public User add(User user) {
         String encode = passwordEncoder.encode(user.getPassword());
         user.setPassword(encode);
-        user.setEmail(user.getEmail());
         return userDao.add(user);
     }
 
