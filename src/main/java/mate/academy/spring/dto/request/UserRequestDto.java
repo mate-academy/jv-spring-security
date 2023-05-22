@@ -9,7 +9,6 @@ import mate.academy.spring.validation.Password;
 public class UserRequestDto {
     @Email
     private String email;
-    @Size(min = 4, max = 255)
     private String password;
     @Size(min = 8, max = 255)
     private String repeatPassword;
