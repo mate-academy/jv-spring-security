@@ -10,7 +10,6 @@ public class UserRequestDto {
     @Email
     private String email;
     private String password;
-    @Size(min = 8, max = 255)
     private String repeatPassword;
 
     public String getEmail() {
@@ -23,15 +22,6 @@ public class UserRequestDto {
 
     public String getRepeatPassword() {
         return repeatPassword;
-    }
-
-    @Override
-    public int hashCode() {
-        int result = 17;
-        result = 31 * result + email.hashCode();
-        result = 31 * result + password.hashCode();
-        result = 31 * result + repeatPassword.hashCode();
-        return result;
     }
 
     @Override
