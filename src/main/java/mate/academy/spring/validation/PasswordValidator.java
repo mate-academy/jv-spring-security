@@ -10,6 +10,7 @@ public class PasswordValidator implements ConstraintValidator<Password, Object> 
         if (value instanceof UserRequestDto) {
             UserRequestDto user = (UserRequestDto) value;
             return user.getPassword() != null
+                    && user.getPassword().length() > 3
                     && user.getPassword().equals(user.getRepeatPassword());
         }
         return false;
