@@ -28,13 +28,4 @@ public class UserController {
                 () -> new RuntimeException("Invalid email"));
         return userResponseDtoMapper.mapToDto(user);
     }
-
-    @GetMapping("/1")
-    public String test1() {
-        return "done";
-    }
-    @GetMapping("/2")
-    public String test2() {
-        throw new DataProcessingException("Exception!",new RuntimeException());
-    }
 }

@@ -1,5 +1,6 @@
 package mate.academy.spring.exeption_handler;
 
+import mate.academy.spring.exception.DataProcessingException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -7,8 +8,10 @@ import org.springframework.validation.FieldError;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
+
 import java.time.LocalDateTime;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -25,11 +28,17 @@ public class CustomGlobalExceptionHandler extends ResponseEntityExceptionHandler
         Map<String, Object> body = new LinkedHashMap<>();
         body.put("timestamp", LocalDateTime.now().toString());
         body.put("status", status.value());
-        List<String> errors = ex.getBindingResult().getAllErrors().stream()
+        List<String> errors = ex.getBindingResult(). getAllErrors().stream()
                 .map(this::getErrorMessage)
                 .collect(Collectors.toList());
         body.put("errors", errors);
         return new ResponseEntity<>(body, headers, status);
+    }
+
+    @ExceptionHandler(DataProcessingException.class)
+    public final ResponseEntity<Object> handleDataProcessingException(Exception ex, WebRequest request) {
+        Map<String, Object> body = createBodyForCustomException(ex,HttpStatus.INTERNAL_SERVER_ERROR);
+        return new ResponseEntity<>(body, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
     private String getErrorMessage(ObjectError error) {
@@ -38,5 +47,13 @@ public class CustomGlobalExceptionHandler extends ResponseEntityExceptionHandler
             return field + " " + error.getDefaultMessage();
         }
         return error.getDefaultMessage();
+    }
+
+    private Map<String, Object> createBodyForCustomException(Exception ex, HttpStatus status) {
+        Map<String, Object> body = new LinkedHashMap<>();
+        body.put("timestamp", LocalDateTime.now().toString());
+        body.put("status", status.value());
+        body.put("error", ex.getMessage());
+        return body;
     }
 }
