@@ -13,7 +13,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.inMemoryAuthentication()
-                .withUser("bob")
+                .withUser("arthur111@gmail.com")
                 .password(getEncoder().encode("1234"))
                 .roles("USER");
     }
@@ -21,7 +21,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
-                .authorizeRequests()
+                .authorizeRequests().antMatchers("/register**")
+                .permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
