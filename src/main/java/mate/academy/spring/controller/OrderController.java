@@ -2,7 +2,6 @@ package mate.academy.spring.controller;
 
 import java.util.List;
 import java.util.NoSuchElementException;
-
 import mate.academy.spring.dto.response.OrderResponseDto;
 import mate.academy.spring.model.Order;
 import mate.academy.spring.model.ShoppingCart;
@@ -15,7 +14,6 @@ import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -38,14 +36,16 @@ public class OrderController {
 
     @PostMapping("/complete")
     public OrderResponseDto completeOrder(Authentication authenticatedUser) {
-        User user = userService.findByEmail(authenticatedUser.getName()).orElseThrow(NoSuchElementException::new);
+        User user = userService.findByEmail(authenticatedUser
+                .getName()).orElseThrow(NoSuchElementException::new);
         ShoppingCart cart = shoppingCartService.getByUser(userService.get(user.getId()));
         return orderResponseDtoMapper.mapToDto(orderService.completeOrder(cart));
     }
 
     @GetMapping
     public List<OrderResponseDto> getOrderHistory(Authentication authenticatedUser) {
-        User user = userService.findByEmail(authenticatedUser.getName()).orElseThrow(NoSuchElementException::new);
+        User user = userService.findByEmail(authenticatedUser
+                .getName()).orElseThrow(NoSuchElementException::new);
         return orderService.getOrdersHistory(userService.get(user.getId()))
                 .stream()
                 .map(orderResponseDtoMapper::mapToDto)
