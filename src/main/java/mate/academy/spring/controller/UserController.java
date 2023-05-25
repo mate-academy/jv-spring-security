@@ -1,6 +1,7 @@
 package mate.academy.spring.controller;
 
 import mate.academy.spring.dto.response.UserResponseDto;
+import mate.academy.spring.exception.DataProcessingException;
 import mate.academy.spring.model.User;
 import mate.academy.spring.service.UserService;
 import mate.academy.spring.service.mapper.ResponseDtoMapper;
@@ -16,7 +17,7 @@ public class UserController {
     private final ResponseDtoMapper<UserResponseDto, User> userResponseDtoMapper;
 
     public UserController(UserService userService,
-            ResponseDtoMapper<UserResponseDto, User> userResponseDtoMapper) {
+                          ResponseDtoMapper<UserResponseDto, User> userResponseDtoMapper) {
         this.userService = userService;
         this.userResponseDtoMapper = userResponseDtoMapper;
     }
@@ -26,5 +27,14 @@ public class UserController {
         User user = userService.findByEmail(email).orElseThrow(
                 () -> new RuntimeException("Invalid email"));
         return userResponseDtoMapper.mapToDto(user);
+    }
+
+    @GetMapping("/1")
+    public String test1() {
+        return "done";
+    }
+    @GetMapping("/2")
+    public String test2() {
+        throw new DataProcessingException("Exception!",new RuntimeException());
     }
 }
