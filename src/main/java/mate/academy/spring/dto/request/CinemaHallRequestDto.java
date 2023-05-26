@@ -4,11 +4,11 @@ import javax.validation.constraints.NotNull;
 
 public class CinemaHallRequestDto {
     @NotNull
-    private int capacity;
+    private Integer capacity;
     @NotNull
     private String description;
 
-    public int getCapacity() {
+    public Integer getCapacity() {
         return capacity;
     }
 

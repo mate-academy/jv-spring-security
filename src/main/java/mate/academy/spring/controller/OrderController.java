@@ -38,7 +38,7 @@ public class OrderController {
     public OrderResponseDto completeOrder(Authentication authenticatedUser) {
         User user = userService.findByEmail(authenticatedUser
                 .getName()).orElseThrow(NoSuchElementException::new);
-        ShoppingCart cart = shoppingCartService.getByUser(userService.get(user.getId()));
+        ShoppingCart cart = shoppingCartService.getByUser(user);
         return orderResponseDtoMapper.mapToDto(orderService.completeOrder(cart));
     }
 
