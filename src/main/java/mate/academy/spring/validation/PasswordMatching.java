@@ -10,7 +10,7 @@ import javax.validation.Payload;
 @Constraint(validatedBy = PasswordValidator.class)
 @Target({ElementType.TYPE, ElementType.ANNOTATION_TYPE})
 @Retention(RetentionPolicy.RUNTIME)
-public @interface Password {
+public @interface PasswordMatching {
     String message() default "Password mismatch";
     Class<?>[] groups() default{};
     Class<? extends Payload>[] payload() default {};
