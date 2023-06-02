@@ -1,12 +1,9 @@
 package mate.academy.spring.service.impl;
 
-import java.util.Optional;
-import mate.academy.spring.exception.AuthenticationException;
 import mate.academy.spring.model.User;
 import mate.academy.spring.service.AuthenticationService;
 import mate.academy.spring.service.ShoppingCartService;
 import mate.academy.spring.service.UserService;
-import mate.academy.spring.util.HashUtil;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -21,16 +18,6 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     }
 
     @Override
-    public User login(String email, String password) throws AuthenticationException {
-        Optional<User> user = userService.findByEmail(email);
-        if (user.isPresent() && user.get().getPassword().equals(
-                HashUtil.generateSecurePassword(password, user.get().getSalt()))) {
-            return user.get();
-        }
-        throw new AuthenticationException("Invalid login or password");
-    }
-
-    @Override
     public User register(String email, String password) {
         User user = new User();
         user.setEmail(email);
@@ -38,5 +25,10 @@ public class AuthenticationServiceImpl implements AuthenticationService {
         userService.add(user);
         shoppingCartService.registerNewShoppingCart(user);
         return user;
+    }
+
+    @Override
+    public Boolean comparePassword(String password, String repeatPassword) {
+        return password.equals(repeatPassword);
     }
 }
