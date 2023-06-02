@@ -1,21 +1,19 @@
 package mate.academy.spring.validation;
 
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
+import mate.academy.spring.dto.request.UserRequestDto;
 
-public class PasswordValidator implements ConstraintValidator<ValidPassword, String> {
+public class PasswordValidator implements ConstraintValidator<ValidPassword, UserRequestDto> {
     private static final String PASSWORD_PATTERN
             = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,}$";
 
     @Override
-    public boolean isValid(String pass, ConstraintValidatorContext constraintValidatorContext) {
-        if (pass == null) {
+    public boolean isValid(UserRequestDto requestDto,
+                           ConstraintValidatorContext constraintValidatorContext) {
+        if (requestDto.getPassword() == null) {
             return false;
         }
-        Pattern pattern = Pattern.compile(PASSWORD_PATTERN);
-        Matcher matcher = pattern.matcher(pass);
-        return matcher.matches();
+        return requestDto.getPassword().equals(requestDto.getRepeatPassword());
     }
 }

@@ -26,9 +26,4 @@ public class AuthenticationServiceImpl implements AuthenticationService {
         shoppingCartService.registerNewShoppingCart(user);
         return user;
     }
-
-    @Override
-    public Boolean comparePassword(String password, String repeatPassword) {
-        return password.equals(repeatPassword);
-    }
 }

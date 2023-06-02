@@ -1,6 +1,6 @@
 package mate.academy.spring.dto.request;
 
-import javax.validation.constraints.Email;
+import mate.academy.spring.validation.Email;
 import mate.academy.spring.validation.ValidPassword;
 
 @ValidPassword
@@ -18,11 +18,23 @@ public class UserRequestDto {
         return email;
     }
 
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
     public String getPassword() {
         return password;
     }
 
-    public String getRepeatpassword() {
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getRepeatPassword() {
         return repeatpassword;
+    }
+
+    public void setRepeatpassword(String repeatpassword) {
+        this.repeatpassword = repeatpassword;
     }
 }
