@@ -3,7 +3,6 @@ package mate.academy.spring.controller;
 import javax.validation.Valid;
 import mate.academy.spring.dto.request.UserRequestDto;
 import mate.academy.spring.dto.response.UserResponseDto;
-import mate.academy.spring.exception.AuthenticationException;
 import mate.academy.spring.model.User;
 import mate.academy.spring.service.AuthenticationService;
 import mate.academy.spring.service.mapper.ResponseDtoMapper;
@@ -23,13 +22,7 @@ public class AuthenticationController {
     }
 
     @PostMapping("/register")
-    public UserResponseDto register(@RequestBody @Valid UserRequestDto requestDto)
-            throws AuthenticationException {
-        boolean isCompare = authService.comparePassword(requestDto.getPassword(),
-                requestDto.getRepeatpassword());
-        if (!isCompare) {
-            throw new AuthenticationException("Password and repeatPassword do not match");
-        }
+    public UserResponseDto register(@Valid @RequestBody UserRequestDto requestDto) {
         User user = authService.register(requestDto.getEmail(), requestDto.getPassword());
         return userDtoResponseMapper.mapToDto(user);
     }
