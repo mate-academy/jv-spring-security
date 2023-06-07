@@ -1,6 +1,7 @@
 package mate.academy.spring.controller;
 
 import java.util.List;
+import javax.validation.Valid;
 import mate.academy.spring.dto.request.CinemaHallRequestDto;
 import mate.academy.spring.dto.response.CinemaHallResponseDto;
 import mate.academy.spring.model.CinemaHall;
@@ -21,17 +22,19 @@ public class CinemaHallController {
     private final ResponseDtoMapper<CinemaHallResponseDto, CinemaHall> cinemaHallResponseDtoMapper;
 
     public CinemaHallController(CinemaHallService cinemaHallService,
-            RequestDtoMapper<CinemaHallRequestDto, CinemaHall> cinemaHallRequestDtoMapper,
-            ResponseDtoMapper<CinemaHallResponseDto, CinemaHall> cinemaHallResponseDtoMapper) {
+                                RequestDtoMapper<CinemaHallRequestDto,
+                                        CinemaHall> cinemaHallRequestDtoMapper,
+                                ResponseDtoMapper<CinemaHallResponseDto,
+                                        CinemaHall> cinemaHallResponseDtoMapper) {
         this.cinemaHallService = cinemaHallService;
         this.cinemaHallRequestDtoMapper = cinemaHallRequestDtoMapper;
         this.cinemaHallResponseDtoMapper = cinemaHallResponseDtoMapper;
     }
 
     @PostMapping
-    public CinemaHallResponseDto add(@RequestBody CinemaHallRequestDto requestDto) {
+    public CinemaHallResponseDto add(@RequestBody @Valid CinemaHallRequestDto requestDto) {
         CinemaHall cinemaHall = cinemaHallService.add(
-                    cinemaHallRequestDtoMapper.mapToModel(requestDto));
+                cinemaHallRequestDtoMapper.mapToModel(requestDto));
         return cinemaHallResponseDtoMapper.mapToDto(cinemaHall);
     }
 
