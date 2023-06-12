@@ -35,15 +35,17 @@ public class OrderController {
 
     @PostMapping("/complete")
     public OrderResponseDto completeOrder(Authentication authentication) {
-        Long userId = ((User) authentication.getPrincipal()).getId();
-        ShoppingCart cart = shoppingCartService.getByUser(userService.get(userId));
+        String email = authentication.getName();
+        User user = userService.findByEmail(email).get();
+        ShoppingCart cart = shoppingCartService.getByUser(user);
         return orderResponseDtoMapper.mapToDto(orderService.completeOrder(cart));
     }
 
     @GetMapping
     public List<OrderResponseDto> getOrderHistory(Authentication authentication) {
-        Long userId = ((User) authentication.getPrincipal()).getId();
-        return orderService.getOrdersHistory(userService.get(userId))
+        String email = authentication.getName();
+        User user = userService.findByEmail(email).get();
+        return orderService.getOrdersHistory(user)
                 .stream()
                 .map(orderResponseDtoMapper::mapToDto)
                 .toList();

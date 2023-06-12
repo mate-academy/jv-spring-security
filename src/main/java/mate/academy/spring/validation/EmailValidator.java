@@ -7,17 +7,15 @@ import javax.validation.ConstraintValidatorContext;
 
 public class EmailValidator implements ConstraintValidator<Password, String> {
 
-    private static final String VALIDATION_PATTERN =
+    private static final Pattern PATTERN = Pattern.compile(
             "^(?=.{1,64}@)[A-Za-z0-9_-]+(\\\\.[A-Za-z0-9_-]+)*@[^-]"
-                    + "[A-Za-z0-9-]+(\\\\.[A-Za-z0-9-]+)*(\\\\.[A-Za-z]{2,})$";
+            + "[A-Za-z0-9-]+(\\\\.[A-Za-z0-9-]+)*(\\\\.[A-Za-z]{2,})$");
 
     @Override
     public boolean isValid(String email, ConstraintValidatorContext constraintValidatorContext) {
         if (email == null) {
             return false;
         }
-        Pattern pattern = Pattern.compile(VALIDATION_PATTERN);
-        Matcher matcher = pattern.matcher(email);
-        return matcher.matches();
+        return PATTERN.matcher(email).matches();
     }
 }
