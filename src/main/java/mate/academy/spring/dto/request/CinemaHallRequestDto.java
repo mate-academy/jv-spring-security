@@ -1,7 +1,15 @@
 package mate.academy.spring.dto.request;
 
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
 public class CinemaHallRequestDto {
-    private int capacity;
+    @NotNull
+    @Min(0)
+    private Integer capacity;
+    @NotNull
+    @Size(min = 10)
     private String description;
 
     public int getCapacity() {
