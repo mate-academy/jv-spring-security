@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class UserServiceImpl implements UserService {
-    private static PasswordEncoder passwordEncoder;
+    private PasswordEncoder passwordEncoder;
     private final UserDao userDao;
 
     public UserServiceImpl(UserDao userDao, PasswordEncoder passwordEncoder) {
