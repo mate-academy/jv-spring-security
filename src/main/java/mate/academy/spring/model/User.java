@@ -6,6 +6,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import mate.academy.spring.model.validation.Email;
 
 @Entity
 @Table(name = "users")
@@ -14,9 +17,13 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column(unique = true)
+    @NotNull
+    @Email
+    @NotBlank
     private String email;
+    @NotNull
+    @NotBlank
     private String password;
-    private String salt;
 
     public Long getId() {
         return id;
@@ -40,14 +47,6 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    public String getSalt() {
-        return salt;
-    }
-
-    public void setSalt(String salt) {
-        this.salt = salt;
     }
 
     @Override

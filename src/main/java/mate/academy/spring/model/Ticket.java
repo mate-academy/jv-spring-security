@@ -8,6 +8,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "tickets")
@@ -17,9 +19,13 @@ public class Ticket {
     private Long id;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "movie_session_id")
+    @NotNull
+    @Valid
     private MovieSession movieSession;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
+    @NotNull
+    @Valid
     private User user;
 
     public Long getId() {

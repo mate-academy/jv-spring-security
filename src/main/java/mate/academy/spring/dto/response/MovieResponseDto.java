@@ -1,8 +1,16 @@
 package mate.academy.spring.dto.response;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+
 public class MovieResponseDto {
+    @NotNull
     private Long movieId;
+    @NotBlank
+    @NotNull
     private String movieTitle;
+    @NotNull
+    @NotBlank
     private String movieDescription;
 
     public Long getMovieId() {
