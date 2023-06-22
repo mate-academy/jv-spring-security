@@ -1,22 +1,13 @@
 package mate.academy.spring.dto.request;
 
-import java.util.Objects;
-import javax.validation.Valid;
-import javax.validation.constraints.AssertTrue;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 import mate.academy.spring.model.validation.Email;
+import mate.academy.spring.model.validation.PasswordsMatch;
 
+@PasswordsMatch
 public class UserRequestDto {
     @Email
-    @NotNull
-    @NotBlank
     private String email;
-    @NotNull
-    @NotBlank
     private String password;
-    @NotNull
-    @NotBlank
     private String repeatPassword;
 
     public String getEmail() {
@@ -29,11 +20,5 @@ public class UserRequestDto {
 
     public String getRepeatPassword() {
         return repeatPassword;
-    }
-
-    @Valid
-    @AssertTrue(message = "passwords do not match")
-    public boolean getPasswordsMatch() {
-        return Objects.equals(password, repeatPassword);
     }
 }
