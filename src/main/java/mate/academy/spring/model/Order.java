@@ -12,8 +12,6 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.validation.Valid;
-import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "orders")
@@ -25,15 +23,11 @@ public class Order {
     @JoinTable(name = "orders_tickets",
             joinColumns = @JoinColumn(name = "order_id"),
             inverseJoinColumns = @JoinColumn(name = "ticket_id"))
-    @NotNull
     private List<Ticket> tickets;
     @Column(name = "order_time")
-    @NotNull
     private LocalDateTime orderTime;
     @ManyToOne
     @JoinColumn(name = "user_id")
-    @NotNull
-    @Valid
     private User user;
 
     public Long getId() {

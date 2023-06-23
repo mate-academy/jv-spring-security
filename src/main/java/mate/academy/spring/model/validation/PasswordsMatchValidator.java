@@ -1,6 +1,5 @@
 package mate.academy.spring.model.validation;
 
-import java.util.Objects;
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 import mate.academy.spring.dto.request.UserRequestDto;
@@ -16,10 +15,10 @@ public class PasswordsMatchValidator implements
         String password = dto.getPassword();
         String repeatPassword = dto.getRepeatPassword();
 
-        if (password.isBlank() || repeatPassword.isBlank()) {
+        if (password == null || password.isBlank()) {
             return false;
         }
 
-        return Objects.equals(password, repeatPassword);
+        return password.equals(repeatPassword);
     }
 }

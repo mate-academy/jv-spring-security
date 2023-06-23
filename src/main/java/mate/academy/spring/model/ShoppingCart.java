@@ -9,8 +9,6 @@ import javax.persistence.MapsId;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import javax.validation.Valid;
-import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "shopping_carts")
@@ -25,8 +23,6 @@ public class ShoppingCart {
     @MapsId
     @OneToOne
     @JoinColumn(name = "id")
-    @NotNull
-    @Valid
     private User user;
 
     public Long getId() {

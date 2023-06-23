@@ -1,10 +1,8 @@
 package mate.academy.spring.dto.response;
 
 import java.util.List;
-import javax.validation.constraints.NotNull;
 
 public class ShoppingCartResponseDto {
-    @NotNull
     private Long userId;
     private List<Long> ticketIds;
 
