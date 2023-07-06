@@ -11,7 +11,8 @@ import javax.validation.Payload;
 @Target({ElementType.TYPE})
 @Retention(RetentionPolicy.RUNTIME)
 public @interface Password {
-    String message() default "Password and repeat password don't match";
+    String message() default "Password less than 8 characters "
+            + "or password and repeat password don't match";
     Class<?>[] groups() default {};
     Class<? extends Payload>[] payload() default {};
 }
