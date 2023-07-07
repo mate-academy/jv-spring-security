@@ -5,7 +5,6 @@ import javax.validation.constraints.Size;
 import org.hibernate.validator.constraints.Length;
 
 public class CinemaHallRequestDto {
-    @NotNull
     @Size(min = 20, max = 80)
     private int capacity;
     @NotNull
