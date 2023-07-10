@@ -16,15 +16,24 @@ public class PasswordValidator implements ConstraintValidator<Password, Object> 
             return false;
         }
         UserRequestDto user = (UserRequestDto) userRequestDto;
-        return isMatch(user.getPassword(), user.getRepeatPassword());
+        return isValid(user.getPassword(), user.getRepeatPassword())
+                && isMatch(user.getPassword(), user.getRepeatPassword());
+
+    }
+
+    private boolean isValid(String password, String repeatPassword) {
+        if (password == null || repeatPassword == null) {
+            return false;
+        }
+        Pattern pattern = Pattern.compile(PASSWORD_PATTERN);
+        Matcher matcher = pattern.matcher(password);
+        return matcher.matches();
     }
 
     private boolean isMatch(String password, String repeatPassword) {
         if (password == null || repeatPassword == null) {
             return false;
         }
-        Pattern pattern = Pattern.compile(PASSWORD_PATTERN);
-        Matcher matcher = pattern.matcher(password);
-        return matcher.matches() && password.equals(repeatPassword);
+        return password.equals(repeatPassword);
     }
 }
