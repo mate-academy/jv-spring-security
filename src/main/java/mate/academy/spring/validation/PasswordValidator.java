@@ -9,13 +9,16 @@ import mate.academy.spring.dto.request.UserRequestDto;
 public class PasswordValidator implements ConstraintValidator<Password, UserRequestDto> {
     private static final String PASSWORD_PATTERN =
             "/^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*\\W)(?!.* ).{8,16}$/;";
+    private static final int MIN_LENGTH = 6;
+    private static final int MAX_LENGTH = 12;
 
     @Override
     public boolean isValid(UserRequestDto userRequestDto,
                            ConstraintValidatorContext constraintValidatorContext) {
         String password = userRequestDto.getPassword();
         String repeatPassword = userRequestDto.getRepeatPassword();
-        if (password == null || !password.equals(repeatPassword)) {
+        if (password == null || !password.equals(repeatPassword)
+                || (password.length() < MIN_LENGTH) || password.length() > MAX_LENGTH) {
             return false;
         }
         Pattern pattern = Pattern.compile(PASSWORD_PATTERN);
