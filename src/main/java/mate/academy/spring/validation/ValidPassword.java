@@ -11,7 +11,7 @@ import javax.validation.Payload;
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
 public @interface ValidPassword {
-    String message() default "Invalid password";
+    String message() default "Passwords are incorrect";
 
     Class<?>[] groups() default {};
 
