@@ -3,13 +3,13 @@ package mate.academy.spring.dto.request;
 import mate.academy.spring.validator.Email;
 import mate.academy.spring.validator.RepeatPassword;
 
-import javax.validation.constraints.Min;
+import javax.validation.constraints.Size;
 
 @RepeatPassword
 public class UserRegistrationDto {
     @Email
     private String email;
-    @Min(8)
+    @Size(min = 8)
     private String password;
     private String repeatPassword;
 

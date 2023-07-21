@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import javax.validation.Valid;
 
 @RestController
 @RequestMapping("/users")
@@ -22,7 +23,7 @@ public class UserController {
     }
 
     @GetMapping("/by-email")
-    public UserResponseDto findByEmail(@RequestParam String email) {
+    public UserResponseDto findByEmail(@RequestParam @Valid String email) {
         User user = userService.findByEmail(email).orElseThrow(
                 () -> new RuntimeException("Invalid email"));
         return userResponseDtoMapper.mapToDto(user);
