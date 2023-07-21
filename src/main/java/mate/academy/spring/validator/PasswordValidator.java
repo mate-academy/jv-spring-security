@@ -1,10 +1,11 @@
 package mate.academy.spring.validator;
 
-import mate.academy.spring.dto.request.UserRegistrationDto;
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
+import mate.academy.spring.dto.request.UserRegistrationDto;
 
-public class PasswordValidator implements ConstraintValidator<RepeatPassword, UserRegistrationDto> {
+public class PasswordValidator implements ConstraintValidator<RepeatPassword,
+        UserRegistrationDto> {
     @Override
     public boolean isValid(UserRegistrationDto dto, ConstraintValidatorContext context) {
         String password = dto.getPassword();

@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import javax.validation.Valid;
 
 @RestController
 @RequestMapping("/orders")
@@ -35,15 +34,14 @@ public class OrderController {
     }
 
     @PostMapping("/complete")
-    public OrderResponseDto completeOrder(@RequestParam @Valid Authentication authentication) {
+    public OrderResponseDto completeOrder(@RequestParam Authentication authentication) {
         ShoppingCart cart = shoppingCartService.getByUser(userService.findByEmail(authentication
                 .getPrincipal().toString()).get());
         return orderResponseDtoMapper.mapToDto(orderService.completeOrder(cart));
     }
 
     @GetMapping
-    public List<OrderResponseDto> getOrderHistory(
-            @RequestParam @Valid Authentication authentication) {
+    public List<OrderResponseDto> getOrderHistory(@RequestParam Authentication authentication) {
         return orderService.getOrdersHistory(userService.findByEmail(authentication
                         .getPrincipal().toString()).get())
                 .stream()

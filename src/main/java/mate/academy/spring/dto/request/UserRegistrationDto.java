@@ -1,9 +1,8 @@
 package mate.academy.spring.dto.request;
 
+import javax.validation.constraints.Size;
 import mate.academy.spring.validator.Email;
 import mate.academy.spring.validator.RepeatPassword;
-
-import javax.validation.constraints.Size;
 
 @RepeatPassword
 public class UserRegistrationDto {
