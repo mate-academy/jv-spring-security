@@ -46,7 +46,8 @@ public class ShoppingCartController {
     }
 
     @GetMapping("/by-user")
-    public ShoppingCartResponseDto getByUser(Authentication authentication) throws AuthenticationException {
+    public ShoppingCartResponseDto getByUser(Authentication authentication)
+            throws AuthenticationException {
         User user = userService.findByEmail(authentication.getName())
                 .orElseThrow(() -> new AuthenticationException("Can't find user with this email: "
                         + authentication.getName()));
