@@ -33,6 +33,7 @@ public class CustomGlobalExceptionHandler extends ResponseEntityExceptionHandler
                 .stream()
                 .map(this::getErrorsMessage)
                 .collect(Collectors.toList());
+        body.put("errors", errors);
         return new ResponseEntity<>(body, headers, status);
     }
 
@@ -42,7 +43,7 @@ public class CustomGlobalExceptionHandler extends ResponseEntityExceptionHandler
         Map<String, Object> body = new LinkedHashMap<>();
         body.put("timestamp", LocalDateTime.now());
         body.put("status", HttpStatus.INTERNAL_SERVER_ERROR.value());
-        body.put("message", ex.getMessage());
+        body.put("error", ex.getMessage());
         return new ResponseEntity<>(body, headers, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
