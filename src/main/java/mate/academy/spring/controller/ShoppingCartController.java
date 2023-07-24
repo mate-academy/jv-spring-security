@@ -11,7 +11,6 @@ import mate.academy.spring.service.mapper.ResponseDtoMapper;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -37,7 +36,7 @@ public class ShoppingCartController {
     }
 
     @PutMapping("/movie-sessions")
-    public void addToCart(@RequestBody @Valid Authentication authentication,
+    public void addToCart(Authentication authentication,
                           @RequestParam @Valid Long movieSessionId) {
         shoppingCartService.addSession(
                 movieSessionService.get(movieSessionId),
@@ -45,7 +44,7 @@ public class ShoppingCartController {
     }
 
     @GetMapping("/by-user")
-    public ShoppingCartResponseDto getByUser(@RequestParam @Valid Authentication authentication) {
+    public ShoppingCartResponseDto getByUser(Authentication authentication) {
         User user = userService.findByEmail(authentication.getPrincipal().toString()).get();
         return shoppingCartResponseDtoMapper.mapToDto(shoppingCartService.getByUser(user));
     }
