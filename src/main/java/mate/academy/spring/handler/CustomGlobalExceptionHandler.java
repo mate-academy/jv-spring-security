@@ -5,6 +5,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
+
 import mate.academy.spring.exception.DataProcessingException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -36,12 +37,13 @@ public class CustomGlobalExceptionHandler extends ResponseEntityExceptionHandler
     }
 
     @ExceptionHandler(DataProcessingException.class)
-    protected ResponseEntity<Object> handleDataProcessingException(DataProcessingException ex) {
+    protected ResponseEntity<Object> handleDataProcessingException(DataProcessingException ex,
+                                                                   HttpHeaders headers) {
         Map<String, Object> errorBody = new LinkedHashMap<>();
         errorBody.put("timestamp", LocalDateTime.now().toString());
         errorBody.put("status", HttpStatus.INTERNAL_SERVER_ERROR.value());
         errorBody.put("error", ex.getMessage());
-        return new ResponseEntity<>(errorBody, HttpStatus.INTERNAL_SERVER_ERROR);
+        return new ResponseEntity<>(errorBody, headers, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
     private String getErrorMessage(ObjectError error) {
