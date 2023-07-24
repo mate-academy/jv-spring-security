@@ -21,16 +21,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .anyRequest()
-                .authenticated()
+                .anyRequest().authenticated()
                 .and()
                 .formLogin()
                 .permitAll()
                 .and()
                 .httpBasic()
                 .and()
-                .csrf()
-                .disable();
+                .csrf().disable();
     }
 
     @Bean

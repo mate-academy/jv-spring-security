@@ -5,7 +5,6 @@ import javax.validation.constraints.Positive;
 import javax.validation.constraints.Size;
 
 public class CinemaHallRequestDto {
-    @NotNull
     @Positive
     private int capacity;
     @NotNull
