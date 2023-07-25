@@ -1,6 +1,5 @@
 package mate.academy.spring.validation;
 
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
@@ -18,7 +17,6 @@ public class PasswordValidator implements ConstraintValidator<Password, UserRequ
                 || !userRequestDto.getPassword().equals(userRequestDto.getRepeatPassword())) {
             return false;
         }
-        Matcher matcher = PATTERN.matcher(userRequestDto.getPassword());
-        return matcher.matches();
+        return PATTERN.matcher(userRequestDto.getPassword()).matches();
     }
 }
