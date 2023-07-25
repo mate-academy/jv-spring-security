@@ -14,13 +14,13 @@ public class PasswordValidator implements ConstraintValidator<Password, UserRequ
                            ConstraintValidatorContext constraintValidatorContext) {
         String password = userRequestDto.getPassword();
         String repeatPassword = userRequestDto.getRepeatPassword();
-        if (userRequestDto != null && isPattern(password) && isPattern(repeatPassword)) {
+        if (userRequestDto != null && isMatchPattern(password)) {
             return password.equals(repeatPassword);
         }
         return false;
     }
 
-    private boolean isPattern(String password) {
+    private boolean isMatchPattern(String password) {
         if (password != null) {
             Pattern patterns = Pattern.compile(PASSWORD_PATTERN);
             Matcher matcher = patterns.matcher(password);
