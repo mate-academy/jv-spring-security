@@ -1,5 +1,6 @@
 package mate.academy.spring.controller;
 
+import java.util.NoSuchElementException;
 import javax.validation.Valid;
 import mate.academy.spring.dto.response.ShoppingCartResponseDto;
 import mate.academy.spring.model.ShoppingCart;
@@ -27,8 +28,8 @@ public class ShoppingCartController {
     public ShoppingCartController(ShoppingCartService shoppingCartService,
                                   UserService userService,
                                   MovieSessionService movieSessionService,
-            ResponseDtoMapper<ShoppingCartResponseDto, ShoppingCart>
-                                      shoppingCartResponseDtoMapper) {
+                                  ResponseDtoMapper<ShoppingCartResponseDto, ShoppingCart>
+                                          shoppingCartResponseDtoMapper) {
         this.shoppingCartService = shoppingCartService;
         this.userService = userService;
         this.movieSessionService = movieSessionService;
@@ -38,13 +39,18 @@ public class ShoppingCartController {
     @PutMapping("/movie-sessions")
     public void addToCart(@RequestParam Authentication authentication,
                           @RequestParam @Valid Long movieSessionId) {
+        User user = userService.findByEmail(authentication.getName())
+                .orElseThrow(() -> new NoSuchElementException("Can't find user by this email: "
+                        + authentication.getName()));
         shoppingCartService.addSession(movieSessionService.get(movieSessionId),
-                userService.findByEmail(authentication.getPrincipal().toString()).get());
+                user);
     }
 
     @GetMapping("/by-user")
     public ShoppingCartResponseDto getByUser(@RequestParam Authentication authentication) {
-        User user = userService.findByEmail(authentication.getPrincipal().toString()).get();
+        User user = userService.findByEmail(authentication.getName())
+                .orElseThrow(() -> new NoSuchElementException("Can't find user by this email: "
+                        + authentication.getName()));
         return shoppingCartResponseDtoMapper.mapToDto(shoppingCartService.getByUser(user));
     }
 }

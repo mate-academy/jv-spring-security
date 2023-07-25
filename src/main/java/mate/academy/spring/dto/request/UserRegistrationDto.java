@@ -1,14 +1,12 @@
 package mate.academy.spring.dto.request;
 
-import javax.validation.constraints.Size;
 import mate.academy.spring.validator.Email;
-import mate.academy.spring.validator.RepeatPassword;
+import mate.academy.spring.validator.ValidPassword;
 
-@RepeatPassword
+@ValidPassword
 public class UserRegistrationDto {
     @Email
     private String email;
-    @Size(min = 8)
     private String password;
     private String repeatPassword;
 
