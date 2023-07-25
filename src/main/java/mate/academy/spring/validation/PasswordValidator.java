@@ -5,7 +5,7 @@ import javax.validation.ConstraintValidatorContext;
 import mate.academy.spring.dto.request.UserRequestDto;
 
 public class PasswordValidator implements ConstraintValidator<Password, UserRequestDto> {
-    private final int MIN_PASSWORD_SIZE = 8;
+    private static final int MIN_PASSWORD_SIZE = 8;
 
     @Override
     public boolean isValid(UserRequestDto userRequestDto, ConstraintValidatorContext context) {
