@@ -9,9 +9,9 @@ import javax.validation.Payload;
 
 @Constraint(validatedBy = PasswordValidation.class)
 @Retention(value = RetentionPolicy.RUNTIME)
-@Target(value = {ElementType.FIELD, ElementType.PARAMETER})
+@Target(value = ElementType.TYPE)
 public @interface Password {
-    String message() default "Invalid password format.";
+    String message() default "Invalid password.";
 
     Class<?>[] groups() default {};
 

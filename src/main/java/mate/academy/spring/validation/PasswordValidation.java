@@ -1,14 +1,21 @@
 package mate.academy.spring.validation;
 
+import java.util.regex.Pattern;
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
+import mate.academy.spring.dto.request.UserRequestDto;
 
-public class PasswordValidation implements ConstraintValidator<Email, String> {
-    private static final String PASSWORD_PATTERN = "^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{8,40}$";
+public class PasswordValidation implements ConstraintValidator<Email, UserRequestDto> {
+    private static final Pattern PASSWORD_PATTERN =
+            Pattern.compile("^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{8,40}$");
 
     @Override
-    public boolean isValid(String password,
-                           ConstraintValidatorContext constraintValidatorContext) {
-        return password != null && password.matches(PASSWORD_PATTERN);
+    public boolean isValid(UserRequestDto userRequestDto, ConstraintValidatorContext context) {
+        if (userRequestDto.getPassword() == null
+                || !userRequestDto.getPassword().equals(userRequestDto.getRepeatPassword())) {
+            return false;
+        }
+        return PASSWORD_PATTERN.matcher(userRequestDto.getPassword()).matches();
     }
 }
+
