@@ -1,6 +1,5 @@
 package mate.academy.spring.controller;
 
-
 import mate.academy.spring.dto.response.ShoppingCartResponseDto;
 import mate.academy.spring.exception.AuthenticationException;
 import mate.academy.spring.model.ShoppingCart;
