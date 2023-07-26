@@ -31,7 +31,7 @@ public class CustomGlobalExceptionHandler extends ResponseEntityExceptionHandler
                 .map(this::getErrorMessage)
                 .collect(Collectors.toList());
         body.put("errors", errors);
-        return super.handleMethodArgumentNotValid(ex, headers, status, request);
+        return new ResponseEntity<>(body, headers, status);
     }
 
     @ExceptionHandler(DataProcessingException.class)
