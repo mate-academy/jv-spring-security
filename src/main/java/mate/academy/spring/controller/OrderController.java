@@ -48,7 +48,7 @@ public class OrderController {
         String email = authentication.getName();
         User user = userService.findByEmail(email).orElseThrow(
                 () -> new NoSuchElementException("There is no user with email " + email));
-        return orderService.getOrdersHistory(userService.get(user.getId()))
+        return orderService.getOrdersHistory(user)
                 .stream()
                 .map(orderResponseDtoMapper::mapToDto)
                 .toList();
