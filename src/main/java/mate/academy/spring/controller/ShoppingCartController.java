@@ -41,7 +41,7 @@ public class ShoppingCartController {
                 new NoSuchElementException("Can't find user by email: "
                         + authentication.getName()));
         shoppingCartService.addSession(
-                movieSessionService.get(movieSessionId), userService.get(user.getId()));
+                movieSessionService.get(movieSessionId), user);
     }
 
     @GetMapping("/by-user")

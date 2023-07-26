@@ -21,7 +21,6 @@ public class PasswordValidator implements ConstraintValidator<Password, UserRequ
             return false;
         }
         Pattern pattern = Pattern.compile(PASSWORD_PATTERN);
-        Matcher matcher = pattern.matcher(password);
-        return matcher.matches();
+        return pattern.matcher(password).matches();
     }
 }
