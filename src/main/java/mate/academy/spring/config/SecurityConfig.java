@@ -1,7 +1,5 @@
 package mate.academy.spring.config;
 
-import static java.util.Base64.getEncoder;
-
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;

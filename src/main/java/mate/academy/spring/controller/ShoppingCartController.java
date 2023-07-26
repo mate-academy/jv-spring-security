@@ -40,7 +40,8 @@ public class ShoppingCartController {
         User user = userService.findByEmail(authentication
                         .getName())
                         .orElseThrow(() ->
-                        new NoSuchElementException("Can`t find user by email " + authentication.getName()));
+                        new NoSuchElementException("Can`t find user by email "
+                                + authentication.getName()));
         shoppingCartService.addSession(
                 movieSessionService.get(movieSessionId), user);
     }
@@ -50,7 +51,8 @@ public class ShoppingCartController {
         User user = userService.findByEmail(authentication
                         .getName())
                         .orElseThrow(() ->
-                        new NoSuchElementException("Can`t find user by email " + authentication.getName()));
+                        new NoSuchElementException("Can`t find user by email "
+                                + authentication.getName()));
         return shoppingCartResponseDtoMapper.mapToDto(shoppingCartService.getByUser(user));
     }
 }
