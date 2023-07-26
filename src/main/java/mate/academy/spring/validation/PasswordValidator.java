@@ -7,7 +7,7 @@ import mate.academy.spring.dto.request.UserRequestDto;
 
 public class PasswordValidator implements ConstraintValidator<Password, UserRequestDto> {
     private static final String PASSWORD_PATTERN =
-            "/^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*\\W)(?!.* ).{8,16}$/;";
+            "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*\\W)(?!.* ).{8,16}$";
     private static final int MIN_LENGTH = 8;
 
     @Override
