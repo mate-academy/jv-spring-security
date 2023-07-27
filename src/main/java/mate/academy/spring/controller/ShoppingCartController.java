@@ -1,7 +1,7 @@
 package mate.academy.spring.controller;
 
+import java.util.NoSuchElementException;
 import mate.academy.spring.dto.response.ShoppingCartResponseDto;
-import mate.academy.spring.exception.AuthenticationException;
 import mate.academy.spring.model.ShoppingCart;
 import mate.academy.spring.model.User;
 import mate.academy.spring.service.MovieSessionService;
@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
 
 @RestController
 @RequestMapping("/shopping-carts")
@@ -42,10 +43,9 @@ public class ShoppingCartController {
     }
 
     @GetMapping("/by-user")
-    public ShoppingCartResponseDto getByUser(Authentication authentication)
-            throws AuthenticationException {
+    public ShoppingCartResponseDto getByUser(Authentication authentication) {
         User user = userService.findByEmail(authentication.getName())
-                .orElseThrow(() -> new AuthenticationException("Can't find user with this email: "
+                .orElseThrow(() -> new NoSuchElementException("Can't find user with this email: "
                         + authentication.getName()));
         return shoppingCartResponseDtoMapper
                 .mapToDto(shoppingCartService.getByUser(user));

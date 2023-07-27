@@ -14,7 +14,7 @@ public class EmailValidator implements ConstraintValidator<Email, String> {
         if (email == null) {
             return false;
         }
-        Pattern patterns = Pattern.compile(EMAIL_PATTERN);
+        final Pattern patterns = Pattern.compile(EMAIL_PATTERN);
         Matcher matcher = patterns.matcher(email);
         return matcher.matches();
     }

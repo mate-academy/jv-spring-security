@@ -1,8 +1,8 @@
 package mate.academy.spring.controller;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 import mate.academy.spring.dto.response.OrderResponseDto;
-import mate.academy.spring.exception.AuthenticationException;
 import mate.academy.spring.model.Order;
 import mate.academy.spring.model.ShoppingCart;
 import mate.academy.spring.model.User;
@@ -35,20 +35,18 @@ public class OrderController {
     }
 
     @PostMapping("/complete")
-    public OrderResponseDto completeOrder(Authentication authentication)
-            throws AuthenticationException {
+    public OrderResponseDto completeOrder(Authentication authentication) {
         User user = userService.findByEmail(authentication.getName())
-                .orElseThrow(() -> new AuthenticationException("Can't find user with this email: "
+                .orElseThrow(() -> new NoSuchElementException("Can't find user with this email: "
                         + authentication.getName()));
         ShoppingCart cart = shoppingCartService.getByUser(user);
         return orderResponseDtoMapper.mapToDto(orderService.completeOrder(cart));
     }
 
     @GetMapping
-    public List<OrderResponseDto> getOrderHistory(Authentication authentication)
-            throws AuthenticationException {
+    public List<OrderResponseDto> getOrderHistory(Authentication authentication) {
         User user = userService.findByEmail(authentication.getName()).orElseThrow(
-                () -> new AuthenticationException(
+                () -> new NoSuchElementException(
                         "Can't find user with this email: " + authentication.getName()));
         return orderService.getOrdersHistory(user)
                 .stream()
