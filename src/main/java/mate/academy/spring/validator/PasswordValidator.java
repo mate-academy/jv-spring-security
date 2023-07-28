@@ -9,6 +9,7 @@ import mate.academy.spring.dto.request.UserRequestDto;
 public class PasswordValidator implements ConstraintValidator<Password, Object> {
     public static final String PASSWORD_PATTERN = "^(?=.*[0-9])(?=.*[a-z])"
             + "(?=.*[A-Z])(?=.*[@#$%^&+=!])(?=\\S+$).{8,}$";
+    private static final int MIN_PASSWORD_SIZE = 8;
 
     @Override
     public boolean isValid(Object userRequestDto,
@@ -22,7 +23,9 @@ public class PasswordValidator implements ConstraintValidator<Password, Object> 
     }
 
     private boolean isValid(String password, String repeatPassword) {
-        if (password == null || repeatPassword == null) {
+        if (password == null || repeatPassword == null
+                || password.length() <= MIN_PASSWORD_SIZE
+                || repeatPassword.length() <= MIN_PASSWORD_SIZE) {
             return false;
         }
         Pattern pattern = Pattern.compile(PASSWORD_PATTERN);
