@@ -7,8 +7,9 @@ import javax.validation.ConstraintValidatorContext;
 import mate.academy.spring.dto.request.UserRequestDto;
 
 public class PasswordValidator implements ConstraintValidator<Password, UserRequestDto> {
-    private static final String PASSWORD_PATTERN =
+    private static final String PASSWORD_REGEX =
             "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,}$";
+    private static final Pattern PASSWORD_PATTERN = Pattern.compile(PASSWORD_REGEX);
 
     @Override
     public boolean isValid(UserRequestDto userRequestDto,
@@ -18,8 +19,7 @@ public class PasswordValidator implements ConstraintValidator<Password, UserRequ
                 || !userRequestDto.getPassword().equals(userRequestDto.getRepeatPassword())) {
             return false;
         }
-        Pattern pattern = Pattern.compile(PASSWORD_PATTERN);
-        Matcher matcher = pattern.matcher(userRequestDto.getPassword());
+        Matcher matcher = PASSWORD_PATTERN.matcher(userRequestDto.getPassword());
         return matcher.matches();
     }
 }
