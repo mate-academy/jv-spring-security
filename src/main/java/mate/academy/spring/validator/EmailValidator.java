@@ -6,15 +6,13 @@ import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
 public class EmailValidator implements ConstraintValidator<Email, String> {
-    private static final String EMAIL_PATTERN = "^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]"
-            + "+\\\\.[A-Za-z]{2,}$";
+    private static final Pattern patterns = Pattern.compile("^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]");
 
     @Override
     public boolean isValid(String email, ConstraintValidatorContext constraintValidatorContext) {
         if (email == null) {
             return false;
         }
-        final Pattern patterns = Pattern.compile(EMAIL_PATTERN);
         Matcher matcher = patterns.matcher(email);
         return matcher.matches();
     }
