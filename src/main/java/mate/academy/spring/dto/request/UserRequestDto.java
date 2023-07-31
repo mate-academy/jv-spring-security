@@ -8,7 +8,6 @@ public class UserRequestDto {
     private String email;
     @Password
     private String password;
-    @Password
     private String repeatPassword;
 
     public String getEmail() {
