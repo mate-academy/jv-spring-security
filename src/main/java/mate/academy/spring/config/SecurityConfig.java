@@ -10,12 +10,17 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
+    private final PasswordEncoder passwordEncoder;
+
+    public SecurityConfig(PasswordEncoder passwordEncoder) {
+        this.passwordEncoder = passwordEncoder;
+    }
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.inMemoryAuthentication()
                 .withUser("jorjik@gmail.com")
-                .password(getEncoder().encode("1234KK*&G"))
+                .password(passwordEncoder.encode("1234KK*&G"))
                 .roles("USER");
     }
 
