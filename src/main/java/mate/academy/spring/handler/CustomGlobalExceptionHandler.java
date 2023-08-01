@@ -11,7 +11,7 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 public class CustomGlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler(DataProcessingException.class)
-    public ResponseEntity<Object> handleDataProcessingException(DataProcessingException ex) {
+    public ResponseEntity<Object> handleDataProcessingException() {
         HttpStatus httpStatus = HttpStatus.valueOf(500);
         return new ResponseEntity<>(httpStatus);
     }
