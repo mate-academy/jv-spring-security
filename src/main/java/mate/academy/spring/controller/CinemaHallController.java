@@ -21,7 +21,7 @@ public class CinemaHallController {
     private final RequestDtoMapper<CinemaHallRequestDto, CinemaHall> cinemaHallRequestDtoMapper;
     private final ResponseDtoMapper<CinemaHallResponseDto, CinemaHall> cinemaHallResponseDtoMapper;
 
-    public CinemaHallController(@Valid CinemaHallService cinemaHallService,
+    public CinemaHallController(CinemaHallService cinemaHallService,
             RequestDtoMapper<CinemaHallRequestDto, CinemaHall> cinemaHallRequestDtoMapper,
             ResponseDtoMapper<CinemaHallResponseDto, CinemaHall> cinemaHallResponseDtoMapper) {
         this.cinemaHallService = cinemaHallService;
