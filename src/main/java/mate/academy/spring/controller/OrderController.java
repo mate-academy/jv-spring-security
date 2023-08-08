@@ -2,6 +2,7 @@ package mate.academy.spring.controller;
 
 import java.util.List;
 import java.util.stream.Collectors;
+import javax.persistence.EntityNotFoundException;
 import mate.academy.spring.dto.response.OrderResponseDto;
 import mate.academy.spring.model.Order;
 import mate.academy.spring.model.ShoppingCart;
@@ -15,8 +16,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import javax.persistence.EntityNotFoundException;
 
 @RestController
 @RequestMapping("/orders")
