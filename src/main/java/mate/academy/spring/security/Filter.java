@@ -12,6 +12,5 @@ public class Filter extends GenericFilterBean {
     public void doFilter(ServletRequest servletRequest,
                          ServletResponse servletResponse, FilterChain filterChain)
             throws IOException, ServletException {
-
     }
 }

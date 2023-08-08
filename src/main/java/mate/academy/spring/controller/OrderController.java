@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.persistence.EntityNotFoundException;
+
 @RestController
 @RequestMapping("/orders")
 public class OrderController {
@@ -38,7 +40,7 @@ public class OrderController {
     public OrderResponseDto completeOrder(Authentication auth) {
         String email = auth.getName();
         User user = userService.findByEmail(email).orElseThrow(
-                () -> new RuntimeException("Can not find user: " + email));
+                () -> new EntityNotFoundException("Can not find user: " + email));
         ShoppingCart cart = shoppingCartService.getByUser(user);
         return orderResponseDtoMapper.mapToDto(orderService.completeOrder(cart));
     }
