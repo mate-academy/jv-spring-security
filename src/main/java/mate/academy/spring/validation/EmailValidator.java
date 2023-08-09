@@ -10,7 +10,6 @@ public class EmailValidator implements ConstraintValidator<Email, String> {
             + "-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$";
     private static final Pattern PATTERN = Pattern.compile(EMAIL_PATTERN);
 
-
     @Override
     public boolean isValid(String email, ConstraintValidatorContext context) {
         if (email == null) {

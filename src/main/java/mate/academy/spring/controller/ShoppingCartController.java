@@ -39,8 +39,8 @@ public class ShoppingCartController {
     public void addToCart(Authentication authentication, @RequestParam Long movieSessionId) {
         User user = userService.findByEmail(authentication.getName()).orElseThrow(
                 () -> new NoSuchElementException(
-                        "Can't add movie session with id " + movieSessionId + " to cart for user " +
-                                "with email: " + authentication.getName()));
+                        "Can't add movie session with id " + movieSessionId + " to cart for user "
+                                + "with email: " + authentication.getName()));
         shoppingCartService.addSession(
                 movieSessionService.get(movieSessionId), user);
     }
