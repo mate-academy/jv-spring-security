@@ -6,7 +6,6 @@ import javax.validation.ConstraintValidatorContext;
 import mate.academy.spring.dto.request.UserRequestDto;
 
 public class PasswordValidator implements ConstraintValidator<Password, UserRequestDto> {
-
     private static final String PASSWORD_REGEX = "^.{5,40}$";
     private static final Pattern EMAIL_PATTERN = Pattern.compile(PASSWORD_REGEX);
 
@@ -15,7 +14,6 @@ public class PasswordValidator implements ConstraintValidator<Password, UserRequ
                            ConstraintValidatorContext constraintValidatorContext) {
         String password = userRequestDto.getPassword();
         String repeatPassword = userRequestDto.getRepeatPassword();
-
         return isNotNull(userRequestDto) && password.equals(repeatPassword)
                 && isValidPasswordPattern(password);
     }
