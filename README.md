@@ -2,7 +2,7 @@
 
 1. Configure Spring Security with in memory authentication.
 1. Replace all `?userId` @RequestParam in your code with Authentication object.
-1. Add @NotNull, @Min, etc annotations where applicable
+1. Add @NonNull, @Min, etc annotations where applicable
    (add [this dependency](https://mvnrepository.com/artifact/org.hibernate/hibernate-validator)
    to your project, see example [here](https://hibernate.org/validator/))
 1. Implement custom email validation.
