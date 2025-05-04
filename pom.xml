@@ -17,7 +17,7 @@
         <maven.checkstyle.plugin.configLocation>
             https://raw.githubusercontent.com/mate-academy/style-guides/master/java/checkstyle.xml
         </maven.checkstyle.plugin.configLocation>
-        <spring.version>5.3.20</spring.version>
+        <spring.version>5.3.17</spring.version>
         <spring.security.version>5.6.10</spring.security.version>
         <hibernate.version>5.6.14.Final</hibernate.version>
     </properties>
@@ -80,6 +80,27 @@
             <artifactId>jackson-datatype-jsr310</artifactId>
             <version>2.13.0</version>
         </dependency>
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-core</artifactId>
+            <version>5.5.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-config</artifactId>
+            <version>5.5.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-web</artifactId>
+            <version>5.5.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.hibernate.validator</groupId>
+            <artifactId>hibernate-validator</artifactId>
+            <version>6.1.6.Final</version>
+        </dependency>
+
     </dependencies>
     <build>
         <plugins>
