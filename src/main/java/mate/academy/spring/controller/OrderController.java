@@ -8,10 +8,11 @@ import mate.academy.spring.service.OrderService;
 import mate.academy.spring.service.ShoppingCartService;
 import mate.academy.spring.service.UserService;
 import mate.academy.spring.service.mapper.ResponseDtoMapper;
+import mate.academy.spring.util.UserUtil;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -21,26 +22,30 @@ public class OrderController {
     private final OrderService orderService;
     private final UserService userService;
     private final ResponseDtoMapper<OrderResponseDto, Order> orderResponseDtoMapper;
+    private final UserUtil userUtil;
 
     public OrderController(ShoppingCartService shoppingCartService,
                            OrderService orderService,
                            UserService userService,
-                           ResponseDtoMapper<OrderResponseDto, Order> orderResponseDtoMapper) {
+                           ResponseDtoMapper<OrderResponseDto, Order> orderResponseDtoMapper,
+                           UserUtil userUtil) {
         this.shoppingCartService = shoppingCartService;
         this.orderService = orderService;
         this.userService = userService;
         this.orderResponseDtoMapper = orderResponseDtoMapper;
+        this.userUtil = userUtil;
     }
 
     @PostMapping("/complete")
-    public OrderResponseDto completeOrder(@RequestParam Long userId) {
-        ShoppingCart cart = shoppingCartService.getByUser(userService.get(userId));
+    public OrderResponseDto completeOrder(Authentication authentication) {
+        ShoppingCart cart = shoppingCartService
+                .getByUser(userUtil.getByAuth(authentication, userService));
         return orderResponseDtoMapper.mapToDto(orderService.completeOrder(cart));
     }
 
     @GetMapping
-    public List<OrderResponseDto> getOrderHistory(@RequestParam Long userId) {
-        return orderService.getOrdersHistory(userService.get(userId))
+    public List<OrderResponseDto> getOrderHistory(Authentication authentication) {
+        return orderService.getOrdersHistory(userUtil.getByAuth(authentication, userService))
                 .stream()
                 .map(orderResponseDtoMapper::mapToDto)
                 .toList();
