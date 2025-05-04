@@ -9,6 +9,9 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 
 @Configuration
 @PropertySource("classpath:db.properties")
@@ -43,5 +46,15 @@ public class AppConfig {
         factoryBean.setHibernateProperties(properties);
         factoryBean.setPackagesToScan("mate.academy.spring.model");
         return factoryBean;
+    }
+
+    @Bean
+    public LocalValidatorFactoryBean validator() {
+        return new LocalValidatorFactoryBean();
+    }
+
+    @Bean
+    public PasswordEncoder getEncoder() {
+        return new BCryptPasswordEncoder();
     }
 }
