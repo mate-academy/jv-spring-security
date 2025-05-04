@@ -1,7 +1,13 @@
 package mate.academy.spring.dto.request;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Positive;
+
 public class CinemaHallRequestDto {
+    @Positive(message = "capacity should be greater than zero")
     private int capacity;
+
+    @NotNull(message = "description should be not null")
     private String description;
 
     public int getCapacity() {
