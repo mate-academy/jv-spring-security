@@ -1,6 +1,9 @@
 package mate.academy.spring.dto.request;
 
+import javax.validation.constraints.PositiveOrZero;
+
 public class CinemaHallRequestDto {
+    @PositiveOrZero
     private int capacity;
     private String description;
 
