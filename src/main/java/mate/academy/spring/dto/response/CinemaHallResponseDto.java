@@ -1,7 +1,13 @@
 package mate.academy.spring.dto.response;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
 public class CinemaHallResponseDto {
+    @NotNull
+    @Size(min = 1)
     private Long id;
+    @Size(min = 1)
     private int capacity;
     private String description;
 
